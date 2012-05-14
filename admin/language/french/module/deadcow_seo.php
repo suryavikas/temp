@@ -1,0 +1,26 @@
+<?php
+$_['heading_title'] = 'deadcow SEO';
+$_['text_success'] = 'deadcow SEO réussi!';
+$_['text_module'] = 'Modules';
+$_['back'] = 'Retour';
+$_['warning_clear'] = 'Attention: cette opération va effacer tous vos mots-clés de référencement précédents!';
+$_['warning_clear_tags'] = 'Attention: cette opération va effacer tous vos tags précédents!';
+$_['categories'] = 'Catégories:';
+$_['products'] = 'Produits:';
+$_['generate'] = 'Génération';
+$_['error_permission'] = 'Attention: vous n\'avez pas le droit d\'utiliser le module deadcow SEO!';
+$_['manufacturers'] = 'Marques:';
+$_['template'] = 'Modèle:';
+$_['available_category_tags'] = 'Tags disponibles: [category_name]';
+$_['available_product_tags'] = 'Tags disponibles: [product_name], [model_name], [manufacturer_name]';
+$_['available_manufacturer_tags'] = 'Tags disponibles: [manufacturer_name]';
+$_['available_meta_tags'] = 'Tags disponibles: [product_name], [model_name], [manufaturer_name], [categories_names]';
+$_['available_tags_tags'] = 'Tags disponibles: [product_name], [model_name], [manufaturer_name], [categories_names]';
+$_['meta_keywords'] = 'Meta keywords:';
+$_['add_from_yahoo'] = 'Ajouter les termes genérés par le service Yahoo! Term extraction à partir de la description du produit.';
+$_['your_yahoo_id'] = 'Votre ID Yahoo! Application';
+$_['get_yahoo_id'] = 'Créez votre ID <a href="http://developer.yahoo.com/wsregapp/" target="_blank">ici</a>. Choisissez la méthode d\'authentification générique.';
+$_['enter_yahoo_id'] = 'Veuillez entrer votre ID Yahoo! Application ID si vous souhaitez utiliser le service Yahoo! Term extraction!';
+$_['curl_not_enabled'] = 'Veuillez activer l\'extension cURL si vous souhaitez utiliser le service Yahoo! Term extraction.';
+$_['tags'] = 'Tags';
+$_['source_language'] = 'Language source';

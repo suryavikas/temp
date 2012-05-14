@@ -1,0 +1,26 @@
+<?php
+$_['heading_title'] = 'deadcow SEO';
+$_['text_success'] = 'deadcow SEO Success!';
+$_['text_module'] = 'Modules';
+$_['back'] = 'Back';
+$_['warning_clear'] = 'Warning: this will clear all previous SEO Keywords!';
+$_['warning_clear_tags'] = 'Warning: this will clear all previous tags!';
+$_['categories'] = 'Categories:';
+$_['products'] = 'Products:';
+$_['generate'] = 'Generate';
+$_['error_permission'] = 'Warning: You do not have permission to use module deadcow SEO!';
+$_['manufacturers'] = 'Manufacturers:';
+$_['template'] = 'Template:';
+$_['available_category_tags'] = 'Available tags: [category_name]';
+$_['available_product_tags'] = 'Available tags: [product_name], [model_name], [manufacturer_name]';
+$_['available_manufacturer_tags'] = 'Available tags: [manufacturer_name]';
+$_['available_meta_tags'] = 'Available tags: [product_name], [model_name], [manufaturer_name], [categories_names]';
+$_['available_tags_tags'] = 'Available tags: [product_name], [model_name], [manufaturer_name], [categories_names]';
+$_['meta_keywords'] = 'Meta keywords:';
+$_['add_from_yahoo'] = 'Add terms from Yahoo! Term extraction service using the product description.';
+$_['your_yahoo_id'] = 'Your Yahoo! Application ID';
+$_['get_yahoo_id'] = 'Grab one <a href="http://developer.yahoo.com/wsregapp/" target="_blank">here</a>. Choose generic authentication method.';
+$_['enter_yahoo_id'] = 'Please enter your Yahoo! Application ID if you want to use the Yahoo! Term extraction service!';
+$_['curl_not_enabled'] = 'Please enable the cURL extension if you want to use the Yahoo! Term extraction service.';
+$_['tags'] = 'Tags';
+$_['source_language'] = 'Source language';
