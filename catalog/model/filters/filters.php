@@ -10,7 +10,7 @@ class ModelFiltersFilters extends Model {
             $query = 'SELECT round(min(price)) as min, round(max(price)) as max FROM ' . DB_PREFIX . 'product P
                     join ' . DB_PREFIX . 'product_to_category POC
                     on POC.product_id = P.product_id
-                    where POC.category_id = ' . $categoryId . ' AND P.status = 1' ;
+                    where POC.category_id = ' . $categoryId . ' AND p.status = 1' ;
             
             $results = $this->db->query($query);
             $priceRange = $results->row;
@@ -64,7 +64,7 @@ class ModelFiltersFilters extends Model {
                     join ' . DB_PREFIX . 'product_to_category PTC
                     on PTC.product_id = PO.product_id
                     join ' . DB_PREFIX . 'product P
-                    on P.product_id = PO.product_id
+                    on p.product_id = PO.product_id
                     AND P.status = 1
                     where PTC.category_id =' . $categoryId
                     . ' group by OD.name,OVD.name';
@@ -101,15 +101,15 @@ class ModelFiltersFilters extends Model {
     public function getManufacturersInACategory($categoryId) {
         //Caching enabled
         $manufacturersData = $this->cache->get('filters.manufacturer' . (int) $this->config->get('config_language_id') . '.' . (int) $categoryId);
-        $manufacturersData = array();
         if (!$manufacturersData) {
             $manufacturersData = array();
-            $query = 'SELECT distinct(M.manufacturer_id), M.name, M.image from ' . DB_PREFIX . 'product P
+            $query = 'SELECT M.manufacturer_id, M.name, M.image from ' . DB_PREFIX . 'product P
                     join ' . DB_PREFIX . 'product_to_category PTC
                     on PTC.product_id=P.product_id
                     join ' . DB_PREFIX . 'manufacturer M
                     on M.manufacturer_id = P.manufacturer_id
-                    where category_id=' . $categoryId . ' AND P.status = 1';           
+                    where category_id=' . $categoryId . ' AND P.status = 1';
+           
             $results = $this->db->query($query);
             $manufacturersData = $results->rows;
             $this->cache->set('filters.manufacturer' . (int) $this->config->get('config_language_id') . '.' . (int) $categoryId, $manufacturersData);

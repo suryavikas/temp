@@ -128,7 +128,7 @@ class ModelToolExport extends Model {
 		foreach ($manufacturerIds as $manufacturerId) {
 			$maxManufacturerId = max( $maxManufacturerId, $manufacturerId );
 		}
-		$sql = "INSERT INTO `".DB_PREFIX."manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`) VALUES "; 
+		// $sql = "INSERT INTO `".DB_PREFIX."manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`) VALUES "; 
 		$k = strlen( $sql );
 		$first = TRUE;
 		foreach ($products as $product) {
@@ -140,15 +140,20 @@ class ModelToolExport extends Model {
 				$maxManufacturerId += 1;
 				$manufacturerId = $maxManufacturerId;
 				$manufacturerIds[$manufacturerName] = $manufacturerId;
-				$sql .= ($first) ? "\n" : ",\n";
-				$first = FALSE;
+				// $sql .= ($first) ? "\n" : ",\n";
+				// $first = FALSE;
+				$sql = "INSERT INTO `".DB_PREFIX."manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`) VALUES "; 
 				$sql .= "($manufacturerId, '".$database->escape($manufacturerName)."', '', 0)";
+				$sql .=" ON DUPLICATE KEY UPDATE ";
+				$sql .=" name = '".$database->escape($manufacturerName)."', sort_order = 0 ";
+				
+				$database->query( $sql );				
 			}
 		}
-		$sql .= ";\n";
-		if (strlen( $sql ) > $k+2) {
-			$database->query( $sql );
-		}
+		// $sql .= ";\n";
+		// if (strlen( $sql ) > $k+2) {
+			// $database->query( $sql );
+		// }
 		
 		// populate manufacturer_to_store table
 		$storeIdsForManufacturers = array();
@@ -165,7 +170,9 @@ class ModelToolExport extends Model {
 			foreach ($storeIds as $storeId) {
 				if (!in_array($storeId,$storeIdsForManufacturers[$manufacturerId])) {
 					$storeIdsForManufacturers[$manufacturerId][] = $storeId;
-					$sql2 = "INSERT INTO `".DB_PREFIX."manufacturer_to_store` (`manufacturer_id`,`store_id`) VALUES ($manufacturerId,$storeId);";
+					$sql2 = " INSERT INTO `".DB_PREFIX."manufacturer_to_store` (`manufacturer_id`,`store_id`) VALUES ($manufacturerId,$storeId)";
+					$sql2 .=" ON DUPLICATE KEY UPDATE ";
+					$sql2 .=" manufacturer_id= $manufacturerId, store_id= $storeId ";
 					$database->query( $sql2 );
 				}
 			}
@@ -248,15 +255,15 @@ class ModelToolExport extends Model {
 		
 		// start transaction, remove products
 		$sql = "START TRANSACTION;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."product`;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."product_description` WHERE language_id=$languageId;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."product_to_category`;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."product_to_store`;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."manufacturer_to_store`;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."url_alias` WHERE `query` LIKE 'product_id=%';\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."product_related`;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."product_tag` WHERE language_id=$languageId;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."product_to_layout`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."product`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."product_description` WHERE language_id=$languageId;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."product_to_category`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."product_to_store`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."manufacturer_to_store`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."url_alias` WHERE `query` LIKE 'product_id=%';\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."product_related`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."product_tag` WHERE language_id=$languageId;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."product_to_layout`;\n";
 		$this->import( $database, $sql );
 		
 		// get pre-defined layouts
@@ -264,7 +271,8 @@ class ModelToolExport extends Model {
 		
 		// get pre-defined store_ids
 		$availableStoreIds = $this->getAvailableStoreIds( $database );
-		
+					echo "hi";
+
 		// store or update manufacturers
 		$manufacturerIds = array();
 		$ok = $this->storeManufacturersIntoDatabase( $database, $products, $manufacturerIds );
@@ -272,7 +280,8 @@ class ModelToolExport extends Model {
 			$database->query( 'ROLLBACK;' );
 			return FALSE;
 		}
-		
+					echo "hji2";
+
 		// get weight classes
 		$weightClassIds = $this->getWeightClassIds( $database );
 		
@@ -327,6 +336,7 @@ class ModelToolExport extends Model {
 			$minimum = $product['minimum'];
 			$meta_keywords = $database->escape($product['meta_keywords']);
 			$sort_order = $product['sort_order'];
+			
 			$sql  = "INSERT INTO `".DB_PREFIX."product` (`product_id`,`quantity`,`sku`,`upc`,`location`,";
 			$sql .= "`stock_status_id`,`model`,`manufacturer_id`,`image`,`shipping`,`price`,`points`,`date_added`,`date_modified`,`date_available`,`weight`,`weight_class_id`,`status`,";
 			$sql .= "`tax_class_id`,`viewed`,`length`,`width`,`height`,`length_class_id`,`sort_order`,`subtract`,`minimum`) VALUES ";
@@ -336,29 +346,63 @@ class ModelToolExport extends Model {
 			$sql .= ($dateModified=='NOW()') ? "$dateModified," : "'$dateModified',";
 			$sql .= ($dateAvailable=='NOW()') ? "$dateAvailable," : "'$dateAvailable',";
 			$sql .= "$weight,$weightClassId,$status,";
-			$sql .= "$taxClassId,$viewed,$length,$width,$height,'$lengthClassId','$sort_order','$subtract','$minimum');";
-			$sql2 = "INSERT INTO `".DB_PREFIX."product_description` (`product_id`,`language_id`,`name`,`description`,`meta_description`,`meta_keyword`) VALUES ";
-			$sql2 .= "($productId,$languageId,'$productName','$productDescription','$meta_description','$meta_keywords');";
+			$sql .= "$taxClassId,$viewed,$length,$width,$height,'$lengthClassId','$sort_order','$subtract','$minimum')";
+			
+			$sql .= " ON DUPLICATE KEY UPDATE ";
+			 //loginid="SS", password="SSh"
+			$sql .= " quantity= $quantity, ";
+			$sql .= " sku='$sku', upc='$upc', location='$location',";
+			$sql .= " stock_status_id = $stockStatusId, model='$model', manufacturer_id= $manufacturerId, image='$imageName', shipping=$shipping, price=$price, points=$points,";
+			//$sql .= ($dateAdded=='NOW()') ? "$dateAdded," : "'$dateAdded',";
+			$sql .= " date_modified = '$dateModified', date_available= '$dateAvailable',";
+			$sql .= " weight= $weight, weight_class_id= $weightClassId, status= $status,";
+			$sql .= " tax_class_id= $taxClassId,viewed = $viewed, length= $length,";
+			$sql .= " width= $width, height= $height, length_class_id='$lengthClassId', sort_order='$sort_order', subtract='$subtract', minimum='$minimum';";
+		
+		
+			$sql2  = "INSERT INTO `".DB_PREFIX."product_description` (`product_id`,`language_id`,`name`,`description`,`meta_description`,`meta_keyword`) VALUES ";
+			$sql2 .= "($productId,$languageId,'$productName','$productDescription','$meta_description','$meta_keywords')";
+			$sql2 .= " ON DUPLICATE KEY UPDATE ";
+			$sql2 .= "language_id =$languageId, name ='$productName', description ='$productDescription', meta_description='$meta_description', meta_keyword='$meta_keywords'";
+
+
+			
 			$database->query($sql);
 			$database->query($sql2);
+			
 			if (count($categories) > 0) {
-				$sql = "INSERT INTO `".DB_PREFIX."product_to_category` (`product_id`,`category_id`) VALUES ";
-				$first = TRUE;
+				// $sql = "INSERT INTO `".DB_PREFIX."product_to_category` (`product_id`,`category_id`) VALUES ";
+				// $first = TRUE;
 				foreach ($categories as $categoryId) {
-					$sql .= ($first) ? "\n" : ",\n";
-					$first = FALSE;
+					// $sql .= ($first) ? "\n" : ",\n";
+					// $first = FALSE;
+					$sql  = "INSERT INTO `".DB_PREFIX."product_to_category` (`product_id`,`category_id`) VALUES ";
 					$sql .= "($productId,$categoryId)";
+					$sql .= " ON DUPLICATE KEY UPDATE ";
+					$sql .= " category_id = $categoryId";
+					$database->query($sql);
 				}
-				$sql .= ";";
-				$database->query($sql);
+				//$sql .= ";";
+				//$database->query($sql);
 			}
 			if ($keyword) {
-				$sql4 = "INSERT INTO `".DB_PREFIX."url_alias` (`query`,`keyword`) VALUES ('product_id=$productId','$keyword');";
+				$sql4  = " INSERT INTO `".DB_PREFIX."url_alias` (`query`,`keyword`) VALUES ('product_id=$productId','$keyword')";
+				$sql4 .= " ON DUPLICATE KEY UPDATE ";
+				$sql4 .= " keyword = '$keyword'";
+				
 				$database->query($sql4);
 			}
+			
+			// echo $sql4;
+			// echo "<br>";
+			// echo $sql;
+			// die();
+			
 			foreach ($storeIds as $storeId) {
 				if (in_array((int)$storeId,$availableStoreIds)) {
-					$sql6 = "INSERT INTO `".DB_PREFIX."product_to_store` (`product_id`,`store_id`) VALUES ($productId,$storeId);";
+					$sql6  = " INSERT INTO `".DB_PREFIX."product_to_store` (`product_id`,`store_id`) VALUES ($productId, $storeId)";
+					$sql6 .= " ON DUPLICATE KEY UPDATE ";
+					$sql6 .= " store_id = $storeId";
 					$database->query($sql6);
 				}
 			}
@@ -382,23 +426,30 @@ class ModelToolExport extends Model {
 				}
 			}
 			foreach ($layouts as $storeId => $layoutId) {
-				$sql7 = "INSERT INTO `".DB_PREFIX."product_to_layout` (`product_id`,`store_id`,`layout_id`) VALUES ($productId,$storeId,$layoutId);";
+				$sql7  = " INSERT INTO `".DB_PREFIX."product_to_layout` (`product_id`,`store_id`,`layout_id`) ";
+				$sql7 .= " VALUES ($productId,$storeId,$layoutId)";
+				$sql7 .= " ON DUPLICATE KEY UPDATE ";
+				$sql7 .= " store_id = $storeId, layout_id = $layoutId";			
 				$database->query($sql7);
 			}
 			if (count($related) > 0) {
-				$sql = "INSERT INTO `".DB_PREFIX."product_related` (`product_id`,`related_id`) VALUES ";
+				// $sql = "INSERT INTO `".DB_PREFIX."product_related` (`product_id`,`related_id`) VALUES ";
 				$first = TRUE;
 				foreach ($related as $relatedId) {
-					$sql .= ($first) ? "\n" : ",\n";
-					$first = FALSE;
-					$sql .= "($productId,$relatedId)";
+					// $sql .= ($first) ? "\n" : ",\n";
+					// $first = FALSE;	
+					$sql  = " INSERT INTO `".DB_PREFIX."product_related` (`product_id`,`related_id`) ";
+					$sql .= " VALUES($productId, $relatedId)";
+					$sql .= " ON DUPLICATE KEY UPDATE ";
+					$sql .= " related_id = $relatedId";			
+					$database->query($sql);
 				}
-				$sql .= ";";
-				$database->query($sql);
+				// $sql .= ";";
+				// $database->query($sql);
 			}
 			if (count($tags) > 0) {
-				$sql = "INSERT INTO `".DB_PREFIX."product_tag` (`product_id`,`tag`,`language_id`) VALUES ";
-				$first = TRUE;
+				// $sql = "INSERT INTO `".DB_PREFIX."product_tag` (`product_id`,`tag`,`language_id`) VALUES ";
+				// $first = TRUE;
 				$inserted_tags = array();
 				foreach ($tags as $tag) {
 					if ($tag == '') {
@@ -407,15 +458,23 @@ class ModelToolExport extends Model {
 					if (in_array($tag,$inserted_tags)) {
 						continue;
 					}
-					$sql .= ($first) ? "\n" : ",\n";
-					$first = FALSE;
+					// $sql .= ($first) ? "\n" : ",\n";
+					// $first = FALSE;
+
+					$sql  = "INSERT INTO `".DB_PREFIX."product_tag` (`product_id`,`tag`,`language_id`) VALUES ";
 					$sql .= "($productId,'".$database->escape($tag)."',$languageId)";
+					$sql .= " ON DUPLICATE KEY UPDATE ";
+					$sql .= " tag = '".$database->escape($tag)."', language_id = $languageId";
+					
 					$inserted_tags[] = $tag;
+					if (count($inserted_tags)>0) {
+						$database->query($sql);
+					}
 				}
-				$sql .= ";";
-				if (count($inserted_tags)>0) {
-					$database->query($sql);
-				}
+				// $sql .= ";";
+				// if (count($inserted_tags)>0) {
+					// $database->query($sql);
+				// }
 			}
 		}
 		
@@ -605,22 +664,36 @@ class ModelToolExport extends Model {
 			$layout = $category['layout'];
 			$status = $category['status'];
 			$status = ((strtoupper($status)=="TRUE") || (strtoupper($status)=="YES") || (strtoupper($status)=="ENABLED")) ? 1 : 0;
-			$sql2 = "INSERT INTO `".DB_PREFIX."category` (`category_id`, `image`, `parent_id`, `top`, `column`, `sort_order`, `date_added`, `date_modified`, `status`) VALUES ";
-			$sql2 .= "( $categoryId, '$imageName', $parentId, $top, $columns, $sortOrder, ";
+			
+			$sql2 = "INSERT INTO `".DB_PREFIX."category` (`category_id`, `image`, `parent_id`, `top`, `column`, `sort_order`, `date_added`, `date_modified`, `status`)";
+			$sql2 .= " VALUES( $categoryId, '$imageName', $parentId, $top, $columns, $sortOrder, ";
 			$sql2 .= ($dateAdded=='NOW()') ? "$dateAdded," : "'$dateAdded',";
 			$sql2 .= ($dateModified=='NOW()') ? "$dateModified," : "'$dateModified',";
-			$sql2 .= " $status);";
+			$sql2 .= " $status)";
+			$sql2 .= " ON DUPLICATE KEY UPDATE ";
+			$sql2 .= " image = '$imageName', parent_id = $parentId,";
+			$sql2 .= " top= $top, `column`= $columns, sort_order= $sortOrder, date_added= '$dateAdded', date_modified= '$dateModified'";
 			$database->query( $sql2 );
-			$sql3 = "INSERT INTO `".DB_PREFIX."category_description` (`category_id`, `language_id`, `name`, `description`, `meta_description`, `meta_keyword`) VALUES ";
-			$sql3 .= "( $categoryId, $languageId, '$name', '$description', '$meta_description', '$meta_keywords' );";
+			
+			unset($sql2);
+			
+			$sql3  = "INSERT INTO `".DB_PREFIX."category_description` (`category_id`, `language_id`, `name`, `description`, `meta_description`, `meta_keyword`) ";
+			$sql3 .= " VALUES( $categoryId, $languageId, '$name', '$description', '$meta_description', '$meta_keywords')";
+			$sql3 .= " ON DUPLICATE KEY UPDATE ";
+			$sql3 .= " language_id= $languageId, name= '$name', description= '$description', meta_description= '$meta_description', meta_keyword= '$meta_keywords'";
 			$database->query( $sql3 );
+			
 			if ($keyword) {
-				$sql5 = "INSERT INTO `".DB_PREFIX."url_alias` (`query`,`keyword`) VALUES ('category_id=$categoryId','$keyword');";
+				$sql5  = " INSERT INTO `".DB_PREFIX."url_alias` (`query`,`keyword`) VALUES ('category_id=$categoryId','$keyword')";
+				$sql5 .= " ON DUPLICATE KEY UPDATE ";
+				$sql5 .= " keyword = '$keyword'";
 				$database->query($sql5);
 			}
 			foreach ($storeIds as $storeId) {
 				if (in_array((int)$storeId,$availableStoreIds)) {
-					$sql6 = "INSERT INTO `".DB_PREFIX."category_to_store` (`category_id`,`store_id`) VALUES ($categoryId,$storeId);";
+					$sql6  = "INSERT INTO `".DB_PREFIX."category_to_store` (`category_id`,`store_id`) VALUES ($categoryId,$storeId)";
+					$sql6 .= " ON DUPLICATE KEY UPDATE ";
+					$sql6 .= " store_id = $storeId";					
 					$database->query($sql6);
 				}
 			}
@@ -644,7 +717,10 @@ class ModelToolExport extends Model {
 				}
 			}
 			foreach ($layouts as $storeId => $layoutId) {
-				$sql7 = "INSERT INTO `".DB_PREFIX."category_to_layout` (`category_id`,`store_id`,`layout_id`) VALUES ($categoryId,$storeId,$layoutId);";
+				$sql7  = " INSERT INTO `".DB_PREFIX."category_to_layout` (`category_id`,`store_id`,`layout_id`)";
+				$sql7 .= " VALUES ($categoryId, $storeId, $layoutId)";
+				$sql7 .= " ON DUPLICATE KEY UPDATE ";
+				$sql7 .= " store_id = $storeId, layout_id = $layoutId";
 				$database->query($sql7);
 			}
 		}
@@ -776,12 +852,12 @@ class ModelToolExport extends Model {
 		
 		// start transaction, remove options
 		$sql = "START TRANSACTION;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."option`;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."option_description` WHERE language_id=$languageId;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."option_value`;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."option_value_description` WHERE language_id=$languageId;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."product_option`;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."product_option_value`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."option`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."option_description` WHERE language_id=$languageId;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."option_value`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."option_value_description` WHERE language_id=$languageId;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."product_option`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."product_option_value`;\n";
 		$this->import( $database, $sql );
 		
 		$newOptionIds = array();       // indexed by [name][type]
@@ -810,10 +886,17 @@ class ModelToolExport extends Model {
 					$optionId = $maxOptionId;
 				}
 				$newOptionIds[$name][$type] = $optionId;
-				$sql = "INSERT INTO `".DB_PREFIX."option` (`option_id`,`type`,`sort_order`) VALUES ($optionId,'$type',$countOptions);";
+				$sql  = "INSERT INTO `".DB_PREFIX."option` (`option_id`,`type`,`sort_order`) VALUES ($optionId,'$type',$countOptions)";
+				$sql .= " ON DUPLICATE KEY UPDATE ";
+				$sql .= " type= '$type', sort_order= $countOptions";
 				$database->query( $sql );
-				$sql = "INSERT INTO `".DB_PREFIX."option_description` (`option_id`,`language_id`,`name`) VALUES ($optionId,$langId,'".$database->escape($name)."');";
+				
+				$sql  = " INSERT INTO `".DB_PREFIX."option_description` (`option_id`,`language_id`,`name`)";
+				$sql .= " VALUES ($optionId,$langId,'".$database->escape($name)."')";
+				$sql .= " ON DUPLICATE KEY UPDATE ";
+				$sql .= " language_id= $langId, name='".$database->escape($name)."'";
 				$database->query( $sql);
+				
 				$countOptions += 1;
 			}
 			if (($type=='select') || ($type=='checkbox') || ($type=='radio') || ($type=='image')) {
@@ -834,11 +917,18 @@ class ModelToolExport extends Model {
 					$sortOrder = ($option['sort_order'] == '') ? 0 : $option['sort_order'];
 					$image = ($option['image'] == '') ? '' : $this->db->escape($option['image']);
 					$optionId = $newOptionIds[$name][$type];
+					
 					$sql  = "INSERT INTO `".DB_PREFIX."option_value` (`option_value_id`,`option_id`,`image`,`sort_order`) VALUES ";
-					$sql .= "($optionValueId,$optionId,'$image',$sortOrder);";
+					$sql .= "($optionValueId,$optionId,'$image',$sortOrder)";
+					$sql .= " ON DUPLICATE KEY UPDATE ";
+					$sql .= " option_id= $optionId, image='$image', sort_order= $sortOrder";
 					$database->query( $sql );
+					
 					$sql  = "INSERT INTO `".DB_PREFIX."option_value_description` (`option_value_id`,`language_id`,`option_id`,`name`) VALUES ";
-					$sql .= "($optionValueId,$langId,$optionId,'".$database->escape($value)."');";
+					$sql .= "($optionValueId,$langId,$optionId,'".$database->escape($value)."')";
+					$sql .= " ON DUPLICATE KEY UPDATE ";
+					$sql .= " language_id=$langId, option_id= $optionId, name='".$database->escape($value)."'";					
+					
 					$database->query( $sql );
 				}
 			}
@@ -856,7 +946,10 @@ class ModelToolExport extends Model {
 					$productOptionValue = '';
 				}
 				$sql  = "INSERT INTO `".DB_PREFIX."product_option` (`product_option_id`,`product_id`,`option_id`,`option_value`,`required`) VALUES ";
-				$sql .= "($productOptionId,$productId,$optionId,'".$database->escape($productOptionValue)."',$required);";
+				$sql .= "($productOptionId,$productId,$optionId,'".$database->escape($productOptionValue)."',$required)";
+				$sql .= " ON DUPLICATE KEY UPDATE ";
+				$sql .= " product_id= $productId, option_id= $optionId, option_value= '".$database->escape($productOptionValue)."', required= $required";
+				
 				$database->query( $sql );
 			}
 			if (($type=='select') || ($type=='checkbox') || ($type=='radio') || ($type=='image')) {
@@ -875,8 +968,17 @@ class ModelToolExport extends Model {
 				$optionId = $newOptionIds[$name][$type];
 				$optionValueId = $newOptionValueIds[$name][$type][$value];
 				$productOptionId = $productOptionIds[$productId][$optionId];
-				$sql  = "INSERT INTO `".DB_PREFIX."product_option_value` (`product_option_value_id`,`product_option_id`,`product_id`,`option_id`,`option_value_id`,`quantity`,`subtract`,`price`,`price_prefix`,`points`,`points_prefix`,`weight`,`weight_prefix`) VALUES ";
-				$sql .= "($productOptionValueId,$productOptionId,$productId,$optionId,$optionValueId,$quantity,$subtract,$price,'$pricePrefix',$points,'$pointsPrefix',$weight,'$weightPrefix');";
+				
+				$sql  = "INSERT INTO `".DB_PREFIX."product_option_value` ";
+				$sql .= " (`product_option_value_id`,`product_option_id`,`product_id`,`option_id`,`option_value_id`,`quantity`,";
+				$sql .= " `subtract`,`price`,`price_prefix`,`points`,`points_prefix`,`weight`,`weight_prefix`) ";
+				$sql .= " VALUES($productOptionValueId,$productOptionId,$productId,$optionId,$optionValueId,";
+				$sql .= " $quantity,$subtract,$price,'$pricePrefix',$points,'$pointsPrefix',$weight,'$weightPrefix') ";
+				$sql .= " ON DUPLICATE KEY UPDATE ";
+				$sql .= " product_option_id=$productOptionId,product_id=$productId,option_id=$optionId,option_value_id=$optionValueId,quantity=$quantity,";
+				$sql .= " subtract=$subtract, price=$price, price_prefix= '$pricePrefix', points=$points, points_prefix='$pointsPrefix',";
+				$sql .= " weight=$weight, weight_prefix='$weightPrefix'";
+
 				$database->query( $sql );
 			}
 		}
@@ -987,11 +1089,11 @@ class ModelToolExport extends Model {
 		
 		// start transaction, remove attributes
 		$sql = "START TRANSACTION;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."attribute_group`;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."attribute_group_description` WHERE language_id=$languageId;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."attribute`;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."attribute_description` WHERE language_id=$languageId;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."product_attribute` WHERE language_id=$languageId;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."attribute_group`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."attribute_group_description` WHERE language_id=$languageId;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."attribute`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."attribute_description` WHERE language_id=$languageId;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."product_attribute` WHERE language_id=$languageId;\n";
 		$this->import( $database, $sql );
 		
 		$newAttributeGroupIds = array();  // indexed by [group]
@@ -1012,10 +1114,15 @@ class ModelToolExport extends Model {
 				}
 				$newAttributeGroupIds[$group] = $attributeGroupId;
 				$sql  = "INSERT INTO `".DB_PREFIX."attribute_group` (`attribute_group_id`,`sort_order`) VALUES ";
-				$sql .= "($attributeGroupId,".count($newAttributeGroupIds).");";
+				$sql .= "($attributeGroupId,".count($newAttributeGroupIds).")";
+				$sql .= " ON DUPLICATE KEY UPDATE ";
+				$sql .= " sort_order=".count($newAttributeGroupIds);					
 				$database->query( $sql );
+				
 				$sql  = "INSERT INTO `".DB_PREFIX."attribute_group_description` (`attribute_group_id`,`language_id`,`name`) VALUES ";
-				$sql .= "($attributeGroupId,$langId,'".$database->escape($group)."');";
+				$sql .= "($attributeGroupId,$langId,'".$database->escape($group)."')";
+				$sql .= " ON DUPLICATE KEY UPDATE ";
+				$sql .= " language_id=$langId, name='".$database->escape($group)."'";
 				$database->query( $sql );
 			}
 			if (!isset($newAttributeIds[$group])) {
@@ -1031,15 +1138,22 @@ class ModelToolExport extends Model {
 				$newAttributeIds[$group][$name] = $attributeId;
 				$attributeGroupId = $newAttributeGroupIds[$group];
 				$sql  = "INSERT INTO `".DB_PREFIX."attribute` (`attribute_id`,`attribute_group_id`,`sort_order`) VALUES ";
-				$sql .= "($attributeId,$attributeGroupId,".count($newAttributeIds[$group]).");";
+				$sql .= "($attributeId,$attributeGroupId,".count($newAttributeIds[$group]).")";
+				$sql .= " ON DUPLICATE KEY UPDATE ";
+				$sql .= " attribute_group_id=$attributeGroupId, sort_order=".count($newAttributeIds[$group]);
 				$database->query( $sql );
+
 				$sql  = "INSERT INTO `".DB_PREFIX."attribute_description` (`attribute_id`,`language_id`,`name`) VALUES ";
-				$sql .= "($attributeId,$langId,'".$database->escape($name)."');";
+				$sql .= "($attributeId,$langId,'".$database->escape($name)."')";
+				$sql .= " ON DUPLICATE KEY UPDATE ";
+				$sql .= " language_id=$langId, name='".$database->escape($name)."'";				
 				$database->query( $sql );
 			}
 			$attributeId = $newAttributeIds[$group][$name];
 			$sql  = "INSERT INTO `".DB_PREFIX."product_attribute` (`product_id`,`attribute_id`,`language_id`,`text`) VALUES ";
-			$sql .= "($productId,$attributeId,$langId,'".$database->escape( $text )."');";
+			$sql .= "($productId,$attributeId,$langId,'".$database->escape( $text )."')";
+			$sql .= " ON DUPLICATE KEY UPDATE ";
+			$sql .= " attribute_id=$attributeId, language_id=$langId, text='".$database->escape($text)."'";				
 			$database->query( $sql );
 		}
 		
@@ -1097,7 +1211,7 @@ class ModelToolExport extends Model {
 	function storeSpecialsIntoDatabase( &$database, &$specials )
 	{
 		$sql = "START TRANSACTION;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."product_special`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."product_special`;\n";
 		$this->import( $database, $sql );
 
 		// find existing customer groups from the database
@@ -1123,7 +1237,9 @@ class ModelToolExport extends Model {
 				$maxCustomerGroupId += 1;
 				$sql  = "INSERT INTO `".DB_PREFIX."customer_group` (`customer_group_id`, `name`) VALUES "; 
 				$sql .= "($maxCustomerGroupId, '$name')";
-				$sql .= ";\n";
+				$sql .= " ON DUPLICATE KEY UPDATE ";
+				$sql .= " name='$name'";				
+				//$sql .= ";\n";
 				$database->query($sql);
 				$customerGroups[$name] = $maxCustomerGroupId;
 			}
@@ -1131,8 +1247,8 @@ class ModelToolExport extends Model {
 
 		// store product specials into the database
 		$productSpecialId = 0;
-		$first = TRUE;
-		$sql = "INSERT INTO `".DB_PREFIX."product_special` (`product_special_id`,`product_id`,`customer_group_id`,`priority`,`price`,`date_start`,`date_end` ) VALUES "; 
+		//$first = TRUE;
+
 		foreach ($specials as $special) {
 			$productSpecialId += 1;
 			$productId = $special['product_id'];
@@ -1142,13 +1258,20 @@ class ModelToolExport extends Model {
 			$price = $special['price'];
 			$dateStart = $special['date_start'];
 			$dateEnd = $special['date_end'];
-			$sql .= ($first) ? "\n" : ",\n";
-			$first = FALSE;
+			//$sql .= ($first) ? "\n" : ",\n";
+			//$first = FALSE;
+			$sql = "INSERT INTO `".DB_PREFIX."product_special`(`product_special_id`,`product_id`,`customer_group_id`,`priority`,`price`,`date_start`,`date_end` ) VALUES "; 
 			$sql .= "($productSpecialId,$productId,$customerGroupId,$priority,$price,'$dateStart','$dateEnd')";
-		}
-		if (!$first) {
+			$sql .= " ON DUPLICATE KEY UPDATE ";
+			$sql .= " product_id=$productId, customer_group_id=$customerGroupId, priority=$priority,";
+			$sql .= " price=$price, date_start='$dateStart', date_end='$dateEnd'";	
+
 			$database->query($sql);
+
 		}
+		// if (!$first) {
+			// $database->query($sql);
+		// }
 
 		$database->query("COMMIT;");
 		return TRUE;
@@ -1195,7 +1318,7 @@ class ModelToolExport extends Model {
 	function storeDiscountsIntoDatabase( &$database, &$discounts )
 	{
 		$sql = "START TRANSACTION;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."product_discount`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."product_discount`;\n";
 		$this->import( $database, $sql );
 
 		// find existing customer groups from the database
@@ -1221,7 +1344,9 @@ class ModelToolExport extends Model {
 				$maxCustomerGroupId += 1;
 				$sql  = "INSERT INTO `".DB_PREFIX."customer_group` (`customer_group_id`, `name`) VALUES "; 
 				$sql .= "($maxCustomerGroupId, '$name')";
-				$sql .= ";\n";
+				$sql .= " ON DUPLICATE KEY UPDATE ";
+				$sql .= " name='$name'";
+				//$sql .= ";\n";
 				$database->query($sql);
 				$customerGroups[$name] = $maxCustomerGroupId;
 			}
@@ -1230,7 +1355,6 @@ class ModelToolExport extends Model {
 		// store product discounts into the database
 		$productDiscountId = 0;
 		$first = TRUE;
-		$sql = "INSERT INTO `".DB_PREFIX."product_discount` (`product_discount_id`,`product_id`,`customer_group_id`,`quantity`,`priority`,`price`,`date_start`,`date_end` ) VALUES "; 
 		foreach ($discounts as $discount) {
 			$productDiscountId += 1;
 			$productId = $discount['product_id'];
@@ -1241,13 +1365,19 @@ class ModelToolExport extends Model {
 			$price = $discount['price'];
 			$dateStart = $discount['date_start'];
 			$dateEnd = $discount['date_end'];
-			$sql .= ($first) ? "\n" : ",\n";
-			$first = FALSE;
+			// $sql .= ($first) ? "\n" : ",\n";
+			// $first = FALSE;
+			$sql = "INSERT INTO `".DB_PREFIX."product_discount` (`product_discount_id`,`product_id`,`customer_group_id`,`quantity`,`priority`,`price`,`date_start`,`date_end` ) VALUES "; 
+
 			$sql .= "($productDiscountId,$productId,$customerGroupId,$quantity,$priority,$price,'$dateStart','$dateEnd')";
-		}
-		if (!$first) {
+			$sql .= " ON DUPLICATE KEY UPDATE ";
+			$sql .= " product_id=$productId, customer_group_id=$customerGroupId, quantity=$quantity, priority=$priority,";
+			$sql .= " price=$price, date_start='$dateStart', date_end='$dateEnd'";	
 			$database->query($sql);
 		}
+		// if (!$first) {
+			// $database->query($sql);
+		// }
 
 		$database->query("COMMIT;");
 		return TRUE;
@@ -1297,7 +1427,7 @@ class ModelToolExport extends Model {
 	function storeRewardsIntoDatabase( &$database, &$rewards )
 	{
 		$sql = "START TRANSACTION;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."product_reward`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."product_reward`;\n";
 		$this->import( $database, $sql );
 
 		// find existing customer groups from the database
@@ -1323,7 +1453,8 @@ class ModelToolExport extends Model {
 				$maxCustomerGroupId += 1;
 				$sql  = "INSERT INTO `".DB_PREFIX."customer_group` (`customer_group_id`, `name`) VALUES "; 
 				$sql .= "($maxCustomerGroupId, '$name')";
-				$sql .= ";\n";
+				$sql .= " ON DUPLICATE KEY UPDATE ";
+				$sql .= " name='$name'";	
 				$database->query($sql);
 				$customerGroups[$name] = $maxCustomerGroupId;
 			}
@@ -1331,21 +1462,24 @@ class ModelToolExport extends Model {
 
 		// store product rewards into the database
 		$productRewardId = 0;
-		$first = TRUE;
-		$sql = "INSERT INTO `".DB_PREFIX."product_reward` (`product_reward_id`,`product_id`,`customer_group_id`,`points` ) VALUES "; 
+		// $first = TRUE;
 		foreach ($rewards as $reward) {
 			$productRewardId += 1;
 			$productId = $reward['product_id'];
 			$name = $reward['customer_group'];
 			$customerGroupId = $customerGroups[$name];
 			$points = $reward['points'];
-			$sql .= ($first) ? "\n" : ",\n";
-			$first = FALSE;
-			$sql .= "($productRewardId,$productId,$customerGroupId,$points)";
-		}
-		if (!$first) {
+
+			$sql  = "INSERT INTO `".DB_PREFIX."product_reward` (`product_reward_id`,`product_id`,`customer_group_id`,`points` )  "; 
+			$sql .= " VALUES($productRewardId,$productId,$customerGroupId,$points)";
+			$sql .= " ON DUPLICATE KEY UPDATE ";
+			$sql .= " product_id=$productId, customer_group_id=$customerGroupId, points=$points";
 			$database->query($sql);
+
 		}
+		// if (!$first) {
+			// $database->query($sql);
+		// }
 
 		$database->query("COMMIT;");
 		return TRUE;
@@ -1407,8 +1541,11 @@ class ModelToolExport extends Model {
 			$imageNames = ($imageNames=="") ? array() : explode( ",", $imageNames );
 			foreach ($imageNames as $imageName) {
 				$maxImageId += 1;
-				$sql = "INSERT INTO `".DB_PREFIX."product_image` (`product_image_id`, product_id, `image`) VALUES ";
-				$sql .= "($maxImageId,$productId,'$imageName');";
+				$sql  = "INSERT INTO `".DB_PREFIX."product_image` (`product_image_id`, product_id, `image`) VALUES ";
+				$sql .= "($maxImageId,$productId,'$imageName')";
+				$sql .= " ON DUPLICATE KEY UPDATE ";
+				$sql .= " product_id = $productId, image = '$imageName'";
+				
 				$database->query( $sql );
 			}
 		}
