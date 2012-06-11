@@ -271,7 +271,6 @@ class ModelToolExport extends Model {
 		
 		// get pre-defined store_ids
 		$availableStoreIds = $this->getAvailableStoreIds( $database );
-					echo "hi";
 
 		// store or update manufacturers
 		$manufacturerIds = array();
@@ -280,7 +279,6 @@ class ModelToolExport extends Model {
 			$database->query( 'ROLLBACK;' );
 			return FALSE;
 		}
-					echo "hji2";
 
 		// get weight classes
 		$weightClassIds = $this->getWeightClassIds( $database );
@@ -625,11 +623,11 @@ class ModelToolExport extends Model {
 
 		// start transaction, remove categories
 		$sql = "START TRANSACTION;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."category`;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."category_description` WHERE language_id=$languageId;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."category_to_store`;\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."url_alias` WHERE `query` LIKE 'category_id=%';\n";
-		$sql .= "DELETE FROM `".DB_PREFIX."category_to_layout`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."category`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."category_description` WHERE language_id=$languageId;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."category_to_store`;\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."url_alias` WHERE `query` LIKE 'category_id=%';\n";
+		// $sql .= "DELETE FROM `".DB_PREFIX."category_to_layout`;\n";
 		$this->import( $database, $sql );
 		
 		// get pre-defined layouts
