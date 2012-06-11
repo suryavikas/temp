@@ -105,7 +105,7 @@
                     <div class="box-single-checkbox">
                     <div class="checkbox product-options" id="">
                     <?php
-                    echo '<input  type="checkbox" id="sale_items" name="sale_items">';
+                    echo '<input  type="checkbox" id="in_stock" name="in_stock">';
                     echo '</div>';
                     echo '<label for="'. $text_in_stock_products.'">' . $text_in_stock_products . '</label>';
                     echo'</div>';
