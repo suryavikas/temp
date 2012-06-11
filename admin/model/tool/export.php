@@ -393,11 +393,6 @@ class ModelToolExport extends Model {
 				$database->query($sql4);
 			}
 			
-			// echo $sql4;
-			// echo "<br>";
-			// echo $sql;
-			// die();
-			
 			foreach ($storeIds as $storeId) {
 				if (in_array((int)$storeId,$availableStoreIds)) {
 					$sql6  = " INSERT INTO `".DB_PREFIX."product_to_store` (`product_id`,`store_id`) VALUES ($productId, $storeId)";
