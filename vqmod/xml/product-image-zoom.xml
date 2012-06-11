@@ -1,0 +1,66 @@
+﻿<modification>
+	<id>Product Image Zoom</id>
+	<version>1.2</version>
+	<vqmver>2.0</vqmver>
+	<author>www.backonoc.com</author>
+	<file name="catalog/view/theme/default/template/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[
+				<link rel="stylesheet" type="text/css" href="catalog/view/theme/default/stylesheet/stylesheet.css" />
+			]]></search>
+			<add><![CDATA[
+			    <link href="catalog/view/theme/default/stylesheet/cloud-zoom.css" rel="stylesheet" type="text/css" />
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[
+				<script type="text/javascript" src="catalog/view/javascript/common.js"></script>
+			]]></search>
+			<add><![CDATA[
+			  	<script type="text/JavaScript" src="catalog/view/javascript/cloud-zoom.1.0.2.min.js"></script>
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/default/template/product/product.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<div class="image"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" /></a></div>]]></search>
+			<add><![CDATA[<div class="image"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class = 'cloud-zoom' id='zoom1' rel="showTitle: false, tint:true, zoomWidth:400, zoomHeight:339, adjustX:12,adjustY:-11 " ><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a></div><div class="bigImage"></div>]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[<div class="image-additional">]]></search>
+			<add><![CDATA[<a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class = 'cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '<?php echo $thumb; ?>' "><img src="<?php echo $small; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[<a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>]]></search>
+			<add><![CDATA[<a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" class="cloud-zoom-gallery" rel="useZoom: 'zoom1', smallImage: '<?php echo $image['thumb']; ?>' "><img src="<?php echo $image['small']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/product/product.php">
+		<operation>
+			<search position="before"><![CDATA[$this->data['images'] = array();]]></search>
+			<add><![CDATA[
+			    if ($product_info['image']) {
+				$this->data['small'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'));
+			} else {
+				$this->data['small'] = '';
+			}
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[
+				'popup' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')),
+			]]></search>
+			<add><![CDATA[
+			    'small' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height')),
+			]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[
+				'thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'))
+			]]></search>
+			<add><![CDATA[
+			    'thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_thumb_width'), $this->config->get('config_image_thumb_height'))
+			]]></add>
+		</operation>		
+	</file>
+</modification>
