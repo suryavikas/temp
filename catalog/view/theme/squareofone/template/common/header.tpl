@@ -30,7 +30,7 @@
 <!--<![endif]-->
 
 <!-- CSS -->
-<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/alice-min.css" media="all">
+<!--<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/alice-min.css" media="all">-->
 <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/colorbox/colorbox.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/stylesheet.css" />
 
@@ -141,8 +141,8 @@ DD_belatedPNG.fix('#logo img');
 
 <div id="header_top4_outer">
     <div id="header_top4_inner">
-      <div class="menu">
-         <!--[if lt IE 9]><span class="nav-subGradient"></span><![endif]-->
+<!--      <div class="menu">
+         [if lt IE 9]><span class="nav-subGradient"></span><![endif]
             <ul class="nav-sub">
               <li class="">
 
@@ -288,7 +288,7 @@ DD_belatedPNG.fix('#logo img');
             <div class="clear"></div>
             </ul>
         <div class="clear"></div>
-      </div>
+      </div>-->
       <div class="clear"></div>
     </div>
     <div class="clear"></div>
