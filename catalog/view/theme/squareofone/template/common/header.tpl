@@ -30,10 +30,10 @@
 <!--<![endif]-->
 
 <!-- CSS -->
-
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/alice-min.css" media="all">
 <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/colorbox/colorbox.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/stylesheet.css" />
-<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/alice-min.css" media="all">
+
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/skin.css" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/style.css" />
 <?php foreach ($styles as $style) { ?>
@@ -138,8 +138,6 @@ DD_belatedPNG.fix('#logo img');
     </div>
     <div class="clear"></div>
   </div>
-
-
 
 <div id="header_top4_outer">
     <div id="header_top4_inner">
