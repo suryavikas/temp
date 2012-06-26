@@ -1,7 +1,7 @@
 <div id="banner">
   <div id="banner_img">
   <div class="banner_menu">
-  <div class="banner_menu_inner">
+<!--  <div class="banner_menu_inner">
     <ul>
        <li><strong>Men</strong></li>
 <li><a href="#">Casual Shoes</a></li>
@@ -35,7 +35,7 @@
       <div class="clear"></div>
     </ul>
   <div class="clear"></div>
-  </div>
+  </div>-->
   <div class="clear"></div>
   </div>
   <div style=" overflow:hidden; position:relative; height:395px; display:block; margin:0; padding:0;">
@@ -61,8 +61,7 @@
 
 <script type="text/javascript" src="catalog/view/javascript/jquery.jcarousel.min.js"></script>
 <script type="text/javascript"><!--
-function mycarousel_initCallback(carousel)
-{
+function mycarousel_initCallback(carousel){
     // Disable autoscrolling if the user clicks the prev or next button.
     carousel.buttonNext.bind('click', function() {
         carousel.startAuto(0);

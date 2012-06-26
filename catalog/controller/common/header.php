@@ -55,7 +55,13 @@ class ControllerCommonHeader extends Controller {
 		$this->data['account'] = $this->url->link('account/account', '', 'SSL');
 		$this->data['shopping_cart'] = $this->url->link('checkout/cart');
 		$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');
-		
+
+                //Added by Surya to accomodate the theme
+                $this->data['product_count'] =  $this->cart->countProducts();
+                $this->language->load('common/footer');
+                $this->data['text_contact'] = $this->language->get('text_contact');
+		$this->data['contact'] = $this->url->link('information/contact');
+
 		if (isset($this->request->get['filter_name'])) {
 			$this->data['filter_name'] = $this->request->get['filter_name'];
 		} else {

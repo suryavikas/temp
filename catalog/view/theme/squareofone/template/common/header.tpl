@@ -71,7 +71,7 @@ DD_belatedPNG.fix('#logo img');
     <div id="header">
     <div id="header_top1_outer">
     <div id="header_top1_inner">
-      <div class="header_top1_menu">24x7 Customer Support  - <a href="#">Contact Us</a> | <a href="<?php echo $home; ?>"><?php echo $text_home; ?></a> | <a href="#">Account</a> | <a href="<?php echo $wishlist; ?>"  id="wishlist-total"><?php echo $text_wishlist; ?></a> | <a href="<?php echo $shopping_cart; ?>"><?php echo $text_shopping_cart; ?></a> | <a href="<?php echo $checkout; ?>"><?php echo $text_checkout; ?></a> |
+      <div class="header_top1_menu">24x7 Customer Support  - <a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a> | <a href="<?php echo $home; ?>"><?php echo $text_home; ?></a> | <a href="#">Account</a> | <a href="<?php echo $wishlist; ?>"  id="wishlist-total"><?php echo $text_wishlist; ?></a> |
 
     <?php if (!$logged) { ?>
         <?php echo $text_welcome; ?>
@@ -112,7 +112,7 @@ DD_belatedPNG.fix('#logo img');
   ?>
   <?php // echo $language; ?>
   <?php // echo $currency; ?>
-  <?php // echo $cart; ?>
+  <?php //echo $cart; ?>
 </div>
     <div id="header_top3_outer">
     <div id="header_top3_inner">
@@ -125,9 +125,9 @@ DD_belatedPNG.fix('#logo img');
         <input type="text" value="Search for items" name="" class="srch" onFocus="if(this.value=='Search for items'){this.value=''}" onclick="if(this.value=='Search for items'){this.value=''}" onblur="if(this.value==''){this.value='Search for items'}" />
         <input type="image" src="catalog/view/theme/squareofone/image/go-btn.jpg" class="go_btn" />
         <div class="sale_btn"><a href="#"><img src="catalog/view/theme/squareofone/image/sale-btn.jpg" alt="" border="0" /></a></div>
-        <div class="shoping_bag">
-          <div class="cart_img"><a href="#"><img src="catalog/view/theme/squareofone/image/cart-img.png" alt="" border="0" /></a></div>
-          <div class="cart_txt"> <strong>Shopping Bag</strong> now in your cart 0 items
+        <div id="cart" class="shoping_bag">
+          <div class="cart_img"><a href="<?php echo $shopping_cart; ?>"</a><img src="catalog/view/theme/squareofone/image/cart-img.png" alt="" border="0" /></a></div>
+          <div class="cart_txt heading"> <strong>Shopping Bag</strong> now in your cart <a><?php echo $product_count; ?> items </a>
             <div class="clear"></div>
           </div>
           <div class="clear"></div>
