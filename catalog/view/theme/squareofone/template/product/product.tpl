@@ -23,7 +23,7 @@
             if(sizeof($images)> 0){
                 foreach ($images as $image) { ?>
                 <li>
-                    <a href="<?php echo $image['popup']; ?>">
+                    <a href="<?php echo $image['thumb']; ?>">
                         <img src="<?php echo $image['popup']; ?>" alt="<?php echo $heading_title; ?>" />
                     </a>
                 </li>
@@ -46,8 +46,9 @@
 
     </div>
          <?php if ($images) { ?>
+         
       <div class="image-additional">
-        <?php foreach ($images as $image) { ?>
+            <?php foreach ($images as $image) { ?>
         <a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
         <?php } ?>
       </div>

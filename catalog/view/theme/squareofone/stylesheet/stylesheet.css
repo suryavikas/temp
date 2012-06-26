@@ -89,18 +89,6 @@ label {
 	margin-right: 195px;
 }
 /* header */
-#header {
-	height: 90px;
-	margin-bottom: 7px;
-	padding-bottom: 4px;
-	position: relative;
-	z-index: 99;
-}
-#header #logo {
-	position: absolute;
-	top: 25px;
-	left: 15px;
-}
 #language {
 	position: absolute;
 	top: 15px;
