@@ -30,7 +30,7 @@
 <!--<![endif]-->
 
 <!-- CSS -->
-<!--<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/alice-min.css" media="all">-->
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/alice-min.css" media="all">
 <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/colorbox/colorbox.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/stylesheet.css" />
 
@@ -139,160 +139,59 @@ DD_belatedPNG.fix('#logo img');
     <div class="clear"></div>
   </div>
 
-<div id="header_top4_outer">
-    <div id="header_top4_inner">
-<!--      <div class="menu">
-         [if lt IE 9]><span class="nav-subGradient"></span><![endif]
-            <ul class="nav-sub">
-              <li class="">
 
-                <a href="#" id="cat_141" class="sel-cat-shoes"> <span class="nav-subTxt">Shoes</span> </a>
-                <div class="nav-layer fsm box-bgcolor ">
-                  <div class="pam line">
-                    <div class="box unit size1of3" >
-                      <div class="prl">
 
-                        <div class="line mts">
-                         <img src="catalog/view/theme/squareofone/image/img9.png" alt="" border="0" />
-                         <h2>Womens Jeans</h2>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    <div class="box unit size1of3" >
-                      <div class="prl">
-                       <h3>Men's Wear</h3>
-                        <div class="line mts">
-                          <ul class="cnv unit">
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Shoes</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Jeans</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Shirts</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">T-shirt</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Watch</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Undergarments</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Formal Dress</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Casual Dress</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Braselet</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Mobile</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Computer</span> </a> </li>
-                              <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">...All Category</span> </a> </li>
-                          </ul>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    <div class="box unit size1of3" >
-                      <div class="prl">
-                        <h3>Women's Wear</h3>
-                        <div class="line mts">
-                          <ul class="cnv unit">
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Shirts</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Formal Dress</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Casual Dress</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Braselet</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Mobile</span> </a> </li>
-                               <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Shoes</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Jeans</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Shirts</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">T-shirt</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Formal Dress</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Casual Dress</span> </a> </li>
-                             <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">...All Category</span> </a> </li>
-                          </ul>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    <div class="box unit size1of3" >
-                      <div class="prl">
-                        <h3>Kid's Wear</h3>
-                        <div class="line mts">
-                          <ul class="cnv unit">
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Shoes</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Jeans</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Shirts</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">T-shirt</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Watch</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Jeans</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Formal Dress</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Casual Dress</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Braselet</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Mobile</span> </a> </li>
-                            <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">Computer</span> </a> </li>
-                             <li class="cnv-level-1"> <a href="#"> <span class="cnv-name pls">...All Category</span> </a> </li>
-                          </ul>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-
-			  <li class="">
-
-                <a href="#" id="cat_141" class="sel-cat-shoes"> <span class="nav-subTxt">Clothing</span> </a>
-
-              </li>
-
-			  <li class="">
-
-                <a href="#" id="cat_141" class="sel-cat-shoes"> <span class="nav-subTxt">Sports</span> </a>
-
-              </li>
-
-			  <li class="">
-
-                <a href="#" id="cat_141" class="sel-cat-shoes"> <span class="nav-subTxt">Computers</span> </a>
-
-              </li>
-
-			  <li class="">
-
-                <a href="#" id="cat_141" class="sel-cat-shoes"> <span class="nav-subTxt">Jewellery</span> </a>
-
-              </li>
-
-			  <li class="">
-
-                <a href="#" id="cat_141" class="sel-cat-shoes"> <span class="nav-subTxt">Mobile & Accessories</span> </a>
-
-              </li>
-
-			  <li class="">
-
-                <a href="#" id="cat_141" class="sel-cat-shoes"> <span class="nav-subTxt">Beauty</span> </a>
-
-              </li>
-
-               <li class="">
-
-                <a href="#" id="cat_141" class="sel-cat-shoes"> <span class="nav-subTxt">Fragrances</span> </a>
-
-              </li>
-
-               <li class="">
-
-                <a href="#" id="cat_141" class="sel-cat-shoes"> <span class="nav-subTxt">Home & Living</span> </a>
-
-              </li>
-
-               <li class="" style="padding-right:0px;">
-
-                <a href="#" id="cat_141" class="sel-cat-shoes"> <span class="nav-subTxt">Brands</span> </a>
-
-              </li>
-            <div class="clear"></div>
-            </ul>
-        <div class="clear"></div>
-      </div>-->
-      <div class="clear"></div>
-    </div>
-    <div class="clear"></div>
-  </div>
 <div id="container">
+<?php if ($categories) { ?>
+<div id="menu" class="menu">
+    <ul class="nav-sub">
+    <?php foreach ($categories as $category) { ?>
+    <li>
+        <a href="<?php echo $category['href']; ?>" id="cat_141" class="sel-cat-shoes"> <span class="nav-subTxt"><?php echo $category['name']; ?></span> </a>
 
+      <?php if ($category['children']) { ?>
+      <div class="nav-layer fsm box-bgcolor ">
+        <div class="pam line">
+             <div class="box unit size1of3" >
+                  <div class="prl">
+                    <div class="line mts">
+                        <img src="catalog/view/theme/squareofone/image/img9.png" alt="" border="0" />
+                        <h2>Womens Jeans</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="box unit size1of3" >
+                <div class="prl">
+                <?php
+                    foreach ($category['children'] as $subcategory) {  ?>                   
+                    <a href="<?php echo $subcategory['href']; ?>"><h3><?php echo $subcategory['name']; ?></h3></a>
+                    <?php if ($subcategory['children']) { ?>
+                        <div class="line mts">
+                           <ul class="cnv unit">
+                            <?php
+                                $sizeOfChildren = count($subcategory['children']);
+                                for ($i = 0; $i <$sizeOfChildren; $i++) {
+                                    if (isset($subcategory['children'][$i])) { ?>
+                                        <li class="cnv-level-1"><a href="<?php echo $subcategory['children'][$i]['href']; ?>"><span class="cnv-name pls"><?php echo $subcategory['children'][$i]['name']; ?></span> </a> </li>
+                            <?php
+                                    }
+                                }
+                            ?>
+                            </ul>
+                        </div>
+                <?php
+                        }
+                    }
+                ?>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <?php } ?>
+     </li>  
+<?php } ?>
+    </ul>
+</div>
+          <?php } ?>
 <div id="notification"></div>

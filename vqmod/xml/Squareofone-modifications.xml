@@ -1,6 +1,12 @@
-<?php   
-class ControllerCommonHeader extends Controller {
-	protected function index() {
+<modification>
+	<id>Squareofone-core-behaviour-change</id>
+	<version>1.0.0</version>
+	<vqmver>2.1.1</vqmver>
+	<author>Surya Vikas</author>
+	<file name="catalog/controller/common/header.php">
+		<operation>
+			<search position="replace" offset="115"><![CDATA[protected function index() {]]></search>
+			<add><![CDATA[protected function index() {
 		$this->data['title'] = $this->document->getTitle();
 		
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
@@ -55,7 +61,13 @@ class ControllerCommonHeader extends Controller {
 		$this->data['account'] = $this->url->link('account/account', '', 'SSL');
 		$this->data['shopping_cart'] = $this->url->link('checkout/cart');
 		$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');
-		
+
+                //Added by Surya to accomodate the theme
+                $this->data['product_count'] =  $this->cart->countProducts();
+                $this->language->load('common/footer');
+                $this->data['text_contact'] = $this->language->get('text_contact');
+		$this->data['contact'] = $this->url->link('information/contact');
+
 		if (isset($this->request->get['filter_name'])) {
 			$this->data['filter_name'] = $this->request->get['filter_name'];
 		} else {
@@ -82,12 +94,26 @@ class ControllerCommonHeader extends Controller {
 						'filter_sub_category' => true	
 					);		
 						
-					$product_total = $this->model_catalog_product->getTotalProducts($data);
+					//$product_total = $this->model_catalog_product->getTotalProducts($data);
 									
-					$children_data[] = array(
-						'name'  => $child['name'] . ' (' . $product_total . ')',
-						'href'  => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])	
-					);					
+					
+                                        $children_level2 = $this->model_catalog_category->getCategories($child['category_id']);
+                                                                               
+                                        $children_data_level2 = array();
+                                        if($children_level2){
+                                            foreach ($children_level2 as $child_level2) {                                               
+                                                $children_data_level2[] = array(
+                                                    'name'  => $child_level2['name'],
+                                                    'href'  => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'] . '_' . $child_level2['category_id'])
+                                                );
+                                            }
+                                        }
+                                        $children_data[] = array(
+						'name'  => $child['name'] ,
+						'href'  => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id']),
+                                                'children' => $children_data_level2
+					);
+                                      
 				}
 				
 				// Level 1
@@ -99,7 +125,6 @@ class ControllerCommonHeader extends Controller {
 				);
 			}
 		}
-		
 		$this->children = array(
 			'module/language',
 			'module/currency',
@@ -115,4 +140,7 @@ class ControllerCommonHeader extends Controller {
     	$this->render();
 	} 	
 }
-?>
+?>]]></add>
+		</operation>
+	</file>
+</modification>
