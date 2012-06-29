@@ -29,12 +29,14 @@ class ControllerModuleFilters extends Controller {
         $priceRangeArray = $this->model_filters_filters->getPriceRange($categoryId);
         $this->data['priceRangeArray'] = $priceRangeArray;
 //         echo "<pre>";
+//        print_r($_SESSION);
 //         var_dump($priceRangeArray);
         //Setting text from language file
         $this->data['text_manufacturer_select_option'] = html_entity_decode($this->language->get('text_manufacturer_select_option'));
         $this->data['text_product_options_select_option'] = html_entity_decode($this->language->get('text_product_options_select_option'));
         $this->data['text_price_filter'] = html_entity_decode($this->language->get('text_price_filter'));
-        $this->data['currency'] = html_entity_decode($this->language->get('text_currency'));
+//        $this->data['currency'] = html_entity_decode($this->language->get('text_currency'));
+        $this->data['currency'] = html_entity_decode($_SESSION["currency"]);
         $this->data['text_sale_items'] = html_entity_decode($this->language->get('text_sale_items'));
         $this->data['text_in_stock_products'] = html_entity_decode($this->language->get('text_in_stock_products'));
 
@@ -73,6 +75,8 @@ class ControllerModuleFilters extends Controller {
         $this->load->model('catalog/product');
 
         $this->load->model('tool/image');
+
+		$this->load->model('filters/filters');
 
         if (isset($this->request->get['sort'])) {
             $sort = $this->request->get['sort'];
@@ -229,7 +233,8 @@ class ControllerModuleFilters extends Controller {
             ksort($filters);
             $localPriceArray = array();
             foreach ($filters as $filter) {
-//            print_r($filter);
+  //          print_r($filter);
+			//	echo "<br>****".$filter['param']."*******".$filter['val']."</br>";
                 if (strtolower($filter['param']) == 'product-option') {
                     if (!$productOption) {
                         $productOption = $filter['val'];
@@ -243,8 +248,10 @@ class ControllerModuleFilters extends Controller {
                         $manufacturerId = $manufacturerId . ',' . $filter['val'];
                     }
                 } else if (strtolower($filter['param']) == 'sale_items' && strtolower($filter['val']) == 'on') {
+					echo "@@@@@@@@@@@@@@@222";
                     $saleItems = true;
                 } else if (strtolower($filter['param']) == 'in_stock' && strtolower($filter['val']) == 'on') {
+					echo "$$$$$$$$$$$";
                     $inStock = true;
                 } else if (strtolower($filter['param']) == 'price') {
                     list($minPrice, $maxPrice) = explode("-", $filter['val']);
@@ -266,18 +273,23 @@ class ControllerModuleFilters extends Controller {
                 'minPrice' => $minPrice,
                 'maxPrice' => $maxPrice
             );
-//        print_r($filterCond);
+       // print_r($filterCond);
             $data = array_merge($data, $filterCond);
 //        echo'<pre>';
-//        print_r($data);
-//        die;
+        
+       
             /*             * ******************************************TBD as VQMOD**************************************************** */
+			
+            $product_total = $this->model_filters_filters->getTotalProducts($data);
+			$results = $this->model_filters_filters->getProductsResult($data);
 
-            $product_total = $this->model_catalog_product->getTotalProducts($data);
-
+			//echo "<pre>";
+			//print_r($data);
+			//echo "Products total abc ".$product_total;
+			//echo "</pre>";
 //            $results = $this->model_catalog_product->getProducts($data);
-            $this->load->model('filters/filters');
-            $results = $this->model_filters_filters->getProducts($data);
+            
+            
 
             foreach ($results as $result) {
 //                print_r($result);

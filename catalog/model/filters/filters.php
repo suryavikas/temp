@@ -117,7 +117,8 @@ class ModelFiltersFilters extends Model {
         return $manufacturersData;
     }
 
-    public function getProducts($data = array()) {
+    public function getProductsResult($data = array()) {
+		
 		if ($this->customer->isLogged()) {
 			$customer_group_id = $this->customer->getCustomerGroupId();
 		} else {
@@ -126,8 +127,10 @@ class ModelFiltersFilters extends Model {
 
 		$cache = md5(http_build_query($data));
 
-		$product_data = $this->cache->get('product.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . (int)$customer_group_id . '.' . $cache);                
+		$product_data = $this->cache->get('filters.product' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . (int)$customer_group_id . '.' . $cache);                
+		//echo $product_data;
 		if (!$product_data) {
+			
 			$sql = "SELECT p.product_id, (SELECT AVG(rating) AS total FROM " . DB_PREFIX . "review r1 WHERE r1.product_id = p.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id)";
 
 			if (!empty($data['filter_tag'])) {
@@ -138,7 +141,7 @@ class ModelFiltersFilters extends Model {
 				$sql .= " LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)";
 			}
                         
-                        if (!empty($data['productOption'])) {
+            if (!empty($data['productOption'])) {
 				$sql .= " JOIN " . DB_PREFIX . "product_option_value POV ON (p.product_id = POV.product_id)";
                                 $sql .= " AND POV.option_value_id in (".$data['productOption'].")";
 			}                        
@@ -152,12 +155,17 @@ class ModelFiltersFilters extends Model {
                                 $sql .= " AND p.quantity > 1";
 			}
 
-                        if (!empty($data['saleItems'])) {
+			if (!empty($data['saleItems'])) {
 				$sql .= " JOIN " . DB_PREFIX . "product_discount PDC ON (p.product_id = PDC.product_id)";
                                 $sql .= " AND (PDC.date_end >= current_date or PDC.date_end = '0000-00-00')";
 			}
+			//Added for filtering out products which are for sale only 
+			if (!empty($data['saleItems'])) {
+				$sql .= " LEFT JOIN " . DB_PREFIX . "product_discount prd ON (prd.product_id = p.product_id)";			
+			}
                         
 			$sql .= " WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
+			
 
 			if (!empty($data['filter_name']) || !empty($data['filter_tag'])) {
 				$sql .= " AND (";
@@ -225,6 +233,11 @@ class ModelFiltersFilters extends Model {
 				$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
 			}
 
+			//Added for filtering out products which are "IN Stock"
+			if (!empty($data['inStock'])) {
+				$sql .= " AND p.stock_status_id in (" . $this->getInStockItemId(). ")";
+			}
+
 			$sql .= " GROUP BY p.product_id";
 
 			$sort_data = array(
@@ -265,8 +278,9 @@ class ModelFiltersFilters extends Model {
 				$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 			}
 
+			
 			$product_data = array();
-
+	
 			$query = $this->db->query($sql);
 
                         $this->load->model('catalog/product');
@@ -275,10 +289,123 @@ class ModelFiltersFilters extends Model {
 			}
 
 			$this->cache->set('product.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . (int)$customer_group_id . '.' . $cache, $product_data);
-		}
 
+		}
+		
 		return $product_data;
 	}
+
+	public function getTotalProducts($data = array()) {
+		$sql = "SELECT COUNT(DISTINCT p.product_id) AS total FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id)";
+
+		if (!empty($data['filter_category_id'])) {
+			$sql .= " LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)";			
+		}
+		
+		if (!empty($data['filter_tag'])) {
+			$sql .= " LEFT JOIN " . DB_PREFIX . "product_tag pt ON (p.product_id = pt.product_id)";			
+		}
+
+		//Added for filtering out products which are for sale only 
+		if (!empty($data['saleItems'])) {
+			$sql .= " LEFT JOIN " . DB_PREFIX . "product_discount prd ON (prd.product_id = p.product_id)";			
+		}
+					
+		$sql .= " WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
+		
+		if (!empty($data['filter_name']) || !empty($data['filter_tag'])) {
+			$sql .= " AND (";
+								
+			if (!empty($data['filter_name'])) {
+				$implode = array();
+				
+				$words = explode(' ', $data['filter_name']);
+				
+				foreach ($words as $word) {
+					if (!empty($data['filter_description'])) {
+						$implode[] = "LCASE(pd.name) LIKE '%" . $this->db->escape(utf8_strtolower($word)) . "%' OR LCASE(pd.description) LIKE '%" . $this->db->escape(utf8_strtolower($word)) . "%'";
+					} else {
+						$implode[] = "LCASE(pd.name) LIKE '%" . $this->db->escape(utf8_strtolower($word)) . "%'";
+					}				
+				}
+				
+				if ($implode) {
+					$sql .= " " . implode(" OR ", $implode) . "";
+				}
+			}
+			
+			if (!empty($data['filter_name']) && !empty($data['filter_tag'])) {
+				$sql .= " OR ";
+			}
+			
+			if (!empty($data['filter_tag'])) {
+				$implode = array();
+				
+				$words = explode(' ', $data['filter_tag']);
+				
+				foreach ($words as $word) {
+					$implode[] = "LCASE(pt.tag) LIKE '%" . $this->db->escape(utf8_strtolower($word)) . "%' AND pt.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+				}
+				
+				if ($implode) {
+					$sql .= " " . implode(" OR ", $implode) . "";
+				}
+			}
+		
+			$sql .= ")";
+		}
+		
+		if (!empty($data['filter_category_id'])) {
+			if (!empty($data['filter_sub_category'])) {
+				$implode_data = array();
+				
+				$implode_data[] = "p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
+				
+				$this->load->model('catalog/category');
+				
+				$categories = $this->model_catalog_category->getCategoriesByParentId($data['filter_category_id']);
+					
+				foreach ($categories as $category_id) {
+					$implode_data[] = "p2c.category_id = '" . (int)$category_id . "'";
+				}
+							
+				$sql .= " AND (" . implode(' OR ', $implode_data) . ")";			
+			} else {
+				$sql .= " AND p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
+			}
+		}		
+		
+		if (!empty($data['filter_manufacturer_id'])) {
+			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
+		}
+		
+		//Added for filtering out products which are "IN Stock"
+		if (!empty($data['inStock'])) {
+			$sql .= " AND p.stock_status_id in (" . $this->getInStockItemId(). ")";
+		}
+
+		//echo "<pre>".$sql."</pre>";
+
+		$query = $this->db->query($sql);
+		return $query->row['total'];
+	}
+
+	//Getting the stock_status_id for products which are in stock
+	public function getInStockItemId() {
+		if ($this->customer->isLogged()) {
+			$customer_group_id = $this->customer->getCustomerGroupId();
+		} else {
+			$customer_group_id = $this->config->get('config_customer_group_id');
+		}		
+		
+		$query = $this->db->query("SELECT stock_status_id as statusId from ocstock_status where name like '%In%Stock%'");
+		
+		if (isset($query->row['statusId'])) {
+			return $query->row['statusId'];
+		} else {
+			return 7;	
+		}
+	}	
 }
 
 ?>

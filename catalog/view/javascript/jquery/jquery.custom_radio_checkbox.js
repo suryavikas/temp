@@ -24,26 +24,33 @@ dgStyle: function()
 		$(this).data('checked',$(elm).attr("checked"));
 		$(this).dgClear();
 	});
+	$(this).hover(function() { $(this).hoverInEffect();  },function() { $(this).hoverOutEffect();  });
 	$(this).mousedown(function() { $(this).dgEffect(); });
 	$(this).mouseup(function() { $(this).dgHandle(); });	
+},
+hoverInEffect: function(){
+	$(this).addClass('hoverInColor');
+},
+hoverOutEffect: function(){
+	$(this).removeClass('hoverInColor');
 },
 dgClear: function()
 {
 	if($(this).data("checked") == true)
 	{
-		$(this).css("backgroundPosition","center -"+(elmHeight*2)+"px");
+		$(this).css("backgroundPosition","left -"+(elmHeight*2)+"px");
 		}
 	else
 	{
-		$(this).css("backgroundPosition","center 0");
+		$(this).css("backgroundPosition","left 0");
 		}	
 },
 dgEffect: function()
 {
 	if($(this).data("checked") == true)
-		$(this).css({backgroundPosition:"center -"+(elmHeight*3)+"px"});
+		$(this).css({backgroundPosition:"left -"+(elmHeight*3)+"px"});
 	else
-		$(this).css({backgroundPosition:"center -"+(elmHeight)+"px"});
+		$(this).css({backgroundPosition:"left -"+(elmHeight)+"px"});
 },
 dgHandle: function()
 {
@@ -65,14 +72,14 @@ dgHandle: function()
 dgCheck: function(div)
 {
 	$(this).attr("checked",true);
-	$(div).data('checked',true).css({backgroundPosition:"center -"+(elmHeight*2)+"px"});
+	$(div).data('checked',true).css({backgroundPosition:"left -"+(elmHeight*2)+"px"});
 },
 dgUncheck: function(div)
 {
 	$(this).attr("checked",false);
 	if(div != -1)
-		$(div).data('checked',false).css({backgroundPosition:"center 0"});
+		$(div).data('checked',false).css({backgroundPosition:"left 0"});
 	else
-		$(this).parent().data("checked",false).css({backgroundPosition:"center 0"});
+		$(this).parent().data("checked",false).css({backgroundPosition:"left 0"});
 }
 });

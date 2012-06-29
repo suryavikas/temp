@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/default/stylesheet/filters.css" />
 <div class="box">
     <div class="box-heading"><?php echo $heading_title; ?></div>
-    <div class="box-content">
+    <div class="filterBox box-content">
         <div class="box-product">
             <!--Manufactures -->
             <?php
@@ -18,12 +18,11 @@
 
                 <?php
                 foreach ($manufacturers as $value) {
-                ?>
-                    <div>
+		?>
+                    
                     <div class="checkbox product-options" id="">
                     <?php
-                    echo '<input  type="checkbox" id="manufacturer" name="manufacturers[]" value="' . $value['manufacturer_id'] . '">';
-                    echo '</div>';
+                    echo '<input  class="checkbox-label" type="checkbox" id="manufacturer" name="manufacturers[]" value="' . $value['manufacturer_id'] . '">';
                     echo '<label for="'. $value['name'].'">' . $value['name'] . '</label>';
                     echo '</div>';
 //                        echo"<option value=" . $value['manufacturer_id'] . ">" . $value['name'] . "</option>";
@@ -46,11 +45,9 @@
                             unset($value['name']);
                             foreach ($value as $child) {
                     ?>
-                                <div>
                                 <div class="checkbox product-options" id="">
                     <?php
-                                echo '<input  type="checkbox" id="product-option" name="product-option[]" value="' . $child['child_id'] . '">';
-                                echo '</div>';
+                                echo '<input  class="checkbox-label" type="checkbox" id="product-option" name="product-option[]" value="' . $child['child_id'] . '">';
                                 echo '<label for="'. $child['child_name'].'">' . $child['child_name'] . '</label>';
                                 echo '</div>';
             
@@ -62,6 +59,7 @@
 
                     <!-- Price Range -->
                     <?php
+                    
                     if (!empty($priceRangeArray)) {
                     ?>
                     <div class="box-heading-checkbox"><?php echo  $text_price_filter; ?> </div>
@@ -70,13 +68,11 @@
                     <?php
                         foreach ($priceRangeArray as $value) {
                             ?>
-                            <div>
                             <div class="checkbox product-options" id="">
 
                                 <?php
-                                    echo '<input  type="checkbox" id="price" name="price[]" value="' . $value['min'] . "-" . $value['max'] . '">';
-                                    echo '</div>';
-                                    echo '<label for="'. $currency . ' ' . $value['min'] . " - " . $currency . ' ' . $value['max'] .'">' . $currency . ' ' . $value['min'] . " - " . $currency . ' ' . $value['max'] . '</label>';
+                                    echo '<input  class="checkbox-label" type="checkbox" id="price" name="price[]" value="' . $value['min'] . "-" . $value['max'] . '">';
+                                    echo '<label for="'. $this->currency->format($value['min']) . " - " .  $this->currency->format($value['max'])  .'">' .  $this->currency->format($value['min']) . " - " . $this->currency->format($value['max']). '</label>';
                                     echo '</div>';
                 //                        echo"<option value=" . $value['manufacturer_id'] . ">" . $value['name'] . "</option>";
                                 }
@@ -85,18 +81,15 @@
                     }
                     ?>
                     <!-- Sale items -->
-                    <?php
-
+                    <?php	
                     if (!empty($priceRangeArray)) {
                     ?>
 <!--                     <div class="box-heading-checkbox"><?php echo $text_sale_items; ?> </div>
                      <div class="checkboxDiv">-->
 
-                    <div>
                     <div class="checkbox product-options" id="">
                     <?php
-                    echo '<input  type="checkbox" id="sale_items" name="sale_items">';
-                    echo '</div>';
+                    echo '<input  class="checkbox-label" type="checkbox" id="sale_items" name="sale_items">';
                     echo '<label for="'. $text_sale_items.'">' . $text_sale_items . '</label>';
                                            
                     ?>
@@ -105,9 +98,9 @@
                     <div class="box-single-checkbox">
                     <div class="checkbox product-options" id="">
                     <?php
-                    echo '<input  type="checkbox" id="in_stock" name="in_stock">';
-                    echo '</div>';
+                    echo '<input  class="checkbox-label" type="checkbox" id="in_stock" name="in_stock">';
                     echo '<label for="'. $text_in_stock_products.'">' . $text_in_stock_products . '</label>';
+                    echo '</div>';
                     echo'</div>';
                      }
                     ?>
