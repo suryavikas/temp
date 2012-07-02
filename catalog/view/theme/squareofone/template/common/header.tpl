@@ -162,17 +162,19 @@ DD_belatedPNG.fix('#logo img');
             </div>
             <div class="box unit size1of3" >
                 <div class="prl">
-                <?php
+                <?php                
                     foreach ($category['children'] as $subcategory) {  ?>                   
                     <a href="<?php echo $subcategory['href']; ?>"><h3><?php echo $subcategory['name']; ?></h3></a>
-                    <?php if ($subcategory['children']) { ?>
+                    <?php if (count($subcategory['children']) > 0) { ?>
                         <div class="line mts">
                            <ul class="cnv unit">
                             <?php
                                 $sizeOfChildren = count($subcategory['children']);
                                 for ($i = 0; $i <$sizeOfChildren; $i++) {
-                                    if (isset($subcategory['children'][$i])) { ?>
-                                        <li class="cnv-level-1"><a href="<?php echo $subcategory['children'][$i]['href']; ?>"><span class="cnv-name pls"><?php echo $subcategory['children'][$i]['name']; ?></span> </a> </li>
+                                    if (count($subcategory['children'][$i]) > 0) { ?>
+                                        <li class="cnv-level-1">
+                                            <a href="<?php echo $subcategory['children'][$i]['href']; ?>"><span class="cnv-name pls"><?php echo $subcategory['children'][$i]['name']; ?></span> </a>
+                                        </li>
                             <?php
                                     }
                                 }
