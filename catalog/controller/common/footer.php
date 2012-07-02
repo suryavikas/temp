@@ -8,7 +8,7 @@ class ControllerCommonFooter extends Controller {
 		$this->data['text_extra'] = $this->language->get('text_extra');
 		$this->data['text_contact'] = $this->language->get('text_contact');
 		$this->data['text_return'] = $this->language->get('text_return');
-    	$this->data['text_sitemap'] = $this->language->get('text_sitemap');
+                $this->data['text_sitemap'] = $this->language->get('text_sitemap');
 		$this->data['text_manufacturer'] = $this->language->get('text_manufacturer');
 		$this->data['text_voucher'] = $this->language->get('text_voucher');
 		$this->data['text_affiliate'] = $this->language->get('text_affiliate');
@@ -17,6 +17,7 @@ class ControllerCommonFooter extends Controller {
 		$this->data['text_order'] = $this->language->get('text_order');
 		$this->data['text_wishlist'] = $this->language->get('text_wishlist');
 		$this->data['text_newsletter'] = $this->language->get('text_newsletter');
+                $this->data['best_seller'] = $this->language->get('best_seller');
 		
 		$this->load->model('catalog/information');
 		
@@ -31,7 +32,7 @@ class ControllerCommonFooter extends Controller {
 
 		$this->data['contact'] = $this->url->link('information/contact');
 		$this->data['return'] = $this->url->link('account/return/insert', '', 'SSL');
-    	$this->data['sitemap'] = $this->url->link('information/sitemap');
+                $this->data['sitemap'] = $this->url->link('information/sitemap');
 		$this->data['manufacturer'] = $this->url->link('product/manufacturer');
 		$this->data['voucher'] = $this->url->link('account/voucher', '', 'SSL');
 		$this->data['affiliate'] = $this->url->link('affiliate/account', '', 'SSL');
@@ -41,8 +42,23 @@ class ControllerCommonFooter extends Controller {
 		$this->data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
 		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');		
 
-		$this->data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
-		
+//		$this->data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
+
+                $this->load->model('catalog/product');
+
+		$this->load->model('tool/image');
+
+		$this->data['best_sellers'] = array();
+                //Hard coded count value
+		$results = $this->model_catalog_product->getBestSellerProducts(5);
+		foreach ($results as $result) {
+                   
+                    $this->data['best_sellers'][] = array(                           
+                            'name'    	 => $result['name'],
+                            'href'    	 => $this->url->link('product/product', 'product_id=' . $result['product_id']),
+                    );
+		}
+                
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/footer.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/footer.tpl';
 		} else {

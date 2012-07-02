@@ -398,7 +398,7 @@ class ModelFiltersFilters extends Model {
 			$customer_group_id = $this->config->get('config_customer_group_id');
 		}		
 		
-		$query = $this->db->query("SELECT stock_status_id as statusId from ocstock_status where name like '%In%Stock%'");
+		$query = $this->db->query("SELECT stock_status_id as statusId from " . DB_PREFIX . "stock_status where name like '%In%Stock%'");
 		
 		if (isset($query->row['statusId'])) {
 			return $query->row['statusId'];
