@@ -160,7 +160,7 @@ td {
 }
 .clearfix:before, .clearfix:after, #content, #content:after, .box:before, .box:after, .box-hd:before, .box-hd:after, .box-bd:before, .box-bd:after, .box-ft:before, .box-ft:after, .l-pageWrapper:before, .l-pageWrapper:after {
 	content:"";
-	display:table
+/*	display:table*/
 }
 .clearfix:after, #content:after, .box:after, .box-hd:after, .box-bd:after, .box-ft:after, .l-pageWrapper:after, .oldie .clearfix {
 	clear:both
