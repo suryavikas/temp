@@ -48,7 +48,7 @@
 <script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/common.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/jquery.jcarousel.min.js"></script>
+<!--<script type="text/javascript" src="catalog/view/javascript/jquery.jcarousel.min.js"></script>-->
 <!--<script type="text/javascript" src="catalog/view/javascript/alice-1339158486.js"></script>-->
 <?php foreach ($scripts as $script) { ?>
 <script type="text/javascript" src="<?php echo $script; ?>"></script>
@@ -143,6 +143,8 @@ DD_belatedPNG.fix('#logo img');
 
 <div id="container">
 <?php if ($categories) { ?>
+    <div id="header_top4_outer">
+        <div id="header_top4_inner">
 <div id="menu" class="menu">
     <ul class="nav-sub">
     <?php foreach ($categories as $category) { ?>
@@ -152,7 +154,7 @@ DD_belatedPNG.fix('#logo img');
       <?php if ($category['children']) { ?>
       <div class="nav-layer fsm box-bgcolor ">
         <div class="pam line">
-             <div class="box unit size1of3" >
+             <div class="unit size1of3" >
                   <div class="prl">
                     <div class="line mts">
                         <img src="catalog/view/theme/squareofone/image/img9.png" alt="" border="0" />
@@ -160,10 +162,14 @@ DD_belatedPNG.fix('#logo img');
                     </div>
                 </div>
             </div>
-            <div class="box unit size1of3" >
-                <div class="prl">
-                <?php                
-                    foreach ($category['children'] as $subcategory) {  ?>                   
+            
+                <?php
+                foreach ($category['children'] as $subcategory) {
+                        $loopCount = 0;
+                        ?>
+                    
+                <div class="unit size1of3" >
+                    <div class="prl">
                     <a href="<?php echo $subcategory['href']; ?>"><h3><?php echo $subcategory['name']; ?></h3></a>
                     <?php if (count($subcategory['children']) > 0) { ?>
                         <div class="line mts">
@@ -183,17 +189,24 @@ DD_belatedPNG.fix('#logo img');
                         </div>
                 <?php
                         }
-                    }
+                        ?>
+                    </div>
+    </div>
+          <?php          }
                 ?>
                 </div>
             </div>
-        </div>
-    </div>
+        
    
     <?php } ?>
      </li>  
 <?php } ?>
     </ul>
 </div>
+            <div class="clear"></div>
+</div>
+<div class="clear"></div>
+</div>
+
           <?php } ?>
 <div id="notification"></div>

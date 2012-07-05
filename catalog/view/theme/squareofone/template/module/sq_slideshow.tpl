@@ -1,43 +1,6 @@
 <div id="banner">
   <div id="banner_img">
-  <div class="banner_menu">
-<!--  <div class="banner_menu_inner">
-    <ul>
-       <li><strong>Men</strong></li>
-<li><a href="#">Casual Shoes</a></li>
-<li><a href="#">Formal Shoes</a></li>
-<li><a href="#">Sports Shoes</a></li>
-<li><a href="#">Sandals</a></li>
-<li><a href="#">Shirts</a></li>
-<li><a href="#">Jeans</a></li>
-<li><a href="#">Watches & Accessories</a></li>
-<div class="clear"></div>
-    </ul>
-
-    <ul>
-    <li><strong>Women</strong></li>
-<li><a href="#">Slippers</a></li>
-<li><a href="#">Casual Shoes</a></li>
-<li><a href="#">Sandals</a></li>
-<li><a href="#">Kurtas & Kurtis</a></li>
-<li><a href="#">Sarees</a></li>
-<li><a href="#">Tops</a></li>
-<li><a href="#">Bags & Accessories</a></li>
-    <div class="clear"></div>
-    </ul>
-
-
-    <ul>
-      <li><a href="#"><strong>Kids</strong></a></li>
-<li><a href="#"><strong>Beauty</strong></a></li>
-<li><a href="#"><strong>Sports</strong></a></li>
-<li><a href="#"><strong>Home & Living</strong></a></li>
-      <div class="clear"></div>
-    </ul>
-  <div class="clear"></div>
-  </div>-->
-  <div class="clear"></div>
-  </div>
+ 
   <div style=" overflow:hidden; position:relative; height:395px; display:block; margin:0; padding:0;">
 <div class="cnt">
   <div id="slideshow<?php echo $module; ?>" class="cnt2" style="width: <?php echo $width; ?>px; height: <?php echo $height; ?>px;">
@@ -79,12 +42,12 @@ function mycarousel_initCallback(carousel){
     });
 };
 
-//$(document).ready(function() {
+$(document).ready(function() {
     $('#mycarousel').jcarousel({
         auto: 3	,
         wrap: 'last',
         initCallback: mycarousel_initCallback
     });
-    
-//});
+
+});
 --></script>
