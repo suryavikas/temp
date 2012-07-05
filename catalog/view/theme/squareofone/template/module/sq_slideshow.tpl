@@ -44,7 +44,7 @@ function mycarousel_initCallback(carousel){
 
 $(document).ready(function() {
     $('#mycarousel').jcarousel({
-        auto: 3	,
+        auto: 1	,
         wrap: 'last',
         initCallback: mycarousel_initCallback
     });

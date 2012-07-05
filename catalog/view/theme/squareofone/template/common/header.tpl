@@ -117,7 +117,7 @@ DD_belatedPNG.fix('#logo img');
     <div id="header_top3_outer">
     <div id="header_top3_inner">
       <div class="header_top3">
-        <div class="home_icon"><a href="index.html"><img src="catalog/view/theme/squareofone/image/home-icon.png" alt="" border="0" /></a></div>
+        <div class="home_icon"><a href="<?php echo $home; ?>"><img src="catalog/view/theme/squareofone/image/home-icon.png" alt="" border="0" /></a></div>
         <select name="" class="catg">
           <option>All Categories</option>
           <option>Sample</option>
