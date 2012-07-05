@@ -321,13 +321,9 @@ td {
 .clearfix:before, .clearfix:after, #content, #content:after, .box:before, .box:after, .box-hd:before, .box-hd:after, .box-bd:before, .box-bd:after, .box-ft:before, .box-ft:after, .l-pageWrapper:before, .l-pageWrapper:after {
 
 	content:"";
-<<<<<<< HEAD
-/*	display:table*/
-=======
 
 /*	display:table*/
 
->>>>>>> 8750d78e40d5df5a076abef25a3614a69108401e
 }
 
 .clearfix:after, #content:after, .box:after, .box-hd:after, .box-bd:after, .box-ft:after, .l-pageWrapper:after, .oldie .clearfix {
