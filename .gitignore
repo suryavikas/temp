@@ -1,6 +1,7 @@
-image/cache
-system/cache
-system/logs
-download/
+image/cache/*
+system/cache/*
+system/logs/*
+download/*
 config.php
 admin/config.php
+vqmod/vqcache
