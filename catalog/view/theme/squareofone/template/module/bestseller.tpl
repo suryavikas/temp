@@ -1,9 +1,10 @@
 <div class="box">
-  <div class="box-heading"><?php echo $heading_title; ?></div>
+  <div><h1 style="float:left; width:300px;"><?php echo $heading_title; ?></h1></div>
   <div class="box-content">
     <div class="box-product">
-      <?php foreach ($products as $product) { ?>
-      <div>
+      <?php
+        foreach ($products as $product) { ?>
+      <div class ="img1">
         <?php if ($product['thumb']) { ?>
         <div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a></div>
         <?php } ?>
