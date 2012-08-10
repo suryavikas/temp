@@ -143,4 +143,16 @@
 ?>]]></add>
 		</operation>
 	</file>
+        <file name="catalog/model/catalog/product.php">
+		<operation>
+			<search position="replace"><![CDATA[$product_data[$result['product_id']] = $this->getProduct($result['product_id']);]]></search>
+			<add><![CDATA[ $products = $this->getProduct($result['product_id']);
+                                    $products['discounts'] = $this->getProductDiscounts($result['product_id']);
+                                    $temp = $products['price'];
+                                    $discountedPrice = $products['special'];  
+                                    $discount = ((($temp - $discountedPrice)/$temp)*100);
+                                    $products['discount_percentage'] = $discount;
+                                    $product_data[$result['product_id']] = $products;]]></add>
+		</operation>
+	</file>
 </modification>

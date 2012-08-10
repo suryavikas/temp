@@ -215,8 +215,7 @@ class ControllerProductTopCategory extends Controller {
                     $savings = 0;
                     if(sizeof($prodDis) > 0){
                         $prodDis = $prodDis[0];
-                        $savings = $result['price'] - $prodDis['price'];
-                        
+                        $savings = $result['price'] - $prodDis['price'];                        
                         if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
                             $disPrice = $this->currency->format($this->tax->calculate($prodDis['price'], $result['tax_class_id'], $this->config->get('config_tax')));
                             $prodDis['price'] = $disPrice;
