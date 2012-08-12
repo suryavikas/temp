@@ -67,7 +67,7 @@ DD_belatedPNG.fix('#logo img');
 
 <?php echo $google_analytics; ?>
 </head>
-<body>
+<body style="width:100%; height:auto; position:inherit;">
     <div id="header">
     <div id="header_top1_outer">
     <div id="header_top1_inner">
