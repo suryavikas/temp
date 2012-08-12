@@ -8594,11 +8594,13 @@ img.right_sticker {
 
 
 
-	color:#333;
+	color:#fff;
 
 
 
-	text-decoration:underline
+	text-decoration:none;
+	
+	cursor:pointer;
 
 
 
@@ -24380,7 +24382,7 @@ a.underline_hide:hover {
 
 
 
-    font-size: 12px!important;
+    font-size: 14px!important;
 
 
 
@@ -24453,6 +24455,8 @@ a.underline_hide:hover {
 
 
     background:#6bba70!important;
+	
+	width:680px;
 
 
 

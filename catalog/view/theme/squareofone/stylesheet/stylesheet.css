@@ -278,7 +278,7 @@ label {
 
 
 
-    text-align: left;
+    
 
 
 
@@ -291,7 +291,9 @@ label {
 
 
     float: left;
-    margin-left:10px;
+
+
+
     width: 180px;
 
 
@@ -317,42 +319,80 @@ label {
 
 
 #content {
+
+
+
     margin: 0 auto;
+
     min-height: 400px;
+
     overflow: hidden !important;
-<<<<<<< HEAD
 
-    width: 800px;
+    width: 1002px;
 
-=======
-    width: 80%;
->>>>>>> ab451c9509edbff78ff917517bd448ae9be14006
 }
+
+
+
 #column-left + #column-right + #content, #column-left + #content {
-<<<<<<< HEAD
 
 
 
-/*    margin-left: 195px;*/
-
-
-
-=======
     margin-left: 195px;
->>>>>>> ab451c9509edbff78ff917517bd448ae9be14006
+
+
+
 }
+
+
+
 #column-right + #content {
+
+
+
     margin-right: 195px;
+
+
+
 }
+
+
+
 /* header */
+
+
+
 #language {
+
+
+
     position: absolute;
+
+
+
     top: 15px;
+
+
+
     left: 335px;
+
+
+
     width: 75px;
+
+
+
     color: #999;
+
+
+
     line-height: 17px;
+
+
+
 }
+
+
 
 #language img {
 
@@ -1502,10 +1542,18 @@ label {
 
 
 
-#container #content .breadcrumb a{
-    color: #CCCCCC !important;
-    margin-bottom: 5px;
-    font-size: 12px;
+.breadcrumb {
+
+
+
+    color: #CCCCCC;
+
+
+
+    margin-bottom: 10px;
+
+
+
 }
 
 
@@ -2343,12 +2391,22 @@ a.button:hover, input.button:hover {
 
 
 .htabs {
-    height: 30px;
-    line-height: 16px;
-    border-bottom: 1px solid #DDDDDD;
-	position: relative;
-}
 
+
+
+    height: 30px;
+
+
+
+    line-height: 16px;
+
+
+
+    border-bottom: 1px solid #DDDDDD;
+
+
+
+}
 
 
 
@@ -2480,11 +2538,7 @@ a.button:hover, input.button:hover {
 
 
 
-<<<<<<< HEAD
-    width: 30px !important;
-=======
-    width: 100% !important;
->>>>>>> ab451c9509edbff78ff917517bd448ae9be14006
+    width: 1002px !important;
 
 
 
@@ -2501,47 +2555,109 @@ a.button:hover, input.button:hover {
 
 
 .box .box-heading {
+
+
+
     -webkit-border-radius: 7px 7px 0px 0px;
+
+
+
     -moz-border-radius: 7px 7px 0px 0px;
+
+
+
     -khtml-border-radius: 7px 7px 0px 0px;
+
+
+
     border-radius: 7px 7px 0px 0px;
+
+
+
     border: 1px solid #DBDEE1;
+
+
+
     background: url('../image/background.png') repeat-x;
-    padding: 8px 0px 7px;    
+
+
+
+    padding: 8px 10px 7px 10px;
+
+
+
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
+
+
+
+    font-size: 14px;
+
+
+
     font-weight: bold;
+
+
+
     line-height: 14px;
+
+
+
     color: #333;
-<<<<<<< HEAD
 
 
 
-    width: 200px;
+    width: 1002px;
 
 
 
-=======
-    width: 99%;
-	text-align: center;
->>>>>>> ab451c9509edbff78ff917517bd448ae9be14006
 }
 
 
 
 .box .box-content {
+
+
+
     background: #FFFFFF;
-    font-family: Arial, Helvetica, sans-serif;
-	-webkit-border-radius: 0px 0px 7px 7px;
+
+
+
+    -webkit-border-radius: 0px 0px 7px 7px;
+
+
+
     -moz-border-radius: 0px 0px 7px 7px;
+
+
+
     -khtml-border-radius: 0px 0px 7px 7px;
-    border-radius: 0px 0px 7px 7px;
+
+
+
+/*    border-radius: 0px 0px 7px 7px;
+
+
+
     border-left: 1px solid #DBDEE1;
-    border-right: 1px solid #DBDEE1;
+
+
+
+    border-right: 1px solid #DBDEE1;*/
+
+
+
     border-bottom: 1px solid #DBDEE1;
+
+
+
     padding: 10px 0;
-    font-size: 10px;
-    
+
+
+
+   
+
+
+
 }
 
 
@@ -2554,7 +2670,7 @@ a.button:hover, input.button:hover {
 
 
 
-    width: 200px;
+    width: 1002px;
 
 
 
@@ -2742,7 +2858,7 @@ text-align:center;
 
 
     margin-top: -5px;
-  
+
 
 
 }
@@ -2770,7 +2886,13 @@ text-align:center;
 
 
 .box-category > ul > li {
-    padding: 5px 5px 5px 10px;
+
+
+
+    padding: 8px 8px 8px 0px;
+
+
+
 }
 
 
@@ -3860,17 +3982,33 @@ text-align:center;
 
 
 .product-info {
-    overflow: auto !important;
-    padding-top: 5px;
+
+
+
+    overflow: auto;
+
+
+
     margin-bottom: 20px;
+
+
+
 }
 
 
 
 .product-info > .left {
-	width:40%;
+
+
+
     float: left;
+
+
+
     margin-right: 15px;
+
+
+
 }
 
 
@@ -3879,7 +4017,7 @@ text-align:center;
 
 
 
-    margin-left: 40%;
+    margin-left: 265px;
 
 
 
@@ -3919,7 +4057,7 @@ text-align:center;
 
 
 
-    width: 100%;
+    width: 260px;
 
 
 
@@ -3944,7 +4082,6 @@ text-align:center;
 
 
     border: 1px solid #E7E7E7;
-    width:60px;
 
 
 
@@ -3953,10 +4090,22 @@ text-align:center;
 
 
 .product-info .image-additional a {
+
+
+
     float: left;
+
+
+
     display: block;
+
+
+
     margin-left: 10px;
-    margin-bottom: 5px;
+
+
+
+    margin-bottom: 10px;
 
 
 
@@ -6136,7 +6285,7 @@ text-align:center;
 
 
 
-    font-size: 12px;
+    font-size: 14px;
 
 
 
@@ -6204,7 +6353,7 @@ text-align:center;
 
 
 
-    font:10px Arial, Helvetica, sans-serif;
+    font:12px Arial, Helvetica, sans-serif;
 
     background: url('../image/arrow.jpg')  no-repeat scroll left 7px transparent;
 
@@ -6310,9 +6459,5 @@ text-align:center;
 
 }
 
-.product-info .ppy-stage{
-	width:350px;
-	height:250px;
-	
-}
+
 
