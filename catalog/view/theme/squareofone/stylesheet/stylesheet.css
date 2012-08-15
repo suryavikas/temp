@@ -96,21 +96,8 @@ h1, .welcome {
 
 h2 {
 
-    /*
-
-	color: #000000;
-
-
-
-	font-size: 16px;
-
-
-
-	margin-top: 0px;
-
-
-
-	margin-bottom: 5px;*/
+     font-size: 22px;
+    font-weight: normal;
 
 
 
@@ -290,11 +277,9 @@ label {
 
 
 
-    float: left;
-
-
-
-    width: 180px;
+   margin: 0 auto;
+    padding: 0;
+    width: 1002px;
 
 
 
@@ -305,12 +290,9 @@ label {
 #column-right {
 
 
-
-    float: right;
-
-
-
-    width: 180px;
+    margin: 0 auto;
+    padding: 0;
+    width: 1002px;
 
 
 
@@ -337,8 +319,8 @@ label {
 #column-left + #column-right + #content, #column-left + #content {
 
 
-
-    margin-left: 195px;
+/*
+    margin-left: 195px;*/
 
 
 
@@ -350,7 +332,7 @@ label {
 
 
 
-    margin-right: 195px;
+   /* margin-right: 195px;*/
 
 
 
@@ -1546,15 +1528,37 @@ label {
 
 
 
-    color: #CCCCCC;
-
-
-
-    margin-bottom: 10px;
+    color: #555;
+    margin: 0;
+    padding: 10px 0;
 
 
 
 }
+.breadcrumb a {
+
+
+
+    color: #555;
+	
+	text-decoration:none;
+
+
+
+}
+
+.breadcrumb a:hover {
+
+
+
+    color: #555;
+	
+	text-decoration:underline;
+
+
+
+}
+
 
 
 
@@ -2314,19 +2318,11 @@ a.button:hover, input.button:hover {
 
 
 
-    background: #FFFFFF;
-
-
-
-    border: 1px solid #EEEEEE;
 
 
 
     overflow: auto;
 
-
-
-    padding: 6px;
 
 
 
@@ -2393,16 +2389,10 @@ a.button:hover, input.button:hover {
 .htabs {
 
 
-
-    height: 30px;
-
-
-
-    line-height: 16px;
-
-
-
     border-bottom: 1px solid #DDDDDD;
+    clear: both;
+    height: 30px;
+    line-height: 16px;
 
 
 
@@ -2606,7 +2596,7 @@ a.button:hover, input.button:hover {
 
 
 
-    width: 1002px;
+
 
 
 
@@ -3009,19 +2999,7 @@ text-align:center;
 
 
 
-    padding: 10px;
 
-
-
-    overflow: auto;
-
-
-
-    margin-bottom: 20px;
-
-
-
-    border: 1px solid #EEEEEE;
 
 
 
@@ -3990,6 +3968,7 @@ text-align:center;
 
 
     margin-bottom: 20px;
+	    clear: both;
 
 
 
@@ -4003,9 +3982,7 @@ text-align:center;
 
     float: left;
 
-
-
-    margin-right: 15px;
+    width: 300px;
 
 
 
@@ -4013,11 +3990,14 @@ text-align:center;
 
 
 
-.product-info > .left + .right {
+.product-info > .right {
 
 
 
-    margin-left: 265px;
+     clear: both;
+    display: block;
+    float: right;
+    width: 480px;
 
 
 
@@ -6458,6 +6438,89 @@ text-align:center;
 
 
 }
+.inpt{
+   background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px 5px 5px 5px;
+    color: #2F2F2F;
+    font: 12px/15px Arial,Helvetica,sans-serif;
+    margin: 2px 0 0;
+    padding: 5px;
+    vertical-align: middle;
+    width: 250px;
+	}
+	.sltt{
+   background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px 5px 5px 5px;
+    color: #2F2F2F;
+    font: 12px/15px Arial,Helvetica,sans-serif;
+    margin: 2px 0 0;
+    padding: 5px;
+    vertical-align: middle;
+    width: 262px;
+	}
+	
+.msg{
 
+   background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px 5px 5px 5px;
+    color: #2F2F2F;
+    font: 12px/15px Arial,Helvetica,sans-serif;
+    margin: 2px 0 0;
+    padding: 5px;
+    vertical-align: middle;
+    width: 250px;
+	min-height:80px;
+}
 
-
+.sitemap-info ul{
+margin:0;
+padding:0 0 0 5px;
+}
+.sitemap-info ul li{
+    background: url(../image/arrow.jpg) no-repeat scroll left 5px transparent;
+    border: medium none;
+    display: block;
+    font: 12px/16px Arial,Helvetica,sans-serif;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0 0 0 10px;
+	color: #585858;
+	}
+	.sitemap-info ul li a{
+	color: #585858;
+	text-decoration:none;
+	}
+		.sitemap-info ul li a:hover{
+	color: #000;
+	text-decoration:underline;
+	}
+	
+	
+	.box-content{
+	}
+	.box-content ul{
+margin:0;
+padding:0 0 0 5px;
+}
+.box-content ul li{
+    background: url(../image/arrow.jpg) no-repeat scroll left 5px transparent;
+    border: medium none!important;
+    display: block;
+    font: 12px/16px Arial,Helvetica,sans-serif;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0 0 0 10px;
+	color: #585858;
+	}
+	.box-content ul li a{
+	color: #585858;
+	text-decoration:none;
+	}
+		.box-content ul li a:hover{
+	color: #000;
+	text-decoration:underline;
+	}
+	}

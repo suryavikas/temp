@@ -5,13 +5,14 @@
 <?php if ($error_warning) { ?>
 <div class="warning"><?php echo $error_warning; ?></div>
 <?php } ?>
-<?php echo $column_left; ?><?php echo $column_right; ?>
+<?php echo $column_left; ?>
 <div id="content"><?php echo $content_top; ?>
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
     <?php } ?>
   </div>
+  <?php echo $column_right; ?>
   <h1><?php echo $heading_title; ?></h1>
   <div class="login-content">
     <div class="left">
@@ -27,11 +28,11 @@
         <div class="content">
           <p><?php echo $text_i_am_returning_customer; ?></p>
           <b><?php echo $entry_email; ?></b><br />
-          <input type="text" name="email" value="" />
+          <input type="text" name="email" value="" class="inpt" />
           <br />
           <br />
           <b><?php echo $entry_password; ?></b><br />
-          <input type="password" name="password" value="" />
+          <input type="password" name="password" value="" class="inpt" style="margin-bottom:10px;" />
           <br />
           <a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a><br />
           <br />

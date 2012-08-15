@@ -11750,7 +11750,7 @@ a, button.as-link {
 
 
 
-	color:#fff;
+	color:#000;
 
 
 
@@ -14154,15 +14154,13 @@ input, select, textarea, button {
 
 
 
-	font:12px/15px Arial, Helvetica, sans-serif;
-
-
-
-	vertical-align:middle;
-
-
-
-	color:#2f2f2f
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px 5px 5px 5px;
+    color: #2F2F2F;
+    font: 12px/15px Arial,Helvetica,sans-serif;
+    padding: 3px 5px;
+    vertical-align: middle;
 
 
 

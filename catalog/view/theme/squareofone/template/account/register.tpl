@@ -17,35 +17,35 @@
       <table class="form">
         <tr>
           <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
-          <td><input type="text" name="firstname" value="<?php echo $firstname; ?>" />
+          <td><input type="text" name="firstname" class="inpt" value="<?php echo $firstname; ?>" />
             <?php if ($error_firstname) { ?>
             <span class="error"><?php echo $error_firstname; ?></span>
             <?php } ?></td>
         </tr>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_lastname; ?></td>
-          <td><input type="text" name="lastname" value="<?php echo $lastname; ?>" />
+          <td><input type="text" name="lastname" class="inpt" value="<?php echo $lastname; ?>" />
             <?php if ($error_lastname) { ?>
             <span class="error"><?php echo $error_lastname; ?></span>
             <?php } ?></td>
         </tr>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_email; ?></td>
-          <td><input type="text" name="email" value="<?php echo $email; ?>" />
+          <td><input type="text" name="email" class="inpt" value="<?php echo $email; ?>" />
             <?php if ($error_email) { ?>
             <span class="error"><?php echo $error_email; ?></span>
             <?php } ?></td>
         </tr>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_telephone; ?></td>
-          <td><input type="text" name="telephone" value="<?php echo $telephone; ?>" />
+          <td><input type="text" name="telephone" class="inpt" value="<?php echo $telephone; ?>" />
             <?php if ($error_telephone) { ?>
             <span class="error"><?php echo $error_telephone; ?></span>
             <?php } ?></td>
         </tr>
         <tr>
           <td><?php echo $entry_fax; ?></td>
-          <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
+          <td><input type="text" name="fax" class="inpt" value="<?php echo $fax; ?>" /></td>
         </tr>
       </table>
     </div>
@@ -54,36 +54,36 @@
       <table class="form">
         <tr>
           <td><?php echo $entry_company; ?></td>
-          <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>
+          <td><input type="text" name="company" class="inpt" value="<?php echo $company; ?>" /></td>
         </tr>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
-          <td><input type="text" name="address_1" value="<?php echo $address_1; ?>" />
+          <td><input type="text" name="address_1" class="inpt" value="<?php echo $address_1; ?>" />
             <?php if ($error_address_1) { ?>
             <span class="error"><?php echo $error_address_1; ?></span>
             <?php } ?></td>
         </tr>
         <tr>
           <td><?php echo $entry_address_2; ?></td>
-          <td><input type="text" name="address_2" value="<?php echo $address_2; ?>" /></td>
+          <td><input type="text" name="address_2" class="inpt" value="<?php echo $address_2; ?>" /></td>
         </tr>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_city; ?></td>
-          <td><input type="text" name="city" value="<?php echo $city; ?>" />
+          <td><input type="text" name="city" class="inpt" value="<?php echo $city; ?>" />
             <?php if ($error_city) { ?>
             <span class="error"><?php echo $error_city; ?></span>
             <?php } ?></td>
         </tr>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_postcode; ?></td>
-          <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" />
+          <td><input type="text" name="postcode" class="inpt" value="<?php echo $postcode; ?>" />
             <?php if ($error_postcode) { ?>
             <span class="error"><?php echo $error_postcode; ?></span>
             <?php } ?></td>
         </tr>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-          <td><select name="country_id" onchange="$('select[name=\'zone_id\']').load('index.php?route=account/register/zone&country_id=' + this.value + '&zone_id=<?php echo $zone_id; ?>');">
+          <td><select name="country_id" class="sltt" onchange="$('select[name=\'zone_id\']').load('index.php?route=account/register/zone&country_id=' + this.value + '&zone_id=<?php echo $zone_id; ?>');">
               <option value=""><?php echo $text_select; ?></option>
               <?php foreach ($countries as $country) { ?>
               <?php if ($country['country_id'] == $country_id) { ?>
@@ -99,7 +99,7 @@
         </tr>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_zone; ?></td>
-          <td><select name="zone_id">
+          <td><select name="zone_id"  class="sltt">
             </select>
             <?php if ($error_zone) { ?>
             <span class="error"><?php echo $error_zone; ?></span>
@@ -112,14 +112,14 @@
       <table class="form">
         <tr>
           <td><span class="required">*</span> <?php echo $entry_password; ?></td>
-          <td><input type="password" name="password" value="<?php echo $password; ?>" />
+          <td><input type="password" name="password"  class="inpt" value="<?php echo $password; ?>" />
             <?php if ($error_password) { ?>
             <span class="error"><?php echo $error_password; ?></span>
             <?php } ?></td>
         </tr>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_confirm; ?></td>
-          <td><input type="password" name="confirm" value="<?php echo $confirm; ?>" />
+          <td><input type="password" name="confirm"  class="inpt" value="<?php echo $confirm; ?>" />
             <?php if ($error_confirm) { ?>
             <span class="error"><?php echo $error_confirm; ?></span>
             <?php } ?></td>
