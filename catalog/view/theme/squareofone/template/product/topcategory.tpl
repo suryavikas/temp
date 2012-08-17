@@ -47,7 +47,7 @@ echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
     </div>
     <!-- Total products in top category -->
     <div class="found_hd">
-        We found <?php echo $product_total; ?> Products for All Men's
+        <?php echo $text_block_header_start; echo $product_total; echo $text_block_header_end; echo $heading_title; ?>
         <div class="clear"></div>
     </div>
     <!--Products inside category -->
@@ -58,7 +58,7 @@ echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
             <div class="found_prd_div">
                 <h5><?php echo $category_product_arr[$j]['category']['name']; ?></h5>
                 <div class="view_more_prd">
-                    <div class="view_more_btn"><a href="<?php echo $category_product_arr[$j]['category']['href']; ?>"><img src="catalog/view/theme/squareofone/image/view-more-btn.jpg" alt="" border="0" /></a></div>
+                    <div class="view_more_btn"><a href="<?php echo $category_product_arr[$j]['category']['href']; ?>"><img src="catalog/view/theme/squareofone/image/view-more-btn.jpg" alt="<?php echo $text_view_more; ?>" border="0" /></a></div>
 <!--                    <div class="view_page">
                         <div class="arw_left"><a href="#"><img src="catalog/view/theme/squareofone/image/arw-left.png" alt="" border="0" /></a></div>
                         <div class="arw_right"><a href="#"><img src="catalog/view/theme/squareofone/image/arw-right.png" alt="" border="0" /></a></div>
@@ -118,7 +118,7 @@ echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
                              }
                             ?>
                             <div class="clear"></div>
-                            <a href="<?php echo $productArr[$i]['href'] ?>" class="buy_now_button"><span>more</span></a>
+                            <a href="<?php echo $productArr[$i]['href'] ?>" class="buy_now_button"><span><?php echo $buy_now; ?></span></a>
                             <div class="clear"></div>
                         </div>
                     </li>

@@ -3,7 +3,7 @@
 class ControllerProductTopCategory extends Controller {
 
     public function index() {
-        $this->language->load('product/category');
+        $this->language->load('product/topcategory');
 
         $this->load->model('catalog/category');
 
@@ -99,6 +99,10 @@ class ControllerProductTopCategory extends Controller {
             $this->data['button_wishlist'] = $this->language->get('button_wishlist');
             $this->data['button_compare'] = $this->language->get('button_compare');
             $this->data['button_continue'] = $this->language->get('button_continue');
+            $this->data['text_block_header_start'] = $this->language->get('text_block_header_start');
+            $this->data['text_block_header_end'] = $this->language->get('text_block_header_end');
+            $this->data['text_view_more'] = $this->language->get('text_view_more');
+
 
             if ($category_info['image']) {
                 $this->data['thumb'] = $this->model_tool_image->resize($category_info['image'], $this->config->get('config_image_category_width'), $this->config->get('config_image_category_height'));
@@ -173,7 +177,7 @@ class ControllerProductTopCategory extends Controller {
                     'filter_category_id' => $categories['category_id'],
                     'filter_sub_category' => TRUE,
                     'start' => 0,
-                    'limit' => 4
+                    'limit' => -1
                 );
                 $i++;
                 $categories['href'] = $this->url->link('product/category', 'path=' . $category_id . '_' . $categories['category_id']);
