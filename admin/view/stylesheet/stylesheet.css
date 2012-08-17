@@ -133,7 +133,7 @@ label {
 	margin: -27px 0 0 157px;
 }
 #menu > ul li li:hover, #menu > ul li li.sfhover {
-	background: #333;
+	background: #C55B27;
 	color: #000000;
 }
 #container {
@@ -266,6 +266,14 @@ body > #container {
 }
 .box > .heading .buttons .button {
 	margin-left: 5px;
+}
+.box > .content h2 { 
+	text-transform: uppercase;
+	color: #FF802B;
+	font-size: 15px;
+	font-weight: bold;
+	padding-bottom: 3px;
+	border-bottom: 1px dotted #000000;	
 }
 .box > .content {
 	padding: 10px;

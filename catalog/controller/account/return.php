@@ -123,7 +123,7 @@ class ControllerAccountReturn extends Controller {
 		$this->load->model('account/return');
 						
 		$return_info = $this->model_account_return->getReturn($return_id);
-		
+
 		if ($return_info) {
 			$this->document->setTitle($this->language->get('text_return'));
 
@@ -453,7 +453,7 @@ class ControllerAccountReturn extends Controller {
 		if (isset($this->request->post['lastname'])) {
     		$this->data['lastname'] = $this->request->post['lastname'];
 		} elseif (!empty($order_info)) {
-			$this->data['lastname'] = $order_info['firstname'];			
+			$this->data['lastname'] = $order_info['lastname'];			
 		} else {
 			$this->data['lastname'] = $this->customer->getLastName();
 		}

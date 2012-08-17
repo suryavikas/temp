@@ -2,7 +2,7 @@
 # WWW.OPENCART.COM
 # Qphoria
 
-# THIS UPGRADE ONLY APPLIES TO PREVIOUS 1.5.x VERSIONS. DO NOT RUN THIS SCRIPT IF UPGRADING FROM v1.4.x 
+# THIS UPGRADE ONLY APPLIES TO PREVIOUS 1.5.x VERSIONS. DO NOT RUN THIS SCRIPT IF UPGRADING FROM v1.4.x
 
 # DO NOT RUN THIS ENTIRE FILE MANUALLY THROUGH PHPMYADMIN OR OTHER MYSQL DB TOOL
 # THIS FILE IS GENERATED FOR USE WITH THE UPGRADE.PHP SCRIPT LOCATED IN THE INSTALL FOLDER
@@ -182,6 +182,75 @@ ALTER TABLE `oc_return` ADD `opened` tinyint(1) NOT NULL DEFAULT '0' COMMENT '' 
 ALTER TABLE `oc_return` ADD `return_reason_id` int(11) NOT NULL DEFAULT '0' COMMENT '' AFTER `opened`;
 ALTER TABLE `oc_return` ADD `return_action_id` int(11) NOT NULL DEFAULT '0' COMMENT '' AFTER `return_reason_id`;
 
-DROP TABLE oc_return_product;
+DROP TABLE IF EXISTS oc_return_product;
 
 ALTER TABLE oc_tax_rate_to_customer_group DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+# Disable Category Module to force user to reenable with new settings to avoid php error
+UPDATE `oc_setting` SET `value` = replace(`value`, 's:6:"status";s:1:"1"', 's:6:"status";s:1:"0"') WHERE `key` = 'category_module';
+
+#### Start 1.5.2.2
+
+# Disable UPS Extension to force user to reenable with new settings to avoid php error
+UPDATE `oc_setting` SET `value` = 0 WHERE `key` = 'ups_status';
+
+CREATE TABLE IF NOT EXISTS oc_customer_group_description (
+    customer_group_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+    language_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+    name varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin,
+    description text NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin,
+    PRIMARY KEY (customer_group_id, language_id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+ALTER TABLE oc_address ADD company_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin AFTER company;
+ALTER TABLE oc_address ADD tax_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin AFTER company_id;
+ALTER TABLE oc_address DROP company_no;
+ALTER TABLE oc_address DROP company_tax;
+
+ALTER TABLE oc_customer_group ADD approval int(1) NOT NULL DEFAULT 0 COMMENT '' AFTER customer_group_id;
+ALTER TABLE oc_customer_group ADD company_id_display int(1) NOT NULL DEFAULT 0 COMMENT '' AFTER approval;
+ALTER TABLE oc_customer_group ADD company_id_required int(1) NOT NULL DEFAULT 0 COMMENT '' AFTER company_id_display;
+ALTER TABLE oc_customer_group ADD tax_id_display int(1) NOT NULL DEFAULT 0 COMMENT '' AFTER company_id_required;
+ALTER TABLE oc_customer_group ADD tax_id_required int(1) NOT NULL DEFAULT 0 COMMENT '' AFTER tax_id_display;
+ALTER TABLE oc_customer_group ADD sort_order int(3) NOT NULL DEFAULT 0 COMMENT '' AFTER tax_id_required;
+
+### This line is executed using php in the upgrade model file so we dont lose names
+#ALTER TABLE oc_customer_group DROP name;
+
+ALTER TABLE `oc_order` ADD payment_company_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin AFTER payment_company;
+ALTER TABLE `oc_order` ADD payment_tax_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin AFTER payment_company_id;
+ALTER TABLE `oc_information` ADD bottom int(1) NOT NULL DEFAULT '1' COMMENT '' AFTER information_id;
+
+#### Start 1.5.4
+CREATE TABLE IF NOT EXISTS `oc_customer_online` (
+  `ip` varchar(40) COLLATE utf8_bin NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `url` text COLLATE utf8_bin NOT NULL,
+  `referer` text COLLATE utf8_bin NOT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`ip`)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+UPDATE `oc_setting` set `group` = replace(`group`, 'alertpay', 'payza');
+UPDATE `oc_setting` set `key` = replace(`key`, 'alertpay', 'payza');
+UPDATE `oc_order` set `payment_method` = replace(`payment_method`, 'AlertPay', 'Payza');
+UPDATE `oc_order` set `payment_code` = replace(`payment_code`, 'alertpay', 'payza');
+ALTER TABLE `oc_affiliate` ADD `salt` varchar(9) COLLATE utf8_bin NOT NULL DEFAULT '' after `password`;
+ALTER TABLE `oc_customer` ADD `salt` varchar(9) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `password`;
+ALTER TABLE `oc_customer` MODIFY `ip` varchar(40) NOT NULL;
+ALTER TABLE `oc_customer_ip` MODIFY `ip` varchar(40) NOT NULL;
+ALTER TABLE `oc_customer_ip_blacklist` MODIFY `ip` varchar(40) NOT NULL;
+ALTER TABLE `oc_order` MODIFY `ip` varchar(40) NOT NULL;
+ALTER TABLE `oc_order` MODIFY `forwarded_ip` varchar(40) NOT NULL;
+ALTER TABLE `oc_order_product` MODIFY `model` varchar(64) NOT NULL;
+ALTER TABLE `oc_product` ADD `ean` varchar(12) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `upc`;
+ALTER TABLE `oc_product` ADD `jan` varchar(12) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `ean`;
+ALTER TABLE `oc_product` ADD `isbn` varchar(12) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `jan`;
+ALTER TABLE `oc_product` ADD `mpn` varchar(12) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `isbn`;
+ALTER TABLE `oc_product_description` ADD `tag` text COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_keyword`;
+ALTER TABLE `oc_product_description` ADD FULLTEXT (`description`);
+ALTER TABLE `oc_product_description` ADD FULLTEXT (`tag`);
+ALTER TABLE `oc_user` ADD `salt` varchar(9) COLLATE utf8_bin NOT NULL DEFAULT '' after `password`;
+ALTER TABLE `oc_user` MODIFY `password` varchar(40) NOT NULL;
+ALTER TABLE `oc_user` MODIFY `ip` varchar(40) NOT NULL;
+

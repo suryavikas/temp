@@ -27,7 +27,7 @@ class ControllerFeedGoogleSitemap extends Controller {
 		 
 		 foreach ($manufacturers as $manufacturer) {
 			$output .= '<url>';
-			$output .= '<loc>' . $this->url->link('product/manufacturer/product', 'manufacturer_id=' . $manufacturer['manufacturer_id']) . '</loc>';
+			$output .= '<loc>' . $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $manufacturer['manufacturer_id']) . '</loc>';
 			$output .= '<changefreq>weekly</changefreq>';
 			$output .= '<priority>0.7</priority>';
 			$output .= '</url>';   

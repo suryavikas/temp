@@ -48,9 +48,9 @@ class ControllerProductCategory extends Controller {
 		
 			foreach ($parts as $path_id) {
 				if (!$path) {
-					$path = $path_id;
+					$path = (int)$path_id;
 				} else {
-					$path .= '_' . $path_id;
+					$path .= '_' . (int)$path_id;
 				}
 									
 				$category_info = $this->model_catalog_category->getCategory($path_id);
@@ -64,7 +64,7 @@ class ControllerProductCategory extends Controller {
 				}
 			}		
 		
-			$category_id = array_pop($parts);
+			$category_id = (int)array_pop($parts);
 		} else {
 			$category_id = 0;
 		}
@@ -128,13 +128,13 @@ class ControllerProductCategory extends Controller {
 			foreach ($results as $result) {
 				$data = array(
 					'filter_category_id'  => $result['category_id'],
-					'filter_sub_category' => true	
+					'filter_sub_category' => true
 				);
-							
-				$product_total = $this->model_catalog_product->getTotalProducts($data);
+				
+				$product_total = $this->model_catalog_product->getTotalProducts($data);				
 				
 				$this->data['categories'][] = array(
-					'name'  => $result['name'] . ' (' . $product_total . ')',
+					'name'  => $result['name'] . ($this->config->get('config_product_count') ? ' (' . $product_total . ')' : ''),
 					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '_' . $result['category_id'] . $url)
 				);
 			}
@@ -194,8 +194,7 @@ class ControllerProductCategory extends Controller {
 					'tax'         => $tax,
 					'rating'      => $result['rating'],
 					'reviews'     => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
-					'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id']),
-                                        'discount_percentage' => $result['discount_percentage']
+					'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'])
 				);
 			}
 			

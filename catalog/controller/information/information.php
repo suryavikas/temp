@@ -14,7 +14,7 @@ class ControllerInformationInformation extends Controller {
       	);
 		
 		if (isset($this->request->get['information_id'])) {
-			$information_id = $this->request->get['information_id'];
+			$information_id = (int)$this->request->get['information_id'];
 		} else {
 			$information_id = 0;
 		}
@@ -94,7 +94,7 @@ class ControllerInformationInformation extends Controller {
 		$this->load->model('catalog/information');
 		
 		if (isset($this->request->get['information_id'])) {
-			$information_id = $this->request->get['information_id'];
+			$information_id = (int)$this->request->get['information_id'];
 		} else {
 			$information_id = 0;
 		}      
@@ -106,6 +106,7 @@ class ControllerInformationInformation extends Controller {
 			$output .= '<head>' . "\n";
 			$output .= '  <title>' . $information_info['title'] . '</title>' . "\n";
 			$output .= '  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">' . "\n";
+			$output .= '  <meta name="robots" content="noindex">' . "\n";
 			$output .= '</head>' . "\n";
 			$output .= '<body>' . "\n";
 			$output .= '  <h1>' . $information_info['title'] . '</h1>' . "\n";

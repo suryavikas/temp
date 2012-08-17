@@ -347,11 +347,11 @@ class ControllerCatalogOption extends Controller {
 
 		$this->data['cancel'] = $this->url->link('catalog/option', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
-		$this->data['token'] = $this->session->data['token'];
-
 		if (isset($this->request->get['option_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
       		$option_info = $this->model_catalog_option->getOption($this->request->get['option_id']);
     	}
+		
+		$this->data['token'] = $this->session->data['token'];
 		
 		$this->load->model('localisation/language');
 		
@@ -541,7 +541,7 @@ class ControllerCatalogOption extends Controller {
 												
 				$json[] = array(
 					'option_id'    => $option['option_id'],
-					'name'         => html_entity_decode($option['name'], ENT_QUOTES, 'UTF-8'),
+					'name'         => strip_tags(html_entity_decode($option['name'], ENT_QUOTES, 'UTF-8')),
 					'category'     => $type,
 					'type'         => $option['type'],
 					'option_value' => $option_value_data

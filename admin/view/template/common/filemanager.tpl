@@ -1,7 +1,7 @@
-<?php echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n"; ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="UTF-8" />
 <title><?php echo $title; ?></title>
 <base href="<?php echo $base; ?>" />
 <script type="text/javascript" src="view/javascript/jquery/jquery-1.7.1.min.js"></script>
@@ -101,6 +101,88 @@ img {
 </div>
 <script type="text/javascript"><!--
 $(document).ready(function() { 
+	(function(){
+		var special = jQuery.event.special,
+			uid1 = 'D' + (+new Date()),
+			uid2 = 'D' + (+new Date() + 1);
+	 
+		special.scrollstart = {
+			setup: function() {
+				var timer,
+					handler =  function(evt) {
+						var _self = this,
+							_args = arguments;
+	 
+						if (timer) {
+							clearTimeout(timer);
+						} else {
+							evt.type = 'scrollstart';
+							jQuery.event.handle.apply(_self, _args);
+						}
+	 
+						timer = setTimeout( function(){
+							timer = null;
+						}, special.scrollstop.latency);
+	 
+					};
+	 
+				jQuery(this).bind('scroll', handler).data(uid1, handler);
+			},
+			teardown: function(){
+				jQuery(this).unbind( 'scroll', jQuery(this).data(uid1) );
+			}
+		};
+	 
+		special.scrollstop = {
+			latency: 300,
+			setup: function() {
+	 
+				var timer,
+						handler = function(evt) {
+	 
+						var _self = this,
+							_args = arguments;
+	 
+						if (timer) {
+							clearTimeout(timer);
+						}
+	 
+						timer = setTimeout( function(){
+	 
+							timer = null;
+							evt.type = 'scrollstop';
+							jQuery.event.handle.apply(_self, _args);
+	 
+						}, special.scrollstop.latency);
+	 
+					};
+	 
+				jQuery(this).bind('scroll', handler).data(uid2, handler);
+	 
+			},
+			teardown: function() {
+				jQuery(this).unbind('scroll', jQuery(this).data(uid2));
+			}
+		};
+	})();
+	
+	$('#column-right').bind('scrollstop', function() {
+		$('#column-right a').each(function(index, element) {
+			var height = $('#column-right').height();
+			var offset = $(element).offset();
+						
+			if ((offset.top > 0) && (offset.top < height) && $(element).find('img').attr('src') == '<?php echo $no_image; ?>') {
+				$.ajax({
+					url: 'index.php?route=common/filemanager/image&token=<?php echo $token; ?>&image=' + encodeURIComponent('data/' + $(element).find('input[name=\'image\']').attr('value')),
+					dataType: 'html',
+					success: function(html) {
+						$(element).find('img').replaceWith('<img src="' + html + '" alt="" title="" />');
+					}
+				});
+			}
+		});
+	});
+	
 	$('#column-left').tree({
 		data: { 
 			type: 'json',
@@ -159,35 +241,15 @@ $(document).ready(function() {
 						
 						if (json) {
 							for (i = 0; i < json.length; i++) {
-								name = '';
-								
-								filename = json[i]['filename'];
-								
-								for (j = 0; j < filename.length; j = j + 15) {
-									name += filename.substr(j, 15) + '<br />';
-								}
-								
-								name += json[i]['size'];
-								
-								html += '<a>' + name + '<input type="hidden" name="image" value="' + json[i]['file'] + '" /></a>';
+								html += '<a><img src="<?php echo $no_image; ?>" alt="" title="" /><br />' + ((json[i]['filename'].length > 15) ? (json[i]['filename'].substr(0, 15) + '..') : json[i]['filename']) + '<br />' + json[i]['size'] + '<input type="hidden" name="image" value="' + json[i]['file'] + '" /></a>';
 							}
 						}
 						
 						html += '</div>';
 						
 						$('#column-right').html(html);
-						
-						$('#column-right a').each(function(index, element) {
-							$.ajax({
-								url: 'index.php?route=common/filemanager/image&token=<?php echo $token; ?>&image=' + encodeURIComponent('data/' + $(element).find('input[name=\'image\']').attr('value')),
-								dataType: 'html',
-								success: function(html) {
-									$(element).prepend('<img src="' + html + '" title="" style="display: none;" /><br />');
-									
-									$(element).find('img').fadeIn();
-								}
-							});
-						});
+
+						$('#column-right').trigger('scrollstop');	
 					},
 					error: function(xhr, ajaxOptions, thrownError) {
 						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -196,7 +258,7 @@ $(document).ready(function() {
 			}
 		}
 	});	
-	
+
 	$('#column-right a').live('click', function() {
 		if ($(this).attr('class') == 'selected') {
 			$(this).removeAttr('class');

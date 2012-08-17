@@ -84,6 +84,16 @@ class ControllerPaymentAuthorizeNetAim extends Controller {
 		$data['x_exp_date'] = $this->request->post['cc_expire_date_month'] . $this->request->post['cc_expire_date_year'];
 		$data['x_card_code'] = $this->request->post['cc_cvv2'];
 		$data['x_invoice_num'] = $this->session->data['order_id'];
+
+		/* Customer Shipping Address Fields */
+		$data['x_ship_to_first_name'] = html_entity_decode($order_info['shipping_firstname'], ENT_QUOTES, 'UTF-8');
+		$data['x_ship_to_last_name'] = html_entity_decode($order_info['shipping_lastname'], ENT_QUOTES, 'UTF-8');
+		$data['x_ship_to_company'] = html_entity_decode($order_info['shipping_company'], ENT_QUOTES, 'UTF-8');
+		$data['x_ship_to_address'] = html_entity_decode($order_info['shipping_address_1'], ENT_QUOTES, 'UTF-8') . ' ' . html_entity_decode($order_info['shipping_address_2'], ENT_QUOTES, 'UTF-8');
+		$data['x_ship_to_city'] = html_entity_decode($order_info['shipping_city'], ENT_QUOTES, 'UTF-8');
+		$data['x_ship_to_state'] = html_entity_decode($order_info['shipping_zone'], ENT_QUOTES, 'UTF-8');
+		$data['x_ship_to_zip'] = html_entity_decode($order_info['shipping_postcode'], ENT_QUOTES, 'UTF-8');
+		$data['x_ship_to_country'] = html_entity_decode($order_info['shipping_country'], ENT_QUOTES, 'UTF-8');
 	
 		if ($this->config->get('authorizenet_aim_mode') == 'test') {
 			$data['x_test_request'] = 'true';
@@ -100,7 +110,7 @@ class ControllerPaymentAuthorizeNetAim extends Controller {
 		curl_setopt($curl, CURLOPT_POST, 1);
 		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
 		curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
  
 		$response = curl_exec($curl);
 		
@@ -113,40 +123,40 @@ class ControllerPaymentAuthorizeNetAim extends Controller {
 		} elseif ($response) {
 			$i = 1;
 			
-			$response_data = array();
+			$response_info = array();
 			
 			$results = explode(',', $response);
 			
 			foreach ($results as $result) {
-				$response_data[$i] = trim($result, '"');
+				$response_info[$i] = trim($result, '"');
 				
 				$i++;
 			}
 		
-			if ($response_data[1] == '1') {
-				if (strtoupper($response_data[38]) != strtoupper(md5($this->config->get('authorizenet_aim_hash') . $this->config->get('authorizenet_aim_login') . $response_data[6] . $this->currency->format($order_info['total'], $order_info['currency_code'], 1.00000, false)))) {
+			if ($response_info[1] == '1') {
+				if (strtoupper($response_info[38]) == strtoupper(md5($this->config->get('authorizenet_aim_hash') . $response_info[6] . $this->currency->format($order_info['total'], $order_info['currency_code'], 1.00000, false)))) {
 					$this->model_checkout_order->confirm($this->session->data['order_id'], $this->config->get('config_order_status_id'));
 					
 					$message = '';
 					
-					if (isset($response_data['5'])) {
-						$message .= 'Authorization Code: ' . $response_data['5'] . "\n";
+					if (isset($response_info['5'])) {
+						$message .= 'Authorization Code: ' . $response_info['5'] . "\n";
 					}
 					
-					if (isset($response_data['6'])) {
-						$message .= 'AVS Response: ' . $response_data['6'] . "\n";
+					if (isset($response_info['6'])) {
+						$message .= 'AVS Response: ' . $response_info['6'] . "\n";
 					}
 			
-					if (isset($response_data['7'])) {
-						$message .= 'Transaction ID: ' . $response_data['7'] . "\n";
+					if (isset($response_info['7'])) {
+						$message .= 'Transaction ID: ' . $response_info['7'] . "\n";
 					}
 	
-					if (isset($response_data['39'])) {
-						$message .= 'Card Code Response: ' . $response_data['39'] . "\n";
+					if (isset($response_info['39'])) {
+						$message .= 'Card Code Response: ' . $response_info['39'] . "\n";
 					}
 					
-					if (isset($response_data['40'])) {
-						$message .= 'Cardholder Authentication Verification Response: ' . $response_data['40'] . "\n";
+					if (isset($response_info['40'])) {
+						$message .= 'Cardholder Authentication Verification Response: ' . $response_info['40'] . "\n";
 					}				
 	
 					$this->model_checkout_order->update($this->session->data['order_id'], $this->config->get('authorizenet_aim_order_status_id'), $message, false);				
@@ -154,7 +164,7 @@ class ControllerPaymentAuthorizeNetAim extends Controller {
 				
 				$json['success'] = $this->url->link('checkout/success', '', 'SSL');
 			} else {
-				$json['error'] = $response_data[4];
+				$json['error'] = $response_info[4];
 			}
 		} else {
 			$json['error'] = 'Empty Gateway Response';
