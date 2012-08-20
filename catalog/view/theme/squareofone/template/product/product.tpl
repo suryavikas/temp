@@ -38,7 +38,8 @@
         <?php if ($reward) { ?>
         <span><?php echo $text_reward; ?></span> <?php echo $reward; ?><br />
         <?php } ?>
-        <span><?php echo $text_stock; ?></span> <?php echo $stock; ?></div>
+        <span><?php echo $text_stock; ?></span> <?php echo $stock; ?>
+      </div>
      
       <div class="buy_detail">
         <div class="buy_detail_left">
@@ -55,36 +56,25 @@
                  <p>Delivered in 2 - 5 business days </p>
         </div>
         <div class="cart buy_detail_right">
-        <div><?php echo $text_qty; ?>
-          <input type="text" name="quantity" size="2" value="<?php echo $minimum; ?>" />
-          <input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" />
-          &nbsp;
-          
-          <a href="#" id="button-cart"><img border="0" alt="<?php echo $button_cart; ?>" src="catalog/view/theme/squareofone/image/buy-now.jpg"></a>
+            <div><?php echo $text_qty; ?>
+                <input type="text" name="quantity" size="2" value="<?php echo $minimum; ?>" />
+                <input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" />
+            &nbsp;
+
+            
+            </div>
+            <a href="#" id="button-cart"><img border="0" alt="<?php echo $button_cart; ?>" src="catalog/view/theme/squareofone/image/buy-now.jpg"></a>
+            <?php if ($minimum > 1) { ?>
+            <div class="minimum"><?php echo $text_minimum; ?></div>
+            <?php } ?>
         </div>
-       
-        <div><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a><br />
-          <a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></div>
-        <?php if ($minimum > 1) { ?>
-        <div class="minimum"><?php echo $text_minimum; ?></div>
-        <?php } ?>
+       <div class="clear"></div>
       </div>
-        <br />       
-        <?php if ($points) { ?>
-        <span class="reward"><small><?php echo $text_points; ?> <?php echo $points; ?></small></span><br />
-        <?php } ?>
-        <?php if ($discounts) { ?>
-        <br />
-        <div class="discount">
-          <?php foreach ($discounts as $discount) { ?>
-          <?php echo sprintf($text_discount, $discount['quantity'], $discount['price']); ?><br />
-          <?php } ?>
-        </div>
-       
-      </div>
-      <?php } ?>
+     
+    <div class="size_detail">
+        <div class="options about_size">
       <?php if ($options) { ?>
-      <div class="options about_size">
+          <strong>
         <?php foreach ($options as $option) { ?>
         <?php if ($option['type'] == 'select') { ?>
         <div id="option-<?php echo $option['product_option_id']; ?>" class="option">
@@ -222,14 +212,25 @@
           <b><?php echo $option['name']; ?>:</b><br />
           <input type="text" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option['option_value']; ?>" class="time" />
         </div>
-        <div><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a><br />
-          <a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></div>
-        <br />
+         <?php } ?>
         <?php } ?>
-        <?php } ?>
-      </div>
-      <?php } ?>
+        </strong>
+         <?php } ?>
+        <label><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a></label> |
+        <label><a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></label>
+        <div class="clear"></div>
       
+        <p><a href="#">Not sure about your size?</a></p>
+            <ul>
+            <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/free-shipping.jpg"></a></li>
+            <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/pay-cash.jpg"></a></li>
+            <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/secure.jpg"></a></li>
+            </ul>
+    
+    </div>
+     
+        <div class="clear"></div>
+      </div>
       <?php if ($review_status) { ?>
       <div class="review">
         <div><img src="catalog/view/theme/default/image/stars-<?php echo $rating; ?>.png" alt="<?php echo $reviews; ?>" />&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $reviews; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $text_write; ?></a></div>

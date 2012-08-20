@@ -1,12 +1,14 @@
+
 <modification>
-	<id>Squareofone-core-behaviour-change</id>
-	<version>1.0.0</version>
-	<vqmver>2.1.1</vqmver>
-	<author>Surya Vikas</author>
-	<file name="catalog/controller/common/header.php">
-		<operation>
-			<search position="replace" offset="145"><![CDATA[protected function index() {]]></search>
-			<add><![CDATA[protected function index() {
+    <id>Squareofone-core-behaviour-change</id>
+    <version>1.0.0</version>
+    <vqmver>2.1.1</vqmver>
+    <author>Surya Vikas</author>
+    <file name="catalog/controller/common/header.php">
+        <operation>
+            <search position="replace" offset="145"><![CDATA[protected function index() {]]>
+            </search>
+            <add><![CDATA[protected function index() {
 		$this->data['title'] = $this->document->getTitle();
 		
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
@@ -166,26 +168,116 @@
     	$this->render();
 	}
 	}
-?>]]></add>
-		</operation>
-	</file>
-        <file name="catalog/model/catalog/product.php">
-		<operation>
-			<search position="replace"><![CDATA[$product_data[$result['product_id']] = $this->getProduct($result['product_id']);]]></search>
-			<add><![CDATA[ $products = $this->getProduct($result['product_id']);
+?>]]>
+            </add>
+        </operation>
+    </file>
+    <file name="catalog/model/catalog/product.php">
+        <operation>
+            <search position="replace"><![CDATA[$product_data[$result['product_id']] = $this->getProduct($result['product_id']);]]>
+            </search>
+            <add><![CDATA[ $products = $this->getProduct($result['product_id']);
                                     $products['discounts'] = $this->getProductDiscounts($result['product_id']);
                                     $temp = $products['price'];
                                     $discountedPrice = $products['special'];  
                                     $discount = ((($temp - $discountedPrice)/$temp)*100);
                                     $products['discount_percentage'] = $discount;
-                                    $product_data[$result['product_id']] = $products;]]></add>
-		</operation>
-	</file>	
-	<file name="catalog/language/english/common/header.php">
-		<operation>
-			<search position="replace"><![CDATA[$_['text_welcome']        = 'Welcome visitor you can <a href="%s">login</a> or <a href="%s">create an account</a>.';]]></search>
-			<add><![CDATA[$_['text_welcome']        = '<a href="%s">Login</a> | <a href="%s">Sign up</a>.';]]></add>
-		</operation>
-	</file>
+                                    $product_data[$result['product_id']] = $products;]]>
+            </add>
+        </operation>
+    </file>
+    <file name="catalog/language/english/common/header.php">
+        <operation>
+            <search position="replace"><![CDATA[$_['text_welcome']        = 'Welcome visitor you can <a href="%s">login</a> or <a href="%s">create an account</a>.';]]>
+            </search>
+            <add><![CDATA[$_['text_welcome']        = '<a href="%s">Login</a> | <a href="%s">Sign up</a>.';]]>
+            </add>
+        </operation>
+    </file>
+    <file name="catalog/controller/common/footer.php">
+        <operation>
+            <search position="replace" offset="54"><![CDATA[protected function index() {]]>
+            </search>
+            <add><![CDATA[protected function index() {
+		$this->language->load('common/footer');
+
+		$this->data['text_information'] = $this->language->get('text_information');
+		$this->data['text_service'] = $this->language->get('text_service');
+		$this->data['text_extra'] = $this->language->get('text_extra');
+		$this->data['text_contact'] = $this->language->get('text_contact');
+		$this->data['text_return'] = $this->language->get('text_return');
+                $this->data['text_sitemap'] = $this->language->get('text_sitemap');
+		$this->data['text_manufacturer'] = $this->language->get('text_manufacturer');
+		$this->data['text_voucher'] = $this->language->get('text_voucher');
+		$this->data['text_affiliate'] = $this->language->get('text_affiliate');
+		$this->data['text_special'] = $this->language->get('text_special');
+		$this->data['text_account'] = $this->language->get('text_account');
+		$this->data['text_order'] = $this->language->get('text_order');
+		$this->data['text_wishlist'] = $this->language->get('text_wishlist');
+		$this->data['text_newsletter'] = $this->language->get('text_newsletter');
+                $this->data['best_seller'] = $this->language->get('best_seller');
+
+		$this->load->model('catalog/information');
+
+		$this->data['informations'] = array();
+
+		foreach ($this->model_catalog_information->getInformations() as $result) {
+      		$this->data['informations'][] = array(
+        		'title' => $result['title'],
+	    		'href'  => $this->url->link('information/information', 'information_id=' . $result['information_id'])
+      		);
+    	}
+
+		$this->data['contact'] = $this->url->link('information/contact');
+		$this->data['return'] = $this->url->link('account/return/insert', '', 'SSL');
+                $this->data['sitemap'] = $this->url->link('information/sitemap');
+		$this->data['manufacturer'] = $this->url->link('product/manufacturer');
+		$this->data['voucher'] = $this->url->link('account/voucher', '', 'SSL');
+		$this->data['affiliate'] = $this->url->link('affiliate/account', '', 'SSL');
+		$this->data['special'] = $this->url->link('product/special');
+		$this->data['account'] = $this->url->link('account/account', '', 'SSL');
+		$this->data['order'] = $this->url->link('account/order', '', 'SSL');
+		$this->data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
+		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
+
+//		$this->data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
+
+                $this->load->model('catalog/product');
+
+		$this->load->model('tool/image');
+
+		$this->data['best_sellers'] = array();
+                //Hard coded count value
+		$results = $this->model_catalog_product->getBestSellerProducts(5);
+		foreach ($results as $result) {
+
+                    $this->data['best_sellers'][] = array(
+                            'name'    	 => $result['name'],
+                            'href'    	 => $this->url->link('product/product', 'product_id=' . $result['product_id']),
+                    );
+		}
+
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/footer.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/common/footer.tpl';
+		} else {
+			$this->template = 'default/template/common/footer.tpl';
+		}
+
+		$this->render();
+	}
+}
+?>]]>
+            </add>
+        </operation>
+    </file>
+    <file name="catalog/language/english/common/footer.php">
+        <operation>
+            <search position="replace"><![CDATA[$_['text_powered']      = 'Powered By <a href="http://www.opencart.com">OpenCart</a><br /> %s &copy; %s';]]>
+            </search>
+            <add><![CDATA[$_['best_seller']       = 'Best Seller';]]>
+            </add>
+        </operation>
+    </file>
+
 
 </modification>
