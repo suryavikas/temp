@@ -1,61 +1,35 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
-  <div class="breadcrumb">
+<div id="middle_outer">
+    <div id="middle">
+    <?php echo $content_top; ?>
+  <div class="breadcrumb bradecam">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
     <?php } ?>
   </div>
-  <div class="product-info">
+ 
+  <div class="prd_detail_mid_left">
     <?php if ($thumb || $images) { ?>
-    <div class="left">
-        <div  id="inner-left" class="inner-left">
+    <div class="top_pt1_left">
       <?php if ($thumb) { ?>
-      <div class="ppy" id="ppy1">
-       <ul class="ppy-imglist">
-
-        <li>
-             <a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>">
-                 <img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>"  />
-             </a>
-        </li>
-        <?php
-            if(sizeof($images)> 0){
-                foreach ($images as $image) { ?>
-                <li>
-                    <a href="<?php echo $image['thumb']; ?>">
-                        <img src="<?php echo $image['popup']; ?>" alt="<?php echo $heading_title; ?>" />
-                    </a>
-                </li>
-        <?php }
-        }
-        ?>
-        </ul>
-      </div>
-        <div class="ppy-outer">
-                <div class="ppy-stage">
-                    <div class="ppy-nav">
-                        <a class="ppy-prev" title="Previous image">Previous image</a>
-                        <a class="ppy-switch-enlarge" title="Enlarge">Enlarge</a>
-                        <a class="ppy-switch-compact" title="Close">Close</a>
-                        <a class="ppy-next" title="Next image">Next image</a>
-                    </div>
-                </div>
-            </div>
+      <div class="main_img"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" /></a></div>
       <?php } ?>
-
-    </div>
-         <?php if ($images) { ?>
-         
-      <div class="image-additional">
-            <?php foreach ($images as $image) { ?>
-        <a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
+      <?php if ($images) { ?>
+      <div class="small_img image-additional">
+          <ul>
+        <?php foreach ($images as $image) { ?>
+            <li>
+                <a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
+            </li>
         <?php } ?>
+        </ul>
+          <div class="clear"></div>
       </div>
       <?php } ?>
-        </div>
+    </div>
     <?php } ?>
-    <div class="right">
-	  <h2><?php echo $heading_title; ?></h2>
+    <div class="top_pt1_right">
+         <h3><?php echo $heading_title; ?></h3>
       <div class="description">
         <?php if ($manufacturer) { ?>
         <span><?php echo $text_manufacturer; ?></span> <a href="<?php echo $manufacturers; ?>"><?php echo $manufacturer; ?></a><br />
@@ -65,17 +39,37 @@
         <span><?php echo $text_reward; ?></span> <?php echo $reward; ?><br />
         <?php } ?>
         <span><?php echo $text_stock; ?></span> <?php echo $stock; ?></div>
-      <?php if ($price) { ?>
-      <div class="price"><?php echo $text_price; ?>
-        <?php if (!$special) { ?>
-        <?php echo $price; ?>
-        <?php } else { ?>
-        <span class="price-old"><?php echo $price; ?></span> <span class="price-new"><?php echo $special; ?></span>
+     
+      <div class="buy_detail">
+        <div class="buy_detail_left">
+           <?php          
+                if(!$special){
+            ?>            
+            <label><?php echo $price; ?></label>
+        <?php
+          } else{
+              ?>
+              <span><?php echo $price; ?></span> <label><?php echo $special; ?></label>
+        <?php
+              }       ?>
+                 <p>Delivered in 2 - 5 business days </p>
+        </div>
+        <div class="cart buy_detail_right">
+        <div><?php echo $text_qty; ?>
+          <input type="text" name="quantity" size="2" value="<?php echo $minimum; ?>" />
+          <input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" />
+          &nbsp;
+          
+          <a href="#" id="button-cart"><img border="0" alt="<?php echo $button_cart; ?>" src="catalog/view/theme/squareofone/image/buy-now.jpg"></a>
+        </div>
+       
+        <div><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a><br />
+          <a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></div>
+        <?php if ($minimum > 1) { ?>
+        <div class="minimum"><?php echo $text_minimum; ?></div>
         <?php } ?>
-        <br />
-        <?php if ($tax) { ?>
-        <span class="price-tax"><?php echo $text_tax; ?> <?php echo $tax; ?></span><br />
-        <?php } ?>
+      </div>
+        <br />       
         <?php if ($points) { ?>
         <span class="reward"><small><?php echo $text_points; ?> <?php echo $points; ?></small></span><br />
         <?php } ?>
@@ -86,13 +80,11 @@
           <?php echo sprintf($text_discount, $discount['quantity'], $discount['price']); ?><br />
           <?php } ?>
         </div>
-        <?php } ?>
+       
       </div>
       <?php } ?>
       <?php if ($options) { ?>
-      <div class="options">
-        <h2><?php echo $text_option; ?></h2>
-        <br />
+      <div class="options about_size">
         <?php foreach ($options as $option) { ?>
         <?php if ($option['type'] == 'select') { ?>
         <div id="option-<?php echo $option['product_option_id']; ?>" class="option">
@@ -155,19 +147,19 @@
           <span class="required">*</span>
           <?php } ?>
           <b><?php echo $option['name']; ?>:</b><br />
-            <table class="option-image">
-              <?php foreach ($option['option_value'] as $option_value) { ?>
-              <tr>
-                <td style="width: 1px;"><input type="radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>" /></td>
-                <td><label for="option-value-<?php echo $option_value['product_option_value_id']; ?>"><img src="<?php echo $option_value['image']; ?>" alt="<?php echo $option_value['name'] . ($option_value['price'] ? ' ' . $option_value['price_prefix'] . $option_value['price'] : ''); ?>" /></label></td>
-                <td><label for="option-value-<?php echo $option_value['product_option_value_id']; ?>"><?php echo $option_value['name']; ?>
-                    <?php if ($option_value['price']) { ?>
-                    (<?php echo $option_value['price_prefix']; ?><?php echo $option_value['price']; ?>)
-                    <?php } ?>
-                  </label></td>
-              </tr>
-              <?php } ?>
-            </table>
+          <table class="option-image">
+            <?php foreach ($option['option_value'] as $option_value) { ?>
+            <tr>
+              <td style="width: 1px;"><input type="radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>" /></td>
+              <td><label for="option-value-<?php echo $option_value['product_option_value_id']; ?>"><img src="<?php echo $option_value['image']; ?>" alt="<?php echo $option_value['name'] . ($option_value['price'] ? ' ' . $option_value['price_prefix'] . $option_value['price'] : ''); ?>" /></label></td>
+              <td><label for="option-value-<?php echo $option_value['product_option_value_id']; ?>"><?php echo $option_value['name']; ?>
+                  <?php if ($option_value['price']) { ?>
+                  (<?php echo $option_value['price_prefix']; ?><?php echo $option_value['price']; ?>)
+                  <?php } ?>
+                </label></td>
+            </tr>
+            <?php } ?>
+          </table>
         </div>
         <br />
         <?php } ?>
@@ -197,7 +189,7 @@
           <span class="required">*</span>
           <?php } ?>
           <b><?php echo $option['name']; ?>:</b><br />
-          <a id="button-option-<?php echo $option['product_option_id']; ?>" class="button"><?php echo $button_upload; ?></a>
+          <input type="button" value="<?php echo $button_upload; ?>" id="button-option-<?php echo $option['product_option_id']; ?>" class="button">
           <input type="hidden" name="option[<?php echo $option['product_option_id']; ?>]" value="" />
         </div>
         <br />
@@ -230,24 +222,14 @@
           <b><?php echo $option['name']; ?>:</b><br />
           <input type="text" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option['option_value']; ?>" class="time" />
         </div>
+        <div><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a><br />
+          <a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></div>
         <br />
         <?php } ?>
         <?php } ?>
       </div>
       <?php } ?>
-      <div class="cart">
-        <div><?php echo $text_qty; ?>
-          <input type="text" name="quantity" size="2" value="<?php echo $minimum; ?>" />
-          <input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" />
-          &nbsp;<input type="button" value="<?php echo $button_cart; ?>" id="button-cart" class="button" />
-          </div>
-        <div><span>&nbsp;&nbsp;&nbsp;<?php echo $text_or; ?>&nbsp;&nbsp;&nbsp;</span></div>
-        <div><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a><br />
-          <a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></div>
-        <?php if ($minimum > 1) { ?>
-        <div class="minimum"><?php echo $text_minimum; ?></div>
-        <?php } ?>
-      </div>
+      
       <?php if ($review_status) { ?>
       <div class="review">
         <div><img src="catalog/view/theme/default/image/stars-<?php echo $rating; ?>.png" alt="<?php echo $reviews; ?>" />&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $reviews; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $text_write; ?></a></div>
@@ -315,7 +297,7 @@
     <input type="radio" name="rating" value="4" />
     &nbsp;
     <input type="radio" name="rating" value="5" />
-    &nbsp; <span><?php echo $entry_good; ?></span><br />
+    &nbsp;<span><?php echo $entry_good; ?></span><br />
     <br />
     <b><?php echo $entry_captcha; ?></b><br />
     <input type="text" name="captcha" value="" />
@@ -355,12 +337,16 @@
   <?php } ?>
   <?php if ($tags) { ?>
   <div class="tags"><b><?php echo $text_tags; ?></b>
-    <?php foreach ($tags as $tag) { ?>
-    <a href="<?php echo $tag['href']; ?>"><?php echo $tag['tag']; ?></a>,
+    <?php for ($i = 0; $i < count($tags); $i++) { ?>
+    <?php if ($i < (count($tags) - 1)) { ?>
+    <a href="<?php echo $tags[$i]['href']; ?>"><?php echo $tags[$i]['tag']; ?></a>,
+    <?php } else { ?>
+    <a href="<?php echo $tags[$i]['href']; ?>"><?php echo $tags[$i]['tag']; ?></a>
+    <?php } ?>
     <?php } ?>
   </div>
   <?php } ?>
-  <?php echo $content_bottom; ?></div>
+  <?php echo $content_bottom; ?></div></div>
 <script type="text/javascript"><!--
 $('.colorbox').colorbox({
 	overlayClose: true,
@@ -410,18 +396,21 @@ new AjaxUpload('#button-option-<?php echo $option['product_option_id']; ?>', {
 	responseType: 'json',
 	onSubmit: function(file, extension) {
 		$('#button-option-<?php echo $option['product_option_id']; ?>').after('<img src="catalog/view/theme/default/image/loading.gif" class="loading" style="padding-left: 5px;" />');
+		$('#button-option-<?php echo $option['product_option_id']; ?>').attr('disabled', true);
 	},
 	onComplete: function(file, json) {
+		$('#button-option-<?php echo $option['product_option_id']; ?>').attr('disabled', false);
+
 		$('.error').remove();
 
-		if (json.success) {
-			alert(json.success);
+		if (json['success']) {
+			alert(json['success']);
 
-			$('input[name=\'option[<?php echo $option['product_option_id']; ?>]\']').attr('value', json.file);
+			$('input[name=\'option[<?php echo $option['product_option_id']; ?>]\']').attr('value', json['file']);
 		}
 
-		if (json.error) {
-			$('#option-<?php echo $option['product_option_id']; ?>').after('<span class="error">' + json.error + '</span>');
+		if (json['error']) {
+			$('#option-<?php echo $option['product_option_id']; ?>').after('<span class="error">' + json['error'] + '</span>');
 		}
 
 		$('.loading').remove();
@@ -433,11 +422,11 @@ new AjaxUpload('#button-option-<?php echo $option['product_option_id']; ?>', {
 <?php } ?>
 <script type="text/javascript"><!--
 $('#review .pagination a').live('click', function() {
-	$('#review').slideUp('slow');
+	$('#review').fadeOut('slow');
 
 	$('#review').load(this.href);
 
-	$('#review').slideDown('slow');
+	$('#review').fadeIn('slow');
 
 	return false;
 });
@@ -460,12 +449,12 @@ $('#button-review').bind('click', function() {
 			$('.attention').remove();
 		},
 		success: function(data) {
-			if (data.error) {
-				$('#review-title').after('<div class="warning">' + data.error + '</div>');
+			if (data['error']) {
+				$('#review-title').after('<div class="warning">' + data['error'] + '</div>');
 			}
 
-			if (data.success) {
-				$('#review-title').after('<div class="success">' + data.success + '</div>');
+			if (data['success']) {
+				$('#review-title').after('<div class="success">' + data['success'] + '</div>');
 
 				$('input[name=\'name\']').val('');
 				$('textarea[name=\'text\']').val('');
@@ -478,12 +467,6 @@ $('#button-review').bind('click', function() {
 //--></script>
 <script type="text/javascript"><!--
 $('#tabs a').tabs();
-var options1 = {
-
-//      direction:  'left',
-//      opacity:    1
-        }
-    $('#inner-left').popeye(options1);
 //--></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript"><!--
@@ -498,5 +481,4 @@ $('.datetime').datetimepicker({
 });
 $('.time').timepicker({timeFormat: 'h:m'});
 //--></script>
-
 <?php echo $footer; ?>

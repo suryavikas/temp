@@ -20,9 +20,9 @@ echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
         <?php
         $header = 0;
         for ($i=0 ; $i < count($categories); $i++) {
-            if($i == 4){
-                break;
-            }
+//            if($i == 4){
+//                break;
+//            }
             echo '<ul>';
             ?>
             <li><strong><a href="<?php echo $categories[$i]['href']; ?>"><?php echo $categories[$i]['name']; ?></a></strong></li>
@@ -30,13 +30,13 @@ echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
             if (isset($categories[$i]['children'])) {
                 $sizeOfChildren = count($categories[$i]['children']);
                 for ($k = 0; $k <$sizeOfChildren; $k++) {
-                    if($k == 5){
-                        break;
-                    }
+//                    if($k == 5){
+//                        break;
+//                    }
                     if (count($categories[$i]['children'][$k]) > 0) { ?>
-        <li>
-            <a href="<?php echo $categories[$i]['children'][$k]['href']; ?>"><?php echo $categories[$i]['children'][$k]['name']; ?></a>
-        </li>
+                        <li>
+                            <a href="<?php echo $categories[$i]['children'][$k]['href']; ?>"><?php echo $categories[$i]['children'][$k]['name']; ?></a>
+                        </li>
                 <?php
                     }
                 }
@@ -78,6 +78,9 @@ echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
                $productArr = array();
             }
                 for($i = 0; $i < count($productArr); $i++){
+                    if($i == 4){
+                break;
+            }
     ?>                  
                     <li>
                         <img src="<?php echo $productArr[$i]['thumb']; ?>" alt="" border="0"  />
