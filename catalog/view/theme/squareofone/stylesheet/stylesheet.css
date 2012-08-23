@@ -96,8 +96,13 @@ h1, .welcome {
 
 h2 {
 
-     font-size: 22px;
+       	background:url(../image/bg-menu.jpg) repeat-x scroll 0 0 transparent;
+
+    color: #FFFFFF;
+    font-size: 22px;
     font-weight: normal;
+    margin: 0 0 10px;
+    padding: 3px 0 6px 12px;
 
 
 
@@ -2222,7 +2227,7 @@ a.button, input.button {
 
 
 
-    background: url('../image/button.png') top left repeat-x;
+    background: none repeat scroll 0 0 #1359b1;
 
 
 
@@ -2306,7 +2311,7 @@ a.button:hover, input.button:hover {
 
 
 
-    background: url('../image/button-active.png') repeat-x;
+    background:#0a6187;
 
 
 
@@ -3016,6 +3021,7 @@ text-align:center;
 
 
     width: 49%;
+	    padding: 0 0 10px 15px;
 
 
 
@@ -6134,6 +6140,11 @@ text-align:center;
 
 
     overflow: auto;
+	
+	    border: 1px solid #CCCCCC;
+    border-radius: 13px 14px 10px 10px;
+    float: left;
+    width: 400px;
 
 
 
@@ -6278,6 +6289,7 @@ text-align:center;
 
 
     margin-top: 0;
+	background:none;
 
 
 
@@ -6523,4 +6535,154 @@ padding:0 0 0 5px;
 	color: #000;
 	text-decoration:underline;
 	}
-	}
+
+
+
+.ct_left{
+    border: 1px solid #CCCCCC;
+
+    display: block;
+    float: left;
+    margin: 0 0 15px;
+    padding: 0;
+    width: 700px;
+}
+
+
+.ct_right{
+    border: 1px solid #CCCCCC;
+
+    display: block;
+    float: right;
+    margin: 0;
+    padding: 0;
+    width: 275px;
+}
+.padg{
+margin:0;
+padding:0 0 0 15px;
+}
+
+
+
+.login_page_left{
+margin:0;
+padding:0;
+float:left;
+width:175px;
+}
+h3{
+margin:0;
+padding:2px 0 4px 12px;
+background:#6bba70;
+font:normal 24px Arial, Helvetica, sans-serif;
+color:#fff;
+background:url(../image/bg-menu.jpg) repeat-x scroll 0 0 transparent;
+}
+.login_page_box{
+margin:5px 0 0 0;
+padding:10px;
+border:1px solid #d3d3d3;
+}
+.login_page_box ul{
+margin:0;
+padding:0;
+}
+.login_page_box ul li{
+margin:0;
+padding:10px 0 4px 10px;
+list-style:none;
+display:block;
+color:#000;
+border-bottom:1px dotted #000;
+background:url(../image/arrw1.jpg) no-repeat left 14px;
+}
+.login_page_box ul li a{
+color:#000;
+text-decoration:none;
+}
+.login_page_box ul li a:hover{
+color:#000;
+text-decoration:underline;
+}
+.login_page_left1{
+margin:0;
+padding:0 0 0 10px;
+float:left;
+width:460px;
+}
+.login_page_box .ac_login{
+margin:0;
+padding:8px 25px 8px 25px;
+}
+.login_page_box .ac_login a{
+color:#000;
+text-decoration:none;
+}
+.login_page_box .ac_login a:hover{
+color:#000;
+text-decoration:underline;
+}
+.login_page_box .ac_login strong{
+margin:0;
+padding:0 0 5px 0;
+display:block;
+font-size:13px;
+}
+.login_page_box .ac_login label{
+margin:0;
+padding:10px 0 4px 10px;
+display:block;
+font-size:13px;
+}
+.txt_field{
+margin:0;
+padding:15px 10px;
+background:#f1f1f1;
+border:1px solid #b2b2b2;
+border-radius:10px;
+width:360px;
+font:normal 12px Arial, Helvetica, sans-serif;
+color:#000;
+display:block;
+}
+.login_btn{
+margin:0;
+padding:5px 0 0 0;
+float:right;
+display:block;
+}
+.or_img{
+margin:155px 0 0 440px;
+padding:0;
+position:absolute;
+width:39px;
+height:39px;
+background:url(../image/or-img.png) no-repeat;
+border:none;
+}
+.ac_lgn{
+margin:0;
+padding:60px 0 0 0;
+float:right;
+width:320px;
+}
+.ac_lgn h3{
+font:normal 24px Arial, Helvetica, sans-serif;
+color:#6bba70;
+margin:0;
+padding:0;
+display:block;
+background:none;
+}
+.ac_lgn label{
+font-size:14px;
+font-weight:bold;
+display:block;
+}
+.ac_lgn strong{
+font-size:13px;
+margin:0;
+padding:10px 0 5px 0;
+display:block;
+}

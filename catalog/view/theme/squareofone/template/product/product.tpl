@@ -1,5 +1,5 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="middle_outer">
+<div id="content">
     <div id="middle">
     <?php echo $content_top; ?>
   <div class="breadcrumb bradecam">
@@ -8,7 +8,7 @@
     <?php } ?>
   </div>
  
-  <div class="prd_detail_mid_left">
+  <div class="product-info">
     <?php if ($thumb || $images) { ?>
     <div class="top_pt1_left">
       <?php if ($thumb) { ?>
@@ -56,14 +56,15 @@
                  <p>Delivered in 2 - 5 business days </p>
         </div>
         <div class="cart buy_detail_right">
-            <div><?php echo $text_qty; ?>
+            <div style="margin-bottom:10px;"><?php echo $text_qty; ?>
                 <input type="text" name="quantity" size="2" value="<?php echo $minimum; ?>" />
                 <input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" />
             &nbsp;
 
             
             </div>
-            <a href="#" id="button-cart"><img border="0" alt="<?php echo $button_cart; ?>" src="catalog/view/theme/squareofone/image/buy-now.jpg"></a>
+<!--            <input type="button" value="<?php echo $button_cart; ?>" id="button-cart" class="button" />-->
+            <a id="button-cart"><img  border="0" alt="<?php echo $button_cart; ?>" src="catalog/view/theme/squareofone/image/buy-now.jpg"></a>
             <?php if ($minimum > 1) { ?>
             <div class="minimum"><?php echo $text_minimum; ?></div>
             <?php } ?>
@@ -81,7 +82,7 @@
           <?php if ($option['required']) { ?>
           <span class="required">*</span>
           <?php } ?>
-          <b><?php echo $option['name']; ?>:</b><br />
+          <b><?php echo $option['name']; ?>:</b>
           <select name="option[<?php echo $option['product_option_id']; ?>]">
             <option value=""><?php echo $text_select; ?></option>
             <?php foreach ($option['option_value'] as $option_value) { ?>
@@ -93,7 +94,7 @@
             <?php } ?>
           </select>
         </div>
-        <br />
+      
         <?php } ?>
         <?php if ($option['type'] == 'radio') { ?>
         <div id="option-<?php echo $option['product_option_id']; ?>" class="option">
@@ -220,16 +221,16 @@
         <label><a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></label>
         <div class="clear"></div>
       
+        
+    
+    </div>     
+        <div class="clear"></div>
         <p><a href="#">Not sure about your size?</a></p>
             <ul>
             <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/free-shipping.jpg"></a></li>
             <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/pay-cash.jpg"></a></li>
             <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/secure.jpg"></a></li>
             </ul>
-    
-    </div>
-     
-        <div class="clear"></div>
       </div>
       <?php if ($review_status) { ?>
       <div class="review">

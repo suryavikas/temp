@@ -102,7 +102,7 @@ $('#button-account').live('click', function() {
 			$('.wait').remove();
 		},			
 		success: function(html) {
-			$('.warning').remove();
+			$('.warning, .error').remove();
 			
 			$('#payment-address .checkout-content').html(html);
 				
@@ -136,13 +136,11 @@ $('#button-login').live('click', function() {
 			$('.wait').remove();
 		},				
 		success: function(json) {
-			$('.warning').remove();
+			$('.warning, .error').remove();
 			
 			if (json['redirect']) {
 				location = json['redirect'];
-			}
-									
-			if (json['error']) {
+			} else if (json['error']) {
 				$('#checkout .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '</div>');
 				
 				$('.warning').fadeIn('slow');
@@ -173,12 +171,10 @@ $('#button-register').live('click', function() {
 			$('.warning, .error').remove();
 						
 			if (json['redirect']) {
-				location = json['redirect'];
-			}
-						
-			if (json['error']) {
+				location = json['redirect'];				
+			} else if (json['error']) {
 				if (json['error']['warning']) {
-					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '</div>');
+					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
 					$('.warning').fadeIn('slow');
 				}
@@ -197,8 +193,16 @@ $('#button-register').live('click', function() {
 				
 				if (json['error']['telephone']) {
 					$('#payment-address input[name=\'telephone\'] + br').after('<span class="error">' + json['error']['telephone'] + '</span>');
-				}		
-										
+				}	
+					
+				if (json['error']['company_id']) {
+					$('#payment-address input[name=\'company_id\'] + br').after('<span class="error">' + json['error']['company_id'] + '</span>');
+				}	
+				
+				if (json['error']['tax_id']) {
+					$('#payment-address input[name=\'tax_id\'] + br').after('<span class="error">' + json['error']['tax_id'] + '</span>');
+				}	
+																		
 				if (json['error']['address_1']) {
 					$('#payment-address input[name=\'address_1\'] + br').after('<span class="error">' + json['error']['address_1'] + '</span>');
 				}	
@@ -348,13 +352,17 @@ $('#button-payment-address').live('click', function() {
 			$('.wait').remove();
 		},			
 		success: function(json) {
-			$('.error').remove();
+			$('.warning, .error').remove();
 			
 			if (json['redirect']) {
 				location = json['redirect'];
-			}
-			
-			if (json['error']) {
+			} else if (json['error']) {
+				if (json['error']['warning']) {
+					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					
+					$('.warning').fadeIn('slow');
+				}
+								
 				if (json['error']['firstname']) {
 					$('#payment-address input[name=\'firstname\']').after('<span class="error">' + json['error']['firstname'] + '</span>');
 				}
@@ -366,7 +374,15 @@ $('#button-payment-address').live('click', function() {
 				if (json['error']['telephone']) {
 					$('#payment-address input[name=\'telephone\']').after('<span class="error">' + json['error']['telephone'] + '</span>');
 				}		
-										
+				
+				if (json['error']['company_id']) {
+					$('#payment-address input[name=\'company_id\']').after('<span class="error">' + json['error']['company_id'] + '</span>');
+				}	
+				
+				if (json['error']['tax_id']) {
+					$('#payment-address input[name=\'tax_id\']').after('<span class="error">' + json['error']['tax_id'] + '</span>');
+				}	
+														
 				if (json['error']['address_1']) {
 					$('#payment-address input[name=\'address_1\']').after('<span class="error">' + json['error']['address_1'] + '</span>');
 				}	
@@ -465,13 +481,17 @@ $('#button-shipping-address').live('click', function() {
 			$('.wait').remove();
 		},			
 		success: function(json) {
-			$('.error').remove();
+			$('.warning, .error').remove();
 			
 			if (json['redirect']) {
 				location = json['redirect'];
-			}
-			
-			if (json['error']) {
+			} else if (json['error']) {
+				if (json['error']['warning']) {
+					$('#shipping-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					
+					$('.warning').fadeIn('slow');
+				}
+								
 				if (json['error']['firstname']) {
 					$('#shipping-address input[name=\'firstname\']').after('<span class="error">' + json['error']['firstname'] + '</span>');
 				}
@@ -563,13 +583,17 @@ $('#button-guest').live('click', function() {
 			$('.wait').remove();
 		},			
 		success: function(json) {
-			$('.error').remove();
+			$('.warning, .error').remove();
 			
 			if (json['redirect']) {
 				location = json['redirect'];
-			}
-			
-			if (json['error']) {
+			} else if (json['error']) {
+				if (json['error']['warning']) {
+					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					
+					$('.warning').fadeIn('slow');
+				}
+								
 				if (json['error']['firstname']) {
 					$('#payment-address input[name=\'firstname\'] + br').after('<span class="error">' + json['error']['firstname'] + '</span>');
 				}
@@ -584,8 +608,16 @@ $('#button-guest').live('click', function() {
 				
 				if (json['error']['telephone']) {
 					$('#payment-address input[name=\'telephone\'] + br').after('<span class="error">' + json['error']['telephone'] + '</span>');
-				}		
-										
+				}	
+					
+				if (json['error']['company_id']) {
+					$('#payment-address input[name=\'company_id\'] + br').after('<span class="error">' + json['error']['company_id'] + '</span>');
+				}	
+				
+				if (json['error']['tax_id']) {
+					$('#payment-address input[name=\'tax_id\'] + br').after('<span class="error">' + json['error']['tax_id'] + '</span>');
+				}	
+																		
 				if (json['error']['address_1']) {
 					$('#payment-address input[name=\'address_1\'] + br').after('<span class="error">' + json['error']['address_1'] + '</span>');
 				}	
@@ -711,13 +743,17 @@ $('#button-guest-shipping').live('click', function() {
 			$('.wait').remove();
 		},			
 		success: function(json) {
-			$('.error').remove();
+			$('.warning, .error').remove();
 			
 			if (json['redirect']) {
 				location = json['redirect'];
-			}
-			
-			if (json['error']) {
+			} else if (json['error']) {
+				if (json['error']['warning']) {
+					$('#shipping-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					
+					$('.warning').fadeIn('slow');
+				}
+								
 				if (json['error']['firstname']) {
 					$('#shipping-address input[name=\'firstname\']').after('<span class="error">' + json['error']['firstname'] + '</span>');
 				}
@@ -789,15 +825,13 @@ $('#button-shipping-method').live('click', function() {
 			$('.wait').remove();
 		},			
 		success: function(json) {
-			$('.warning').remove();
+			$('.warning, .error').remove();
 			
 			if (json['redirect']) {
 				location = json['redirect'];
-			}
-			
-			if (json['error']) {
+			} else if (json['error']) {
 				if (json['error']['warning']) {
-					$('#shipping-method .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '</div>');
+					$('#shipping-method .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
 					$('.warning').fadeIn('slow');
 				}			
@@ -845,15 +879,13 @@ $('#button-payment-method').live('click', function() {
 			$('.wait').remove();
 		},			
 		success: function(json) {
-			$('.warning').remove();
+			$('.warning, .error').remove();
 			
 			if (json['redirect']) {
 				location = json['redirect'];
-			}
-			
-			if (json['error']) {
+			} else if (json['error']) {
 				if (json['error']['warning']) {
-					$('#payment-method .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '</div>');
+					$('#payment-method .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
 					$('.warning').fadeIn('slow');
 				}			
