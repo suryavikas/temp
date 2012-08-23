@@ -118,12 +118,45 @@ DD_belatedPNG.fix('#logo img');
     <div id="header_top3_inner">
       <div class="header_top3">
         <div class="home_icon"><a href="<?php echo $home; ?>"><img src="catalog/view/theme/squareofone/image/home-icon.png" alt="" border="0" /></a></div>
-        <select name="" class="catg">
-          <option>All Categories</option>
-          <option>Sample</option>
+        <?php
+        if (isset($this->request->get['filter_category_id'])) {
+            $filter_category_id = $this->request->get['filter_category_id'];
+        } else {
+            $filter_category_id = 0;
+        }
+
+        if (isset($this->request->get['filter_sub_category'])) {
+            $filter_sub_category = $this->request->get['filter_sub_category'];
+        } else {
+            $filter_sub_category = '';
+        }
+        ?>
+        <select name="filter_category_id" class="catg">
+            <option value="0"><?php echo $text_category; ?></option>
+            <?php foreach ($categories_dropdown as $category_1) { ?>
+                <?php if ($category_1['category_id'] == $filter_category_id) { ?>
+                    <option value="<?php echo $category_1['category_id']; ?>" selected="selected"><?php echo $category_1['name']; ?></option>
+                <?php } else { ?>
+                    <option value="<?php echo $category_1['category_id']; ?>"><?php echo $category_1['name']; ?></option>
+                <?php } ?>
+                <?php foreach ($category_1['children'] as $category_2) { ?>
+                    <?php if ($category_2['category_id'] == $filter_category_id) { ?>
+                        <option value="<?php echo $category_2['category_id']; ?>" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $category_2['name']; ?></option>
+                    <?php } else { ?>
+                        <option value="<?php echo $category_2['category_id']; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $category_2['name']; ?></option>
+                    <?php } ?>
+                    <?php foreach ($category_2['children'] as $category_3) { ?>
+                        <?php if ($category_3['category_id'] == $filter_category_id) { ?>
+                            <option value="<?php echo $category_3['category_id']; ?>" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $category_3['name']; ?></option>
+                        <?php } else { ?>
+                            <option value="<?php echo $category_3['category_id']; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $category_3['name']; ?></option>
+                        <?php } ?>
+                    <?php } ?>
+                <?php } ?>
+            <?php } ?>
         </select>
-        <input type="text" value="Search for items" name="" class="srch" onFocus="if(this.value=='Search for items'){this.value=''}" onclick="if(this.value=='Search for items'){this.value=''}" onblur="if(this.value==''){this.value='Search for items'}" />
-        <input type="image" src="catalog/view/theme/squareofone/image/go-btn.jpg" class="go_btn" />
+        <input type="text" value="Search for items" name="filter_name" class="srch" onFocus="if(this.value=='Search for items'){this.value=''}" onclick="if(this.value=='Search for items'){this.value=''}" onblur="if(this.value==''){this.value='Search for items'}" />
+        <input type="image"  id="button-search" src="catalog/view/theme/squareofone/image/go-btn.jpg" class="go_btn" />
         <div class="sale_btn"><a href="#"><img src="catalog/view/theme/squareofone/image/sale-btn.jpg" alt="" border="0" /></a></div>
         <div id="cart" class="shoping_bag">
           <div class="cart_img"><a href="<?php echo $shopping_cart; ?>"</a><img src="catalog/view/theme/squareofone/image/cart-img.png" alt="" border="0" /></a></div>
@@ -210,3 +243,40 @@ DD_belatedPNG.fix('#logo img');
 
           <?php } ?>
 <div id="notification"></div>
+<script type="text/javascript"><!--
+$('#header_top3_outer input[name=\'filter_name\']').keydown(function(e) {
+	if (e.keyCode == 13) {
+		$('#button-search').trigger('click');
+	}
+});
+
+$('#button-search').bind('click', function() {
+	url = 'index.php?route=product/search';
+
+	var filter_name = $('#header_top3_outer input[name=\'filter_name\']').attr('value');
+
+	if (filter_name) {
+		url += '&filter_name=' + encodeURIComponent(filter_name);
+	}
+
+	var filter_category_id = $('#header_top3_outer select[name=\'filter_category_id\']').attr('value');
+
+	if (filter_category_id > 0) {
+		url += '&filter_category_id=' + encodeURIComponent(filter_category_id);
+	}
+
+	var filter_sub_category = $('#header_top3_outer input[name=\'filter_sub_category\']:checked').attr('value');
+
+	if (filter_sub_category) {
+		url += '&filter_sub_category=true';
+	}
+
+	var filter_description = $('#header_top3_outer input[name=\'filter_description\']:checked').attr('value');
+
+	if (filter_description) {
+		url += '&filter_description=true';
+	}
+//        console.log(url);
+	location = url;
+});
+</script>
