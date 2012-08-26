@@ -36,6 +36,7 @@
 
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/skin.css" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/style.css" />
+
 <?php foreach ($styles as $style) { ?>
 <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
 <?php } ?>
@@ -48,6 +49,7 @@
 <script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/common.js"></script>
+
 <!--<script type="text/javascript" src="catalog/view/javascript/jquery.jcarousel.min.js"></script>-->
 <!--<script type="text/javascript" src="catalog/view/javascript/alice-1339158486.js"></script>-->
 <?php foreach ($scripts as $script) { ?>
@@ -71,7 +73,7 @@ DD_belatedPNG.fix('#logo img');
     <div id="header">
     <div id="header_top1_outer">
     <div id="header_top1_inner">
-      <div class="header_top1_menu">24x7 Customer Support  - <a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a> | <a href="<?php echo $home; ?>"><?php echo $text_home; ?></a> | <a href="#">Account</a> | <a href="<?php echo $wishlist; ?>"  id="wishlist-total"><?php echo $text_wishlist; ?></a> |
+      <div class="header_top1_menu">24x7 Customer Support  - <a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a> | <a href="<?php echo $home; ?>"><?php echo $text_home; ?></a> | <a href="<?php echo $wishlist; ?>"  id="wishlist-total"><?php echo $text_wishlist; ?></a> |
 
     <?php if (!$logged) { ?>
         <?php echo $text_welcome; ?>
@@ -119,17 +121,7 @@ DD_belatedPNG.fix('#logo img');
       <div class="header_top3">
         <div class="home_icon"><a href="<?php echo $home; ?>"><img src="catalog/view/theme/squareofone/image/home-icon.png" alt="" border="0" /></a></div>
         <?php
-        if (isset($this->request->get['filter_category_id'])) {
-            $filter_category_id = $this->request->get['filter_category_id'];
-        } else {
-            $filter_category_id = 0;
-        }
-
-        if (isset($this->request->get['filter_sub_category'])) {
-            $filter_sub_category = $this->request->get['filter_sub_category'];
-        } else {
-            $filter_sub_category = '';
-        }
+        
         ?>
         <select name="filter_category_id" class="catg">
             <option value="0"><?php echo $text_category; ?></option>
@@ -155,7 +147,8 @@ DD_belatedPNG.fix('#logo img');
                 <?php } ?>
             <?php } ?>
         </select>
-        <input type="text" value="Search for items" name="filter_name" class="srch" onFocus="if(this.value=='Search for items'){this.value=''}" onclick="if(this.value=='Search for items'){this.value=''}" onblur="if(this.value==''){this.value='Search for items'}" />
+
+        <input type="text" value="<?php echo $filter_name; ?>" name="filter_name" class="srch" onFocus="if(this.value=='Search for items'){this.value=''}" onclick="if(this.value=='Search for items'){this.value=''}" onblur="if(this.value==''){this.value='Search for items'}" />
         <input type="image"  id="button-search" src="catalog/view/theme/squareofone/image/go-btn.jpg" class="go_btn" />
         <div class="sale_btn"><a href="#"><img src="catalog/view/theme/squareofone/image/sale-btn.jpg" alt="" border="0" /></a></div>
         <div id="cart" class="shoping_bag">

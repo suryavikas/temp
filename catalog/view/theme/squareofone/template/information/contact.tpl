@@ -8,9 +8,9 @@
   <h1><?php echo $heading_title; ?></h1>
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
    
-    <div class="contact-info" style="float:left; width:400px;">
+    <div class="contact-info" >
      <h2><?php echo $text_location; ?></h2>
-      <div class="content"><div class="left" style="line-height:18px;"><b><?php echo $text_address; ?></b><br />
+      <div class="ct_lt"><div  style="line-height:18px;"><b><?php echo $text_address; ?></b><br />
         <?php echo $store; ?><br />
         <?php echo $address; ?><div class="clear"></div><br />
         <?php if ($telephone) { ?>
@@ -27,8 +27,9 @@
     </div>
     </div>
    
-    <div class="content" style="float:right; width:500px;">
+    <div class="content" style="float:right; width:500px; padding-bottom:15px;">
      <h2><?php echo $text_contact; ?></h2>
+     <div class="ct_lt">
     <b><?php echo $entry_name; ?></b><br />
     <input type="text" name="name" class="inpt" value="<?php echo $name; ?>" />
     <br />
@@ -61,9 +62,11 @@
     <div class="buttons">
       <input type="submit" style="margin-top:10px;" value="<?php echo $button_continue; ?>" class="button" />
     </div>
+       <div class="clear"></div>
+    </div>
      <div class="clear"></div>
     </div>
-    
+    <br class="clear" />
   </form>
   <?php echo $content_bottom; ?></div>
 <?php echo $footer; ?>

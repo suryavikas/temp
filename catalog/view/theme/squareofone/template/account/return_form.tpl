@@ -2,13 +2,16 @@
 <?php if ($error_warning) { ?>
 <div class="warning"><?php echo $error_warning; ?></div>
 <?php } ?>
-<?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
+
+<div id="content">
+
+<?php echo $content_top; ?>
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
     <?php } ?>
   </div>
+  <div class="prd_page_left_part">
   <h1><?php echo $heading_title; ?></h1>
   <?php echo $text_description; ?>
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
@@ -134,7 +137,18 @@
       </div>
     </div>
   </form>
-  <?php echo $content_bottom; ?></div>
+  <?php echo $content_bottom; ?>
+  <div class="clear"></div>
+  </div>
+  
+  <div class="prd_page_right_part" style="padding-top:88px;">
+  <?php echo $column_left; ?>
+  <?php echo $column_right; ?>
+   <div class="clear"></div>
+  </div>
+  
+  <div class="clear"></div>
+  </div>
 <script type="text/javascript"><!--
 $(document).ready(function() {
 	$('.date').datepicker({dateFormat: 'yy-mm-dd'});

@@ -1,5 +1,5 @@
-<?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content">
+<?php echo $header; ?>
+<div id="content" class="product_page">
     <div id="middle">
     <?php echo $content_top; ?>
   <div class="breadcrumb bradecam">
@@ -7,19 +7,21 @@
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
     <?php } ?>
   </div>
- 
+
+ <div class="prd_page_left_part">
   <div class="product-info">
     <?php if ($thumb || $images) { ?>
     <div class="top_pt1_left">
       <?php if ($thumb) { ?>
-      <div class="main_img"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" /></a></div>
+      <div class="main_img"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class="jqzoom" rel='gal1'><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" /></a></div>
       <?php } ?>
       <?php if ($images) { ?>
       <div class="small_img image-additional">
+	  <a href="#" title="<?php echo $heading_title; ?>" rel="{gallery: 'gal1', smallimage: '<?php echo $thumb; ?>',largeimage: '<?php echo $popup; ?>'}"><img src="<?php echo $thumb2; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
           <ul>
         <?php foreach ($images as $image) { ?>
             <li>
-                <a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
+                <a href="#" title="<?php echo $heading_title; ?>" rel="{gallery: 'gal1', smallimage: '<?php echo $image['thumb2']; ?>',largeimage: '<?php echo $image['popup']; ?>'}"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
             </li>
         <?php } ?>
         </ul>
@@ -348,6 +350,13 @@
     <?php } ?>
   </div>
   <?php } ?>
+   <div class="clear"></div>
+  </div>
+  <div class="prd_page_right_part">
+   <?php echo $column_left; ?>
+  <?php echo $column_right; ?>
+  <div class="clear"></div>
+  </div>
   <?php echo $content_bottom; ?></div></div>
 <script type="text/javascript"><!--
 $('.colorbox').colorbox({
@@ -386,6 +395,20 @@ $('#button-cart').bind('click', function() {
 	});
 });
 //--></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('.jqzoom').jqzoom({
+    zoomType: 'standard',
+    lens:true,
+    preloadImages: false,
+    alwaysOn:false,
+    xOffset: 20,
+    yOffset: -10,
+    zoomWidth: 500,
+    zoomHeight: 500
+  });
+});
+</script>
 <?php if ($options) { ?>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ajaxupload.js"></script>
 <?php foreach ($options as $option) { ?>

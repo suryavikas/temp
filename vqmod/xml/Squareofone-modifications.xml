@@ -152,6 +152,17 @@
 				);
 			}
 		}
+                if (isset($this->request->get['filter_name'])) {
+			$this->data['filter_name'] = $this->request->get['filter_name'];
+		} else {
+			$this->data['filter_name'] = $this->language->get('text_search');
+		}
+                if (isset($this->request->get['filter_category_id'])) {
+                    $this->data['filter_category_id'] = $this->request->get['filter_category_id'];
+                } else {
+                    $this->data['filter_category_id'] = 0;
+                }
+
 		// 3 Level Category Search
 		$this->data['categories_dropdown'] = array();
                 $categories_1 = $categories;
@@ -228,6 +239,10 @@
             <add><![CDATA[$_['text_welcome']        = '<a href="%s">Login</a> | <a href="%s">Sign up</a>.';]]>
             </add>
         </operation>
+		<operation>
+			<search position="replace"><![CDATA[$_['text_search']         = 'Search';]]></search>
+			<add><![CDATA[$_['text_search']         = 'Search for items';]]></add>
+		</operation>
     </file>
     <file name="catalog/controller/common/footer.php">
         <operation>
@@ -313,6 +328,11 @@
             </add>
         </operation>
     </file>
-
+	<file name="system/library/image.php">
+		<operation>
+			<search position="replace"><![CDATA[$background = imagecolorallocate($this->image, 255, 255, 255);]]></search>
+			<add><![CDATA[$background = imagecolorallocate($this->image, 233, 233, 233);]]></add>
+		</operation>
+	</file>
 
 </modification>
