@@ -5229,43 +5229,13 @@ element.style {
 
 
 
-
-	margin:0;
-
-
-
-
-
-
-
-	padding:0px 0 0 0;
-
-
-
-
-
-
-
-	text-align:center!important;
-
-
-
-
-
-
-
-	background:#e9e9e9;
-
-
-
-
-
-
-
-	border:1px solid #d4d4d4;
-	
-	
-	min-height:360px;
+    background: none repeat scroll 0 0 #E9E9E9;
+    border: 1px solid #D4D4D4;
+    height: 360px;
+    margin: 0;
+    padding: 0 0 0;
+    text-align: center !important;
+    width: 326px;
 
 
 
@@ -6029,7 +5999,7 @@ p {
 
 
     background: none repeat scroll 0 0 #6BBA70;
-    border-radius: 10px 10px 10px 10px;
+
     color: #FFFFFF;
     font: 12px/20px Arial,Helvetica,sans-serif;
     margin: 0 0 10px;

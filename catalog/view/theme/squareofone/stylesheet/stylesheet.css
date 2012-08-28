@@ -6808,31 +6808,5 @@ border:1px solid #ccc;
     margin: -5px 0 0;
     padding:15px 25px 28px;
 }
-.rt_cst a.button, input.button {
-    background: none repeat scroll 0 0 #046DD8;
-    border-radius: 7px 7px 7px 7px;
-    box-shadow: 0 2px 3px #000000;
-    color: #FFFFFF;
-    cursor: pointer;
-    font-family: verdana;
-    font-size: 27px;
-    font-weight: normal;
-    height: auto !important;
-    line-height: 12px;
-    margin: 0;
-    padding: 5px 20px !important;
-}
-.ac_lgn a.button, input.button {
-    background: none repeat scroll 0 0 #046DD8;
-    border-radius: 7px 7px 7px 7px;
-    box-shadow: 0 2px 3px #000000;
-    color: #FFFFFF;
-    cursor: pointer;
-    font-family: verdana;
-    font-size: 27px;
-    font-weight: normal;
-    height: auto !important;
-    line-height: 12px;
-    margin: 0;
-    padding: 5px 20px !important;
-}
+
+

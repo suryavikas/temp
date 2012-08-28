@@ -17,8 +17,11 @@
       <?php } ?>
       <?php if ($images) { ?>
       <div class="small_img image-additional">
-	  <a href="#" title="<?php echo $heading_title; ?>" rel="{gallery: 'gal1', smallimage: '<?php echo $thumb; ?>',largeimage: '<?php echo $popup; ?>'}"><img src="<?php echo $thumb2; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
+	  
           <ul>
+              <li>
+                  <a href="#" title="<?php echo $heading_title; ?>" rel="{gallery: 'gal1', smallimage: '<?php echo $thumb; ?>',largeimage: '<?php echo $popup; ?>'}"><img src="<?php echo $thumb2; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
+              </li>
         <?php foreach ($images as $image) { ?>
             <li>
                 <a href="#" title="<?php echo $heading_title; ?>" rel="{gallery: 'gal1', smallimage: '<?php echo $image['thumb2']; ?>',largeimage: '<?php echo $image['popup']; ?>'}"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
