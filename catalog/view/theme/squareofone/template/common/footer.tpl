@@ -79,9 +79,9 @@
 
 Sign up to receive special offers and the latest style news.
 <div class="clear"></div>
-<input type="text" value="Enter Your Email Address" name="" class="mals" onFocus="if(this.value=='Enter Your Email Address'){this.value=''}" onclick="if(this.value=='Enter Your Email Address'){this.value=''}" onblur="if(this.value==''){this.value='Enter Your Email Address'}" />
+<input type="text" value="Enter Your Email Address" name="" class="mals" onclick="if(this.value=='Enter Your Email Address'){this.value=''}" onblur="if(this.value==''){this.value='Enter Your Email Address'}" />
 <div class="clear"></div>
-<input type="image" src="catalog/view/theme/squareofone/image/sign-up.jpg" class="sin_up" />
+<input type="submit" value="submit"  class="sin_up" />
 <div class="clear"></div>
 </div>
 <div class="clear"></div>
@@ -92,18 +92,18 @@ Sign up to receive special offers and the latest style news.
 <div id="footer_bottom_inner">
  <div class="paypal_left">
    <ul>
-     <li><img src="catalog/view/theme/squareofone/image/paypal.jpg" alt="" border="0" /></li>
-     <li><img src="catalog/view/theme/squareofone/image/ms1.jpg" alt="" border="0" /></li>
-     <li><img src="catalog/view/theme/squareofone/image/ms2.jpg" alt="" border="0" /></li>
-     <li><img src="catalog/view/theme/squareofone/image/visa1.jpg" alt="" border="0" /></li>
-     <li><img src="catalog/view/theme/squareofone/image/visa2.jpg" alt="" border="0" /></li>
-     <li style="padding-top:0px; padding-left:20px;"><img src="catalog/view/theme/squareofone/image/norton.jpg" alt="" border="0" /></li>
+     <li class="sq_paypal">&nbsp;</li>
+    <li class="sq_mst1">&nbsp;</li>
+    <li class="sq_mst2">&nbsp;</li>
+    <li class="sq_visa1">&nbsp;</li>
+   <li class="sq_visa2">&nbsp;</li>
+     <li style="margin:0 0 10px 20px;" class="sq_nrt">&nbsp;</li>
    </ul>
    <div class="clear"></div>
  </div>
  <div class="follow">
   <ul>
-    <li style="padding:0px; margin-right:-10px;"><img src="catalog/view/theme/squareofone/image/follow.jpg" alt="" border="0" /></li>
+    <li style="padding:0px; margin-right:-10px;" class="sq_flw">&nbsp;</li>
     <li><a href="#" class="tw_hv"><span>more</span></a></li>
     <li><a href="#" class="rss_hv"><span>more</span></a></li>
     <li><a href="#" class="fb_hv"><span>more</span></a></li>
@@ -119,5 +119,4 @@ Sign up to receive special offers and the latest style news.
 <div class="clear"></div>
 </div>
 
-</div>
 </body></html>

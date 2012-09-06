@@ -60,7 +60,7 @@
               }       ?>
                  <p>Delivered in 2 - 5 business days </p>
         </div>
-        <div class="cart buy_detail_right">
+        <div class="cart buy_detail_right" style="border-bottom:none; margin-bottom:0px;">
             <div style="margin-bottom:10px;"><?php echo $text_qty; ?>
                 <input type="text" name="quantity" size="2" value="<?php echo $minimum; ?>" />
                 <input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" />
@@ -69,7 +69,7 @@
             
             </div>
 <!--            <input type="button" value="<?php echo $button_cart; ?>" id="button-cart" class="button" />-->
-            <a id="button-cart"><img  border="0" alt="<?php echo $button_cart; ?>" src="catalog/view/theme/squareofone/image/buy-now.jpg"></a>
+            <a id="button-cart" >&nbsp;</a>
             <?php if ($minimum > 1) { ?>
             <div class="minimum"><?php echo $text_minimum; ?></div>
             <?php } ?>

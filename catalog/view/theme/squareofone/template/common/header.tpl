@@ -25,12 +25,13 @@
 <html class="no-js ie8 oldie" lang="en" version="HTML+RDFa 1.1"> <![endif]-->
 <!--[if IE 9]>
 <html class="no-js ie9" lang="en" version="HTML+RDFa 1.1"> <![endif]-->
-<!--[if gt IE 9]><!-->
-<html class=" js flexbox cssgradients csstransitions" version="HTML+RDFa 1.1" lang="en">
-<!--<![endif]-->
+
+
+
+
 
 <!-- CSS -->
-<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/alice-min.css" media="all">
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/alice-min.css" media="all"/>
 <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/colorbox/colorbox.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/stylesheet.css" />
 
@@ -88,7 +89,7 @@ DD_belatedPNG.fix('#logo img');
   <?php if ($logo) { ?>
      <div id="header_top2_outer">
         <div id="header_top2_inner">
-            <div class="logo"> <a href="<?php echo $home; ?>"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" border="0" /></a></div>
+            <div class="logo"> <a href="<?php echo $home; ?>"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" /></a></div>
                 <div class="header_top2_right">
                     <div class="search_box">
                          <?php if ($filter_name) { ?>
@@ -119,7 +120,7 @@ DD_belatedPNG.fix('#logo img');
     <div id="header_top3_outer">
     <div id="header_top3_inner">
       <div class="header_top3">
-        <div class="home_icon"><a href="<?php echo $home; ?>"><img src="catalog/view/theme/squareofone/image/home-icon.png" alt="" border="0" /></a></div>
+           <a href="<?php echo $home; ?>" class="home_icon"><span>more</span></a>
         <?php
         
         ?>
@@ -148,11 +149,11 @@ DD_belatedPNG.fix('#logo img');
             <?php } ?>
         </select>
 
-        <input type="text" value="<?php echo $filter_name; ?>" name="filter_name" class="srch" onFocus="if(this.value=='Search for items'){this.value=''}" onclick="if(this.value=='Search for items'){this.value=''}" onblur="if(this.value==''){this.value='Search for items'}" />
-        <input type="image"  id="button-search" src="catalog/view/theme/squareofone/image/go-btn.jpg" class="go_btn" />
-        <div class="sale_btn"><a href="#"><img src="catalog/view/theme/squareofone/image/sale-btn.jpg" alt="" border="0" /></a></div>
+        <input type="text" value="<?php echo $filter_name; ?>" name="filter_name" class="srch" onclick="if(this.value=='Search for items'){this.value=''}" onblur="if(this.value==''){this.value='Search for items'}" />
+          <input type="image"  id="button-search"  class="go_btn" value="submit" />
+      <a href="#" class="sale_btn"><span>more</span></a>
         <div id="cart" class="shoping_bag">
-          <div class="cart_img"><a href="<?php echo $shopping_cart; ?>"</a><img src="catalog/view/theme/squareofone/image/cart-img.png" alt="" border="0" /></a></div>
+       <a href="<?php echo $shopping_cart; ?>" class="cart_img"><span>more</span></a>
           <div class="cart_txt heading"> <strong>Shopping Bag</strong> now in your cart <a><?php echo $product_count; ?> items </a>
             <div class="clear"></div>
           </div>
@@ -175,7 +176,7 @@ DD_belatedPNG.fix('#logo img');
     <ul class="nav-sub">
     <?php foreach ($categories as $category) { ?>
     <li>
-        <a href="<?php echo $category['href']; ?>" id="cat_141" class="sel-cat-shoes"> <span class="nav-subTxt"><?php echo $category['name']; ?></span> </a>
+        <a href="<?php echo $category['href']; ?>" class="sel-cat-shoes"> <span class="nav-subTxt"><?php echo $category['name']; ?></span> </a>
 
       <?php if ($category['children']) { ?>
       <div class="nav-layer fsm box-bgcolor ">
@@ -183,7 +184,7 @@ DD_belatedPNG.fix('#logo img');
              <div class="unit size1of3" >
                   <div class="prl">
                     <div class="line mts">
-                        <img src="catalog/view/theme/squareofone/image/img9.png" alt="" border="0" />
+                        <img src="catalog/view/theme/squareofone/image/img9.png" alt="" />
                         <h2>Womens Jeans</h2>
                     </div>
                 </div>
@@ -196,7 +197,7 @@ DD_belatedPNG.fix('#logo img');
                     
                 <div class="unit size1of3" >
                     <div class="prl">
-                    <a href="<?php echo $subcategory['href']; ?>"><h3><?php echo $subcategory['name']; ?></h3></a>
+                    <h3><a href="<?php echo $subcategory['href']; ?>"><?php echo $subcategory['name']; ?></a></h3>
                     <?php if (count($subcategory['children']) > 0) { ?>
                         <div class="line mts">
                            <ul class="cnv unit">
@@ -272,4 +273,4 @@ $('#button-search').bind('click', function() {
 //        console.log(url);
 	location = url;
 });
-</script>
+--></script>

@@ -6298,7 +6298,7 @@ padding:0;
 position:absolute;
 width:39px;
 height:39px;
-background:url(../image/or-img.png) no-repeat;
+background:url(../image/sprit-img.png) no-repeat scroll -271px -64px transparent;
 border:none;
 }
 .ac_lgn{
@@ -6326,7 +6326,6 @@ margin:0;
 padding:10px 0 5px 0;
 display:block;
 }
-
 
 
 

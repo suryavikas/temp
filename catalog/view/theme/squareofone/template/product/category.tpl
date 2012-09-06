@@ -1,4 +1,11 @@
-<?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
+<?php echo $header; ?>
+<div style="width:1002px; margin:0 auto; padding-top:15px;">
+<div id="spl_catg_left">
+<?php echo $column_left; ?>
+<?php echo $column_right; ?>
+</div>
+<div id="spl_catg_right">
+
 <div id="content"><?php echo $content_top; ?>
   <div class="prd_nm">
 
@@ -91,6 +98,9 @@
   </div>
   <?php } ?>
   <?php echo $content_bottom; ?></div>
+  
+  </div>
+  </div>
 <script type="text/javascript"><!--
 function display(view) {
 	if (view == 'list') {
