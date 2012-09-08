@@ -24,7 +24,7 @@
             <span class="error"><?php echo $error_lastname; ?></span>
             <?php } ?></td>
         </tr>
-        <tr>
+        <tr style="display:none;">
           <td><?php echo $entry_company; ?></td>
           <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>
         </tr>

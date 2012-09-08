@@ -334,5 +334,17 @@
 			<add><![CDATA[$background = imagecolorallocate($this->image, 233, 233, 233);]]></add>
 		</operation>
 	</file>
-
+	<file name="catalog/language/english/account/register.php">
+		<operation>
+			<search position="replace"><![CDATA[$_['entry_telephone']      = 'Telephone:';]]></search>
+			<add><![CDATA[$_['entry_telephone']      = 'Mobile:';]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/english/checkout/checkout.php">
+		<operation>
+			<search position="replace"><![CDATA[$_['entry_telephone']                = 'Telephone:';]]></search>
+			<add><![CDATA[$_['entry_telephone']                = 'Mobile:';]]></add>
+		</operation>
+	</file>
+	
 </modification>
