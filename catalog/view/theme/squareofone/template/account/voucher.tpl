@@ -2,17 +2,21 @@
 <?php if ($error_warning) { ?>
 <div class="warning"><?php echo $error_warning; ?></div>
 <?php } ?>
-<?php echo $column_left; ?><?php echo $column_right; ?>
+
 <div id="content"><?php echo $content_top; ?>
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
     <?php } ?>
   </div>
-  <h1><?php echo $heading_title; ?></h1>
+  <h1><?php echo $heading_title; ?></h1>  <div class="all_page_left">
+  <?php echo $column_left; ?><?php echo $column_right; ?>
+    </div>
+  
+     <div class="all_page_right">
   <p><?php echo $text_description; ?></p>
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-    <table class="form">
+     <table class="form" style="border: 1px solid #CCCCCC; margin:-5px 0 15px;padding:10px; display:block;">
       <tr>
         <td><span class="required">*</span> <?php echo $entry_to_name; ?></td>
         <td><input type="text" name="to_name" value="<?php echo $to_name; ?>" />
@@ -80,5 +84,8 @@
       </div>
     </div>
   </form>
+  
+  </div>
+  
   <?php echo $content_bottom; ?></div>
 <?php echo $footer; ?>

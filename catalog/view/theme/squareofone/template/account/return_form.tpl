@@ -11,12 +11,20 @@
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
     <?php } ?>
   </div>
-  <div class="prd_page_left_part">
-  <h1><?php echo $heading_title; ?></h1>
+   <h1><?php echo $heading_title; ?></h1>
+  
+  
+    <div class="all_page_left">
+  <?php echo $column_left; ?><?php echo $column_right; ?>
+    </div>
+  
+  <div class="all_page_right">
+ 
   <?php echo $text_description; ?>
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
     <h2><?php echo $text_order; ?></h2>
     <div class="content">
+    <div style="border: 1px solid #CCCCCC; margin:-5px 0 15px;padding:10px; display:block;">
       <div class="left"><span class="required">*</span> <?php echo $entry_firstname; ?><br />
         <input type="text" name="firstname" value="<?php echo $firstname; ?>" class="large-field" />
         <br />
@@ -57,10 +65,13 @@
         <input type="text" name="date_ordered" value="<?php echo $date_ordered; ?>" class="large-field date" />
         <br />
       </div>
+      <div class="clear"></div>
+      </div>
     </div>
     <h2><?php echo $text_product; ?></h2>
     <div id="return-product">
       <div class="content">
+       <div style="border: 1px solid #CCCCCC; margin:-5px 0 15px;padding:10px; display:block;">
         <div class="return-product">
           <div class="return-name"><span class="required">*</span> <b><?php echo $entry_product; ?></b><br />
             <input type="text" name="product" value="<?php echo $product; ?>" />
@@ -128,6 +139,8 @@
             <?php } ?>
           </div>
         </div>
+          <div class="clear"></div>
+      </div>
       </div>
     </div>
     <div class="buttons">
@@ -139,12 +152,6 @@
   </form>
   <?php echo $content_bottom; ?>
   <div class="clear"></div>
-  </div>
-  
-  <div class="prd_page_right_part" style="padding-top:88px;">
-  <?php echo $column_left; ?>
-  <?php echo $column_right; ?>
-   <div class="clear"></div>
   </div>
   
   <div class="clear"></div>

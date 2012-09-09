@@ -30,6 +30,8 @@
 
 
 
+
+
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/alice-min.css" media="all"/>
 <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/colorbox/colorbox.css" media="screen" />
@@ -67,6 +69,14 @@ DD_belatedPNG.fix('#logo img');
 </script>
 <![endif]-->
 
+
+<!--[if IE ]>
+<style type="text/css">
+.nav-layer{
+top: 33px;
+}
+</style>
+<![endif]-->
 
 <?php echo $google_analytics; ?>
 </head>

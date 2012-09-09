@@ -5,7 +5,7 @@
 <?php if ($error_warning) { ?>
 <div class="warning"><?php echo $error_warning; ?></div>
 <?php } ?>
-<?php echo $column_left; ?><?php echo $column_right; ?>
+
 <div id="content"><?php echo $content_top; ?>
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -13,6 +13,15 @@
     <?php } ?>
   </div>
   <h1><?php echo $heading_title; ?></h1>
+  
+  
+  <div style="width:225px; float:left; padding:42px 0 0 0;">
+  <?php echo $column_left; ?><?php echo $column_right; ?>
+    </div>
+    
+      <div style="float:right; width:765px;">
+  
+  
   <h2><?php echo $text_address_book; ?></h2>
   <?php foreach ($addresses as $result) { ?>
   <div class="content">
@@ -28,5 +37,9 @@
     <div class="left"><a href="<?php echo $back; ?>" class="button"><?php echo $button_back; ?></a></div>
     <div class="right"><a href="<?php echo $insert; ?>" class="button"><?php echo $button_new_address; ?></a></div>
   </div>
+  </div>
+  
+  
+  
   <?php echo $content_bottom; ?></div>
 <?php echo $footer; ?>

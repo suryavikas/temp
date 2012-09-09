@@ -268,6 +268,8 @@ label {
 
 
     margin-right: auto;
+	
+	/*background:url(../image/bg_noise.png) repeat scroll 0 0 transparent;*/
 
 
 
@@ -781,20 +783,12 @@ label {
 .mini-cart-info td {
 
 
-
-    color: #000;
-
-
-
-    vertical-align: top;
-
-
-
+    border-bottom: 1px dotted #FFFFFF;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
     padding: 10px 5px;
-
-
-
-    border-bottom: 1px solid #EEEEEE;
+    vertical-align: top;
 
 
 
@@ -834,7 +828,7 @@ label {
 
 
 
-    color: #666;
+    color: #0A4194;
 
 
 
@@ -926,7 +920,8 @@ label {
 
 
 
-    color: #000;
+     color: #FFFFFF;
+    font-size: 15px;
 
 
 
@@ -2425,7 +2420,20 @@ a.button:hover, input.button:hover {
 
 }
 
+.htabs a:hover {
 
+
+
+    padding-bottom: 7px;
+	color:#fff;
+
+
+
+    background: none repeat scroll 0 0 #1353A3;
+
+
+
+}
 
 .htabs a.selected {
 
@@ -2433,7 +2441,7 @@ a.button:hover, input.button:hover {
 
     padding-bottom: 7px;
 
-
+color:#fff;
 
     background: none repeat scroll 0 0 #1353A3;
 
@@ -6507,6 +6515,8 @@ display:block;
 
 
     margin-right: 10px;
+	
+	min-height:340px;
 
 
 
@@ -6555,6 +6565,10 @@ display:block;
 
 
     border: 2px solid #E7E7E7;
+	
+	width:225px;
+	
+	height:225px;
 
 
 
@@ -6578,7 +6592,7 @@ text-align:center;
 	
     display: block;
 	
-    font: bold 15px Verdana, Arial, Helvetica, sans-serif;
+    font: bold 12px Verdana, Arial, Helvetica, sans-serif;
 	
     margin-bottom: 4px;
 	
@@ -6593,18 +6607,10 @@ text-align:center;
 
 
 
+    color: #1AAF22;
     display: block;
-
-
-
-    font-weight: bold;
-
-
-
-    color: #333333;
-
-
-
+    font-size: 18px;
+    font-weight: normal;
     margin-bottom: 4px;
 
 
@@ -6656,6 +6662,7 @@ text-align:center;
 }
 .home .box .box-content .box-product .img1 {
     float: left;
+	 width: 235px;
 }
 
 
@@ -6807,5 +6814,33 @@ border:1px solid #ccc;
     margin: -5px 0 0;
     padding:15px 25px 28px;
 }
+.all_page_left{
+width:225px; 
+float:left; 
+padding:0px 0 0 0;
+}
+.all_page_right{
+float:left;
+ width:755px;
+margin-left:10px;
+}
 
+.shoping_bag .content{
+    background: url(../image/drop-bg.jpg) repeat-x scroll center top #46934B ;
+    border-radius: 0 0 5px 5px;
+    color: #FFFFFF !important;
+    margin: 1px 0 0;
+    padding: 8px;
+    position: relative;
+    z-index: 9999;
+}
 
+.shoping_bag h4{
+    background: url(../image/new-cart-img.png) no-repeat scroll 158px bottom transparent;
+    display: block;
+    font: bold 18px Arial,Helvetica,sans-serif;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    width: 200px;
+}

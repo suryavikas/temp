@@ -6,6 +6,12 @@
     <?php } ?>
   </div>
   <h1><?php echo $heading_title; ?></h1>
+  <div class="all_page_left">
+  <?php echo $column_left; ?><?php echo $column_right; ?>
+  </div>
+  
+     <div class="all_page_right">
+  
   <div class="sitemap-info">
     <div class="left">
       <ul>
@@ -56,5 +62,8 @@
       </ul>
     </div>
   </div>
+  
+  </div>
+  
   <?php echo $content_bottom; ?></div>
 <?php echo $footer; ?>

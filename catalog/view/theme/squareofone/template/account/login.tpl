@@ -35,7 +35,7 @@
           <div class="clear"></div>
           <a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a>
            <div class="clear"></div>
-          <input type="submit" value="<?php echo $button_login; ?>" class="button" style="float:right" />
+          <input type="submit" value="<?php echo $button_login; ?>" class="button" style="float: right;font-size: 28px;font-weight: normal;height: auto;padding: 5px 20px;" />
           <?php if ($redirect) { ?>
           <input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
           <?php } ?>
@@ -56,7 +56,7 @@
       <div class="content">
         <p><b><?php echo $text_register; ?></b></p>
         <p><?php echo $text_register_account; ?></p>
-        <a href="<?php echo $register; ?>" class="button" style="float:right"><?php echo $button_continue; ?></a></div>
+        <a href="<?php echo $register; ?>" class="button" style="float: right;font-size: 28px;font-weight: normal;height: auto;padding: 5px 20px; line-height:normal;"><?php echo $button_continue; ?></a></div>
     </div>
     
   </div>

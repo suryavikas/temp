@@ -8,7 +8,7 @@
 <?php if ($error_warning) { ?>
 <div class="warning"><?php echo $error_warning; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
 <?php } ?>
-<?php echo $column_left; ?><?php echo $column_right; ?>
+
 <div id="content"><?php echo $content_top; ?>
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -16,6 +16,16 @@
     <?php } ?>
   </div>
   <h1><?php echo $heading_title; ?>
+  
+  
+    <div class="all_page_left">
+  <?php echo $column_left; ?><?php echo $column_right; ?>
+  </div>
+  
+  
+  
+  <div class="all_page_right">
+  
     <?php if ($weight) { ?>
     &nbsp;(<?php echo $weight; ?>)
     <?php } ?>
@@ -194,6 +204,11 @@
     <div class="right"><a href="<?php echo $checkout; ?>" class="button"><?php echo $button_checkout; ?></a></div>
     <div class="center"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_shopping; ?></a></div>
   </div>
+  
+  </div>
+  
+  
+  
   <?php echo $content_bottom; ?></div>
 <script type="text/javascript"><!--
 $('input[name=\'next\']').bind('change', function() {
