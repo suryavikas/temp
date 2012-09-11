@@ -164,7 +164,9 @@ top: 33px;
       <a href="#" class="sale_btn"><span>more</span></a>
         <div id="cart" class="shoping_bag">
        <a href="<?php echo $shopping_cart; ?>" class="cart_img"><span>more</span></a>
-          <div class="cart_txt heading"> <strong>Shopping Bag</strong> now in your cart <a><?php echo $product_count; ?> items </a>
+          <div class="cart_txt heading"> <strong>Shopping Cart</strong> now in your cart <a><span id="cart-total"><?php echo $product_count; ?> items</span></a>
+
+
             <div class="clear"></div>
           </div>
           <div class="clear"></div>
