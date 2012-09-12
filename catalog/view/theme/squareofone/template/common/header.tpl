@@ -162,13 +162,24 @@ top: 33px;
         <input type="text" value="<?php echo $filter_name; ?>" name="filter_name" class="srch" onclick="if(this.value=='Search for items'){this.value=''}" onblur="if(this.value==''){this.value='Search for items'}" />
           <input type="image"  id="button-search"  class="go_btn" value="submit" />
       <a href="#" class="sale_btn"><span>more</span></a>
+      <div id ="outer-cart">
+          <a href="<?php echo $shopping_cart; ?>" class="cart_img"><span>more</span></a>
         <div id="cart" class="shoping_bag">
-       <a href="<?php echo $shopping_cart; ?>" class="cart_img"><span>more</span></a>
-          <div class="cart_txt heading"> <strong>Shopping Cart</strong> now in your cart <a><span id="cart-total"><?php echo $product_count; ?> items</span></a>
+       
+          <a><div class="cart_txt heading"> <strong>Shopping Cart</strong><span id="cart-total">
+              
+              <?php if($product_count == 0){
+                  echo $text_empty;
+              } else {
+                  echo $text_items;
+              }
+              ?>
+               </span></a>
 
 
             <div class="clear"></div>
           </div>
+    </div>
           <div class="clear"></div>
         </div>
         <div class="clear"></div>
