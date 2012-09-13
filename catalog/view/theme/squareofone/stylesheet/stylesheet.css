@@ -447,13 +447,34 @@ label {
 .checkout{
 color: #000;
 }
+#login a{
+    background: none repeat scroll 0 0 transparent;
+    color: #000000 !important;
+    display: block;
+    font-size: 12px;
+    padding: 5px 0 0;
+    text-decoration: none !important;
+}
+#login a:hover{
+    background: none repeat scroll 0 0 transparent;
+    color: #000000 !important;
+    display: block;
+    font-size: 12px;
+    padding: 5px 0 0;
+    text-decoration: underline !important;
+}
 .checkout a{
-color: #000!important;
-text-decoration:none!important;
+    background: none repeat scroll 0 0 #57B05C;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF !important;
+    font-size: 14px;
+    padding: 5px 12px;
+    text-decoration: none !important;
 }
 .checkout a:hover{
-color: #000!important;
-text-decoration:underline!important;
+background: none repeat scroll 0 0 #1353A3;
+color: #fff!important;
+text-decoration:none!important;
 }
 .name a{
 color: #000!important;
@@ -2483,22 +2504,15 @@ h3 {
 	margin-left:10px;
 }
 .shoping_bag .content {
-    -moz-border-bottom-colors: none;
-    -moz-border-image: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
     background: none repeat scroll 0 0 #FFFFFF;
-    border-color: -moz-use-text-color #000000 #000000;
+	border:none;
     border-radius: 0 0 5px 5px;
-    border-right: 1px solid #000000;
-    border-style: none solid solid;
-    border-width: medium 1px 1px;
     color: #000 !important;
     margin: 4px 0 0;
     padding: 8px;
     position: relative;
     z-index: 9999;
+	box-shadow: 0 2px 2px 2px #CCCCCC;
 }
 .shoping_bag h4 {
 	background: url(../image/new-cart-img.png) no-repeat scroll 158px bottom transparent;
