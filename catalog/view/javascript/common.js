@@ -28,13 +28,31 @@ $(document).ready(function() {
 	
 	/* Ajax Cart */
 	$('#cart > .heading a').live('click', function() {
-		$('#cart').addClass('active');
-		
-		$('#cart').load('index.php?route=module/cart #cart > *');
-		
-		$('#cart').live('mouseleave', function() {
-			$(this).removeClass('active');
-		});
+           
+		if($.trim($('#cart #cart-total').text()) == "Your shopping cart is empty!"){
+                    return false;
+                }else{
+                    $('#cart').addClass('active');
+
+                    $('#cart').load('index.php?route=module/cart #cart > *');
+
+                    $('#cart').live('mouseleave', function() {
+                            $(this).removeClass('active');
+                    });
+                    $('body').live('click', function(){
+                            $("#cart .heading .content").fadeIn('slow', function(){
+                            $(this).remove('#cart .heading .content');
+                        });
+                    })
+//                    $(function(){
+//                        $(document).click(function(){
+//                           console.log("Event found");
+//                            $('div').remove('#cart .heading .content');
+//
+//                        });
+//                    });
+
+                }
 	});
 	
 	/* Mega Menu */
@@ -129,7 +147,7 @@ function addToCart(product_id, quantity) {
 				
 				$('#cart-total').html(json['total']);
 				
-				$('html, body').animate({ scrollTop: 0 }, 'slow'); 
+				$('html, body').animate({scrollTop: 0}, 'slow'); 
 			}	
 		}
 	});
@@ -150,7 +168,7 @@ function addToWishList(product_id) {
 				
 				$('#wishlist-total').html(json['total']);
 				
-				$('html, body').animate({ scrollTop: 0 }, 'slow');
+				$('html, body').animate({scrollTop: 0}, 'slow');
 			}	
 		}
 	});
@@ -172,7 +190,7 @@ function addToCompare(product_id) {
 				
 				$('#compare-total').html(json['total']);
 				
-				$('html, body').animate({ scrollTop: 0 }, 'slow'); 
+				$('html, body').animate({scrollTop: 0}, 'slow'); 
 			}	
 		}
 	});

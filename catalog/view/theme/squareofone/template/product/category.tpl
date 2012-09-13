@@ -1,12 +1,19 @@
 <?php echo $header; ?>
-<div style="width:1002px; margin:0 auto; padding-top:15px;">
-<div id="spl_catg_left">
-<?php echo $column_left; ?>
-<?php echo $column_right; ?>
-</div>
-<div id="spl_catg_right">
+<div  id="content"><?php echo $content_top; ?>
 
-<div id="content"><?php echo $content_top; ?>
+<div class="breadcrumb">
+    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
+    <?php } ?>
+  </div>
+  
+   <h1><?php echo $heading_title; ?></h1>
+   
+     <div class="all_page_left"><?php echo $column_left; ?><?php echo $column_right; ?> </div>
+
+<div class="all_page_right">
+
+<div>
   <div class="prd_nm">
 
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -15,6 +22,9 @@
   </div> 
   <?php if ($thumb || $description) { ?>
   <div class="category-info">
+    <?php if ($thumb) { ?>
+    <div class="image"><img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" /></div>
+    <?php } ?>
     <?php if ($description) { ?>
     <?php echo $description; ?>
     <?php } ?>
@@ -94,10 +104,11 @@
     <div class="right"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a></div>
   </div>
   <?php } ?>
-  <?php echo $content_bottom; ?></div>
+</div>
   
   </div>
-  </div>
+  
+   <?php echo $content_bottom; ?></div>
 <script type="text/javascript"><!--
 function display(view) {
 	if (view == 'list') {

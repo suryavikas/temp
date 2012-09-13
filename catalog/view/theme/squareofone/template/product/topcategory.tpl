@@ -9,11 +9,11 @@ echo $header; ?>
     </div>   
     
     
-      <div class="all_page_left"><?php echo $column_left; ?><?php echo $column_right; ?>
+      <div ><?php echo $column_left; ?><?php echo $column_right; ?>
     </div>
     
     
-        <div class="all_page_right">
+        <div >
     <div class="mens_prd_detail">
         <div class="prds_img1">
             <div class="prds_img1_hd"><?php echo $heading_title; ?></div>
