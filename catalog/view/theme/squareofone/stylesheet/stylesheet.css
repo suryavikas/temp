@@ -396,8 +396,8 @@ label {
 .mini-cart-info td {
 	border-bottom: 1px dotted #000;
 	color: #000;
-	font-size: 14px;
-	font-weight: bold;
+	font-size: 12px;
+	font-weight: normal;
 	padding: 10px 5px;
 	vertical-align: top;
 }
@@ -410,6 +410,10 @@ label {
 }
 .mini-cart-info .name small {
 	color: #0A4194;
+	font-size: 12px;
+}
+small{
+font-size: 12px!important;
 }
 .mini-cart-info .quantity {
 	text-align: right;
@@ -433,7 +437,7 @@ label {
 }
 .mini-cart-total td {
 	color: #000;
-	font-size: 15px;
+	font-size: 12px;
 	padding: 4px;
 }
 #header #cart .checkout {
@@ -479,6 +483,7 @@ text-decoration:none!important;
 .name a{
 color: #000!important;
 text-decoration:none!important;
+font-weight:normal;
 }
 .name a:hover{
 color: #000!important;
@@ -888,12 +893,12 @@ table.list td {
 	border-bottom: 1px solid #DDDDDD;
 }
 table.list thead td {
-	background-color: #EFEFEF;
+	background-color: #57B05C;
 	padding: 0px 5px;
 }
 table.list thead td a, .list thead td {
 	text-decoration: none;
-	color: #222222;
+	color: #fff;
 	font-weight: bold;
 }
 table.list tbody td {
@@ -1611,9 +1616,9 @@ a.button:hover, input.button:hover {
 	padding: 7px;
 }
 .wishlist-info thead td {
-	color: #4D4D4D;
+	color: #fff;
 	font-weight: bold;
-	background-color: #F7F7F7;
+	background-color: #57B05C;
 	border-bottom: 1px solid #DDDDDD;
 }
 .wishlist-info thead .image {
@@ -1816,9 +1821,9 @@ a.button:hover, input.button:hover {
 	padding: 7px;
 }
 .cart-info thead td {
-	color: #4D4D4D;
+	color: #fff;
 	font-weight: bold;
-	background-color: #F7F7F7;
+	background-color: #57B05C;
 	border-bottom: 1px solid #DDDDDD;
 }
 .cart-info thead .image {
@@ -1845,7 +1850,7 @@ a.button:hover, input.button:hover {
 }
 .cart-info tbody .quantity input[type='image'], .cart-info tbody .quantity img {
 	position: relative;
-	top: 4px;
+	top: 0px;
 	cursor: pointer;
 }
 .cart-info tbody .price, .cart-info tbody .total {

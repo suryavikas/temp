@@ -185,22 +185,22 @@ min-height:350px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	font-weight: normal;
-	width:290px;
+	width:250px;
 	outline:none;
 }
 .go_btn {
-	float: left;
-	margin:2px 0 0 10px;
-	text-indent:-9999px;
-	padding: 0;
-	width: 42px;
-	height:26px;
-	background: url(../image/sprit-img.png) no-repeat scroll -351px top transparent;
-	border:none;
-	border-radius:0px 0px 0px 0px;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: medium none;
+    border-radius: 0 0 0 0;
+    float: left;
+    font-size: 14px;
+    margin: 1px 0 0 10px;
+    padding: 7px 14px;
+
 }
 .go_btn:hover {
-	background-position: -351px -26px;
+    background: none repeat scroll 0 0 #32e065;
+    color: #FFFFFF;
 }
 .shoping_bag {
 	float: right;
@@ -208,6 +208,12 @@ min-height:350px;
 	padding: 0;
 	position: absolute;
 	color:#fff;
+}
+#cart-loading-indicator{
+    float: right;
+    margin-top: 20px;
+    display: none;
+    
 }
 .cart_txt {
 	margin:-3px 0 0 0;
@@ -502,7 +508,7 @@ h1 {
 	margin:0;
 	padding:1px 4px 3px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size:14px;
+	font-size:12px;
 	color:#fff;
 	font-weight:bold;
 	background:none;

@@ -27,32 +27,27 @@ $(document).ready(function() {
 	});
 	
 	/* Ajax Cart */
-	$('#cart > .heading a').live('click', function() {
-           
-		if($.trim($('#cart #cart-total').text()) == "Your shopping cart is empty!"){
-                    return false;
-                }else{
-                    $('#cart').addClass('active');
+	$('#cart > .heading').live('click', function(event) {
+            if($.trim($('#cart #cart-total').text()) == "Your shopping cart is empty!"){                
+                return false;
+            }else{
+                $('#cart-loading-indicator').css('display', 'block');
+                $('#cart').addClass('active');
+               
+                $('#cart').load('index.php?route=module/cart #cart > *');
+                
+                $('#cart-loading-indicator').css('display', 'none');
 
-                    $('#cart').load('index.php?route=module/cart #cart > *');
-
-                    $('#cart').live('mouseleave', function() {
-                            $(this).removeClass('active');
+                $('#cart').live('mouseleave', function() {
+                        $(this).removeClass('active');
+                });
+                $('body').live('click', function(){
+                        $("#cart .heading .content").fadeIn('slow', function(){
+                        $(this).remove('#cart .heading .content');
+                        $(this).removeClass('active');
                     });
-                    $('body').live('click', function(){
-                            $("#cart .heading .content").fadeIn('slow', function(){
-                            $(this).remove('#cart .heading .content');
-                        });
-                    })
-//                    $(function(){
-//                        $(document).click(function(){
-//                           console.log("Event found");
-//                            $('div').remove('#cart .heading .content');
-//
-//                        });
-//                    });
-
-                }
+                })
+            }
 	});
 	
 	/* Mega Menu */

@@ -45,8 +45,8 @@
 <?php } ?>
 
 <!-- Java script -->
-<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css" />
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/external/jquery.cookie.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
@@ -160,13 +160,13 @@ top: 33px;
         </select>
 
         <input type="text" value="<?php echo $filter_name; ?>" name="filter_name" class="srch" onclick="if(this.value=='Search for items'){this.value=''}" onblur="if(this.value==''){this.value='Search for items'}" />
-          <input type="image"  id="button-search"  class="go_btn" value="submit" />
+          <input type="SUBMIT"  id="button-search"  class="go_btn" value="SUBMIT" />
       <a href="#" class="sale_btn"><span>more</span></a>
       <div id ="outer-cart">
           <a href="<?php echo $shopping_cart; ?>" class="cart_img"><span>more</span></a>
         <div id="cart" class="shoping_bag">
        
-          <a><div class="cart_txt heading"> <strong>Shopping Cart</strong><span id="cart-total">
+          <div class="cart_txt heading"><a> <strong>Shopping Cart</strong><span id="cart-total">
               
               <?php if($product_count == 0){
                   echo $text_empty;
@@ -174,11 +174,12 @@ top: 33px;
                   echo $text_items;
               }
               ?>
-               </span></a>
-
+               </span></a></div>
+            
 
             <div class="clear"></div>
           </div>
+          <div id="cart-loading-indicator"><img src="catalog/view/theme/squareofone/image/ajax-loader.gif"/></div>
     </div>
           <div class="clear"></div>
         </div>
