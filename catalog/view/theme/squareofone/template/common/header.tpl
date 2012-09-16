@@ -26,12 +26,6 @@
 <!--[if IE 9]>
 <html class="no-js ie9" lang="en" version="HTML+RDFa 1.1"> <![endif]-->
 
-
-
-
-
-
-
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/alice-min.css" media="all"/>
 <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/colorbox/colorbox.css" media="screen" />
@@ -45,13 +39,15 @@
 <?php } ?>
 
 <!-- Java script -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+<!--<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>-->
+<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
 <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css" />
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/external/jquery.cookie.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/common.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/sq-common.js"></script>
 
 <!--<script type="text/javascript" src="catalog/view/javascript/jquery.jcarousel.min.js"></script>-->
 <!--<script type="text/javascript" src="catalog/view/javascript/alice-1339158486.js"></script>-->
@@ -160,7 +156,7 @@ top: 33px;
         </select>
 
         <input type="text" value="<?php echo $filter_name; ?>" name="filter_name" class="srch" onclick="if(this.value=='Search for items'){this.value=''}" onblur="if(this.value==''){this.value='Search for items'}" />
-          <input type="SUBMIT"  id="button-search"  class="go_btn" value="SUBMIT" />
+          <input type="submit"  id="button-search"  class="go_btn" value="Go" />
       <a href="#" class="sale_btn"><span>more</span></a>
       <div id ="outer-cart">
           <a href="<?php echo $shopping_cart; ?>" class="cart_img"><span>more</span></a>
@@ -179,7 +175,7 @@ top: 33px;
 
             <div class="clear"></div>
           </div>
-          <div id="cart-loading-indicator"><img src="catalog/view/theme/squareofone/image/ajax-loader.gif"/></div>
+          <div  id="cart-loading-indicator"><img alt="Shopping cart loading..." src="catalog/view/theme/squareofone/image/ajax-loader.gif"/> </div>
     </div>
           <div class="clear"></div>
         </div>
@@ -188,9 +184,6 @@ top: 33px;
       <div class="clear"></div>
     </div>
     <div class="clear"></div>
-  </div>
-
-
 
 <div id="container">
 <?php if ($categories) { ?>

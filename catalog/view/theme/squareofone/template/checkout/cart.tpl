@@ -15,21 +15,19 @@
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
     <?php } ?>
   </div>
-  <h1><?php echo $heading_title; ?>
+  <h1><?php echo $heading_title; ?> </h1>
   
   
     <div class="all_page_left">
-  <?php echo $column_left; ?><?php echo $column_right; ?>
-  </div>
+        <?php echo $column_left; ?><?php echo $column_right; ?>
+    </div>
   
   
   
   <div class="all_page_right">
   
-    <?php if ($weight) { ?>
-    &nbsp;(<?php echo $weight; ?>)
-    <?php } ?>
-  </h1>
+   
+ 
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
     <div class="cart-info">
       <table>

@@ -1062,7 +1062,12 @@ a.button:hover, input.button:hover {
 }
 /* box */
 
-
+.tab-content .box-product .related-product{
+    float: left;
+    margin-right: 10px;
+    text-align: center;
+    width: 235px;
+}
 
 
 
@@ -1367,7 +1372,7 @@ a.button:hover, input.button:hover {
 
 
 .product-info {
-	overflow: auto;
+	overflow: none;
 	margin-bottom: 20px;
 	clear: both;
 }

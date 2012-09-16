@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	/* Search */
-	$('.button-search').bind('click', function() {
+        $('.button-search').bind('click', function() {
 		url = $('base').attr('href') + 'index.php?route=product/search';
 				 
 		var filter_name = $('input[name=\'filter_name\']').attr('value');
@@ -41,20 +41,19 @@ $(document).ready(function() {
 
        	/* Ajax Cart */
 	$('#cart .heading').live('click', function(event) {
-            event.stopPropagation();
-            if($('#cart .heading .content').length != 0){
-                return false;
-            }
-            if($.trim($('#cart #cart-total').text()) == "Your shopping cart is empty!"){                
-                return false;
-            }else{                
-                $('#cart').addClass('active');
-               
-                $('#cart').load('index.php?route=module/cart #cart > *');
-                
-                $('#cart').live('mouseleave', function() {
-                    $(this).removeClass('active');
-                });
+//            event.stopPropagation();
+            if($('#cart .heading .content').length == 0){
+                if($.trim($('#cart #cart-total').text()) == "Your shopping cart is empty!"){
+                    return false;
+                }else{
+                    $('#cart').addClass('active');
+
+                    $('#cart').load('index.php?route=module/cart #cart');
+
+                    $('#cart').live('mouseleave', function() {
+                        $(this).removeClass('active');
+                    });
+                }
             }
 	});
 	
@@ -126,9 +125,15 @@ function getURLVar(urlVarName) {
 	}
 	
 	return urlVarValue;
-} 
+}
+
+$('.cart .button, .related-product .button').live('click', function() {
+    $(this).after('<img id="load-indicator-image" alt="Shopping cart loading..." src="catalog/view/theme/squareofone/image/loading.gif" style="margin-left: 10px;"/>');
+});
 
 function addToCart(product_id, quantity) {
+   
+
 	quantity = typeof(quantity) != 'undefined' ? quantity : 1;
 
 	$.ajax({
@@ -138,7 +143,7 @@ function addToCart(product_id, quantity) {
 		dataType: 'json',
 		success: function(json) {
 			$('.success, .warning, .attention, .information, .error').remove();
-			
+                        $('#load-indicator-image').remove();
 			if (json['redirect']) {
 				location = json['redirect'];
 			}

@@ -222,8 +222,8 @@
         <?php } ?>
         </strong>
          <?php } ?>
-        <label><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a></label> |
-        <label><a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></label>
+        <label><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a></label> 
+<!--        <label><a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></label>-->
         <div class="clear"></div>
       
         
@@ -320,7 +320,7 @@
   <div id="tab-related" class="tab-content">
     <div class="box-product">
       <?php foreach ($products as $product) { ?>
-      <div>
+      <div class="related-product">
         <?php if ($product['thumb']) { ?>
         <div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a></div>
         <?php } ?>

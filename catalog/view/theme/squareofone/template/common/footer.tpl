@@ -118,5 +118,5 @@ Sign up to receive special offers and the latest style news.
 </div>
 <div class="clear"></div>
 </div>
-
+</div>
 </body></html>
