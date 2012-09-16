@@ -128,7 +128,7 @@ function getURLVar(urlVarName) {
 }
 
 $('.cart .button, .related-product .button').live('click', function() {
-    $(this).after('<img id="load-indicator-image" alt="Shopping cart loading..." src="catalog/view/theme/squareofone/image/loading.gif" style="margin-left: 10px;"/>');
+    $(this).after('<img id="load-indicator-image" alt="Adding To Cart..." src="catalog/view/theme/squareofone/image/loading.gif" style="margin-left: 10px;"/>');
 });
 
 function addToCart(product_id, quantity) {
