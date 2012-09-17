@@ -468,8 +468,7 @@ color: #000;
     text-decoration: underline !important;
 }
 .checkout a{
-    background: none repeat scroll 0 0 #57B05C;
-    border-radius: 5px 5px 5px 5px;
+    background: none repeat scroll 0 0 #046DD8;
     color: #FFFFFF !important;
     font-size: 14px;
     padding: 5px 12px;
@@ -973,19 +972,19 @@ table.radio label {
 
 a.button, input.button {
 	cursor: pointer;
-	color: #FFFFFF;
+	color: #FFFFFF!important;
 	line-height: 12px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	font-weight: bold;
 	background: none repeat scroll 0 0 #046DD8;
-	-webkit-border-radius: 7px 7px 7px 7px;
+/*	-webkit-border-radius: 7px 7px 7px 7px;
 	-moz-border-radius: 7px 7px 7px 7px;
 	-khtml-border-radius: 7px 7px 7px 7px;
 	border-radius: 7px 7px 7px 7px;
 	-webkit-box-shadow: 0px 2px 2px #DDDDDD;
 	-moz-box-shadow: 0px 2px 2px #DDDDDD;
-	box-shadow: 0px 2px 2px #DDDDDD;
+	box-shadow: 0px 2px 2px #DDDDDD;*/
 }
 a.button {
 	display: inline-block;
@@ -1025,7 +1024,7 @@ a.button:hover, input.button:hover {
 	line-height: 26px;
 }
 .htabs a {
-	background: none repeat scroll 0 0 #57B05C;
+	background: none repeat scroll 0 0 #046DD8;
 	color: #FFFFFF;
 	display: none;
 	float: left;
@@ -1886,12 +1885,12 @@ a.button:hover, input.button:hover {
 
 
 .checkout-heading {
-	background: #F8F8F8;
+	background: #57B05C;
 	border: 1px solid #DBDEE1;
 	padding: 8px;
 	font-weight: bold;
 	font-size: 13px;
-	color: #555555;
+	color: #fff;
 	margin-bottom: 15px;
 }
 .checkout-heading a {
@@ -2445,7 +2444,7 @@ h3 {
 	text-align:center;
 }
 .product_page .box-product .name a {
-	color: #0A4194;
+	color: #0A4194!important;
 	display: block;
 	font: normal 12px Verdana, Arial, Helvetica, sans-serif;
 	margin-bottom: 4px;
@@ -2532,4 +2531,105 @@ h3 {
 	padding: 0;
 	text-transform: uppercase;
 	width: 200px;
+}
+
+.cont_btm_pt{
+margin:0;
+padding:10px 0;
+display:block;
+}
+
+
+
+.product_page .cont_btm_pt .box {
+    float: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+}
+.product_page .cont_btm_pt .box .box-heading {
+	-webkit-border-radius: 7px 7px 0px 0px;
+	-moz-border-radius: 7px 7px 0px 0px;
+	-khtml-border-radius: 7px 7px 0px 0px;
+	border-radius: 7px 7px 0px 0px;
+	border: 1px solid #DBDEE1;
+	background: url('../image/background.png') repeat-x;
+	padding: 8px 10px 7px 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 14px;
+	color: #333;
+}
+.product_page .cont_btm_pt .box .box-content {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    margin: 0;
+    padding: 0;
+}
+
+
+.product_page .cont_btm_pt .box-product {
+
+}
+.product_page .cont_btm_pt .box-product > div {
+    display: inline-block;
+    float: left;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    min-height: 295px;
+    vertical-align: top;
+    width: 180px;
+}
+#column-left + #column-right + #content .product_page .cont_btm_pt .box-product > div {
+	width: 119px;
+}
+.product_page .cont_btm_pt .box-product .image {
+	display: block;
+	margin-bottom: 0px;
+}
+.product_page .cont_btm_pt .box-product .image img {
+    border: 2px solid #E7E7E7;
+    height: 200px;
+    padding: 2px;
+    width: 170px;
+}
+.product_page .cont_btm_pt .box-product .name {
+	text-align:center;
+}
+.product_page .cont_btm_pt .box-product .price {
+	text-align:center;
+}
+.product_page .cont_btm_pt .box-product .cart {
+	text-align:center;
+}
+.product_page .cont_btm_pt .box-product .name a {
+	color: #0A4194;
+	display: block;
+	font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+	margin-bottom: 4px;
+	text-decoration: none;
+	min-height: 32px;
+}
+.product_page .cont_btm_pt .box-product .price {
+    color: #333333;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+.product_page .cont_btm_pt .box-product .price-old {
+	color: #F00;
+	text-decoration: line-through;
+}
+.product_page .cont_btm_pt .box-product .price-new {
+	font-weight: bold;
+}
+.product_page .cont_btm_pt .box-product .rating {
+	display: block;
+	margin-bottom: 4px;
+}
+.product_page .cont_btm_pt .box .box-content .box-product .img1 {
+	float: left;
+	width: 235px;
 }
