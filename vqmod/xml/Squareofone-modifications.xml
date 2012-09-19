@@ -392,12 +392,12 @@
             </add>
         </operation>
     </file>
-	<file name="system/library/image.php">
+	<!-- <file name="system/library/image.php">
 		<operation>
 			<search position="replace"><![CDATA[$background = imagecolorallocate($this->image, 255, 255, 255);]]></search>
-			<add><![CDATA[$background = imagecolorallocate($this->image, 233, 233, 233);]]></add>
+			<add><![CDATA[$background = imagecolorallocate($this->image, 255, 255, 255);]]></add>
 		</operation>
-	</file>
+	</file> -->
 	<file name="catalog/language/english/account/register.php">
 		<operation>
 			<search position="replace"><![CDATA[$_['entry_telephone']      = 'Telephone:';]]></search>
