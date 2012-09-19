@@ -12,6 +12,22 @@ $(document).ready(function() {
 		location = url;
 	});
 	
+        $('.links a').live('click', function() {
+            alert('Clicked');
+            var arrData = getFilterParams();
+            var getParams = getSortingParams();
+
+            var url = $(this).attr('href');
+            console.log(url);
+            categoryId = getURLVar("path");
+            page = getURLVarFromString(url, "page");
+            sendRequest(arrData, getParams, categoryId, "page="+page);
+            
+            
+            return false;
+        });
+
+
 	$('#header input[name=\'filter_name\']').bind('keydown', function(e) {
 		if (e.keyCode == 13) {
 			url = $('base').attr('href') + 'index.php?route=product/search';
@@ -103,7 +119,9 @@ $(document).ready(function() {
 		$(this).parent().fadeOut('slow', function() {
 			$(this).remove();
 		});
-	});	
+	});
+
+     
 });
 
 function getURLVar(urlVarName) {
@@ -124,6 +142,27 @@ function getURLVar(urlVarName) {
 		}
 	}
 	
+	return urlVarValue;
+}
+
+function getURLVarFromString(url, urlVarName) {
+	var urlHalves = url.toLowerCase().split('?');
+	var urlVarValue = '';
+	
+	if (urlHalves[1]) {
+		var urlVars = urlHalves[1].split('&');
+
+		for (var i = 0; i <= (urlVars.length); i++) {
+			if (urlVars[i]) {
+				var urlVarPair = urlVars[i].split('=');
+
+				if (urlVarPair[0] && urlVarPair[0] == urlVarName.toLowerCase()) {
+					urlVarValue = urlVarPair[1];
+				}
+			}
+		}
+	}
+
 	return urlVarValue;
 }
 
@@ -203,3 +242,73 @@ function addToCompare(product_id) {
 		}
 	});
 }
+function getSortingParams(){
+    var getParams;
+    $("select option:selected").each(function() {
+
+        var val = $(this).val();
+        //console.log("Value = "+val);
+        if(getParams == null && val != null){
+            getParams = val;
+        } else {
+            if(getParams != null && val != null){
+                getParams = "&"+getParams+"="+val;
+            }
+        }
+    //console.log(getParams);
+    });
+    return getParams;
+}
+function dropdown(dp){
+    var arrData = getFilterParams();
+    var getParams = getSortingParams();
+    sendRequest(arrData, getParams);
+}
+function getFilterParams(){
+    var arrData = new Array();
+//    $('.checkboxDiv > checkbox:selected').each(function() {
+//        var item = {};
+//        item.param = $(this).parent().attr('id');
+//        item.val = $(this).val();
+//        //                    console.log($(this).parent().attr('id'));
+//        arrData.push(item);
+//    });
+    //Iterating over all the check boxes
+    $("input:checked").each(function() {
+        var item = {};
+        item.param = $(this).attr('id');
+        item.val = $(this).val();
+        arrData.push(item);
+    });
+    return arrData;
+}
+
+function sendRequest(arrData, getParams, categoryId, appendToUrl){
+        var url = "index.php?route=module/filters/applyFilter&path="+categoryId;
+        if(getParams != null){
+            url = url+"&"+getParams;
+        }
+        if(appendToUrl != null){
+            url = url+"&"+appendToUrl;
+        }
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {filters : arrData},
+            dataType: "html"
+        }).done(function( msg ) {
+            $('div').remove('.pagination');
+            var productDiv;
+            if($('.product-list').length){
+                productDiv = '.product-list';
+            } else {
+                productDiv = '.product-grid';
+            }
+            $('div').remove(productDiv);
+            $('div').remove('.pagination');
+            $('div').remove('.buttons');
+            $('div').remove('.product-list')
+            $(msg).insertAfter('.sort');
+        });
+    }

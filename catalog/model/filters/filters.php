@@ -141,7 +141,7 @@ class ModelFiltersFilters extends Model {
 				$sql .= " LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)";
 			}
                         
-            if (!empty($data['productOption'])) {
+                        if (!empty($data['productOption'])) {
 				$sql .= " JOIN " . DB_PREFIX . "product_option_value POV ON (p.product_id = POV.product_id)";
                                 $sql .= " AND POV.option_value_id in (".$data['productOption'].")";
 			}                        
@@ -156,13 +156,9 @@ class ModelFiltersFilters extends Model {
 			}
 
 			if (!empty($data['saleItems'])) {
-				$sql .= " JOIN " . DB_PREFIX . "product_discount PDC ON (p.product_id = PDC.product_id)";
-                                $sql .= " AND (PDC.date_end >= current_date or PDC.date_end = '0000-00-00')";
-			}
-			//Added for filtering out products which are for sale only 
-			if (!empty($data['saleItems'])) {
-				$sql .= " LEFT JOIN " . DB_PREFIX . "product_discount prd ON (prd.product_id = p.product_id)";			
-			}
+				$sql .= " JOIN " . DB_PREFIX . "product_discount PDC ON (p.product_id = PDC.product_id";
+                                $sql .= " AND PDC.date_end >= current_date or PDC.date_end = '0000-00-00')";
+			}			
                         
 			$sql .= " WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
 			
@@ -282,7 +278,7 @@ class ModelFiltersFilters extends Model {
 			$product_data = array();
 	
 			$query = $this->db->query($sql);
-
+                        
                         $this->load->model('catalog/product');
 			foreach ($query->rows as $result) {                           
 				$product_data[$result['product_id']] = $this->model_catalog_product->getProduct($result['product_id']);

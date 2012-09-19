@@ -29,8 +29,9 @@ class ControllerModuleFilters extends Controller {
         $priceRangeArray = $this->model_filters_filters->getPriceRange($categoryId);
         $this->data['priceRangeArray'] = $priceRangeArray;
 //         echo "<pre>";
-//        print_r($_SESSION);
+////        print_r($_SESSION);
 //         var_dump($priceRangeArray);
+//         exit;
         //Setting text from language file
         $this->data['text_manufacturer_select_option'] = html_entity_decode($this->language->get('text_manufacturer_select_option'));
         $this->data['text_product_options_select_option'] = html_entity_decode($this->language->get('text_product_options_select_option'));
@@ -76,7 +77,7 @@ class ControllerModuleFilters extends Controller {
 
         $this->load->model('tool/image');
 
-		$this->load->model('filters/filters');
+        $this->load->model('filters/filters');
 
         if (isset($this->request->get['sort'])) {
             $sort = $this->request->get['sort'];
@@ -215,14 +216,18 @@ class ControllerModuleFilters extends Controller {
                 'order' => $order,
                 'start' => ($page - 1) * $limit,
                 'limit' => $limit
-            );            
+            );
+
             /*             * ******************************************TBD as VQMOD**************************************************** */
             $filters = array();
             if (isset($this->request->post['filters'])) {
                 $filters = $this->request->post['filters'];
 
+            }elseif(isset($this->request->get['filters'])){
+                $filters = $this->request->get['filters'];
             }
-        
+//            print_r($filters);
+//            exit;
             //Add by Surya for Other filter information
             $manufacturerId = 0;
             $productOption = null;
@@ -233,8 +238,6 @@ class ControllerModuleFilters extends Controller {
             ksort($filters);
             $localPriceArray = array();
             foreach ($filters as $filter) {
-  //          print_r($filter);
-			//	echo "<br>****".$filter['param']."*******".$filter['val']."</br>";
                 if (strtolower($filter['param']) == 'product-option') {
                     if (!$productOption) {
                         $productOption = $filter['val'];
@@ -247,18 +250,17 @@ class ControllerModuleFilters extends Controller {
                     } else {
                         $manufacturerId = $manufacturerId . ',' . $filter['val'];
                     }
-                } else if (strtolower($filter['param']) == 'sale_items' && strtolower($filter['val']) == 'on') {
-					echo "@@@@@@@@@@@@@@@222";
+                } else if (strtolower($filter['param']) == 'sale_items' && strtolower($filter['val']) == 'on') {					
                     $saleItems = true;
-                } else if (strtolower($filter['param']) == 'in_stock' && strtolower($filter['val']) == 'on') {
-					echo "$$$$$$$$$$$";
+                } else if (strtolower($filter['param']) == 'in_stock' && strtolower($filter['val']) == 'on') {					
                     $inStock = true;
                 } else if (strtolower($filter['param']) == 'price') {
-                    list($minPrice, $maxPrice) = explode("-", $filter['val']);
+                    list($minPrice, $maxPrice) = explode("-", $filter['val']); 
                     array_push($localPriceArray,$minPrice);
                     array_push($localPriceArray,$maxPrice);
                 }
             }
+
 
             if(sizeof($localPriceArray) > 1){
                 $minPrice = min($localPriceArray);
@@ -273,18 +275,21 @@ class ControllerModuleFilters extends Controller {
                 'minPrice' => $minPrice,
                 'maxPrice' => $maxPrice
             );
-       // print_r($filterCond);
-            $data = array_merge($data, $filterCond);
-//        echo'<pre>';
-        
-       
-            /*             * ******************************************TBD as VQMOD**************************************************** */
-			
-            $product_total = $this->model_filters_filters->getTotalProducts($data);
-			$results = $this->model_filters_filters->getProductsResult($data);
 
-			//echo "<pre>";
-			//print_r($data);
+            $data = array_merge($data, $filterCond); 
+            /*             * ******************************************TBD as VQMOD**************************************************** */
+            $results = $this->model_filters_filters->getProductsResult($data);
+            if(!empty($productOption) or $manufacturerId != 0 or !empty($saleItems) or !empty($inStock) or !empty($minPrice)){
+                echo "IF";
+                $product_total = sizeof($results);
+            } else{
+                echo "ISSET";
+                $product_total = $this->model_filters_filters->getTotalProducts($data);                
+            }
+            
+
+//			echo "<pre>";
+//			print_r($results);
 			//echo "Products total abc ".$product_total;
 			//echo "</pre>";
 //            $results = $this->model_catalog_product->getProducts($data);
@@ -346,11 +351,11 @@ class ControllerModuleFilters extends Controller {
 
             $this->data['sorts'] = array();
 
-            $this->data['sorts'][] = array(
-                'text' => $this->language->get('text_default'),
-                'value' => 'p.sort_order-ASC',
-                'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.sort_order&order=ASC' . $url)
-            );
+//            $this->data['sorts'][] = array(
+//                'text' => $this->language->get('text_default'),
+//                'value' => 'p.sort_order-ASC',
+//                'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.sort_order&order=ASC' . $url)
+//            );
 
             $this->data['sorts'][] = array(
                 'text' => $this->language->get('text_name_asc'),
@@ -376,31 +381,31 @@ class ControllerModuleFilters extends Controller {
                 'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.price&order=DESC' . $url)
             );
 
-            if ($this->config->get('config_review_status')) {
-                $this->data['sorts'][] = array(
-                    'text' => $this->language->get('text_rating_desc'),
-                    'value' => 'rating-DESC',
-                    'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=DESC' . $url)
-                );
-
-                $this->data['sorts'][] = array(
-                    'text' => $this->language->get('text_rating_asc'),
-                    'value' => 'rating-ASC',
-                    'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=ASC' . $url)
-                );
-            }
-
-            $this->data['sorts'][] = array(
-                'text' => $this->language->get('text_model_asc'),
-                'value' => 'p.model-ASC',
-                'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=ASC' . $url)
-            );
-
-            $this->data['sorts'][] = array(
-                'text' => $this->language->get('text_model_desc'),
-                'value' => 'p.model-DESC',
-                'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=DESC' . $url)
-            );
+//            if ($this->config->get('config_review_status')) {
+//                $this->data['sorts'][] = array(
+//                    'text' => $this->language->get('text_rating_desc'),
+//                    'value' => 'rating-DESC',
+//                    'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=DESC' . $url)
+//                );
+//
+//                $this->data['sorts'][] = array(
+//                    'text' => $this->language->get('text_rating_asc'),
+//                    'value' => 'rating-ASC',
+//                    'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=ASC' . $url)
+//                );
+//            }
+//
+//            $this->data['sorts'][] = array(
+//                'text' => $this->language->get('text_model_asc'),
+//                'value' => 'p.model-ASC',
+//                'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=ASC' . $url)
+//            );
+//
+//            $this->data['sorts'][] = array(
+//                'text' => $this->language->get('text_model_desc'),
+//                'value' => 'p.model-DESC',
+//                'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=DESC' . $url)
+//            );
 
             $url = '';
 
@@ -457,7 +462,7 @@ class ControllerModuleFilters extends Controller {
             if (isset($this->request->get['limit'])) {
                 $url .= '&limit=' . $this->request->get['limit'];
             }
-
+//            die($product_total."*****");
             $pagination = new Pagination();
             $pagination->total = $product_total;
             $pagination->page = $page;
@@ -479,14 +484,6 @@ class ControllerModuleFilters extends Controller {
                 $this->template = 'default/template/module/filtered_category.tpl';
             }
 
-//            $this->children = array(
-//                'common/column_left',
-//                'common/column_right',
-//                'common/content_top',
-//                'common/content_bottom',
-//                'common/footer',
-//                'common/header'
-//            );
 
             $this->response->setOutput($this->render());
         } else {

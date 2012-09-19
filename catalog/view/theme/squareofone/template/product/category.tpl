@@ -1,13 +1,11 @@
 <?php echo $header; ?>
 <div  id="content"><?php echo $content_top; ?>
 
-<div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  
-   <h1><?php echo $heading_title; ?></h1>
+
+  <div class="shop_by"> We found <?php echo $product_total ?> Products for <?php echo $heading_title; ?>
+<div class="clear"></div>
+</div>
+   
    
      <div class="all_page_left"><?php echo $column_left; ?><?php echo $column_right; ?> </div>
 
@@ -32,7 +30,8 @@
   <?php } ?>
  
   <?php if ($products) { ?>
-  <div class="prd_sort">Sort:  <a href="#">Popularity</a>  /  <a href="#">Discount</a>  /  <a href="#">What's New</a>  /  <a href="#">Price</a> </div>
+   
+  
 <!--  <div class="product-filter">
     <div class="display"><b><?php echo $text_display; ?></b> <?php echo $text_list; ?> <b>/</b> <a onclick="display('grid');"><?php echo $text_grid; ?></a></div>
     <div class="limit"><b><?php echo $text_limit; ?></b>
@@ -45,20 +44,20 @@
         <?php } ?>
         <?php } ?>
       </select>
-    </div>
-    <div class="sort"><b><?php echo $text_sort; ?></b>
-      <select onchange="location = this.value;">
+    </div>-->
+
+  </div>
+    <div class="sort prd_sort"><b><?php echo $text_sort; ?></b>
         <?php foreach ($sorts as $sorts) { ?>
         <?php if ($sorts['value'] == $sort . '-' . $order) { ?>
-        <option value="<?php echo $sorts['href']; ?>" selected="selected"><?php echo $sorts['text']; ?></option>
+        <a class="product-sorting" href="<?php echo $sorts['href']; ?>" ><?php echo $sorts['text']; ?></a>
         <?php } else { ?>
-        <option value="<?php echo $sorts['href']; ?>"><?php echo $sorts['text']; ?></option>
+        <a class="product-sorting" href="<?php echo $sorts['href']; ?>"><?php echo $sorts['text']; ?></a>
         <?php } ?>
         <?php } ?>
-      </select>
+
     </div>
-  </div>-->
-  <div class="product-compare"><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></div>
+<!--  <div class="product-compare"><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></div>-->
   <div class="found_prd_item product-list">
       <ul>
     <?php foreach ($products as $product) {  ?>

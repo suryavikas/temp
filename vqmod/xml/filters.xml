@@ -23,43 +23,5 @@
 			<search position="replace"><![CDATA[<?php echo $sorts['href']; ?>]]></search>
 			<add><![CDATA[<?php echo $sorts['text']; ?>]]></add>
 		</operation>-->
-    </file>
-    <file name="catalog\controller\product\category.php">
-        <operation>
-            <search position="replace"><![CDATA['href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.sort_order&order=ASC' . $url)]]></search>
-            <add><![CDATA['href' => 'sort=p.sort_order&order=ASC']]></add>
-        </operation>
-        <operation>
-            <search position="replace"><![CDATA['href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=pd.name&order=ASC' . $url)]]></search>
-            <add><![CDATA['href' => 'sort=pd.name&order=ASC']]></add>
-        </operation>
-        <operation>
-            <search position="replace"><![CDATA['href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=pd.name&order=DESC' . $url)]]></search>
-            <add><![CDATA['href' => 'sort=pd.name&order=DESC']]></add>
-        </operation>
-        <operation>
-            <search position="replace"><![CDATA['href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.price&order=ASC' . $url)]]></search>
-            <add><![CDATA['href' => 'sort=p.price&order=ASC']]></add>
-        </operation>
-        <operation>
-            <search position="replace"><![CDATA['href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.price&order=DESC' . $url)]]></search>
-            <add><![CDATA['href' => 'sort=p.price&order=DESC']]></add>
-        </operation>
-        <operation>
-            <search position="replace"><![CDATA['href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=DESC' . $url)]]></search>
-            <add><![CDATA['href' => 'sort=rating&order=DESC']]></add>
-        </operation>
-        <operation>
-            <search position="replace"><![CDATA['href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=ASC' . $url)]]></search>
-            <add><![CDATA['href' => 'sort=rating&order=ASC']]></add>
-        </operation>
-        <operation>
-            <search position="replace"><![CDATA['href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=ASC' . $url)]]></search>
-            <add><![CDATA['href' => 'sort=p.model&order=ASC']]></add>
-        </operation>
-        <operation>
-            <search position="replace"><![CDATA['href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=DESC' . $url)]]></search>
-            <add><![CDATA['href' => 'sort=p.model&order=DESC']]></add>
-        </operation>
-    </file>
+    </file>    
 </modification>

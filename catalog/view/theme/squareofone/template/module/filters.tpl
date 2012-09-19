@@ -115,78 +115,16 @@
                 $(".checkbox").dgStyle();
             });
 
-            function getSortingParams(){
-                var getParams;
-                $("select option:selected").each(function() {
-
-                    var val = $(this).val();
-                    //console.log("Value = "+val);
-                    if(getParams == null && val != null){
-                            getParams = val;
-                    } else {
-                        if(getParams != null && val != null){
-                            getParams = "&"+getParams+"="+val;
-                        }
-                    }
-                    //console.log(getParams);
-                });
-                return getParams;
-            }
-            function dropdown(dp){             
-                var arrData = getFilterParams();
-                var getParams = getSortingParams();                
-                sendRequest(arrData, getParams);
-            }
-            function getFilterParams(){
-                var arrData = new Array();
-                $('.checkboxDiv > checkbox:selected').each(function() {
-                    var item = {};
-                    item.param = $(this).parent().attr('id');
-                    item.val = $(this).val();
-                    //                    console.log($(this).parent().attr('id'));
-                    arrData.push(item);
-                });
-                //Iterating over all the check boxes
-                $("input:checked").each(function() {
-                    var item = {};
-                    item.param = $(this).attr('id');
-                    item.val = $(this).val();
-                    arrData.push(item);
-                });
-                return arrData;
-            }
-
+            
             $('.product-options').click(function(e) {
                 //Iterating over multiple select boxes
+
                 var arrData = getFilterParams();
                 var getParams = getSortingParams();
-                sendRequest(arrData, getParams);                
+                sendRequest(arrData, getParams, <?php echo $categoryId; ?>);
             });
 
-            function sendRequest(arrData, getParams){
-                var url = "index.php?route=module/filters/applyFilter&path="+<?php echo $categoryId ?>;
-                if(getParams != null){
-                    url = url+"&"+getParams;
-                }
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: {filters : arrData},
-                dataType: "html"
-            }).done(function( msg ) {   
-                $('div').remove('.pagination');            
-                var productDiv;
-                if($('.product-list').length){
-                    productDiv = '.product-list';
-                } else {
-                    productDiv = '.product-grid';
-                }             
-                $('div').remove(productDiv);
-                $('div').remove('.pagination');
-                $('div').remove('.buttons');
-                $(msg).insertAfter('.product-compare');
-            });
-        }
+    
         
 
         //--></script>
