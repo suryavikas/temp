@@ -284,7 +284,7 @@ class ModelFiltersFilters extends Model {
 				$product_data[$result['product_id']] = $this->model_catalog_product->getProduct($result['product_id']);
 			}
 
-			$this->cache->set('product.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . (int)$customer_group_id . '.' . $cache, $product_data);
+//			$this->cache->set('product.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . (int)$customer_group_id . '.' . $cache, $product_data);
 
 		}
 		

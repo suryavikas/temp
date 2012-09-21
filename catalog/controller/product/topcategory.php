@@ -6,6 +6,7 @@ class ControllerProductTopCategory extends Controller {
         $this->language->load('product/topcategory');
 
         $this->load->model('catalog/category');
+        $this->load->model('business/category');
 
         $this->load->model('catalog/product');
 
@@ -102,6 +103,8 @@ class ControllerProductTopCategory extends Controller {
             $this->data['text_block_header_start'] = $this->language->get('text_block_header_start');
             $this->data['text_block_header_end'] = $this->language->get('text_block_header_end');
             $this->data['text_view_more'] = $this->language->get('text_view_more');
+             $this->data['no_discount'] = $this->language->get('no_discount');
+              $this->data['discount'] = $this->language->get('discount');
 
 
             if ($category_info['image']) {
@@ -172,6 +175,7 @@ class ControllerProductTopCategory extends Controller {
             $this->data['product_total'] = $product_total;
             $category_product_arr = array();
             $i=-1;
+            $discountPercentageArray = array();
             foreach ($results as $categories) {
                 $data = array(
                     'filter_category_id' => $categories['category_id'],
@@ -219,15 +223,16 @@ class ControllerProductTopCategory extends Controller {
                     $savings = 0;
                     if(sizeof($prodDis) > 0){
                         $prodDis = $prodDis[0];
-                        $savings = $result['price'] - $prodDis['price'];                        
+                        $savings = $result['price'] - $prodDis['price'];                       
+                        $discountPercentage = ($prodDis['price']/$result['price'])*100;
+                        array_push($discountPercentageArray, $discountPercentage);
                         if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
                             $disPrice = $this->currency->format($this->tax->calculate($prodDis['price'], $result['tax_class_id'], $this->config->get('config_tax')));
-                            $prodDis['price'] = $disPrice;
+                            $prodDis['price'] = $disPrice;                            
                         } else {
                             $prodDis = array();
                         }
-                    }
-                                       
+                    }                   
                     $category_product_arr[$i]['category']['products'][] = array(
                         'product_id' => $result['product_id'],
                         'thumb' => $image,
@@ -247,8 +252,7 @@ class ControllerProductTopCategory extends Controller {
                 
             }
              $this->data['category_product_arr'] = $category_product_arr;
-            
-
+             $this->data['discountPercentageArray'] = $discountPercentageArray;
             if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/product/topcategory.tpl')) {
                 $this->template = $this->config->get('config_template') . '/template/product/topcategory.tpl';
             } else {

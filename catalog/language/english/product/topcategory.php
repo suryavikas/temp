@@ -30,4 +30,6 @@ $_['text_block_header_start'] = 'We found ';
 $_['text_block_header_end'] = ' products in category ';
 $_['text_view_more'] = 'View More';
 $_['buy_now'] = 'Buy Now';
+$_['no_discount'] = 'Latest designs';
+$_['discount'] = 'Up to <br/> %d percent off';
 ?>

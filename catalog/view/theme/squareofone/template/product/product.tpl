@@ -37,11 +37,11 @@
          <h3><?php echo $heading_title; ?></h3>
       <div class="description">
         <?php if ($manufacturer) { ?>
-        <span><?php echo $text_manufacturer; ?></span> <a href="<?php echo $manufacturers; ?>"><?php echo $manufacturer; ?></a><br />
+        <span><?php echo $text_manufacturer; ?></span> <a href="<?php echo $manufacturers; ?>"><?php echo $manufacturer; ?></a>
         <?php } ?>
-        <span><?php echo $text_model; ?></span> <?php echo $model; ?><br />
+        <span><?php echo $text_model; ?></span> <?php echo $model; ?>
         <?php if ($reward) { ?>
-        <span><?php echo $text_reward; ?></span> <?php echo $reward; ?><br />
+        <span><?php echo $text_reward; ?></span> <?php echo $reward; ?>
         <?php } ?>
         <span><?php echo $text_stock; ?></span> <?php echo $stock; ?>
       </div>
@@ -354,13 +354,27 @@
   </div>
   <?php } ?>
    <div class="clear"></div>
+   
+    <div class="cont_btm_pt">
+  <?php echo $content_bottom; ?>
+  <div class="clear"></div>
   </div>
+   <div class="clear"></div>
+  </div>
+  
+  
   <div class="prd_page_right_part">
    <?php echo $column_left; ?>
   <?php echo $column_right; ?>
   <div class="clear"></div>
   </div>
-  <?php echo $content_bottom; ?></div></div>
+
+
+   <div class="clear"></div>
+  </div>
+   <div class="clear"></div>
+  </div>
+
 <script type="text/javascript"><!--
 $('.colorbox').colorbox({
 	overlayClose: true,

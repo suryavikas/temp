@@ -19,8 +19,15 @@ echo $header; ?>
             <div class="prds_img1_hd"><?php echo $heading_title; ?></div>
             <div class="clear"></div>
             <div class="prds_img1_txt">
-                <a href="#"><img src="<?php echo $thumb; ?>" alt="" border="0" align="left" />Up to <br />
-                    30%off</a>
+                <?php
+                    $message = '';
+                    if(sizeof($discountPercentageArray) > 0){
+                        $message = sprintf($discount, intval(max($discountPercentageArray)));
+                    } else{
+                        $message = $no_discount;
+                    }
+                ?>
+                <a href="#"><img src="<?php echo $thumb; ?>" alt="" border="0" align="left" /> <?php echo $message ?></a>
             </div>
             <div class="clear"></div>
         </div>
