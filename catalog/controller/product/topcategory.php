@@ -103,8 +103,9 @@ class ControllerProductTopCategory extends Controller {
             $this->data['text_block_header_start'] = $this->language->get('text_block_header_start');
             $this->data['text_block_header_end'] = $this->language->get('text_block_header_end');
             $this->data['text_view_more'] = $this->language->get('text_view_more');
-             $this->data['no_discount'] = $this->language->get('no_discount');
-              $this->data['discount'] = $this->language->get('discount');
+            $this->data['no_discount'] = $this->language->get('no_discount');
+            $this->data['discount'] = $this->language->get('discount');
+            $this->data['buy_now'] = $this->language->get('buy_now');
 
 
             if ($category_info['image']) {

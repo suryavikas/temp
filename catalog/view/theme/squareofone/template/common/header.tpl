@@ -40,16 +40,18 @@
 <?php } ?>
 
 <!-- Java script -->
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-<!--<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>-->
+<!--<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>-->
+<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
 <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css" />
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/external/jquery.cookie.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
+<script src="http://cdn.jquerytools.org/1.2.7/all/jquery.tools.min.js"></script>
+<!--<script src="catalog/view/javascript/jquery/jquery-tools/jquery.tools.min.js"></script>-->
 <script type="text/javascript" src="catalog/view/javascript/sq-common.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/nivo-slider/jquery.nivo.slider.pack.js"></script>
+
 
 <!--<script type="text/javascript" src="catalog/view/javascript/jquery.jcarousel.min.js"></script>-->
 <!--<script type="text/javascript" src="catalog/view/javascript/alice-1339158486.js"></script>-->
