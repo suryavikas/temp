@@ -410,5 +410,17 @@
 			<add><![CDATA[$_['entry_telephone']                = 'Mobile:';]]></add>
 		</operation>
 	</file>
+        <file name="catalog/controller/module/cart.php">
+		<operation>
+			<search position="replace"><![CDATA[		$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');]]></search>
+			<add><![CDATA[		$this->data['checkout'] = $this->url->link('checkout/onepagecheckout', '', 'SSL');]]></add>
+		</operation>
+	</file>
+        <file name="catalog/controller/checkout/cart.php">
+		<operation>
+			<search position="replace"><![CDATA[		$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');]]></search>
+			<add><![CDATA[		$this->data['checkout'] = $this->url->link('checkout/onepagecheckout', '', 'SSL');]]></add>
+		</operation>
+	</file>
 	
 </modification>

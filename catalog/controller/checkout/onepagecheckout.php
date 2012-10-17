@@ -1348,7 +1348,7 @@ class ControllerCheckoutOnePageCheckout extends Controller {
 			}
 		}
 
-		if (!$json) {
+		if (!$json) {                    
 			if ($this->request->post['shipping_address'] == 'existing') {                            
 				$this->load->model('account/address');
 
@@ -1439,6 +1439,7 @@ class ControllerCheckoutOnePageCheckout extends Controller {
 					unset($this->session->data['shipping_methods']);
 				}
 			}
+                        $this->session->data['payment_address_id'] = $this->session->data['shipping_address_id'];
                         $this->set_default_shipping();
 		}
 

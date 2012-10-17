@@ -35,7 +35,7 @@
           <div class="clear"></div>
           <a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a>
            <div class="clear"></div>
-          <input type="submit" value="<?php echo $button_login; ?>" class="button" style="float: right;font-size: 28px;font-weight: normal;height: auto;padding: 5px 20px;" />
+          <input type="submit" value="<?php echo $button_login; ?>" class="button" style="float: right;font-size: 28px;font-weight: normal;height:44px;padding: 5px 20px;" />
           <?php if ($redirect) { ?>
           <input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
           <?php } ?>

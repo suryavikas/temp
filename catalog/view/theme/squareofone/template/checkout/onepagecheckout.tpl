@@ -278,7 +278,7 @@
                             var api = $("ul.css-tabs").data("tabs");
                            <?php if ($shipping_required) { ?>
 				$.ajax({
-					url: 'index.php?route=checkout/onepagecheckout/shipping_address',
+					url: 'index.php?route=checkout/onepagecheckout/loggedin_user_shipping_address',
 					dataType: 'html',
 					success: function(html) {
 						$('#login').html(html);
@@ -289,25 +289,25 @@
 					}
 				});
 				<?php } else { ?>
-				$.ajax({
-					url: 'index.php?route=checkout/onepagecheckout/loggedin_user_payment_method',
-					dataType: 'html',
-					success: function(html) {
-						$('#payment-method .checkout-content').html(html);
-
-						$('#payment-address .checkout-content').slideUp('slow');
-
-						$('#payment-method .checkout-content').slideDown('slow');
-
-						$('#payment-address .checkout-heading a').remove();
-						$('#payment-method .checkout-heading a').remove();
-
-						$('#payment-address .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
-					},
-					error: function(xhr, ajaxOptions, thrownError) {
-						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-					}
-				});
+//				$.ajax({
+//					url: 'index.php?route=checkout/onepagecheckout/loggedin_user_payment_method',
+//					dataType: 'html',
+//					success: function(html) {
+//						$('#payment-method .checkout-content').html(html);
+//
+//						$('#payment-address .checkout-content').slideUp('slow');
+//
+//						$('#payment-method .checkout-content').slideDown('slow');
+//
+//						$('#payment-address .checkout-heading a').remove();
+//						$('#payment-method .checkout-heading a').remove();
+//
+//						$('#payment-address .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
+//					},
+//					error: function(xhr, ajaxOptions, thrownError) {
+//						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+//					}
+//				});
 				<?php } ?>
 
 //				$.ajax({

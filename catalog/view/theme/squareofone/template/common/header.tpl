@@ -74,9 +74,31 @@ DD_belatedPNG.fix('#logo img');
 <style type="text/css">
 .nav-layer{
 top: 33px;
+width:720px!important;
 }
 </style>
 <![endif]-->
+
+
+<!--[if IE 7 ]>
+<style type="text/css">
+#outer-cart {
+    margin: -18px 0px 0px 690px!important;
+    z-index: 99999!important;
+    position: relative!important;
+}
+.cart_img{
+margin:0px 0px 0px 40px!important;
+}
+</style>
+<![endif]-->
+<style>
+.nav-sub, .nav-subGradient {
+    position: absolute;
+    width: 1002px;
+    z-index: 99999 !important;
+}
+</style>
 
 <?php echo $google_analytics; ?>
 </head>
@@ -203,7 +225,7 @@ top: 33px;
         <a href="<?php echo $category['href']; ?>" class="sel-cat-shoes"> <span class="nav-subTxt"><?php echo $category['name']; ?></span> </a>
 
       <?php if ($category['children']) { ?>
-      <div class="nav-layer fsm box-bgcolor ">
+      <div  class="nav-layer fsm box-bgcolor" >
         <div class="pam line">
              <div class="unit size1of3" >
                   <div class="prl">
