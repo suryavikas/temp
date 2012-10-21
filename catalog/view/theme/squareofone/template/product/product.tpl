@@ -232,9 +232,9 @@
         <div class="clear"></div>
         <p><a href="#">Not sure about your size?</a></p>
             <ul>
-            <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/free-shipping.jpg"></a></li>
-            <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/pay-cash.jpg"></a></li>
-            <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/secure.jpg"></a></li>
+            <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/free-shipping.jpg" /></a></li>
+            <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/pay-cash.jpg" /></a></li>
+            <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/secure.jpg"/></a></li>
             </ul>
       </div>
       <?php if ($review_status) { ?>
@@ -249,7 +249,9 @@
       <?php } ?>
     </div>
   </div>
-  <div id="tabs" class="htabs"><a href="#tab-description"><?php echo $tab_description; ?></a>
+  <div id="tabs" class="htabs">
+      
+    <a href="#tab-description"><?php echo $tab_description; ?></a>
     <?php if ($attribute_groups) { ?>
     <a href="#tab-attribute"><?php echo $tab_attribute; ?></a>
     <?php } ?>

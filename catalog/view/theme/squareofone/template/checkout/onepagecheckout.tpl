@@ -24,7 +24,7 @@
             <div class="css-panes">
                 <div style="display: block;">
                     <div class="checkout-content user-checkout-choice">
-                        
+                            <div id="login-guest-not-selected" style="display:none;" class="error" ></div>
                             <div id="login" class="left">
                                 <?php if (!$logged) { ?>
                                     <h2><?php echo $text_returning_customer; ?></h2>
@@ -164,10 +164,7 @@
                                         <input type="text" name="tax_id" value="<?php echo $tax_id; ?>" class="large-field" />
                                         <br />
                                         <br />
-                                    </div>
-                                   
-                                
-                                
+                                    </div>                                
                                 <div class="buttons">
                                     <div class="right">
                                         <input type="button" value="<?php echo $button_continue; ?>" id="button-guest" class="button" />
@@ -175,12 +172,7 @@
                                 </div>
                                 </div>
                             </div>
-                       
-
-                    </div>
-                    <p>
-                        <button class="next">Next »</button>
-                    </p>
+                    </div>                    
                 </div>
                 <div style="display: none;" id="payment-process"> 
                     <p>
@@ -196,7 +188,10 @@
         </div>
 
         <?php echo $content_bottom; ?></div>
+    <!--<script src="http://cdn.jquerytools.org/1.2.7/all/jquery.tools.min.js"></script>-->
+<script src="catalog/view/javascript/jquery/jquery-tools/jquery.tools.min.js"></script>
     <script type="text/javascript"><!--
+        var canProceed = false;
         $(function() {
             // get container for the wizard and initialize its exposing
             //var wizard = $("#checkout-wizard").expose({color: '#789', lazy: true});
@@ -222,6 +217,13 @@
                 //
                 //                // everything is ok. remove possible red highlight from the terms
                 //                terms.parent().removeClass("error");
+                if(index > 0 && !canProceed){
+                    $("#login-guest-not-selected").html("Pls choose to login or do a guest checkout");
+                    $("#login-guest-not-selected").show();
+                    $("#login-guest-not-selected").delay(2000).fadeOut(400)
+;
+                    return false;
+                }
             });
 
             // get handle to the tabs API
@@ -280,7 +282,7 @@
 				$.ajax({
 					url: 'index.php?route=checkout/onepagecheckout/loggedin_user_shipping_address',
 					dataType: 'html',
-					success: function(html) {
+					success: function(html) {                                                
 						$('#login').html(html);
 
 					},
@@ -467,6 +469,7 @@ $('#button-shipping-address').live('click', function() {
 					dataType: 'html',
 					success: function(html) {
                                                 $('#payment-process').html(html);
+                                                canProceed = true;
                                                 var api = $("ul.css-tabs").data("tabs");
                                                 api.next();
 //						$('#payment-method .checkout-content').html(html);
@@ -534,6 +537,7 @@ $('#button-guest').live('click', function() {
                     dataType: 'html',
                     success: function(html) {
                         $('#payment-process').html(html);
+                         canProceed = true;
                         var api = $("ul.css-tabs").data("tabs");
                         api.next();
                     },
