@@ -34,6 +34,35 @@
     </ul>
   </div>
 </div>-->
+<script type=text/javascript>
+    $(document).ready(function(){
+    $('#subscribeform').live('click', function(){
+    var email = $("#email1").val();
+    var emailconfirm = document.getElementById("emailconfirm1").value=email;
+    if ($('#Men').is(':checked')){
+            var Men = $("#Men").val();
+           //var Men1 =document.getElementById("listname[6]").value=Men;
+        }
+     if ($('#Women').is(':checked')){
+        var Women = $("#Women").val();
+        //var women1=document.getElementById("listname[5]").value=Women;
+     }
+    var dataString = 'email='+ email + '&Men1=' + Men + '&Women1='+ Women + '&emailconfirm='+ emailconfirm;
+    $.ajax({  
+          type:'post',  
+          url: 'http://localhost/lists/?p=subscribe&id=3',
+          data: dataString,
+          success: function(){
+                  $("#message").html("News Subscribe Form Submitted!");
+                  $('#newsletter').hide();
+           }		
+         });
+     });
+     return false;
+ });
+ 
+</script>
+
 <div id="footer">
 <div id="footer_top">
 <div id="footer_top_inner">
@@ -54,6 +83,7 @@
       <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
       <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li>
       <li><a href="<?php echo $sitemap; ?>"><?php echo $text_sitemap; ?></a></li>
+      <li><a href="http://localhost/squareofone/index.php?route=account/guest">Guest Order</a></li>
     </ul>
   </div>
 
@@ -67,7 +97,7 @@
     </ul>
   </div>
 
-     <div class="column">
+  <div class="column">
     <h3><?php echo $best_seller; ?></h3>
     <ul>
       <?php foreach ($best_sellers as $best_seller) { ?>
@@ -75,15 +105,39 @@
       <?php } ?>
     </ul>
   </div>
-<div class="column">
-
-Sign up to receive special offers and the latest style news.
-<div class="clear"></div>
-<input type="text" value="Enter Your Email Address" name="" class="mals" onclick="if(this.value=='Enter Your Email Address'){this.value=''}" onblur="if(this.value==''){this.value='Enter Your Email Address'}" />
-<div class="clear"></div>
-<input type="submit" value="submit"  class="sin_up" />
-<div class="clear"></div>
+<div class="column">Newsletter
+    <div id="newsletter">
+      <form method=post  id="subscribeform1" name="subscribeform1">
+      <input type="hidden" name="formtoken" value="280dc1c3946c44e757b1fcc19b55c90c"/>
+  <table border=0>
+    <tr>
+      <td><div>Email</div></td>
+      <td class="attributeinput"><input type="text" name="email" id="email1"   size="25" />
+          <input type="hidden" name="emailconfirm" id="emailconfirm1"  size="25"/>
+      </td>
+    </tr>
+  </table>
+  <p>Please select the newsletters you want to sign up to:</p>
+  <ul class="list">
+    <li class="list">
+      <input type="checkbox" name="Men" id="Men" value="Men" />
+      <input type=hidden name="listname[6]" id="listname[6]" value="Men"/>
+      <b>Men</b>
+    </li>
+    <li class="list">
+      <input type="checkbox" name="Women" id="Women" value="Women" />
+      <input type=hidden name="listname[5]" id="listname[5]" value="Women"/>
+      <b>Women</b>
+    </li>
+  </ul>
+  <p>
+      <input type="button" value="Subscribe to the Selected Mailinglists" id="subscribeform" name="subscribe"/>
+  </p>
+</form>
 </div>
+    <div id="message" style="color:#F52887;"></div>
+</div>
+
 <div class="clear"></div>
 </div>
 <div class="clear"></div>

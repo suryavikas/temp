@@ -6,3 +6,4 @@ config.php
 admin/config.php
 vqmod/vqcache
 image/data/*
+/nbproject/private/
