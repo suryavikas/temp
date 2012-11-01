@@ -15,6 +15,7 @@
       <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
       <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li>
       <li><a href="<?php echo $sitemap; ?>"><?php echo $text_sitemap; ?></a></li>
+      <li><a href="http://localhost/squareofone/index.php?route=account/guest">Guest Order</a></li>
     </ul>
   </div>
   <div class="column">

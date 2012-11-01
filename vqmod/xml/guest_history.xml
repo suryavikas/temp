@@ -1,0 +1,77 @@
+<modification>
+	<id>Guest History</id>
+	<version>1.0</version>
+	<vqmver>1.2.3</vqmver>
+	<author>grgr</author>
+	
+	<file name="catalog/model/checkout/order.php">
+        <operation>
+            <search position="replace"><![CDATA[
+$template->data['link'] = $order_info['store_url'] . 'index.php?route=account/order/info&order_id=' . $order_id;
+            ]]></search>
+            <add><![CDATA[
+	if ($order_info['customer_id']) {
+		$template->data['link'] = $order_info['store_url'] . 'index.php?route=account/order/info&order_id=' . $order_id;
+		} else {
+		  if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {			
+			$storelink = preg_replace( '^http:^', 'https:', $order_info['store_url'] );
+			$template->data['link'] = $storelink . 'index.php?route=account/guest';
+			} else {
+			$template->data['link'] = $order_info['store_url'] . 'index.php?route=account/guest';
+		  }
+	}
+            ]]></add>
+        </operation>
+		
+		<operation>
+            <search position="replace" index="3" offset="3"><![CDATA[
+if ($order_info['customer_id']) {
+            ]]></search>
+            <add><![CDATA[
+			if ($order_info['customer_id']) {
+				$text .= $language->get('text_new_link') . "\n";
+				$text .= $order_info['store_url'] . 'index.php?route=account/order/info&order_id=' . $order_id . "\n\n";
+			} else {
+				$text .= $language->get('text_guest_link') . "\n";
+				$text .= $order_info['store_url'] . 'index.php?route=account/guest' . "\n\n";
+			}
+            ]]></add>
+        </operation>
+		
+		<operation>
+            <search position="replace"><![CDATA[
+$template->data['text_link'] = $language->get('text_new_link');
+            ]]></search>
+            <add><![CDATA[
+			if ($order_info['customer_id']) {
+				$template->data['text_link'] = $language->get('text_new_link');
+			} else {
+				$template->data['text_link'] = $language->get('text_guest_link');
+			}
+            ]]></add>
+        </operation>
+	</file>
+
+	<file name="catalog/language/english/mail/order.php">
+        <operation>
+            <search position="after"><![CDATA[
+'To view your order click on the link below:';
+            ]]></search>
+            <add><![CDATA[
+$_['text_guest_link']             = 'You may check your order status at any time by clicking on the link below:';
+            ]]></add>
+        </operation>
+	</file>
+
+	<file name="catalog/view/theme/default/template/mail/order.tpl">
+        <operation>
+            <search position="replace" offset="3"><![CDATA[
+<?php if ($customer_id) { ?>
+            ]]></search>
+            <add><![CDATA[
+  <p><?php echo $text_link; ?></p>
+  <p><a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
+            ]]></add>
+        </operation>
+	</file>
+</modification>
