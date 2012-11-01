@@ -9,7 +9,19 @@
 <?php } ?>
 <?php if ($keywords) { ?>
 <meta name="keywords" content="<?php echo $keywords; ?>" />
-<?php } ?>
+<?php } else {?>
+  <meta name="keywords" content='Online shopping India, Gifts to India, Fashion, Style, Vogue, Stylish, Party wear, Latest fashion, Men, Women, Accessories, Earrings, Pendents, Skirts, Stoles, Long Skirts, Short Skirts, Printed tops, Speghetti tops, 15 days refund, Free home delivery, Free shipping, Cash on delivery, COD, Delhi NCR, Bangalore, Mumbai, Chennai, Hyderabad' />
+<?php }?>
+  <meta name="author" content="Square One Trade Com "/>
+  <meta name="copyright" content="2012"/>
+  <meta name="email" content="info@squareofone.com"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta name="Charset" content="UTF-8"/>
+  <meta name="Rating" content="General"/>
+  <meta name="Distribution" content="Local"/>
+  <meta name="Robots" content="INDEX,NOFOLLOW"/>
+  <meta name="Revisit-after" content="7 Days"/>
+
 <?php if ($icon) { ?>
 <link href="<?php echo $icon; ?>" rel="icon" />
 <?php } ?>
@@ -40,10 +52,10 @@
 <?php } ?>
 
 <!-- Java script -->
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
-<!--<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>-->
+<!--<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>-->
+<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
 <!--<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css" />-->
 <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
 <script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
@@ -93,7 +105,7 @@ margin:0px 0px 0px 40px!important;
 }
 </style>
 <![endif]-->
-<style>
+<style type="text/css">
 .nav-sub, .nav-subGradient {
     position: absolute;
     width: 1002px;
@@ -105,8 +117,9 @@ margin:0px 0px 0px 40px!important;
 </head>
 <body style="width:100%; height:auto; position:inherit;">
         <!-- Pre loading images -->
+        <p>
         <img alt="Shopping cart loading..." src="catalog/view/theme/squareofone/image/loading.gif" height="0.1" width="0.1" style="display: none;" />
-
+        </p>
     <div id="header">
     <div id="header_top1_outer">
     <div id="header_top1_inner">

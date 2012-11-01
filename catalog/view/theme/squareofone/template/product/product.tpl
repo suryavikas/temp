@@ -39,7 +39,8 @@
         <?php if ($manufacturer) { ?>
         <span><?php echo $text_manufacturer; ?></span> <a href="<?php echo $manufacturers; ?>"><?php echo $manufacturer; ?></a>
         <?php } ?>
-        <span><?php echo $text_model; ?></span> <?php echo $model; ?>
+        <span style="display:none;"><?php echo $text_model; ?>  <?php echo $model; ?></span>
+        
         <?php if ($reward) { ?>
         <span><?php echo $text_reward; ?></span> <?php echo $reward; ?>
         <?php } ?>
@@ -222,7 +223,8 @@
         <?php } ?>
         </strong>
          <?php } ?>
-        <label><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a></label> 
+        <label style="float:left;"><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a></label> 
+        <p style="margin:0; padding:0; float:right; color:#fff;"><a href="#" style="color:#fff;">Not sure about your size?</a></p>
 <!--        <label><a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></label>-->
         <div class="clear"></div>
       
@@ -230,12 +232,14 @@
     
     </div>     
         <div class="clear"></div>
-        <p><a href="#">Not sure about your size?</a></p>
+        
             <ul>
             <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/free-shipping.jpg" /></a></li>
             <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/pay-cash.jpg" /></a></li>
             <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/secure.jpg"/></a></li>
+            <div class="clear"></div>
             </ul>
+            <div class="clear"></div>
       </div>
       <?php if ($review_status) { ?>
       <div class="review">

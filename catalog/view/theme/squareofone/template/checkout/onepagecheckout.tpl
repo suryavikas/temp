@@ -1,3 +1,19 @@
+<style type="text/css">
+.all_page_left h1{
+    float: none!important;
+    width: auto!important;
+	font-size:22px;
+}
+.all_page_left {
+    border: 1px solid #CCCCCC;
+    padding: 5px!important;
+
+}
+.all_page_right {
+    width: 750px!important;
+}
+</style>
+
 <?php echo $header; ?>
 <div id="content"><?php echo $content_top; ?>
     <div class="breadcrumb">
@@ -71,18 +87,16 @@
                                                  <?php echo $entry_postcode; ?>
                                         </label>
                                                 <input type="text" name="postcode" value="<?php /*echo $postcode;*/ ?>" class="form-field-input-half" />
+                                        <span>
+                                            <input type="hidden" name="city" disabled="true" value="<?php echo $city; ?>" class="form-field-input-half" />
+                                            <span id="city_info"></span>
+                                            <input type="hidden" name="country_id" id="country_id"/>
+                                            <input type="hidden" name ="zone_id" id ="zone_id"/>
+                                            <input type="hidden" name="shipping_address_guest" value="1" id="shipping" />
+                                        </span>
                                     </fieldset>
-                                    <fieldset title="<?php echo $entry_city; ?>" id="<?php echo $entry_city; ?>" class="form-field-left">
-                                        <label>
-                                                <span>                                                    
-                                                </span> <?php echo $entry_city; ?>
-                                        </label>
-                                        <input type="text" name="city" disabled="true" value="<?php echo $city; ?>" class="form-field-input-half" />
-                                    </fieldset>
-                                    <div id="city_info"></div>
-                                    <input type="hidden" name="country_id" id="country_id"/>
-                                    <input type="hidden" name ="zone_id" id ="zone_id"/>
-                                    <input type="hidden" name="shipping_address_guest" value="1" id="shipping" />
+                                    
+                                    
                                     <fieldset title="<?php echo $entry_firstname; ?>" id="first_name" class="form-field-left">
                                         <label>
                                                 <span>
@@ -251,15 +265,6 @@
         // Login
         $('#button-login').live('click', function() {
             $('#login-buy-error').html('');
-            var inputs = $('.css-panes #login :input').validator({
-                    position: 'top left',
-                    offset: [-12, 0],
-                    message: '<div><em/></div>', // em element is the arrow
-                    container: '#login-buy-error',
-                    // do not validate inputs when they are edited
-                    errorInputEvent: null
-            });
-            if(inputs.data("validator").checkValidity()){
                 $.ajax({
                     url: 'index.php?route=checkout/login/validate',
                     type: 'post',
@@ -290,56 +295,17 @@
 						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 					}
 				});
-				<?php } else { ?>
-//				$.ajax({
-//					url: 'index.php?route=checkout/onepagecheckout/loggedin_user_payment_method',
-//					dataType: 'html',
-//					success: function(html) {
-//						$('#payment-method .checkout-content').html(html);
-//
-//						$('#payment-address .checkout-content').slideUp('slow');
-//
-//						$('#payment-method .checkout-content').slideDown('slow');
-//
-//						$('#payment-address .checkout-heading a').remove();
-//						$('#payment-method .checkout-heading a').remove();
-//
-//						$('#payment-address .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
-//					},
-//					error: function(xhr, ajaxOptions, thrownError) {
-//						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-//					}
-//				});
-				<?php } ?>
-
-//				$.ajax({
-//					url: 'index.php?route=checkout/payment_address',
-//					dataType: 'html',
-//					success: function(html) {
-//						$('#payment-address .checkout-content').html(html);
-//					},
-//					error: function(xhr, ajaxOptions, thrownError) {
-//						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-//					}
-//				});
-//                            api.next();
-//
-//                            location = json['redirect'];
-                            //                        $('.checkout-content').html('<?php echo $text_login_success; ?>');
+				<?php }  ?>
                         
                         } else if (json['error']) {
                                 $('#login-buy-error').css('display', 'block');
-                                $('#login-buy-error').html(json['error']['warning']);
+                                $('#login-buy-error').html('<span class="error">' +json['error']['warning']+ '</span>');
                         }
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                     }
                 });
-            } else{
-                return false;
-            }
-            
         });
         
 
@@ -364,9 +330,9 @@
 		success: function(json) {
                     if(!json['error']){
                         if(json['location'] == json['city_name']){
-                            var content = json['city_name']+', '+json['state'];
+                            var content = 'City: '+json['city_name']+', State: '+json['state'];
                         } else{
-                            var content = json['location']+', '+json['city_name']+', '+json['state'];
+                            var content = 'Locality: '+json['location']+', City: '+json['city_name']+', State: '+json['state'];
                         }
                         $(divId+' input[name=\'city\']').val(json['city_name']);
                         $(divId+' #city_info').empty();
@@ -426,41 +392,7 @@ $('#button-shipping-address').live('click', function() {
 					$('.warning').fadeIn('slow');
 				}
 								
-				if (json['error']['firstname']) {
-					$('#login input[name=\'firstname\']').after('<span class="error">' + json['error']['firstname'] + '</span>');
-				}
 				
-				if (json['error']['lastname']) {
-					$('#login input[name=\'lastname\']').after('<span class="error">' + json['error']['lastname'] + '</span>');
-				}	
-				
-				if (json['error']['email']) {
-					$('#login input[name=\'email\']').after('<span class="error">' + json['error']['email'] + '</span>');
-				}
-				
-				if (json['error']['telephone']) {
-					$('#login input[name=\'telephone\']').after('<span class="error">' + json['error']['telephone'] + '</span>');
-				}		
-										
-				if (json['error']['address_1']) {
-					$('#login input[name=\'address_1\']').after('<span class="error">' + json['error']['address_1'] + '</span>');
-				}	
-				
-				if (json['error']['city']) {
-					$('#login input[name=\'city\']').after('<span class="error">' + json['error']['city'] + '</span>');
-				}	
-				
-				if (json['error']['postcode']) {
-					$('#login input[name=\'postcode\']').after('<span class="error">' + json['error']['postcode'] + '</span>');
-				}	
-				
-				if (json['error']['country']) {
-					$('#login select[name=\'country_id\']').after('<span class="error">' + json['error']['country'] + '</span>');
-				}	
-				
-				if (json['error']['zone']) {
-					$('#login select[name=\'zone_id\']').after('<span class="error">' + json['error']['zone'] + '</span>');
-				}
 			} else {
                            
 //                            alert('All is well');
@@ -534,13 +466,62 @@ $('#button-guest').live('click', function() {
                     type: 'post',
                     data: $('#guest-buy input[type=\'text\'], #guest-buy input[type=\'checkbox\']:checked, #guest-buy select, #guest-buy textarea, #guest-buy input[type=\'hidden\']'),
 //                    dataType: 'json',
-                    dataType: 'html',
-                    success: function(html) {
-                        $('#payment-process').html(html);
-                         canProceed = true;
-                        var api = $("ul.css-tabs").data("tabs");
-                        api.next();
-                    },
+                    dataType: 'json',
+                    success: function(json) {
+//                        console.log("Found "+json);
+                    if(typeof json=="object"){
+
+                        if (json['redirect']) {
+				location = json['redirect'];
+			} else if (json['error']) {
+                                var errors = '';
+//
+                                if (json['error']['firstname']) {
+					errors += '<span class="error">' + json['error']['firstname'] + '</span>';
+				}
+
+				if (json['error']['lastname']) {
+					errors += '<span class="error">' + json['error']['lastname'] + '</span>';
+				}
+
+				if (json['error']['email']) {
+					errors += '<span class="error">' + json['error']['email'] + '</span>';
+				}
+
+				if (json['error']['telephone']) {
+					errors += '<span class="error">' + json['error']['telephone'] + '</span>';
+				}
+
+				if (json['error']['address_1']) {
+					errors += '<span class="error">' + json['error']['address_1'] + '</span>';
+				}
+
+				if (json['error']['city']) {
+					errors += '<span class="error">' + json['error']['city'] + '</span>';
+				}
+
+				if (json['error']['postcode']) {
+					errors += '<span class="error">' + json['error']['postcode'] + '</span>';
+				}
+
+				if (json['error']['country']) {
+					errors += '<span class="error">' + json['error']['country'] + '</span>';
+				}
+
+				if (json['error']['zone']) {
+					errors += '<span class="error">' + json['error']['zone'] + '</span>';
+				}
+                                $('#guest-buy-error').html(errors);
+                                $('#guest-buy-error').show();
+			}
+                        }else{
+                        
+                            $('#payment-process').html(json);
+                            canProceed = true;
+                            var api = $("ul.css-tabs").data("tabs");
+                            api.next();
+                        }
+                   },
                     error: function(xhr, ajaxOptions, thrownError) {
                             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                     }
@@ -587,9 +568,6 @@ $('#button-guest').live('click', function() {
 		}
 	});
 });
-//$('#button-payment-method').live('click', function() {
-//$('#payment').submit();
-//});
-
         //--></script>
+        </div>
     <?php echo $footer; ?>

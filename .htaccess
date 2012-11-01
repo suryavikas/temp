@@ -19,15 +19,25 @@ Options -Indexes
 RewriteEngine On
 # If your opencart installation does not run on the main web folder make sure you folder it does run in ie. / becomes /shop/ 
 
+#RewriteBase /
+#RewriteRule ^sitemap.xml$ index.php?route=feed/google_sitemap [L]
+#RewriteRule ^googlebase.xml$ index.php?route=feed/google_base [L]
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css)
+#RewriteCond %{HTTP_HOST} ^www.squareofone.com$ [NC]
+##RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
+#RewriteRule ^(.*)$ http://squareofone.com/$1 [R=301,L]
+
+
+RewriteEngine On
 RewriteBase /
-RewriteRule ^sitemap.xml$ index.php?route=feed/google_sitemap [L]
-RewriteRule ^googlebase.xml$ index.php?route=feed/google_base [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)\?*$ index.php?_route_=$1 [L,QSA]
+RewriteRule ^sitemap.xml$ index.php?route=feed/google_sitemap [L]
+RewriteRule ^googlebase.xml$ index.php?route=feed/google_base [L]
 RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css)
-RewriteCond %{HTTP_HOST} ^www.squareofone.com$ [NC]
-#RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
-RewriteRule ^(.*)$ http://squareofone.com/$1 [R=301,L]
 
 ### Additional Settings that may need to be enabled for some servers 
 ### Uncomment the commands by removing the # sign in front of it.

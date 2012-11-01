@@ -8,7 +8,7 @@
     </vqmver>
     <author><![CDATA[Surya Vikas suryavikas@aol.com]]>
     </author>
-    <file name="catalog\view\theme\default\template\product\category.tpl">
+    <file name="catalog\view\theme\squareofone\template\product\category.tpl">
         <operation>
             <search position="replace"><![CDATA[onchange="location = this.value;"]]>
             </search>

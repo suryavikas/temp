@@ -398,7 +398,7 @@ label {
 	color: #000;
 	font-size: 12px;
 	font-weight: normal;
-	padding: 10px 5px;
+	padding: 10px 4px;
 	vertical-align: top;
 }
 .mini-cart-info .image {
@@ -898,7 +898,14 @@ table.form td {
 	padding: 4px;
 }
 input.large-field, select.large-field {
-	width: 300px;
+	 background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #D5D5D5;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+    display: block;
+    font-size: 16px;
+    margin: 2px 0 0;
+    padding: 8px 10px 6px 8px;
+    width: 330px;
 }
 table.list {
 	border-collapse: collapse;
@@ -1024,6 +1031,7 @@ a.button:hover, input.button:hover {
 .buttons {
 	overflow: auto;
 	margin-bottom: 20px;
+	margin-top:5px;
 }
 .buttons .left {
 	float: left;
@@ -1845,6 +1853,7 @@ a.button:hover, input.button:hover {
 	border-top: 1px solid #DDDDDD;
 	border-left: 1px solid #DDDDDD;
 	border-right: 1px solid #DDDDDD;
+	border-bottom: 1px solid #DDDDDD;
 }
 .cart-info td {
 	padding: 7px;
@@ -1876,7 +1885,9 @@ a.button:hover, input.button:hover {
 }
 .cart-info tbody .name, .cart-info tbody .model, .cart-info tbody .quantity {
 	text-align: left;
+	 width: 165px;
 }
+
 .cart-info tbody .quantity input[type='image'], .cart-info tbody .quantity img {
 	position: relative;
 	top: 0px;
@@ -1938,7 +1949,7 @@ a.button:hover, input.button:hover {
 .checkout-content {
 	padding: 0px 0px 15px 0px;
 	display: none;
-	overflow: auto;
+	overflow: hidden;
 }
 .checkout-content .left {
 	float: left;
@@ -2355,16 +2366,17 @@ h3 {
 	overflow: auto;
 }
 .home .box-product > div {
-	/*	width: 130px;*/
-
-
 
     display: inline-block;
 	vertical-align: top;
 	margin-right: 10px;
 	min-height:310px;
 	margin-bottom: 10px;
+	border:2px solid #fff;
 	float:left;
+}
+.home .box-product > div:hover {
+	border:2px solid #6BBA70;
 }
 #column-left + #column-right + #content .home .box-product > div {
 	width: 119px;
@@ -2379,9 +2391,13 @@ h3 {
 	width:225px;
 	height:225px;
 }
+.home .box-product .image img:hover {
+	border: 2px solid #fff;
+}
 .home .box-product .name {
 	text-align:center;
 	    width: 235px;
+		min-height:35px;
 }
 .home .box-product .price {
 	text-align:center;
@@ -2417,6 +2433,10 @@ h3 {
 .home .box .box-content .box-product .img1 {
 	float: left;
 	width: 235px;
+	border:2px solid #fff;
+}
+.home .box .box-content .box-product .img1:hover {
+border:2px solid #6BBA70;
 }
 #content #column-left {
 	margin:0;
@@ -2511,11 +2531,11 @@ h3 {
 	clear: both;
 }
 .product_page .box h1 {
-	color: #6BBA70;
+	color: #000;
 	display: block;
 	float: none !important;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 24px;
+	font-size: 18px;
 	font-weight: normal;
 	margin: 0;
 	padding: 0 0 10px 0;
@@ -2681,7 +2701,7 @@ ul.css-tabs {
     margin:0 !important;
     padding:0;
     height:30px;
-    border-bottom:1px solid #666;
+    border-bottom:1px solid #ccc;
 }
 
 /* single tab */
@@ -2694,45 +2714,57 @@ ul.css-tabs li {
 
 /* link inside the tab. uses a background image */
 ul.css-tabs a {
-    float:left;
-    font-size:13px;
-    display:block;
-    padding:5px 30px;
-    text-decoration:none;
-    border:1px solid #666;
-    border-bottom:0px;
-    height:18px;
-    background-color:#efefef;
-    color:#777;
-    margin-right:2px;
-    position:relative;
-    top:1px;
-    outline:0;
-    -moz-border-radius:4px 4px 0 0;
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: url(../image/bg-menu.jpg) repeat-x scroll 0 0 transparent;
+    border-color: #CCCCCC #CCCCCC -moz-use-text-color;
+    border-radius: 4px 4px 0 0;
+    border-style: solid solid none;
+    border-width: 1px 1px 0;
+    color: #FFFFFF;
+    display: block;
+    float: left;
+    font-size: 13px;
+    height: 18px;
+    margin-right: 2px;
+    outline: 0 none;
+    padding: 5px 30px;
+    position: relative;
+    text-decoration: none;
+    top: 1px;
 }
 
 ul.css-tabs a:hover {
-    background-color:#F7F7F7;
-    color:#333;
+    background-color:#EAEAEA;
+    color:#000;
 }
 
 /* selected tab */
 ul.css-tabs a.current {
-    background-color:#ddd;
-    border-bottom:1px solid #ddd;
-    color:#000;
-    cursor:default;
+    background-color: #EAEAEA;
+    border-bottom: 1px solid #ccc;
+    color: #000000;
+    cursor: default;
 }
 
 
 /* tab pane */
 div.css-panes > div:first-child {
-    display:none;
-    border:1px solid #666;
-    border-width:0 1px 1px 1px;
-    min-height:150px;
-    padding:15px 20px;
-    background-color:#ddd;
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #EAEAEA;
+    border-color: #CCCCCC;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    display: none;
+    min-height: 150px;
+    padding: 15px 20px;
 }
 /*Checkout page*/
 .user-checkout-choice{
@@ -2755,11 +2787,11 @@ div.css-panes > div:first-child {
 
 }
 .form-field-input-half {
-    width: 151px;
+    width: 330px;
 }
 .form-field-input-full {
 
-    width: 323px;
+    width: 330px;
 }
 .form-field-left, .form-field-full  label {
     color: #666666;
