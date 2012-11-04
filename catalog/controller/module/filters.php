@@ -69,6 +69,7 @@ class ControllerModuleFilters extends Controller {
     }
 
     public function applyFilter() {
+        
         $this->language->load('product/category');
 
         $this->load->model('catalog/category');
@@ -218,7 +219,7 @@ class ControllerModuleFilters extends Controller {
                 'limit' => $limit
             );
 
-            /*             * ******************************************TBD as VQMOD**************************************************** */
+            
             $filters = array();
             if (isset($this->request->post['filters'])) {
                 $filters = $this->request->post['filters'];
@@ -226,9 +227,7 @@ class ControllerModuleFilters extends Controller {
             }elseif(isset($this->request->get['filters'])){
                 $filters = $this->request->get['filters'];
             }
-//            print_r($filters);
-//            exit;
-            //Add by Surya for Other filter information
+          //Add by Surya for Other filter information
             $manufacturerId = 0;
             $productOption = null;
             $saleItems = null;
@@ -277,24 +276,18 @@ class ControllerModuleFilters extends Controller {
             );
 
             $data = array_merge($data, $filterCond); 
-            /*             * ******************************************TBD as VQMOD**************************************************** */
+          
             $results = $this->model_filters_filters->getProductsResult($data);
             if(!empty($productOption) or $manufacturerId != 0 or !empty($saleItems) or !empty($inStock) or !empty($minPrice)){
-                echo "IF";
+//                echo "IF";
                 $product_total = sizeof($results);
             } else{
-                echo "ISSET";
+//                echo "ISSET";
                 $product_total = $this->model_filters_filters->getTotalProducts($data);                
             }
             
 
-//			echo "<pre>";
-//			print_r($results);
-			//echo "Products total abc ".$product_total;
-			//echo "</pre>";
-//            $results = $this->model_catalog_product->getProducts($data);
-            
-            
+	  
 
             foreach ($results as $result) {
 //                print_r($result);

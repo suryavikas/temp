@@ -1,19 +1,3 @@
-<style type="text/css">
-.all_page_left h1{
-    float: none!important;
-    width: auto!important;
-	font-size:22px;
-}
-.all_page_left {
-    border: 1px solid #CCCCCC;
-    padding: 5px!important;
-
-}
-.all_page_right {
-    width: 750px!important;
-}
-</style>
-
 <?php echo $header; ?>
 <div id="content"><?php echo $content_top; ?>
     <div class="breadcrumb">
@@ -201,41 +185,23 @@
             <div id="payment-gateway-info" ></div>
         </div>
 
-        <?php echo $content_bottom; ?></div>
+        <?php echo $content_bottom; ?>
+    </div>
+
     <!--<script src="http://cdn.jquerytools.org/1.2.7/all/jquery.tools.min.js"></script>-->
 <script src="catalog/view/javascript/jquery/jquery-tools/jquery.tools.min.js"></script>
     <script type="text/javascript"><!--
         var canProceed = false;
         $(function() {
-            // get container for the wizard and initialize its exposing
-            //var wizard = $("#checkout-wizard").expose({color: '#789', lazy: true});
-            //
-            //    // enable exposing on the wizard
-            //    wizard.click(function() {
-            //        $(this).overlay().load();
-            //    });
-
+           
             // enable tabs that are contained within the wizard
             $("ul.css-tabs").tabs("div.css-panes > div", function(event, index) {
 
-                /* now we are inside the onBeforeClick event */
-
-                // ensure that the "terms" checkbox is checked.
-                //                var terms = $("#terms");
-                //                if (index > 0 && !terms.get(0).checked)  {
-                //                    terms.parent().addClass("error");
-                //
-                //                    // when false is returned, the user cannot advance to the next tab
-                //                    return false;
-                //                }
-                //
-                //                // everything is ok. remove possible red highlight from the terms
-                //                terms.parent().removeClass("error");
-                if(index > 0 && !canProceed){
+                    if(index > 0 && !canProceed){
                     $("#login-guest-not-selected").html("Pls choose to login or do a guest checkout");
                     $("#login-guest-not-selected").show();
-                    $("#login-guest-not-selected").delay(2000).fadeOut(400)
-;
+                    $("#login-guest-not-selected").delay(2000).fadeOut(400);
+
                     return false;
                 }
             });
@@ -466,7 +432,7 @@ $('#button-guest').live('click', function() {
                     type: 'post',
                     data: $('#guest-buy input[type=\'text\'], #guest-buy input[type=\'checkbox\']:checked, #guest-buy select, #guest-buy textarea, #guest-buy input[type=\'hidden\']'),
 //                    dataType: 'json',
-                    dataType: 'json',
+                    dataType: 'html',
                     success: function(json) {
 //                        console.log("Found "+json);
                     if(typeof json=="object"){
@@ -514,8 +480,7 @@ $('#button-guest').live('click', function() {
                                 $('#guest-buy-error').html(errors);
                                 $('#guest-buy-error').show();
 			}
-                        }else{
-                        
+                        }else{                        
                             $('#payment-process').html(json);
                             canProceed = true;
                             var api = $("ul.css-tabs").data("tabs");
@@ -569,5 +534,20 @@ $('#button-guest').live('click', function() {
 	});
 });
         //--></script>
+            <style type="text/css">
+.all_page_left h1{
+    float: none!important;
+    width: auto!important;
+        font-size:22px;
+}
+.all_page_left {
+    border: 1px solid #CCCCCC;
+    padding: 5px!important;
+
+}
+.all_page_right {
+    width: 750px!important;
+}
+    </style>
         </div>
     <?php echo $footer; ?>

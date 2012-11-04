@@ -598,7 +598,7 @@ body {
 
 
 
-    margin: 0 0 0 25px;
+    margin: -2px 0 0 25px;
 
 
 
@@ -606,7 +606,7 @@ body {
 
 
 
-    width: 46px;
+    width: 30px;
 
 
 
@@ -4583,7 +4583,7 @@ h7 {
 
 
 
-	border:1px solid #d3d3d3;
+	border:2px solid #d3d3d3;
 
 
 
@@ -4605,7 +4605,9 @@ h7 {
 
 }
 
-
+.found_prd_item ul li:hover {
+	border:2px solid #6bba70;
+}
 
 .buy_detail5 {
 

@@ -13,12 +13,12 @@ $(document).ready(function() {
 	});
 	
         $('.links a').live('click', function() {
-            alert('Clicked');
+            
             var arrData = getFilterParams();
             var getParams = getSortingParams();
 
             var url = $(this).attr('href');
-            console.log(url);
+//            console.log(url);
             categoryId = getURLVar("path");
             page = getURLVarFromString(url, "page");
             sendRequest(arrData, getParams, categoryId, "page="+page);

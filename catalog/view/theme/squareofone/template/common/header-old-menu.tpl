@@ -45,9 +45,7 @@
 
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/skin.css" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/style.css" />
-<!--<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/sq_slideshow.css" />-->
-<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/superfish.css" />
-<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/superfish-navbar.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/sq_slideshow.css" />
 
 <?php foreach ($styles as $style) { ?>
 <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
@@ -64,7 +62,6 @@
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/external/jquery.cookie.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
 
-<script type="text/javascript" src="catalog/view/javascript/superfish.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/sq-common.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/nivo-slider/jquery.nivo.slider.pack.js"></script>
 
@@ -96,15 +93,6 @@ width:720px!important;
 <![endif]-->
 
 
-<!--[if IE 8 ]>
-<style type="text/css">
-#header {
-    margin: -30px 0 0!important;;
-    padding: 0;
-}
-</style>
-<![endif]-->
-
 <!--[if IE 7 ]>
 <style type="text/css">
 #outer-cart {
@@ -115,10 +103,6 @@ width:720px!important;
 .cart_img{
 margin:0px 0px 0px 40px!important;
 }
-#header {
-    margin: -35px 0 0!important;;
-    padding: 0;
-}
 </style>
 <![endif]-->
 <style type="text/css">
@@ -127,20 +111,7 @@ margin:0px 0px 0px 40px!important;
     width: 1002px;
     z-index: 99999 !important;
 }
-#header {
-    margin: -27px 0 0;
-    padding: 0;
-}
 </style>
-
-<!--[if IE ]>
-<style type="text/css">
-.box-product > DIV{
-display:block!important;
-}
-
-</style>
-<![endif]-->
 
 <?php echo $google_analytics; ?>
 </head>
@@ -229,7 +200,7 @@ display:block!important;
 
         <input type="text" value="<?php echo $filter_name; ?>" name="filter_name" class="srch" onclick="if(this.value=='Search for items'){this.value=''}" onblur="if(this.value==''){this.value='Search for items'}" />
           <input type="submit"  id="button-search"  class="go_btn" value="Go" />
-      <a href="<?php echo $special; ?>" class="sale_btn"><span>Sales/ Special/ Discount</span></a>
+      <a href="#" class="sale_btn"><span>more</span></a>
       <div id ="outer-cart">
           <a href="<?php echo $shopping_cart; ?>" class="cart_img"><span>more</span></a>
         <div id="cart" class="shoping_bag">
@@ -262,45 +233,60 @@ display:block!important;
     <div id="header_top4_outer">
         <div id="header_top4_inner">
 <div id="menu" class="menu">
-    <ul class="nav-sub sf-menu sf-navbar">
+    <ul class="nav-sub">
     <?php foreach ($categories as $category) { ?>
-
-        <li>
+    <li>
         <a href="<?php echo $category['href']; ?>" class="sel-cat-shoes"> <span class="nav-subTxt"><?php echo $category['name']; ?></span> </a>
 
       <?php if ($category['children']) { ?>
-
-            <ul>
+      <div  class="nav-layer fsm box-bgcolor" >
+        <div class="pam line">
+             <div class="unit size1of3" >
+                  <div class="prl">
+                    <div class="line mts">
+                        <img src="catalog/view/theme/squareofone/image/img9.png" alt="" />
+                        <h2>Womens Jeans</h2>
+                    </div>
+                </div>
+            </div>
+            
                 <?php
-                    foreach ($category['children'] as $subcategory) {
-                ?>
-                        <li>
-                            <a href="<?php echo $subcategory['href']; ?>"><?php echo $subcategory['name']; ?></a>
-                            <?php if (count($subcategory['children']) > 0) { ?>
-
-                           <ul>
-                                <?php
-                                    $sizeOfChildren = count($subcategory['children']);
-                                    for ($i = 0; $i <$sizeOfChildren; $i++) {
-                                        if (count($subcategory['children'][$i]) > 0) { ?>
-                                            <li >
-                                                <a href="<?php echo $subcategory['children'][$i]['href']; ?>"><span class="cnv-name pls"><?php echo $subcategory['children'][$i]['name']; ?></span> </a>
-                                            </li>
-                                <?php
-                                        }
+                foreach ($category['children'] as $subcategory) {
+                        $loopCount = 0;
+                        ?>
+                    
+                <div class="unit size1of3" >
+                    <div class="prl">
+                    <h3><a href="<?php echo $subcategory['href']; ?>"><?php echo $subcategory['name']; ?></a></h3>
+                    <?php if (count($subcategory['children']) > 0) { ?>
+                        <div class="line mts">
+                           <ul class="cnv unit">
+                            <?php
+                                $sizeOfChildren = count($subcategory['children']);
+                                for ($i = 0; $i <$sizeOfChildren; $i++) {
+                                    if (count($subcategory['children'][$i]) > 0) { ?>
+                                        <li class="cnv-level-1">
+                                            <a href="<?php echo $subcategory['children'][$i]['href']; ?>"><span class="cnv-name pls"><?php echo $subcategory['children'][$i]['name']; ?></span> </a>
+                                        </li>
+                            <?php
                                     }
-                                ?>
+                                }
+                            ?>
                             </ul>
-
+                        </div>
                 <?php
-                        } ?>
-                        </li>
-                <?php } ?>
-
-            </ul>
-
+                        }
+                        ?>
+                    </div>
+    </div>
+          <?php          }
+                ?>
+                </div>
+            </div>
+        
+   
     <?php } ?>
-     </li>
+     </li>  
 <?php } ?>
     </ul>
 </div>

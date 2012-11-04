@@ -97,7 +97,9 @@ echo $header; ?>
             }
     ?>                  
                     <li>
+                        <a href="<?php echo $productArr[$i]['href'] ?>" >
                         <img src="<?php echo $productArr[$i]['thumb']; ?>" alt="" border="0"  />
+                        </a>
                         <div class="clear"></div>
                         <div class="buy_detail5">
                             <?php echo $productArr[$i]['name'] ?><br />

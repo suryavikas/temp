@@ -457,7 +457,8 @@ font-size: 12px!important;
     display: block;
     margin: 0;
     padding: 0px 0 0;
-	float:right;
+    float:right;
+    padding-bottom: 3px;
 }
 
 .all_page_right .checkout{
@@ -902,10 +903,10 @@ input.large-field, select.large-field {
     border: 1px solid #D5D5D5;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
     display: block;
-    font-size: 16px;
-    margin: 2px 0 0;
-    padding: 8px 10px 6px 8px;
-    width: 330px;
+    font-size: 12px;
+    margin: 0px 0 5px;
+    padding:4px 10px 4px 8px;
+    width: 275px;
 }
 table.list {
 	border-collapse: collapse;
@@ -2781,17 +2782,17 @@ div.css-panes > div:first-child {
     border: 1px solid #D5D5D5;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
     display: block;
-    font-size: 16px;
-    margin-bottom: 25px;
-    padding: 8px 10px 6px 8px;
+    font-size: 12px;
+    margin-bottom: 5px;
+    padding: 4px 10px 4px 8px;
 
 }
 .form-field-input-half {
-    width: 330px;
+    width: 275px;
 }
 .form-field-input-full {
 
-    width: 330px;
+    width: 275px;
 }
 .form-field-left, .form-field-full  label {
     color: #666666;

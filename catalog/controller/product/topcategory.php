@@ -44,10 +44,10 @@ class ControllerProductTopCategory extends Controller {
             'separator' => false
         );
 
-        if (isset($this->request->get['path'])) {
+        if (isset($this->request->get['tpath'])) {
             $path = '';
 
-            $parts = explode('_', (string) $this->request->get['path']);
+            $parts = explode('_', (string) $this->request->get['tpath']);
 
             foreach ($parts as $path_id) {
                 if (!$path) {
@@ -244,7 +244,7 @@ class ControllerProductTopCategory extends Controller {
                         'tax' => $tax,
                         'rating' => $result['rating'],
                         'reviews' => sprintf($this->language->get('text_reviews'), (int) $result['reviews']),
-                        'href' => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id']),
+                        'href' => $this->url->link('product/product', 'path=' . $this->request->get['tpath'] . '&product_id=' . $result['product_id']),
                         'discount' => $prodDis,
                         'savings' =>$savings                        
                     );

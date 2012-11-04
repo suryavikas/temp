@@ -1,4 +1,4 @@
-<div class="box">
+<div class="box">    
     <div><h1 style="float:left; width:300px;"><?php echo $heading_title; ?></h1></div>
      <div class="content">
     <?php if ($products || $vouchers) { ?>
