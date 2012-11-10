@@ -160,7 +160,7 @@ display:block!important;
     <div id="header">
     <div id="header_top1_outer">
     <div id="header_top1_inner">
-      <div class="header_top1_menu">24x7 Customer Support  - <a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a> | <a href="<?php echo $home; ?>"><?php echo $text_home; ?></a> | <a href="<?php echo $wishlist; ?>"  id="wishlist-total"><?php echo $text_wishlist; ?></a> |
+      <div class="header_top1_menu">24x7 Customer Support  - <a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a> | <a href="<?php echo $guestorder; ?>"><?php echo $text_guestorder; ?></a> |  <a href="<?php echo $home; ?>"><?php echo $text_home; ?></a> | <a href="<?php echo $wishlist; ?>"  id="wishlist-total"><?php echo $text_wishlist; ?></a> |
 
     <?php if (!$logged) { ?>
         <?php echo $text_welcome; ?>

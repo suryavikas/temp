@@ -27,7 +27,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css)
 RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
 RewriteCond %{HTTP_HOST} ^www\.squareofone\.com [NC]
-RewriteRule (.*) http://squareofone.com/home [R=301,L]
+RewriteRule (.*) http://squareofone.com [R=301,L]
 
 ### Additional Settings that may need to be enabled for some servers 
 ### Uncomment the commands by removing the # sign in front of it.
