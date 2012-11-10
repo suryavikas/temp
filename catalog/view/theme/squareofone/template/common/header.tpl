@@ -46,9 +46,9 @@
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/skin.css" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/style.css" />
 <!--<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/sq_slideshow.css" />-->
-<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/superfish.css" />
-<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/superfish-navbar.css" />
-
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/superfish.css" /><!--
+--><link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/superfish-navbar.css" />
+<!--<link rel="stylesheet" type="text/css" href="min/?g=sq-css" />-->
 <?php foreach ($styles as $style) { ?>
 <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
 <?php } ?>
@@ -63,10 +63,11 @@
 <script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/external/jquery.cookie.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
-
+<script type="text/javascript" src="catalog/view/javascript/hoverIntent.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/superfish.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/sq-common.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/nivo-slider/jquery.nivo.slider.pack.js"></script>
+<!--<script type="text/javascript" src="min/?g=sq-js"></script>-->
 
 
 <!--<script type="text/javascript" src="catalog/view/javascript/jquery.jcarousel.min.js"></script>-->
@@ -92,6 +93,7 @@ DD_belatedPNG.fix('#logo img');
 top: 33px;
 width:720px!important;
 }
+
 </style>
 <![endif]-->
 
@@ -102,11 +104,17 @@ width:720px!important;
     margin: -30px 0 0!important;;
     padding: 0;
 }
+.shoping_bag .content {
+margin:40px 0px 0px -280px!important;
+}
 </style>
 <![endif]-->
 
 <!--[if IE 7 ]>
 <style type="text/css">
+.shoping_bag .content {
+margin:40px 0px 0px -280px!important;
+}
 #outer-cart {
     margin: -18px 0px 0px 690px!important;
     z-index: 99999!important;
@@ -312,6 +320,19 @@ display:block!important;
           <?php } ?>
 <div id="notification"></div>
 <script type="text/javascript"><!--
+    $(document).ready(function(){
+        $("ul.sf-menu").superfish({
+            pathClass:  'current',
+            hoverClass:    'sfHover',          // the class applied to hovered list items
+//            pathClass:     'overideThisToUse', // the class you have applied to list items that lead to the current page
+            pathLevels:    1,                  // the number of levels of submenus that remain open or are restored using pathClass
+            delay:         800,                // the delay in milliseconds that the mouse can remain outside a submenu without it closing
+            animation:     {opacity:'show'},   // an object equivalent to first parameter of jQuery’s .animate() method
+            speed:         'normal',           // speed of the animation. Equivalent to second parameter of jQuery’s .animate() method
+            autoArrows:    true,               // if true, arrow mark-up generated automatically = cleaner source code at expense of initialisation performance
+            dropShadows:   true                // completely disable drop shadows by setting this to false
+        });
+    });
 $('#header_top3_outer input[name=\'filter_name\']').keydown(function(e) {
 	if (e.keyCode == 13) {
 		$('#button-search').trigger('click');

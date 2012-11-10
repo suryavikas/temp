@@ -19,6 +19,7 @@
 .sf-navbar li li {
 /*	background:		#BDD2FF;*/
 	position:		relative;
+	padding:0;
 }
 .sf-navbar li li ul {
 	width:			13em;
@@ -84,10 +85,12 @@ ul.sf-navbar .current ul ul {
 
 /*** remove shadow on first submenu ***/
 .sf-navbar > li > ul {
-	background: transparent;
+	background: #0C63C4;
 	padding: 0;
 	-moz-border-radius-bottomleft: 0;
 	-moz-border-radius-topright: 0;
 	-webkit-border-top-right-radius: 0;
 	-webkit-border-bottom-left-radius: 0;
+	width:1002px;
+	left:0px;
 }

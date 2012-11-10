@@ -6114,15 +6114,18 @@ a.underline_hide:hover {
 	font-family: Arial, Helvetica, sans-serif!important;
 	font-size: 14px!important;
 	font-weight:normal!important;
-	padding: 8px 16px 12px 16px!important;
+	padding:0;
 	text-decoration: none;
 }
 .nav-sub > li > a:hover {
-	background:none!important;
+	background:none;
 	height: auto!important;
 	position: relative;
 	z-index: 1001;
-	color:#000!important;
+	color:#fff!important;
+}
+.nav-sub > li:hover{
+background:none repeat scroll 0 0 #0C63C4;
 }
 .nav-layer {
 	-moz-border-bottom-colors: none;

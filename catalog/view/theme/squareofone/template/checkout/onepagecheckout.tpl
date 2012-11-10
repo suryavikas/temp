@@ -193,22 +193,42 @@
     <script type="text/javascript"><!--
         var canProceed = false;
         $(function() {
-           
+            // get container for the wizard and initialize its exposing
+            //var wizard = $("#checkout-wizard").expose({color: '#789', lazy: true});
+            //
+            //    // enable exposing on the wizard
+            //    wizard.click(function() {
+            //        $(this).overlay().load();
+            //    });
+
             // enable tabs that are contained within the wizard
             $("ul.css-tabs").tabs("div.css-panes > div", function(event, index) {
 
-                    if(index > 0 && !canProceed){
+                /* now we are inside the onBeforeClick event */
+
+                // ensure that the "terms" checkbox is checked.
+                //                var terms = $("#terms");
+                //                if (index > 0 && !terms.get(0).checked)  {
+                //                    terms.parent().addClass("error");
+                //
+                //                    // when false is returned, the user cannot advance to the next tab
+                //                    return false;
+                //                }
+                //
+                //                // everything is ok. remove possible red highlight from the terms
+                //                terms.parent().removeClass("error");
+                if(index > 0 && !canProceed){
                     $("#login-guest-not-selected").html("Pls choose to login or do a guest checkout");
                     $("#login-guest-not-selected").show();
-                    $("#login-guest-not-selected").delay(2000).fadeOut(400);
-
+                    $("#login-guest-not-selected").delay(2000).fadeOut(400)
+;
                     return false;
                 }
             });
 
             // get handle to the tabs API
             var api = $("ul.css-tabs").data("tabs");
-            
+
             // "next tab" button
             $("button.next").click(function() {
                 api.next();
@@ -246,14 +266,14 @@
                     },
                     success: function(json) {
                         $('.warning, .error').remove();
-                        
+
                         if (json['redirect']) {
                             var api = $("ul.css-tabs").data("tabs");
                            <?php if ($shipping_required) { ?>
 				$.ajax({
 					url: 'index.php?route=checkout/onepagecheckout/loggedin_user_shipping_address',
 					dataType: 'html',
-					success: function(html) {                                                
+					success: function(html) {
 						$('#login').html(html);
 
 					},
@@ -262,7 +282,7 @@
 					}
 				});
 				<?php }  ?>
-                        
+
                         } else if (json['error']) {
                                 $('#login-buy-error').css('display', 'block');
                                 $('#login-buy-error').html('<span class="error">' +json['error']['warning']+ '</span>');
@@ -273,7 +293,7 @@
                     }
                 });
         });
-        
+
 
         //Load city & country based on pincode
     $('#guest-buy input[name=\'postcode\']').bind('change', function() {
@@ -283,7 +303,7 @@
 	loadPostCode('#login');
     });
     function loadPostCode(divId){
-        
+
         $.ajax({
 		url: 'index.php?route=checkout/onepagecheckout/pincode&pincode=' + $(divId+ ' input[name=\'postcode\']').val(),
 		dataType: 'json',
@@ -331,7 +351,7 @@
 	});
     }
 
-// Shipping Address			
+// Shipping Address
 $('#button-shipping-address').live('click', function() {
 	$.ajax({
 		url: 'index.php?route=checkout/onepagecheckout/loggedin_user_shipping_address_validate',
@@ -341,26 +361,26 @@ $('#button-shipping-address').live('click', function() {
 		beforeSend: function() {
 			$('#button-shipping-address').attr('disabled', true);
 			$('#button-shipping-address').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
-		},	
+		},
 		complete: function() {
 			$('#button-shipping-address').attr('disabled', false);
 			$('.wait').remove();
-		},			
+		},
 		success: function(json) {
 			$('.warning, .error').remove();
-			
+
 			if (json['redirect']) {
 				location = json['redirect'];
 			} else if (json['error']) {
 				if (json['error']['warning']) {
 					$('#login .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
-					
+
 					$('.warning').fadeIn('slow');
 				}
-								
-				
+
+
 			} else {
-                           
+
 //                            alert('All is well');
                             $.ajax({
 					url: 'index.php?route=checkout/onepagecheckout/loggedin_user_payment_method',
@@ -416,12 +436,12 @@ $('#button-shipping-address').live('click', function() {
 //						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 //					}
 //				});
-			}  
+			}
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 		}
-	});	
+	});
 });
 
 
@@ -432,7 +452,7 @@ $('#button-guest').live('click', function() {
                     type: 'post',
                     data: $('#guest-buy input[type=\'text\'], #guest-buy input[type=\'checkbox\']:checked, #guest-buy select, #guest-buy textarea, #guest-buy input[type=\'hidden\']'),
 //                    dataType: 'json',
-                    dataType: 'html',
+                    dataType: 'json',
                     success: function(json) {
 //                        console.log("Found "+json);
                     if(typeof json=="object"){
@@ -480,7 +500,8 @@ $('#button-guest').live('click', function() {
                                 $('#guest-buy-error').html(errors);
                                 $('#guest-buy-error').show();
 			}
-                        }else{                        
+                        }else{
+
                             $('#payment-process').html(json);
                             canProceed = true;
                             var api = $("ul.css-tabs").data("tabs");
@@ -492,15 +513,15 @@ $('#button-guest').live('click', function() {
                     }
                 });
 });
-//Payment button click 
+//Payment button click
  $('#payment-process input[name=\'payment_method\']').live('change', function() {
 
          $.ajax({
 		url: 'index.php?route=checkout/onepagecheckout/validate_payment',
 		type: 'post',
 		data: $('#payment-process input[type=\'radio\']:checked, #payment-process input[type=\'checkbox\']:checked, #payment-process textarea'),
-		dataType: 'json',		
-		complete: function() {			
+		dataType: 'json',
+		complete: function() {
 			$('.wait').remove();
 		},
 		success: function(json) {
@@ -514,7 +535,7 @@ $('#button-guest').live('click', function() {
 
 					$('.warning').fadeIn('slow');
 				}
-			} else {                        
+			} else {
 				$.ajax({
 					url: 'index.php?route=checkout/onepagecheckout/do_payment',
 					dataType: 'html',
@@ -546,8 +567,28 @@ $('#button-guest').live('click', function() {
 
 }
 .all_page_right {
-    width: 750px!important;
+    width: 625px!important;
+}
+.all_page_right h2{
+    font-size: 18px;
+/*    padding: 3px 0 6px 10px;*/
 }
     </style>
+    <style type="text/css">
+
+.all_page_left{
+width:350px !important;
+}
+.mini-cart-info .image img {
+width:90px;
+height:90px;
+}
+.mini-cart-info .name{
+font:normal 11px Arial, Helvetica, sans-serif;
+}
+.mini-cart-info .name a{
+font:normal 11px Arial, Helvetica, sans-serif;
+}
+</style>
         </div>
     <?php echo $footer; ?>

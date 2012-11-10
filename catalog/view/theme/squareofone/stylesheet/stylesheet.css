@@ -73,13 +73,14 @@ h1, .welcome {
 
 }
 h2 {
-	background:url(../image/bg-menu.jpg) repeat-x scroll 0 0 transparent;
-	color: #FFFFFF;
+	background:url(../image/hdd-bg.jpg) repeat-x scroll 0 0 transparent;
+	color: #000;
 	font-size: 22px;
 	font-weight: normal;
 	margin: 0 0 10px;
 	padding: 3px 0 6px 12px;
 	clear:both;
+	border:1px solid #ccc;
 }
 p {
 /*	margin-top: 0px;
@@ -398,7 +399,7 @@ label {
 	color: #000;
 	font-size: 12px;
 	font-weight: normal;
-	padding: 10px 4px;
+	padding: 10px 3px;
 	vertical-align: top;
 }
 .mini-cart-info .image {
@@ -569,254 +570,148 @@ background: none repeat scroll 0 0 transparent;
 }
 /* menu */
 
+/*
+.menu{
+margin:0;
+padding:0;
+display:block;
+}
 
-
-#menu {
-/*	background: #585858;
-
-
-
-	border-bottom: 1px solid #000000;
-
-
-
-	height: 37px;
-
-
-
-	margin-bottom: 15px;
-
-
-
-	-webkit-border-radius: 5px 5px 5px 5px;
-
-
-
-	-moz-border-radius: 5px 5px 5px 5px;
-
-
-
-	-khtml-border-radius: 5px 5px 5px 5px;
-
-
-
-	border-radius: 5px 5px 5px 5px;
-
-
-
-	-webkit-box-shadow: 0px 2px 2px #DDDDDD;
-
-
-
-	-moz-box-shadow: 0px 2px 2px #DDDDDD;
-
-
-
-	box-shadow: 0px 2px 2px #DDDDDD;
+.menu ul{
+margin:0;
+padding:0;
+display:block;
+}
+.menu ul li{
+margin:0;
+padding:0;
+display:block;
+list-style:none;
+float:left;
+color: #FFFFFF ;
+font-family: Arial,Helvetica,sans-serif ;
+font-size: 14px ;
+font-weight: normal ;
+}
+.menu ul li a {
+    color: #FFFFFF;
+    float: left;
+    margin: 0;
+    padding: 8px 16px 13px;
+    text-decoration: none;
+}
+.menu ul li a:hover{
+color:#000;
+text-decoration: none;
+}
+.menu ul li.active{
+color:#000;
+text-decoration: none;
+}
 
 
 
-	padding: 0px 5px;*/
+
+
+
+
+
+.menu ul li > ul {
+    background: none repeat scroll 0 0 #57B05C;
+    border: medium none;
+    border-radius: 0 0 8px 8px;
+    display: none;
+    float: inherit;
+    margin: 35px 0 0;
+    padding: 5px 0 20px;
+    position: absolute;
+    text-align: left;
+    width: 175px;
+    z-index: 99999;
+}
+
+.menu ul li:hover > ul{
+
+
+
+    display:block;
 
 
 
 }
-#menu ul {
-/*	list-style: none;
 
+.menu ul li:first-child > ul{
 
+    margin-left:0;
 
-	margin: 0;
+}
 
-
-
-	padding: 0;*/
-
+.menu ul li > ul li{
+    background: url(../image/arw1-1.png) no-repeat scroll 8px center transparent;
+    border-bottom: 1px dotted #FFFFFF;
+    display: block;
+    float: none;
+    list-style: none outside none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0 0 0 7px !important;
+    width: auto;
 
 
 }
-#menu > ul > li {
-/*	position: relative;
 
-
-
-	float: left;
-
-
-
-	z-index: 20;
-
-
-
-	padding: 6px 5px 5px 0px;*/
-
+.menu ul li > ul li a{
+    border: medium none;
+    color: #fff;
+    display: block !important;
+    font-family: arial;
+    font-size: 14px;
+    font-weight: normal;
+    list-style: none outside none;
+    padding: 4px 10px;
+    position: relative !important;
+    width: 100% !important;
 
 
 }
-#menu > ul > li:hover {
+.menu ul li > ul li a:hover {
+color: #000000;
 }
-#menu > ul > li > a {
-/*	font-size: 13px;
 
+.menu ul li > ul li a span{background:none!important;margin-right: 19px; float:none;}
 
+.menu ul li:hover > ul{
 
-	color: #FFF;
-
-
-
-	line-height: 14px;
-
-
-
-	text-decoration: none;
-
-
-
-	display: block;
-
-
-
-	padding: 6px 10px 6px 10px;
-
-
-
-	margin-bottom: 5px;
-
-
-
-	z-index: 6;
-
-
-
-	position: relative;*/
-
-
+    display:block;
 
 }
-#menu > ul > li:hover > a {
-/*	background: #000000;
 
+       
 
+        .menu ul li > ul li > ul{display:none!important; position:absolute!important; z-index:100;margin-left:100%!important; margin-top:-26px; min-width:225px; }
 
-	-webkit-border-radius: 5px;
+        .menu ul li > ul li > ul li{display:block!important;}
 
+        .menu ul li > ul li > ul li:first-child{border-bottom: 1px solid #000000;
+        border-left:none; border-right:none; border-top:none;}
 
+        .menu ul li > ul li:hover > ul{display:block!important; color:#000; }
 
-	-moz-border-radius: 5px;
+        .main_menu ul li > ul li:last-child a{width:auto;}*/
 
 
 
-	-khtml-border-radius: 5px;
 
 
 
-	border-radius: 5px;*/
 
 
 
-}
-#menu > ul > li > div {
-/*	display: none;
 
 
 
-	background: #FFFFFF;
 
 
-
-	position: absolute;
-
-
-
-	z-index: 5;
-
-
-
-	padding: 5px;
-
-
-
-	border: 1px solid #000000;
-
-
-
-	-webkit-border-radius: 0px 0px 5px 5px;
-
-
-
-	-moz-border-radius: 0px 0px 5px 5px;
-
-
-
-	-khtml-border-radius: 0px 0px 5px 5px;
-
-
-
-	border-radius: 0px 0px 5px 5px;
-
-
-
-	background: url('../image/menu.png');*/
-
-
-
-}
-#menu > ul > li:hover > div {
-/*	display: table;*/
-
-
-
-}
-#menu > ul > li > div > ul {
-/*	display: table-cell;*/
-
-
-
-}
-#menu > ul > li ul + ul {
-/*	padding-left: 20px;*/
-
-
-
-}
-#menu > ul > li ul > li > a {
-/*	text-decoration: none;
-
-
-
-	padding: 4px;
-
-
-
-	color: #FFFFFF;
-
-
-
-	display: block;
-
-
-
-	white-space: nowrap;
-
-
-
-	min-width: 120px;*/
-
-
-
-}
-#menu > ul > li ul > li > a:hover {
-/*	background: #000000;*/
-
-
-
-}
-#menu > ul > li > div > ul > li > a {
-/*	color: #FFFFFF;*/
-
-
-
-}
 .breadcrumb {
 	color: #555;
 	margin: 0;
@@ -833,20 +728,20 @@ background: none repeat scroll 0 0 transparent;
 .success, .warning, .attention, .information {
 	padding: 10px 10px 10px 33px;
 	margin-bottom: 15px;
-	color: #555555;
-	-webkit-border-radius: 5px 5px 5px 5px;
-	-moz-border-radius: 5px 5px 5px 5px;
-	-khtml-border-radius: 5px 5px 5px 5px;
-	border-radius: 5px 5px 5px 5px;
+	color: #fff;
+
 }
+
 .success {
-	background: #EAF7D9 url('../image/success.png') 10px center no-repeat;
-	border: 1px solid #BBDF8D;
-	-webkit-border-radius: 5px 5px 5px 5px;
-	-moz-border-radius: 5px 5px 5px 5px;
-	-khtml-border-radius: 5px 5px 5px 5px;
-	border-radius: 5px 5px 5px 5px;
+    background: url(../image/success.png) no-repeat scroll 10px center #D71313;
+    border: 1px solid #BBDF8D;
+    color: #FFFFFF;
+    font-size: 16px;
 }
+.success a {
+color:#fff;
+}
+
 .warning {
 	background: #FFD1D1 url('../image/warning.png') 10px center no-repeat;
 	border: 1px solid #F8ACAC;
@@ -899,14 +794,14 @@ table.form td {
 	padding: 4px;
 }
 input.large-field, select.large-field {
-	 background: none repeat scroll 0 0 #FFFFFF;
+    background: none repeat scroll 0 0 #F1F1F1;
     border: 1px solid #D5D5D5;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
     display: block;
     font-size: 12px;
     margin: 0px 0 5px;
     padding:4px 10px 4px 8px;
-    width: 275px;
+    width: 245px;
 }
 table.list {
 	border-collapse: collapse;
@@ -2548,13 +2443,14 @@ border:2px solid #6BBA70;
 	border:1px solid #ccc;
 }
 .box-heading {
-	background: url(../image/bg-menu.jpg) repeat-x scroll 0 0 transparent;
+	background:url(../image/hdd-bg.jpg) repeat-x scroll 0 0 transparent;
 	clear: both;
-	color: #FFFFFF;
+	color: #000;
 	font-size: 22px;
 	font-weight: normal;
 	margin: 0 0 10px;
 	padding: 3px 0 6px 12px;
+	border: 1px solid #CCCCCC;
 }
 .rt_cst {
 	border: 1px solid #CCCCCC;
@@ -2578,7 +2474,7 @@ border:2px solid #6BBA70;
     box-shadow: 0 2px 2px 2px #999;
     color: #000000 !important;
     display: block;
-    margin: 4px 0 0;
+    margin: 4px 0 0 -120px;
     padding: 5px;
     position: absolute;
     width: 335px;
@@ -2759,7 +2655,7 @@ div.css-panes > div:first-child {
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    background-color: #EAEAEA;
+/*    background-color: #EAEAEA;*/
     border-color: #CCCCCC;
     border-style: solid;
     border-width: 0 1px 1px;
@@ -2780,29 +2676,32 @@ div.css-panes > div:first-child {
 
 .form-field-input, .form-field-input-half, .form-field-input-full{
     border: 1px solid #D5D5D5;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+/*    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;*/
     display: block;
     font-size: 12px;
     margin-bottom: 5px;
     padding: 4px 10px 4px 8px;
+	clear:both;
+        background: none repeat scroll 0 0 #F1F1F1;
 
 }
 .form-field-input-half {
-    width: 275px;
+    width: 245px;
 }
 .form-field-input-full {
 
-    width: 275px;
+    width: 245px;
 }
 .form-field-left, .form-field-full  label {
-    color: #666666;
+    clear: both;
+    color: #000000;
     display: block;
-    float: left;
-    font-size: 14px;
+    float: none;
+    font-size: 12px;
     font-weight: bold;
 }
 .form-field-full label{
-    width: 340px;
+
 }
 #guest-buy-error{
     border: 1px solid;
