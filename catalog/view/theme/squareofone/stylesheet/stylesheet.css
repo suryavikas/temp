@@ -2706,3 +2706,17 @@ div.css-panes > div:first-child {
 #guest-buy-error{
     border: 1px solid;
 }
+
+#login span{
+    font: 14px solid;
+    
+}
+#login div a{
+    display: inline;
+    color: #0A4194 !important;
+}
+#login div a:hover{
+    display: inline;
+    color: #0A4194 !important;
+    text-decoration: underline;
+}

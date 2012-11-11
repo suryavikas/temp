@@ -19,7 +19,7 @@ $_['text_i_am_returning_customer']   = 'I have Squareofone Account';
 $_['text_register']                  = 'Sign Up Now!';
 $_['text_guest']                     = 'Buy without Sign Up';
 $_['text_register_account']          = 'By creating an account you will be able to shop faster, be up to date on an order\'s status, and keep track of the orders you have previously made.';
-$_['text_forgotten']                 = 'Forgotten Password';
+$_['text_forgotten']                 = 'Forgot Password';
 $_['text_your_details']              = 'Buy as Guest';
 $_['text_your_address']              = 'Your Address';
 $_['text_your_password']             = 'Your Password';
@@ -31,6 +31,8 @@ $_['text_payment_method']            = 'Please select the preferred payment meth
 $_['text_comments']                  = 'Add Comments About Your Order';
 $_['text_login_success']             = 'You are already logged in, please click <a href="%s" >here</a> to logout';
 $_['text_welcome_shipping']          = 'Welcome %s, Shipping address please!';
+$_['text_welcome']                   = '<a href="%s">Sign up</a> | <a href="%s">Forgot password</a>.';
+$_['text_option']                    = 'Or';
 
 // Column
 $_['column_name']                    = 'Product Name';

@@ -112,6 +112,8 @@ class ControllerCheckoutOnePageCheckout extends Controller {
         $this->data['error_email'] = $this->language->get('error_email');
         $this->data['error_password_empty'] = $this->language->get('error_password_empty');
         $this->data['text_login_success'] = sprintf($this->language->get('text_login_success'), $this->url->link('account/logout'));
+        $this->data['text_welcome'] = sprintf($this->language->get('text_welcome'), $this->url->link('account/register', '', 'SSL'), $this->url->link('account/forgotten', '', 'SSL'));
+        $this->data['text_option'] = $this->language->get('text_option');
         ////////////////////////////////////////////////////////SECOND PANE//////////////////////////////////////////////////////////////
         $this->data['text_select'] = $this->language->get('text_select');
         $this->data['text_none'] = $this->language->get('text_none');

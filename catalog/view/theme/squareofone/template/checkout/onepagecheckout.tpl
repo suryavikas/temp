@@ -30,15 +30,16 @@
                                     <h2><?php echo $text_returning_customer; ?></h2>
                                     <div id="login-buy-error" style="display:none;" ></div>
                                     <b><?php echo $entry_email; ?></b><br />
-                                    <input type="email" name="email" class="large-field" required="required" data-message="<?php echo $error_email; ?>"/>
-                                    <br />
-                                    <br />
+                                    <input type="email" name="email" class="large-field" required="required" data-message="<?php echo $error_email; ?>"/>                                   
                                     <b><?php echo $entry_password; ?></b><br />
                                     <input type="password" name="password" class="large-field" required="required" data-message="<?php echo $error_password_empty; ?>"/>
-                                    <br />
-                                    <a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a><br />
-                                    <br />
+                                    
                                     <input type="button" value="<?php echo $button_login; ?>" id="button-login" class="button" /><br />
+                                    
+                                    <?php echo '<span>'.$text_option.'</span>'; ?>
+                                    <br />
+                                    <div><?php echo $text_welcome; ?>
+                                    </div>
                                     <br />
                                 <?php
                                 } else {
