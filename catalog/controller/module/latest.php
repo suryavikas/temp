@@ -46,7 +46,11 @@ class ControllerModuleLatest extends Controller {
 			} else {
 				$rating = false;
 			}
-			
+			if(isset($product_info['special'])){
+                                    $discount_percentage = ((($product_info['price'] - $product_info['special']) / $product_info['price']) * 100);
+                        } else {
+                            $discount_percentage = '';
+                        }
 			$this->data['products'][] = array(
 				'product_id' => $result['product_id'],
 				'thumb'   	 => $image,
@@ -56,6 +60,7 @@ class ControllerModuleLatest extends Controller {
 				'rating'     => $rating,
 				'reviews'    => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
 				'href'    	 => $this->url->link('product/product', 'product_id=' . $result['product_id']),
+                                'discount_percentage'   => $discount_percentage
 			);
 		}
 

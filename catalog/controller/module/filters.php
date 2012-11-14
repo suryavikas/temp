@@ -321,6 +321,11 @@ class ControllerModuleFilters extends Controller {
                 } else {
                     $rating = false;
                 }
+                if(isset($result['special'])){
+                    $discount_percentage = ((($result['price'] - $result['special']) / $result['price']) * 100);
+                } else {
+                    $discount_percentage = '';
+                }
 
                 $this->data['products'][] = array(
                     'product_id' => $result['product_id'],
@@ -332,7 +337,8 @@ class ControllerModuleFilters extends Controller {
                     'tax' => $tax,
                     'rating' => $result['rating'],
                     'reviews' => sprintf($this->language->get('text_reviews'), (int) $result['reviews']),
-                    'href' => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'])
+                    'href' => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id']),
+                    'discount_percentage'   => $discount_percentage
                 );
             }
 

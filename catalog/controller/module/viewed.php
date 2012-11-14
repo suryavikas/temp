@@ -47,6 +47,11 @@ class ControllerModuleViewed extends Controller {
                     } else {
                         $special = false;
                     }
+                    if(isset($product_info['special'])){
+                                    $discount_percentage = ((($product_info['price'] - $product_info['special']) / $product_info['price']) * 100);
+                                } else {
+                                    $discount_percentage = '';
+                                }
                     $this->data['products'][] = array(
                         'product_id' => $product_info['product_id'],
                         'thumb' => $image,
@@ -54,6 +59,7 @@ class ControllerModuleViewed extends Controller {
                         'price' => $price,
                         'special' => $special,
                         'href' => $this->url->link('product/product', 'product_id=' . $product_info['product_id']),
+                        'discount_percentage'   => $discount_percentage
                     );
                 }
             }

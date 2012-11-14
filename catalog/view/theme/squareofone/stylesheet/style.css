@@ -9330,7 +9330,7 @@ display:none;
 
 
 
-	width:90px;
+	width:20%;
 
 
 
@@ -9386,7 +9386,7 @@ display:none;
 
 
 
-	width:80px;
+	width:80%;
 
 
 
@@ -9404,7 +9404,10 @@ display:none;
 
 }
 
-
+.prc_right span{
+    color: #FF0000;
+    text-decoration: line-through;
+}
 
 
 
@@ -10170,7 +10173,7 @@ display:none;
 
 
 
-	background:url(images/discount_tag.png) no-repeat center top;
+	background:url(../image/discount_tag.png) no-repeat center top;
 
 
 

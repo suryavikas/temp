@@ -15,7 +15,7 @@
   
   
   <div class="all_page_right">
-  <p><?php echo $text_account_already; ?></p>
+<!--  <p><?php echo $text_account_already; ?></p>-->
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
     <h2><?php echo $text_your_details; ?></h2>
     <div class="content">

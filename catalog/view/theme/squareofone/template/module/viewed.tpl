@@ -5,6 +5,10 @@
     <div class="box-product">
       <?php foreach ($products as $product) { ?>
       <div>
+          <?php if($product['special']){ ?>
+            <div class="discount_tag"><?php echo $product['discount_percentage']; ?>%<br>OFF</div>
+            <?php }
+            ?>
         <?php if ($product['thumb']) { ?>
         <div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a></div>
         <?php } ?>
