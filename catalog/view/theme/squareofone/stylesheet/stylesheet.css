@@ -943,7 +943,7 @@ a.button:hover, input.button:hover {
 	margin-right: auto;
 }
 .htabs {
-	background: none repeat scroll 0 0 #57B05C;
+/*	background: none repeat scroll 0 0 #57B05C;*/
 	clear: both;
 	height: 40px;
 	line-height: 26px;
@@ -979,6 +979,7 @@ a.button:hover, input.button:hover {
 	border-left: 1px solid #DDDDDD;
 	border-right: 1px solid #DDDDDD;
 	border-bottom: 1px solid #DDDDDD;
+        border-top: 1px solid #DDDDDD;
 	padding: 10px;
 	margin-bottom: 20px;
 	z-index: 2;
@@ -1365,7 +1366,7 @@ a.button:hover, input.button:hover {
 }
 .product-info .description span {
 	color: #0A4194 ;
-	padding-left: 25px;
+/*	padding-left: 25px;*/
 	font-weight: bold;
 }
 .product-info .description a {
@@ -1403,9 +1404,10 @@ a.button:hover, input.button:hover {
 	color: #4D4D4D;
 }
 .product-info .options {
-	color: #fff;
-	margin-bottom: 10px;
-	padding: 5px;
+/*	color: #fff;*/
+/*        background: url("../image/bg-menu.jpg") repeat-x scroll 0 0 transparent;*/
+        margin-bottom: 10px;
+/*	padding: 5px;*/
 }
 .product-info .option-image {
 	margin-top: 3px;

@@ -6371,11 +6371,15 @@ p {
 
 
 
-
+	color:red;
 
 
 }
 
+.about_size .error{
+	display: inline;
+    font-weight: bold;    
+}
 
 
 
@@ -6414,7 +6418,7 @@ p {
 
 
 
-	padding:0 0 0 15px;
+	
 
 
 
@@ -6624,7 +6628,7 @@ p {
 
 
 
-	background: none repeat scroll 0 0 #6BBA70;
+	
 
 
 
@@ -6632,8 +6636,7 @@ p {
 
 
 
-	color: #FFFFFF;
-
+	
 
 
 
@@ -6669,23 +6672,12 @@ p {
 
 
 
-
+.about_size div{
+    margin-top: 5px;
+}
 
 
 .about_size a {
-
-
-
-
-
-
-
-	color:#fff;
-
-
-
-
-
 
 
 	text-decoration:none;
@@ -6720,7 +6712,7 @@ p {
 
 
 
-	color:#fff;
+	
 
 
 
@@ -6900,11 +6892,11 @@ p {
 
 
 
+        padding-right: 5px
 
 
 
-
-	width:190px;
+/*	width:190px;*/
 
 
 

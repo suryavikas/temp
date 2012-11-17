@@ -33,6 +33,7 @@ $_['text_login_success']             = 'You are already logged in, please click 
 $_['text_welcome_shipping']          = 'Welcome %s, Shipping address please!';
 $_['text_welcome']                   = '<a href="%s">Sign up</a> | <a href="%s">Forgot password</a>.';
 $_['text_option']                    = 'Or';
+$_['text_modal_title']               = 'Error!';
 
 // Column
 $_['column_name']                    = 'Product Name';
@@ -89,6 +90,6 @@ $_['error_no_shipping']              = 'Warning: No Shipping options are availab
 $_['error_payment']                  = 'Warning: Payment method required!';
 $_['error_no_payment']               = 'Warning: No Payment options are available. Please <a href="%s">contact us</a> for assistance!';
 $_['error_password_empty']           = 'Password cannot be empty!';
-$_['error_no_shipping_to_this_pincode']= 'Sorry, we do not shipping service to your pincode, please contact our customer care!';
+$_['error_no_shipping_to_this_pincode']= 'Sorry, we do not have shipping service to your pincode, please contact our customer care!';
 $_['error_shipping']                 = 'Unable to set shipping details, pls try again!';
 ?>

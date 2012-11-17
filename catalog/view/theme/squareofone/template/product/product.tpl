@@ -80,8 +80,7 @@
      
     <div class="size_detail">
         <div class="options about_size">
-      <?php if ($options) { ?>
-          <strong>
+      <?php if ($options) { ?>          
         <?php foreach ($options as $option) { ?>
         <?php if ($option['type'] == 'select') { ?>
         <div id="option-<?php echo $option['product_option_id']; ?>" class="option">
@@ -221,11 +220,14 @@
         </div>
          <?php } ?>
         <?php } ?>
-        </strong>
+        
          <?php } ?>
-        <label style="float:left;"><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a></label> 
-        <p style="margin:0; padding:0; float:right; color:#fff;"><a href="#" style="color:#fff;">Not sure about your size?</a></p>
+            <div class ="size">
+                <label style="float:left;"><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a> <span> | </span></label>
+                 
+                <label style="float:left;"><a href="#" >Not sure about your size?</a></label>
 <!--        <label><a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></label>-->
+            </div>
         <div class="clear"></div>
       
         
@@ -399,8 +401,9 @@ $('#button-cart').bind('click', function() {
 
 			if (json['error']) {
 				if (json['error']['option']) {
+                                        $('#option-' + i).css('border-color', 'red');
 					for (i in json['error']['option']) {
-						$('#option-' + i).after('<span class="error">' + json['error']['option'][i] + '</span>');
+						$('#option-' + i).append('<span class="error">' + json['error']['option'][i] + '</span>');
 					}
 				}
 			}

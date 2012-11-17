@@ -12,14 +12,14 @@ $(document).ready(function() {
 		location = url;
 	});
 	
-        $('.links a').live('click', function() {
+        $('.pagination .links a').live('click', function() {
             
             var arrData = getFilterParams();
             var getParams = getSortingParams();
 
             var url = $(this).attr('href');
-//            console.log(url);
-            categoryId = getURLVar("path");
+            
+            categoryId = getURLVarFromString(url, "path");
             page = getURLVarFromString(url, "page");
             sendRequest(arrData, getParams, categoryId, "page="+page);
             
@@ -154,9 +154,8 @@ function getURLVarFromString(url, urlVarName) {
 
 		for (var i = 0; i <= (urlVars.length); i++) {
 			if (urlVars[i]) {
-				var urlVarPair = urlVars[i].split('=');
-
-				if (urlVarPair[0] && urlVarPair[0] == urlVarName.toLowerCase()) {
+				var urlVarPair = urlVars[i].split('=');                                
+				if (urlVarPair[0] && urlVarPair[0] == urlVarName.toLowerCase()) {                                    
 					urlVarValue = urlVarPair[1];
 				}
 			}
@@ -244,11 +243,10 @@ function addToCompare(product_id) {
 	});
 }
 function getSortingParams(){
-    var getParams;
+    var getParams = null;
     $("select option:selected").each(function() {
 
-        var val = $(this).val();
-        //console.log("Value = "+val);
+        var val = $(this).val();        
         if(getParams == null && val != null){
             getParams = val;
         } else {
@@ -256,7 +254,6 @@ function getSortingParams(){
                 getParams = "&"+getParams+"="+val;
             }
         }
-    //console.log(getParams);
     });
     return getParams;
 }
@@ -286,7 +283,8 @@ function getFilterParams(){
 
 function sendRequest(arrData, getParams, categoryId, appendToUrl){
         var url = "index.php?route=module/filters/applyFilter&path="+categoryId;
-        if(getParams != null){
+        
+        if(getParams != 0){
             url = url+"&"+getParams;
         }
         if(appendToUrl != null){
@@ -299,6 +297,7 @@ function sendRequest(arrData, getParams, categoryId, appendToUrl){
             data: {filters : arrData},
             dataType: "html"
         }).done(function( msg ) {
+
             $('div').remove('.pagination');
             var productDiv;
             if($('.product-list').length){

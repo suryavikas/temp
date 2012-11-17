@@ -54,6 +54,12 @@
                             <div class="right">
                                 <div id="guest-buy">
                                     <h2><?php echo $text_your_details; ?></h2>
+                                    <div id="modal-error" title="<?php echo $text_modal_title ; ?>" style="display:none">
+                                        <p>
+                                            <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
+                                            <?php $error_no_shipping_to_this_pincode; ?>
+                                        </p>                                        
+                                    </div>
                                     <div id="guest-buy-error" style="display:none"></div>
                                      <fieldset title="<?php echo $entry_email; ?>" id="email" class="form-field-full">
                                          <label>
@@ -71,7 +77,7 @@
                                                 </span>
                                                  <?php echo $entry_postcode; ?>
                                         </label>
-                                                <input type="text" name="postcode" value="<?php /*echo $postcode;*/ ?>" class="form-field-input-half" />
+                                        <input type="text" maxlength="6" name="postcode" value="<?php /*echo $postcode;*/ ?>" class="form-field-input-half" />
                                         <span>
                                             <input type="hidden" name="city" disabled="true" value="<?php echo $city; ?>" class="form-field-input-half" />
                                             <span id="city_info"></span>
@@ -225,6 +231,7 @@
 ;
                     return false;
                 }
+                
             });
 
             // get handle to the tabs API
@@ -334,12 +341,16 @@
                         $(divId+' #country_id').val('');
                         $(divId+' #zone_id').val('');
                         $(divId+' #city_info').empty();
-                        $(divId+' #guest-buy-error').html(json['error']);
-                        $( "#guest-buy-error" ).dialog({
+                        $(divId+' #modal-error').html(json['error']);
+                        
+                        $( "#modal-error" ).dialog({
                             modal: true,
                             buttons: {
                                     Ok: function() {
+                                        $(divId+ ' input[name=\'postcode\']').val('');
                                             $( this ).dialog( "close" );
+
+
                                     }
                             }
                         });
@@ -448,66 +459,61 @@ $('#button-shipping-address').live('click', function() {
 
 // Guest
 $('#button-guest').live('click', function() {
+        canProceed = false;
 	$.ajax({
                     url: 'index.php?route=checkout/onepagecheckout/set_payment_shipping',
                     type: 'post',
                     data: $('#guest-buy input[type=\'text\'], #guest-buy input[type=\'checkbox\']:checked, #guest-buy select, #guest-buy textarea, #guest-buy input[type=\'hidden\']'),
-//                    dataType: 'json',
-                    dataType: 'json',
+                    dataType: 'html',
                     success: function(json) {
-//                        console.log("Found "+json);
-                    if(typeof json=="object"){
-
-                        if (json['redirect']) {
-				location = json['redirect'];
-			} else if (json['error']) {
+                        try{
+                             result = jQuery.parseJSON(json);
+                             console.log('is json');
+                           
+                            if (result.redirect) {
+				location = result.redirect;
+                            } else if (result.error) {
+                                console.log('else if');
                                 var errors = '';
-//
-                                if (json['error']['firstname']) {
-					errors += '<span class="error">' + json['error']['firstname'] + '</span>';
+                                if (result.error.firstname) {
+					errors += '<span class="error">' + result.error.firstname + '</span>';
 				}
-
-				if (json['error']['lastname']) {
-					errors += '<span class="error">' + json['error']['lastname'] + '</span>';
+				if (result.error.lastname) {
+					errors += '<span class="error">' + result.error.lastname + '</span>';
 				}
-
-				if (json['error']['email']) {
-					errors += '<span class="error">' + json['error']['email'] + '</span>';
+				if (result.error.email) {
+					errors += '<span class="error">' + result.error.email + '</span>';
 				}
-
-				if (json['error']['telephone']) {
-					errors += '<span class="error">' + json['error']['telephone'] + '</span>';
+				if (result.error.telephone) {
+					errors += '<span class="error">' + result.error.telephone + '</span>';
 				}
-
-				if (json['error']['address_1']) {
-					errors += '<span class="error">' + json['error']['address_1'] + '</span>';
+				if (result.error.address_1) {
+					errors += '<span class="error">' + result.error.address_1 + '</span>';
 				}
-
-				if (json['error']['city']) {
-					errors += '<span class="error">' + json['error']['city'] + '</span>';
+				if (result.error.city) {
+					errors += '<span class="error">' + result.error.city + '</span>';
 				}
-
-				if (json['error']['postcode']) {
-					errors += '<span class="error">' + json['error']['postcode'] + '</span>';
+				if (result.error.postcode) {
+					errors += '<span class="error">' + result.error.postcode + '</span>';
 				}
-
-				if (json['error']['country']) {
-					errors += '<span class="error">' + json['error']['country'] + '</span>';
+				if (result.error.country) {
+					errors += '<span class="error">' + result.error.country + '</span>';
 				}
-
-				if (json['error']['zone']) {
-					errors += '<span class="error">' + json['error']['zone'] + '</span>';
+				if (result.error.zone) {
+					errors += '<span class="error">' + result.error.zone + '</span>';
 				}
                                 $('#guest-buy-error').html(errors);
                                 $('#guest-buy-error').show();
-			}
-                        }else{
-
+                            }
+                        } catch(e){
+                            $('#guest-buy-error').html('');
+                            $('#guest-buy-error').hide();
                             $('#payment-process').html(json);
                             canProceed = true;
                             var api = $("ul.css-tabs").data("tabs");
                             api.next();
                         }
+
                    },
                     error: function(xhr, ajaxOptions, thrownError) {
                             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

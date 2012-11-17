@@ -39,8 +39,8 @@ class ControllerModuleBestSeller extends Controller {
 			} else {
 				$rating = false;
 			}
-			if(isset($product_info['special'])){
-                                    $discount_percentage = ((($product_info['price'] - $product_info['special']) / $product_info['price']) * 100);
+			if(isset($result['special'])){
+                                    $discount_percentage = ((($result['price'] - $result['special']) / $result['price']) * 100);
                         } else {
                             $discount_percentage = '';
                         }
