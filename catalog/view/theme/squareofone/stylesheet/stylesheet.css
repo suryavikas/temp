@@ -947,6 +947,7 @@ a.button:hover, input.button:hover {
 	clear: both;
 	height: 40px;
 	line-height: 26px;
+        padding-top: 10px;
 }
 .htabs a {
 	background: none repeat scroll 0 0 #046DD8;

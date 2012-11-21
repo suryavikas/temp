@@ -1,6 +1,6 @@
 <?php
 // Heading 
-$_['heading_title']        = 'Guest Login';
+$_['heading_title']        = 'Track Your Order';
 
 // Entry
 $_['entry_email']          = 'E-Mail Address:';
