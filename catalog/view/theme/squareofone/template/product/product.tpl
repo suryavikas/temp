@@ -61,7 +61,7 @@
               }       ?>
                  <p>Delivered in 2 - 5 business days </p>
         </div>
-        <div class="cart buy_detail_right" style="border-bottom:none; margin-bottom:0px;">
+        <div class="cart buy_detail_right" style="border-bottom:none; margin-bottom:0px; <?php if ($quantity <= 0) { echo ' display:none'; } ?>">
             <div style="margin-bottom:10px;"><?php echo $text_qty; ?>
                 <input type="text" name="quantity" size="2" value="<?php echo $minimum; ?>" />
                 <input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" />

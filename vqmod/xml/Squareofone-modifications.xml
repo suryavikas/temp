@@ -397,12 +397,7 @@
             </add>
         </operation>
     </file>
-	<!-- <file name="system/library/image.php">
-		<operation>
-			<search position="replace"><![CDATA[$background = imagecolorallocate($this->image, 255, 255, 255);]]></search>
-			<add><![CDATA[$background = imagecolorallocate($this->image, 255, 255, 255);]]></add>
-		</operation>
-	</file> -->
+	
     <file name="catalog/language/english/account/register.php">
         <operation>
             <search position="replace"><![CDATA[$_['entry_telephone']      = 'Telephone:';]]>
@@ -547,7 +542,7 @@
                                     foreach ($data as $key => $value) {
                                             $url = '';
                                             if (isset($data['route'])) {
-                                                    if (($data['route'] == 'product/product' && $key == 'product_id') || (($data['route'] == 'product/manufacturer/info' || $data['route'] == 'product/product') && $key == 'manufacturer_id') || ($data['route'] == 'information/information' && $key == 'information_id')) {
+                                                    if (($data['route'] == 'product/product' && $key == 'product_id') || (($data['route'] == 'product/manufacturer/info' || $data['route'] == 'product/product') && $key == 'manufacturer_id') ) {
                                                             $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = '" . $this->db->escape($key . '=' . (int)$value) . "'");
                                                             $url .= '/india/buy-now';
                                                             if ($query->num_rows) {
@@ -556,6 +551,14 @@
                                                                     unset($data[$key]);
                                                             }
                                                             
+                                                    } elseif ($data['route'] == 'information/information' && $key == 'information_id') {
+                                                            $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = '" . $this->db->escape($key . '=' . (int)$value) . "'");
+                                                            if ($query->num_rows) {
+                                                                    $url .= '/' . $query->row['keyword'];
+
+                                                                    unset($data[$key]);
+                                                            }
+
                                                     } elseif ($key == 'path') {
                                                             $categories = explode('_', $value);
                                                             $url .= '/india/fashion';

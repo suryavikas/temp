@@ -187,7 +187,7 @@ display:block!important;
                     </div>
                     <div class="free_shiping">
                         <div class="bn">
-                            <a href="index.html" class="free_shiping_hv"><span>Readmore</span></a>
+                            <a href="./shipping-and-delivery-policy" class="free_shiping_hv"><span>shipping-and-delivery-policy</span></a>
                         </div>
                     </div>
         <div class="clear"></div>
