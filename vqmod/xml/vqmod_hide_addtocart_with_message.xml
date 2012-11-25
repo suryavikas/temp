@@ -35,6 +35,16 @@
 			]]></add>
 		</operation>
 	</file>
+         <file name="catalog/controller/product/product.php">
+		<operation>
+			<search position="after" index="1"><![CDATA[
+			$this->data['products'][] = array(
+			]]></search>
+			<add><![CDATA[
+			'quantity' => $result['quantity'],
+			]]></add>
+		</operation>
+	</file>
 	
 	<file name="catalog/view/theme/*/template/product/product.tpl">
 		<operation>
@@ -72,10 +82,10 @@
 	<file name="catalog/view/theme/*/template/product/category.tpl">
 		<operation>
 			<search position="replace"><![CDATA[
-			<input type="button" value="<?php echo $button_cart; ?>"
+			<a class="buy_now_button" onclick="addToCart('<?php echo $product['product_id']; ?>');"
 			]]></search>
 			<add><![CDATA[
-			<input type="button" value="<?php echo $button_cart; ?>" <?php if ($product['quantity'] <= 0) { echo 'style="display:none"'; } ?>
+                        <a <?php if ($product['quantity'] <= 0) { echo 'style="display:none"'; } class="buy_now_button" onclick="addToCart('<?php echo $product['product_id']; ?>');"
 			]]></add>
 		</operation>
 		

@@ -48,7 +48,7 @@ class ControllerModuleViewed extends Controller {
                         $special = false;
                     }
                     if(isset($product_info['special'])){
-                                    $discount_percentage = ((($product_info['price'] - $product_info['special']) / $product_info['price']) * 100);
+                                    $discount_percentage = floor((($product_info['price'] - $product_info['special']) / $product_info['price']) * 100);
                     } else {
                         $discount_percentage = '';
                     }

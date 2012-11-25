@@ -269,11 +269,15 @@
                                     $products['discounts'] = $this->getProductDiscounts($result['product_id']);
                                     $temp = $products['price'];
                                     $discountedPrice = $products['special'];  
-                                    $discount = ((($temp - $discountedPrice)/$temp)*100);
+                                    $discount = floor(((($temp - $discountedPrice)/$temp)*100));
+//                                    echo"<pre>$discount ------- ****";
+                                    
                                     $products['discount_percentage'] = $discount;
                                     $product_data[$result['product_id']] = $products;]]>
             </add>
         </operation>
+        <!-- Adding check for disabling buy -->
+       
         <operation>
             <search position="before"><![CDATA[	public function getTotalProductSpecials() {]]>
             </search>

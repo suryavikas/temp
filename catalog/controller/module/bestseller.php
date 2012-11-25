@@ -40,7 +40,7 @@ class ControllerModuleBestSeller extends Controller {
 				$rating = false;
 			}
 			if(isset($result['special'])){
-                                    $discount_percentage = ((($result['price'] - $result['special']) / $result['price']) * 100);
+                                    $discount_percentage = floor(((($result['price'] - $result['special']) / $result['price']) * 100));
                         } else {
                             $discount_percentage = '';
                         }

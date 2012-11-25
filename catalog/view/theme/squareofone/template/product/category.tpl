@@ -67,7 +67,9 @@
       <?php }
       ?>
       <?php if ($product['thumb']) { ?>
-      <img src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" />
+            <a href="<?php echo $product['href']; ?>">
+                <img src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" />
+            </a>
       <?php } ?>
       <div class="clear"></div>
       <div class="buy_detail5">
