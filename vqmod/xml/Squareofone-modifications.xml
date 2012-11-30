@@ -397,7 +397,11 @@
         <operation>
             <search position="replace"><![CDATA[$_['text_powered']      = 'Powered By <a href="http://www.opencart.com">OpenCart</a><br /> %s &copy; %s';]]>
             </search>
-            <add><![CDATA[$_['best_seller']       = 'Best Seller';]]>
+            <add><![CDATA[$_['best_seller']       = 'Best Seller';
+            $_['subscribe']       = 'Subscribe';
+            $_['newsletter_header']       = 'Newsletter';
+            $_['best_seller']       = 'Best Seller';
+            $_['best_seller']       = 'Best Seller';]]>
             </add>
         </operation>
     </file>
@@ -654,7 +658,7 @@
             </search>
             <add><![CDATA[
                             if(isset($result['special'])){
-                                $discount_percentage = ((($result['price'] - $result['special'])/$result['price'])*100);
+                                $discount_percentage = floor((($result['price'] - $result['special'])/$result['price'])*100);
                             } else {
                                 $discount_percentage = '';
                             }
@@ -662,6 +666,7 @@
                             $this->data['products'][] = array(
                                 'product_id'            => $result['product_id'],
                                 'thumb'                 => $image,
+                                'thumb_soldout'       => ($result['quantity'] <= 0)?$this->model_tool_image->resize('sold-out.png', $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height')):null,
                                 'name'                  => $result['name'],
                                 'description'           => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 100) . '..',
                                 'price'                 => $price,

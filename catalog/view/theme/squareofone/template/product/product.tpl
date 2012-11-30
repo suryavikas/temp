@@ -236,8 +236,8 @@
         <div class="clear"></div>
         
             <ul>
-            <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/free-shipping.jpg" /></a></li>
-            <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/pay-cash.jpg" /></a></li>
+            <li><a href="/shipping-and-delivery-policy"><img border="0" alt="" src="catalog/view/theme/squareofone/image/free-shipping.jpg" /></a></li>
+            <li><a href="/shipping-and-delivery-policy"><img border="0" alt="" src="catalog/view/theme/squareofone/image/pay-cash.jpg" /></a></li>
             <li><a href="#"><img border="0" alt="" src="catalog/view/theme/squareofone/image/secure.jpg"/></a></li>
             <div class="clear"></div>
             </ul>
@@ -256,7 +256,9 @@
     </div>
   </div>
   <div id="tabs" class="htabs">
-      
+     <?php if ($products) { ?>
+    <a href="#tab-related"><?php echo $tab_related; ?> (<?php echo count($products); ?>)</a>
+    <?php } ?>
     <a href="#tab-description"><?php echo $tab_description; ?></a>
     <?php if ($attribute_groups) { ?>
     <a href="#tab-attribute"><?php echo $tab_attribute; ?></a>
@@ -264,9 +266,7 @@
     <?php if ($review_status) { ?>
     <a href="#tab-review"><?php echo $tab_review; ?></a>
     <?php } ?>
-    <?php if ($products) { ?>
-    <a href="#tab-related"><?php echo $tab_related; ?> (<?php echo count($products); ?>)</a>
-    <?php } ?>
+    
   </div>
   <div id="tab-description" class="tab-content"><?php echo $description; ?></div>
   <?php if ($attribute_groups) { ?>

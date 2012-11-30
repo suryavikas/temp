@@ -97,6 +97,9 @@ echo $header; ?>
             }
     ?>                  
                     <li>
+                        <?php if ($productArr[$i]['thumb_soldout'] != null) { ?>
+                            <img style="position: absolute; pointer-events: none;" src="<?php echo $productArr[$i]['thumb_soldout']; ?>" title="" alt="" />
+                            <?php } ?>
                         <a href="<?php echo $productArr[$i]['href'] ?>" >
                         <img src="<?php echo $productArr[$i]['thumb']; ?>" alt="" border="0"  />
                         </a>
@@ -137,7 +140,7 @@ echo $header; ?>
                              }
                             ?>
                             <div class="clear"></div>
-                            <a href="<?php echo $productArr[$i]['href'] ?>" class="buy_now_button"><span><?php echo $buy_now; ?></span></a>
+                            <a href="<?php echo $productArr[$i]['href'] ?>" <?php if ($productArr[$i]['quantity'] <= 0) { echo 'style="display:none"'; } ?> class="buy_now_button"><span><?php echo $buy_now; ?></span></a>
                             <div class="clear"></div>
                         </div>
                     </li>

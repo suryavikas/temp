@@ -18,7 +18,7 @@
             </div></td>
           <td class="quantity">x&nbsp;<?php echo $product['quantity']; ?></td>
           <td class="total"><?php echo $product['total']; ?></td>
-          <td class="remove"><img src="catalog/view/theme/default/image/remove-small.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" onclick="$('#cart').load('index.php?route=module/cart&remove=<?php echo $product['key']; ?> #cart > *');" /></td>
+<!--          <td class="remove"><img src="catalog/view/theme/default/image/remove-small.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" onclick="$('#cart').load('index.php?route=module/cart&remove=<?php echo $product['key']; ?> #cart > *');" /></td>-->
         </tr>
         <?php } ?>
         <?php foreach ($vouchers as $voucher) { ?>
