@@ -131,7 +131,7 @@ class ModelFiltersFilters extends Model {
 		//echo $product_data;
 		if (!$product_data) {
 			
-			$sql = "SELECT p.product_id, (SELECT AVG(rating) AS total FROM " . DB_PREFIX . "review r1 WHERE r1.product_id = p.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id)";
+			$sql = "SELECT p.product_id FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id)";
 
 			if (!empty($data['filter_tag'])) {
 				$sql .= " LEFT JOIN " . DB_PREFIX . "product_tag pt ON (p.product_id = pt.product_id)";
@@ -156,8 +156,13 @@ class ModelFiltersFilters extends Model {
 			}
 
 			if (!empty($data['saleItems'])) {
-				$sql .= " JOIN " . DB_PREFIX . "product_discount PDC ON (p.product_id = PDC.product_id";
-                                $sql .= " AND PDC.date_end >= current_date or PDC.date_end = '0000-00-00')";
+//				$sql .= " JOIN " . DB_PREFIX . "product_discount PDC ON (p.product_id = PDC.product_id";
+//                                $sql .= " AND PDC.date_start <= current_date AND (PDC.date_end >= current_date or PDC.date_end = '0000-00-00')";
+//                                $sql .= " AND PDC.customer_group_id = $customer_group_id )";
+
+                                $sql .= " JOIN " . DB_PREFIX . "product_special PSC ON (p.product_id = PSC.product_id";
+                                $sql .= " AND PSC.date_start <= current_date AND (PSC.date_end >= current_date or PSC.date_end = '0000-00-00')";
+                                $sql .= " AND PSC.customer_group_id = $customer_group_id )";
 			}			
                         
 			$sql .= " WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
@@ -276,7 +281,7 @@ class ModelFiltersFilters extends Model {
 
 			
 			$product_data = array();
-	
+//	die($sql);
 			$query = $this->db->query($sql);
                         
                         $this->load->model('catalog/product');

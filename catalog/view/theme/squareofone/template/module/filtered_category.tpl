@@ -10,7 +10,10 @@
       <?php }
       ?>
       <?php if ($product['thumb']) { ?>
-      <img src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" />
+            <?php if ($product['thumb_soldout'] != null) { ?><img style="position: absolute; pointer-events: none;" src="<?php echo $product['thumb_soldout']; ?>" title="" alt="" /><?php } ?>
+            <a href="<?php echo $product['href']; ?>">
+                <img src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" />
+            </a>
       <?php } ?>
       <div class="clear"></div>
       <div class="buy_detail5">
@@ -30,7 +33,7 @@
             <div class="clear"></div>
             </div>
             <div class="clear"></div>
-            <a class="buy_now_button" onclick="addToCart('<?php echo $product['product_id']; ?>');"><span>more</span></a>
+             <a <?php if ($product['quantity'] <= 0) { echo 'style="display:none"'; } ?> class="buy_now_button" onclick="addToCart('<?php echo $product['product_id']; ?>');"><span>more</span></a>
             <div class="clear"></div>
     </div>
 

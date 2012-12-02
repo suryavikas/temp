@@ -1,7 +1,24 @@
 <?php echo $header; ?>
+<div id="filter-load" style="display: none; position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    z-index: 10000;">
+    <img alt="Shopping cart loading..." src="catalog/view/theme/squareofone/image/ajax-loader-filters.gif"  style="position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    text-align: center;"/>
+</div>
+
 <div  id="content"><?php echo $content_top; ?>
-
-
   <div class="shop_by"> We found <?php echo $product_total ?> Products for <?php echo $heading_title; ?>
 <div class="clear"></div>
 </div>

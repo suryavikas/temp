@@ -83,7 +83,22 @@
 			]]></add>
 		</operation>
 	</file>
-       
+
+       <file name="catalog/view/theme/*/template/product/filtered_category.tpl">
+		<operation>
+			<search position="replace"><![CDATA[
+			<a class="buy_now_button" onclick="addToCart('<?php echo $product['product_id']; ?>');"
+			]]></search>
+			<add><![CDATA[<a <?php if ($product['quantity'] <= 0) { echo 'style="display:none"'; } ?> class="buy_now_button" onclick="addToCart('<?php echo $product['product_id']; ?>');"]]></add>
+		</operation>
+
+		<operation>
+			<search position="after"><![CDATA[<?php if ($product['thumb']) { ]]></search>
+			<add><![CDATA[
+			<?php if ($product['thumb_soldout'] != null) { ?><img style="position: absolute; pointer-events: none;" src="<?php echo $product['thumb_soldout']; ?>" title="" alt="" /><?php } ?>
+			]]></add>
+		</operation>
+	</file>
 	
 	<file name="catalog/controller/product/search.php">
 		<operation>

@@ -290,14 +290,14 @@ function sendRequest(arrData, getParams, categoryId, appendToUrl){
         if(appendToUrl != null){
             url = url+"&"+appendToUrl;
         }
-
+        $('#filter-load').show();
         $.ajax({
             url: url,
             type: "POST",
             data: {filters : arrData},
             dataType: "html"
         }).done(function( msg ) {
-
+            $('#filter-load').hide()
             $('div').remove('.pagination');
             var productDiv;
             if($('.product-list').length){

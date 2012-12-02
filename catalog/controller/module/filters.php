@@ -65,7 +65,7 @@ class ControllerModuleFilters extends Controller {
         }
         $this->model_filters_filters->filterProducts($filters);
 
-        echo('HELLO');
+//        echo('HELLO');
     }
 
     public function applyFilter() {
@@ -322,14 +322,16 @@ class ControllerModuleFilters extends Controller {
                     $rating = false;
                 }
                 if(isset($result['special'])){
-                    $discount_percentage = ((($result['price'] - $result['special']) / $result['price']) * 100);
+                    $discount_percentage = floor((($result['price'] - $result['special'])/$result['price'])*100);
                 } else {
                     $discount_percentage = '';
                 }
 
                 $this->data['products'][] = array(
+                    'quantity' => $result['quantity'],
                     'product_id' => $result['product_id'],
                     'thumb' => $image,
+                    'thumb_soldout'       => ($result['quantity'] <= 0)?$this->model_tool_image->resize('sold-out.png', $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height')):null,
                     'name' => $result['name'],
                     'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 100) . '..',
                     'price' => $price,
