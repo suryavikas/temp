@@ -299,8 +299,8 @@
         </operation>
 
 
-    </file>
-    <file name="catalog/language/english/common/header.php">
+    </file>    
+     <file name="catalog/language/english/common/header.php">
         <operation>
             <search position="replace"><![CDATA[$_['text_welcome']        = 'Welcome visitor you can <a href="%s">login</a> or <a href="%s">create an account</a>.';]]>
             </search>
@@ -410,10 +410,22 @@
         <operation>
             <search position="replace"><![CDATA[$_['entry_telephone']      = 'Telephone:';]]>
             </search>
-            <add><![CDATA[$_['entry_telephone']      = 'Mobile:';]]>
+            <add><![CDATA[$_['entry_telephone']      = 'Mobile:';
+            $_['text_modal_title']               = 'Error!';
+            $_['error_no_shipping_to_this_pincode']= 'Sorry, we do not have shipping service to your pincode, please contact our customer care!';]]>
             </add>
         </operation>
     </file>
+    <file name="catalog/controller/account/register.php">
+        <operation>
+            <search position="after"><![CDATA[$this->data['button_continue'] = $this->language->get('button_continue');]]>
+            </search>
+            <add><![CDATA[$this->data['text_modal_title'] = $this->language->get('text_modal_title');
+            $this->data['error_no_shipping_to_this_pincode'] = $this->language->get('error_no_shipping_to_this_pincode');]]>
+            </add>
+        </operation>
+    </file>
+
     <file name="catalog/language/english/checkout/checkout.php">
         <operation>
             <search position="replace"><![CDATA[$_['entry_telephone']                = 'Telephone:';]]>
@@ -432,9 +444,123 @@
     </file>
     <file name="catalog/controller/checkout/cart.php">
         <operation>
-            <search position="replace"><![CDATA[		$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');]]>
+            <search position="replace" ><![CDATA[		$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');]]>
             </search>
             <add><![CDATA[		$this->data['checkout'] = $this->url->link('checkout/onepagecheckout', '', 'SSL');]]>
+            </add>
+        </operation>
+        <operation>
+            <search position="replace" offset="10"><![CDATA[// Shipping]]>
+            </search>
+            <add><![CDATA[$this->setShippingCost();]]>
+            </add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[public function country() {]]>
+            </search>
+            <add><![CDATA[public function setShippingCost($countryId = 99, $zoneId = 1486, $postCode = 121003){
+                $this->language->load('checkout/cart');
+
+		$this->load->model('localisation/country');
+
+		$country_info = $this->model_localisation_country->getCountry($countryId);
+
+
+		$this->tax->setShippingAddress($countryId, $zoneId);
+
+		// Default Shipping Address
+		$this->session->data['shipping_country_id'] = $countryId;
+		$this->session->data['shipping_zone_id'] = $zoneId;
+		$this->session->data['shipping_postcode'] = $postCode;
+
+		if ($country_info) {
+			$country = $country_info['name'];
+			$iso_code_2 = $country_info['iso_code_2'];
+			$iso_code_3 = $country_info['iso_code_3'];
+			$address_format = $country_info['address_format'];
+		} else {
+			$country = '';
+			$iso_code_2 = '';
+			$iso_code_3 = '';
+			$address_format = '';
+		}
+
+		$this->load->model('localisation/zone');
+
+		$zone_info = $this->model_localisation_zone->getZone($zoneId);
+
+		if ($zone_info) {
+			$zone = $zone_info['name'];
+			$zone_code = $zone_info['code'];
+		} else {
+			$zone = '';
+			$zone_code = '';
+		}
+
+		$address_data = array(
+			'firstname'      => '',
+			'lastname'       => '',
+			'company'        => '',
+			'address_1'      => '',
+			'address_2'      => '',
+			'postcode'       => $postCode,
+			'city'           => '',
+			'zone_id'        => $zoneId,
+			'zone'           => $zone,
+			'zone_code'      => $zone_code,
+			'country_id'     => $countryId,
+			'country'        => $country,
+			'iso_code_2'     => $iso_code_2,
+			'iso_code_3'     => $iso_code_3,
+			'address_format' => $address_format
+		);
+
+		$quote_data = array();
+
+		$this->load->model('setting/extension');
+
+		$results = $this->model_setting_extension->getExtensions('shipping');
+
+		foreach ($results as $result) {
+			if ($this->config->get($result['code'] . '_status')) {
+				$this->load->model('shipping/' . $result['code']);
+
+				$quote = $this->{'model_shipping_' . $result['code']}->getQuote($address_data);
+
+				if ($quote) {
+					$quote_data[$result['code']] = array(
+						'title'      => $quote['title'],
+						'quote'      => $quote['quote'],
+						'sort_order' => $quote['sort_order'],
+						'error'      => $quote['error']
+					);
+				}
+			}
+		}
+
+		$sort_order = array();
+
+		foreach ($quote_data as $key => $value) {
+			$sort_order[$key] = $value['sort_order'];
+		}
+
+		array_multisort($sort_order, SORT_ASC, $quote_data);
+
+		$this->session->data['shipping_methods'] = $quote_data;
+                $shipping = explode('.', 'flatplusfree.flatplusfree');
+                $this->session->data['shipping_method'] = $this->session->data['shipping_methods'][$shipping[0]]['quote'][$shipping[1]];                
+    }]]>
+            </add>
+        </operation>
+
+    </file>
+
+    <file name="catalog/language/english/checkout/cart.php">
+        <operation>
+            <search position="replace"><![CDATA[$_['text_next']              = 'What would you like to do next?';]]>
+            </search>
+            <add><![CDATA[$_['text_next']       = 'Do you have a discount voucher/ coupon?'; ]]>
             </add>
         </operation>
     </file>

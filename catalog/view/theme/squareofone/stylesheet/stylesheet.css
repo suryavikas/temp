@@ -1793,7 +1793,15 @@ a.button:hover, input.button:hover {
 	cursor: pointer;
 }
 .cart-info tbody .price, .cart-info tbody .total {
+	text-align: right;        
+}
+
+.prod_total {
 	text-align: right;
+        color: #D14747;
+        font-family: Trebuchet MS, Helvetica, sans-serif;
+        font-weight: bold;
+        font-size: 13px;        
 }
 .cart-info tbody span.stock {
 	color: #F00;
@@ -1806,7 +1814,7 @@ a.button:hover, input.button:hover {
 	border-top: 1px solid #DDDDDD;
 	overflow: auto;
 	padding-top: 8px;
-	margin-bottom: 15px;
+	margin-bottom: 15px;        
 }
 .cart-total table {
 	float: right;
@@ -2677,7 +2685,7 @@ div.css-panes > div:first-child {
 }
 
 
-.form-field-input, .form-field-input-half, .form-field-input-full{
+.form-field-input, .form-field-input-half, .form-field-input-full, .form-field-input-half-selected {
     border: 1px solid #D5D5D5;
 /*    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;*/
     display: block;
@@ -2690,6 +2698,10 @@ div.css-panes > div:first-child {
 }
 .form-field-input-half {
     width: 245px;
+}
+
+.form-field-input-half-selected {
+    width: 263px;
 }
 .form-field-input-full {
 

@@ -10,17 +10,17 @@
 <?php if ($keywords) { ?>
 <meta name="keywords" content="<?php echo $keywords; ?>" />
 <?php } else {?>
-  <meta name="keywords" content='Online shopping India, Gifts to India, Fashion, Style, Vogue, Stylish, Party wear, Latest fashion, Men, Women, Accessories, Earrings, Pendents, Skirts, Stoles, Long Skirts, Short Skirts, Printed tops, Speghetti tops, 15 days refund, Free home delivery, Free shipping, Cash on delivery, COD, Delhi NCR, Bangalore, Mumbai, Chennai, Hyderabad' />
+<meta name="keywords" content='Online shopping India, Gifts to India, Fashion, Style, Vogue, Stylish, Party wear, Latest fashion, Men, Women, Accessories, Earrings, Pendents, Skirts, Stoles, Long Skirts, Short Skirts, Printed tops, Speghetti tops, 15 days refund, Free home delivery, Free shipping, Cash on delivery, COD, Delhi NCR, Bangalore, Mumbai, Chennai, Hyderabad' />
 <?php }?>
-  <meta name="author" content="Square One Trade Com "/>
-  <meta name="copyright" content="2012"/>
-  <meta name="email" content="info@squareofone.com"/>
-  <meta http-equiv="Content-Language" content="en"/>
-  <meta name="Charset" content="UTF-8"/>
-  <meta name="Rating" content="General"/>
-  <meta name="Distribution" content="Local"/>
-  <meta name="Robots" content="INDEX,NOFOLLOW"/>
-  <meta name="Revisit-after" content="7 Days"/>
+<meta name="author" content="Square One Trade Com "/>
+<meta name="copyright" content="2012"/>
+<meta name="email" content="info@squareofone.com"/>
+<meta http-equiv="Content-Language" content="en"/>
+<meta name="Charset" content="UTF-8"/>
+<meta name="Rating" content="General"/>
+<meta name="Distribution" content="Local"/>
+<meta name="Robots" content="INDEX,NOFOLLOW"/>
+<meta name="Revisit-after" content="7 Days"/>
 
 <?php if ($icon) { ?>
 <link href="<?php echo $icon; ?>" rel="icon" />
@@ -56,10 +56,12 @@
 <!-- Java script -->
 <!--<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>-->
+
 <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
+
 <!--<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css" />-->
-<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/external/jquery.cookie.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
@@ -327,8 +329,8 @@ display:block!important;
 //            pathClass:     'overideThisToUse', // the class you have applied to list items that lead to the current page
             pathLevels:    1,                  // the number of levels of submenus that remain open or are restored using pathClass
             delay:         800,                // the delay in milliseconds that the mouse can remain outside a submenu without it closing
-            animation:     {opacity:'show'},   // an object equivalent to first parameter of jQuery’s .animate() method
-            speed:         'normal',           // speed of the animation. Equivalent to second parameter of jQuery’s .animate() method
+            animation:     {opacity:'show'},   // an object equivalent to first parameter of jQueryâ€™s .animate() method
+            speed:         'normal',           // speed of the animation. Equivalent to second parameter of jQueryâ€™s .animate() method
             autoArrows:    true,               // if true, arrow mark-up generated automatically = cleaner source code at expense of initialisation performance
             dropShadows:   true                // completely disable drop shadows by setting this to false
         });

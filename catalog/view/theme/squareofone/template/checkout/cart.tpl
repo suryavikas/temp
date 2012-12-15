@@ -65,7 +65,7 @@
               <input type="image" style="border:none" src="catalog/view/theme/default/image/update.png" alt="<?php echo $button_update; ?>" title="<?php echo $button_update; ?>" />
               &nbsp;<a href="<?php echo $product['remove']; ?>"><img src="catalog/view/theme/default/image/remove.png" align="right" style="padding-right: 50px;" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" /></a></td>
             <td class="price"><?php echo $product['price']; ?></td>
-            <td class="total"><?php echo $product['total']; ?></td>
+            <td class="total prod_total"><?php echo $product['total']; ?></td>
           </tr>
           <?php } ?>
           <?php foreach ($vouchers as $vouchers) { ?>
@@ -86,16 +86,15 @@
   <?php if ($coupon_status || $voucher_status || $reward_status || $shipping_status) { ?>
   <h2><?php echo $text_next; ?></h2>
   <div class="content">
-    <p><?php echo $text_next_choice; ?></p>
-    <table class="radio">
+      <table class="radio">
       <?php if ($coupon_status) { ?>
-      <tr class="highlight">
+      <tr class="highlight" style="display:none;">
         <td><?php if ($next == 'coupon') { ?>
-          <input type="radio" name="next" value="coupon" id="use_coupon" checked="checked" />
+          <input type="radio" style="display:none;" name="next" value="coupon" id="use_coupon" checked="checked" />
           <?php } else { ?>
-          <input type="radio" name="next" value="coupon" id="use_coupon" />
+          <input type="radio" style="display:none;" name="next" value="coupon" id="use_coupon" />
           <?php } ?></td>
-        <td><label for="use_coupon"><?php echo $text_use_coupon; ?></label></td>
+        <td ><label for="use_coupon"><?php echo $text_use_coupon; ?></label></td>
       </tr>
       <?php } ?>
       <?php if ($voucher_status) { ?>
@@ -131,7 +130,7 @@
     </table>
   </div>
   <div class="cart-module">
-    <div id="coupon" class="content" style="display: <?php echo ($next == 'coupon' ? 'block' : 'none'); ?>;">
+    <div id="coupon" class="content" style="display:block">
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
         <?php echo $entry_coupon; ?>&nbsp;
         <input type="text" name="coupon" value="<?php echo $coupon; ?>" />
@@ -139,6 +138,7 @@
         &nbsp;
         <input type="submit" value="<?php echo $button_coupon; ?>" class="button" />
       </form>
+        <br/>
     </div>
     <div id="voucher" class="content" style="display: <?php echo ($next == 'voucher' ? 'block' : 'none'); ?>;">
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
@@ -209,6 +209,18 @@
   
   <?php echo $content_bottom; ?></div>
 <script type="text/javascript"><!--
+
+
+
+
+
+$("#total tr:last-child").css({
+        'color': '#D14747',
+        'font-family': 'Trebuchet MS, Helvetica, sans-serif',
+        'font-weight': 'bold',
+        'font-size': '20px'});
+
+
 $('input[name=\'next\']').bind('change', function() {
 	$('.cart-module > div').hide();
 	

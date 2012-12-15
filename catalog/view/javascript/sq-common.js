@@ -312,3 +312,56 @@ function sendRequest(arrData, getParams, categoryId, appendToUrl){
             $(msg).insertAfter('.sort');
         });
     }
+
+    function loadPostCode(divId){
+
+        $.ajax({
+		url: 'index.php?route=checkout/onepagecheckout/pincode&pincode=' + $(divId+ ' input[name=\'postcode\']').val(),
+		dataType: 'json',
+		beforeSend: function() {
+			$(divId+' input[name=\'postcode\']').before('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+		},
+		complete: function() {
+			$('.wait').remove();
+		},
+		success: function(json) {
+                    if(!json['error']){
+                        if(json['location'] == json['city_name']){
+                            var content = 'City: '+json['city_name']+', State: '+json['state'];
+                        } else{
+                            var content = 'Locality: '+json['location']+', City: '+json['city_name']+', State: '+json['state'];
+                        }
+//                        $(divId+' input[name=\'city\']').val(json['city_name']);
+//                        $(divId+' #city_info').empty();
+//                        $(divId+' #city_info').append(content);
+//                        $(divId+' #country_id').val(json['country_id']);
+//                        $(divId+' #zone_id').val(json['state_id']);
+                    } else{
+
+                        //Clearing of pincode and other data on error
+//                        $('#guest-buy input[name=\'postcode\']').val('');
+                        $(divId+' input[name=\'city\']').val('');
+//                        $(divId+' #country_id').val('');
+//                        $(divId+' #zone_id').val('');
+//                        $(divId+' #city_info').empty();
+                        $(divId+' #modal-error').html(json['error']);
+                        $('#filter-load').hide();
+                        $( "#modal-error" ).dialog({
+                            modal: true,                          
+                            buttons: {
+                                    Ok: function() {
+                                        $(divId+ ' input[name=\'postcode\']').val('');
+                                            $( this ).dialog( "close" );
+
+
+                                    }
+                            }
+                        });
+                    }
+//
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+    }

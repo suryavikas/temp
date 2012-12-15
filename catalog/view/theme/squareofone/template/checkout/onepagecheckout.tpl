@@ -1,4 +1,11 @@
 <?php echo $header; ?>
+<div id="modal-error" title="<?php echo $text_modal_title ; ?>" style="display:none;">
+    <p>
+        <span class="ui-icon ui-icon-notice" style="float: left; margin: 0 7px 50px 0;"></span>
+        <?php echo $error_no_shipping_to_this_pincode; ?>
+    </p>
+    <p><br></p>
+</div>
 <div id="content"><?php echo $content_top; ?>
     <div class="breadcrumb">
         <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -54,12 +61,8 @@
                             <div class="right">
                                 <div id="guest-buy">
                                     <h2><?php echo $text_your_details; ?></h2>
-                                    <div id="modal-error" title="<?php echo $text_modal_title ; ?>" style="display:none">
-                                        <p>
-                                            <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
-                                            <?php $error_no_shipping_to_this_pincode; ?>
-                                        </p>                                        
-                                    </div>
+
+                                    
                                     <div id="guest-buy-error" style="display:none"></div>
                                      <fieldset title="<?php echo $entry_email; ?>" id="email" class="form-field-full">
                                          <label>
@@ -69,24 +72,25 @@
                                                  <?php echo $entry_email; ?>
                                         </label>
                                         <input type="text" name="email" value="<?php echo $email; ?>" class="form-field-input-full" />
-                                     </fieldset>                                    
+                                     </fieldset>
+                                    
                                     <fieldset title="<?php echo $entry_postcode; ?>" id="pincode" class="form-field-left">
                                         <label>
                                                 <span>
                                                     <em>*</em>
                                                 </span>
-                                                 <?php echo $entry_postcode; ?>
+                                                <?php echo $entry_postcode; ?>
                                         </label>
                                         <input type="text" maxlength="6" name="postcode" value="<?php /*echo $postcode;*/ ?>" class="form-field-input-half" />
                                         <span>
-                                            <input type="hidden" name="city" disabled="true" value="<?php echo $city; ?>" class="form-field-input-half" />
+
                                             <span id="city_info"></span>
-                                            <input type="hidden" name="country_id" id="country_id"/>
-                                            <input type="hidden" name ="zone_id" id ="zone_id"/>
+                                            <input type="hidden" name="country_id" id="country_id" />
+<!--                                            <input type="hidden" name ="zone_id" id ="zone_id"/>-->
                                             <input type="hidden" name="shipping_address_guest" value="1" id="shipping" />
                                         </span>
                                     </fieldset>
-                                    
+                                                         
                                     
                                     <fieldset title="<?php echo $entry_firstname; ?>" id="first_name" class="form-field-left">
                                         <label>
@@ -125,6 +129,34 @@
                                          <textarea rows="4" cols="34" name="address_1" value="<?php echo $address_1; ?>" class="form-field-input-full"> </textarea>
                                         
                                      </fieldset>
+                                    
+                                    <fieldset title="<?php echo $entry_postcode; ?>" id="pincode" class="form-field-left">
+                                        <label>
+                                                <span>
+                                                    <em>*</em>
+                                                </span>
+                                                <?php echo $entry_city; ?>
+                                        </label>
+                                        <input type="text" name="city"  value="<?php echo $city; ?>" class="form-field-input-half" />
+                                    </fieldset>
+                                    <fieldset title="<?php echo $text_none; ?>" id="zone" class="form-field-left">
+                                        <label>
+                                                <span>
+                                                    <em>*</em>
+                                                </span>
+                                                <?php echo $entry_zone; ?>
+                                        </label>
+                                        <select name="zone_id" class="form-field-input-half-selected">
+                                            <option value="0" selected="selected"><?php echo $text_none; ?></option>
+                                        <?php
+                                                foreach ($zones as $zone) {
+
+                                                    echo '<option value="'.$zone['zone_id'].'" >'. $zone['name'] .'</option>';
+                                                }
+                                        ?>
+                                        </select>
+
+                                    </fieldset>               
                                      <fieldset title="<?php echo $entry_address_2; ?>" id="email" class="form-field-full">
                                          <label>
                                                 <span></span>
@@ -132,7 +164,6 @@
                                         </label>
                                         <input type="text" name="address_2" value="<?php echo $address_2; ?>" class="form-field-input-full" />
                                      </fieldset>
-                                     
                                     <div style="display:none;">
                                         <?php echo $entry_fax; ?><br />
                                         <input type="text" name="fax" value="<?php echo $fax; ?>" class="large-field" />
@@ -172,7 +203,7 @@
                                     </div>                                
                                 <div class="buttons">
                                     <div class="right">
-                                        <input type="button" value="<?php echo $button_continue; ?>" id="button-guest" class="button" />
+                                        <input type="button" value="<?php echo $text_button; ?>" id="button-guest" class="button" />
                                     </div>
                                 </div>
                                 </div>
@@ -310,59 +341,7 @@
     $('#loggedin-user input[name=\'postcode\']').live('change', function() {
 	loadPostCode('#login');
     });
-    function loadPostCode(divId){
-
-        $.ajax({
-		url: 'index.php?route=checkout/onepagecheckout/pincode&pincode=' + $(divId+ ' input[name=\'postcode\']').val(),
-		dataType: 'json',
-		beforeSend: function() {
-			$(divId+' input[name=\'postcode\']').before('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
-		},
-		complete: function() {
-			$('.wait').remove();
-		},
-		success: function(json) {
-                    if(!json['error']){
-                        if(json['location'] == json['city_name']){
-                            var content = 'City: '+json['city_name']+', State: '+json['state'];
-                        } else{
-                            var content = 'Locality: '+json['location']+', City: '+json['city_name']+', State: '+json['state'];
-                        }
-                        $(divId+' input[name=\'city\']').val(json['city_name']);
-                        $(divId+' #city_info').empty();
-                        $(divId+' #city_info').append(content);
-                        $(divId+' #country_id').val(json['country_id']);
-                        $(divId+' #zone_id').val(json['state_id']);
-                    } else{
-
-                        //Clearing of pincode and other data on error
-//                        $('#guest-buy input[name=\'postcode\']').val('');
-                        $(divId+' input[name=\'city\']').val('');
-                        $(divId+' #country_id').val('');
-                        $(divId+' #zone_id').val('');
-                        $(divId+' #city_info').empty();
-                        $(divId+' #modal-error').html(json['error']);
-                        
-                        $( "#modal-error" ).dialog({
-                            modal: true,
-                            buttons: {
-                                    Ok: function() {
-                                        $(divId+ ' input[name=\'postcode\']').val('');
-                                            $( this ).dialog( "close" );
-
-
-                                    }
-                            }
-                        });
-                    }
-//
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});
-    }
-
+    
 // Shipping Address
 $('#button-shipping-address').live('click', function() {
 	$.ajax({
@@ -475,15 +454,19 @@ $('#button-guest').live('click', function() {
                             } else if (result.error) {
                                 console.log('else if');
                                 var errors = '';
+                                if (result.error.email) {
+					errors += '<span class="error">' + result.error.email + '</span>';
+				}
+                                if (result.error.postcode) {
+					errors += '<span class="error">' + result.error.postcode + '</span>';
+				}
                                 if (result.error.firstname) {
 					errors += '<span class="error">' + result.error.firstname + '</span>';
 				}
 				if (result.error.lastname) {
 					errors += '<span class="error">' + result.error.lastname + '</span>';
 				}
-				if (result.error.email) {
-					errors += '<span class="error">' + result.error.email + '</span>';
-				}
+				
 				if (result.error.telephone) {
 					errors += '<span class="error">' + result.error.telephone + '</span>';
 				}
@@ -493,9 +476,7 @@ $('#button-guest').live('click', function() {
 				if (result.error.city) {
 					errors += '<span class="error">' + result.error.city + '</span>';
 				}
-				if (result.error.postcode) {
-					errors += '<span class="error">' + result.error.postcode + '</span>';
-				}
+				
 				if (result.error.country) {
 					errors += '<span class="error">' + result.error.country + '</span>';
 				}

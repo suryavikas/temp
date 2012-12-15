@@ -73,7 +73,7 @@ ul.sf-navbar .current ul ul {
 /*** point all arrows down ***/
 /* point right for anchors in subs */
 .sf-navbar ul .sf-sub-indicator { background-position: -10px -100px; }
-.sf-navbar ul a > .sf-sub-indicator { background-position: 0 -100px; }
+.sf-navbar ul a > .sf-sub-indicator { background-position: 0 -100px; margin:7px 0 0 0; }
 /* apply hovers to modern browsers */
 .sf-navbar ul a:focus > .sf-sub-indicator,
 .sf-navbar ul a:hover > .sf-sub-indicator,

@@ -2,6 +2,8 @@
 
 class ControllerCheckoutOnePageCheckout extends Controller {
 
+    private $countryCode = 99;
+    
     public function pincode() {
         $json = array();
 
@@ -23,6 +25,8 @@ class ControllerCheckoutOnePageCheckout extends Controller {
                 'courier_provider' => $pincode['courier_provider'],
                 'pin_code' => $pincode['pin_code']
             );
+            $this->session->data['pincode_based_details'] = $json;
+
         } else {
             $this->language->load('checkout/onepagecheckout');
             $json = array(
@@ -39,6 +43,14 @@ class ControllerCheckoutOnePageCheckout extends Controller {
             $this->redirect($this->url->link('checkout/cart'));
         }
 
+        //Populating states list
+        $this->load->model('localisation/zone');
+
+    	$zones = $this->model_localisation_zone->getZonesByCountryId($this->countryCode);
+//        print_r($zones);
+//        die;
+
+        $this->data['zones'] = $zones;
         // Validate minimum quantity requirments.
         $products = $this->cart->getProducts();
         foreach ($products as $product) {
@@ -95,6 +107,7 @@ class ControllerCheckoutOnePageCheckout extends Controller {
         $this->data['text_modify'] = $this->language->get('text_modify');
         $this->data['error_no_shipping_to_this_pincode'] = $this->language->get('error_no_shipping_to_this_pincode');
         $this->data['text_modal_title'] = $this->language->get('text_modal_title');
+        $this->data['text_button'] = $this->language->get('text_button');
 
 
         $this->data['logged'] = $this->customer->isLogged();
@@ -304,6 +317,7 @@ class ControllerCheckoutOnePageCheckout extends Controller {
         $this->load->model('setting/extension');
 
         $results = $this->model_setting_extension->getExtensions('shipping');
+       
 //        $shipping_address = $this->session->data['guest']['shipping'];
         if ($this->customer->isLogged() && isset($this->session->data['shipping_address_id'])) {
 			$shipping_address = $this->model_account_address->getAddress($this->session->data['shipping_address_id']);
@@ -317,7 +331,7 @@ class ControllerCheckoutOnePageCheckout extends Controller {
                 $this->load->model('shipping/' . $result['code']);
 
                 $quote = $this->{'model_shipping_' . $result['code']}->getQuote($shipping_address);
-
+               
                 if ($quote) {
                     $quote_data[$result['code']] = array(
                         'title' => $quote['title'],
@@ -333,15 +347,14 @@ class ControllerCheckoutOnePageCheckout extends Controller {
 
 //Always choose the first one and then leave rest
         foreach ($quote_data as $key => $value) {
-
-            $sort_order[$key] = $value['sort_order'];
+            $sort_order[$key] = $value['sort_order'];            
             $this->session->data['shipping_method'] = $quote_data[$key]['quote'][$key];
             break;
         }
 
-        array_multisort($sort_order, SORT_ASC, $quote_data);
+//        array_multisort($sort_order, SORT_ASC, $quote_data);
         $this->session->data['shipping_methods'] = $quote_data;
-
+        
         $json = array();
         if (sizeof($quote_data) <= 0) {
             $this->language->load('checkout/onepagecheckout');
@@ -409,9 +422,11 @@ class ControllerCheckoutOnePageCheckout extends Controller {
             $this->session->data['guest']['payment']['address_2'] = $this->request->post['address_2'];
             $this->session->data['guest']['payment']['postcode'] = $this->request->post['postcode'];
             $this->session->data['guest']['payment']['city'] = $this->request->post['city'];
+            //Added guard rail to get details from server side code only
+            $this->request->post['country_id'] = $this->request->post['country_id'] ? '': $this->session->data['pincode_based_details']['country_id'];
             $this->session->data['guest']['payment']['country_id'] = $this->request->post['country_id'];
             $this->session->data['guest']['payment']['zone_id'] = $this->request->post['zone_id'];
-
+            
             $this->load->model('localisation/country');
 
             $country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
@@ -494,6 +509,7 @@ class ControllerCheckoutOnePageCheckout extends Controller {
     }
 
     public function set_payment_shipping() {
+        
         ////////////////////////////////////////////Validate Form Input///////////////////////////////////////////////////////////////
         $json = $this->guest_checkout_form_validate();
         
@@ -1518,9 +1534,13 @@ class ControllerCheckoutOnePageCheckout extends Controller {
 //			}
 
                 }
-//			if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
-//				$json['error']['city'] = $this->language->get('error_city');
-//			}
+                if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
+                        $json['error']['city'] = $this->language->get('error_city');
+                }
+
+                if ((utf8_strlen($this->request->post['zone_id']) < 2) || (utf8_strlen($this->request->post['zone_id']) > 128)) {
+                        $json['error']['zone'] = $this->language->get('error_zone');
+                }
 
 //			$this->load->model('localisation/country');
 //

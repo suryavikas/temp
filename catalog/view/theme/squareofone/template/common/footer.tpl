@@ -49,7 +49,7 @@
 	var str = $("form").serialize();
 	 $.ajax({
           type:'post',
-          url: 'http://localhost/lists/?p=subscribe&id=3',
+          url: './lists/?p=subscribe&id=3',
           data: str,
           success: function(){
                   $("#message").html("News Letter Subscribe Form Submitted!");

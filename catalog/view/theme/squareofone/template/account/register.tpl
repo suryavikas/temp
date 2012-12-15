@@ -1,4 +1,28 @@
 <?php echo $header; ?>
+<div id="modal-error" title="<?php echo $text_modal_title ; ?>" style="display:none">
+        <p>
+            <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 50px 0;"></span>
+            <?php echo $error_no_shipping_to_this_pincode; ?>
+        </p>
+    </div>
+<div id="filter-load" style="display: none; position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    z-index: 10000;">
+    <img alt="Shopping cart loading..." src="catalog/view/theme/squareofone/image/ajax-loader-filters.gif"  style="position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    text-align: center;"/>
+</div>
 <?php if ($error_warning) { ?>
 <div class="warning"><?php echo $error_warning; ?></div>
 <?php } ?>
@@ -12,7 +36,7 @@
   <h1><?php echo $heading_title; ?></h1>  <div class="all_page_left">
   <?php echo $column_left; ?><?php echo $column_right; ?>
     </div>
-  
+   
   
   <div class="all_page_right">
 <!--  <p><?php echo $text_account_already; ?></p>-->
@@ -285,6 +309,13 @@ $('select[name=\'country_id\']').bind('change', function() {
 });
 
 $('select[name=\'country_id\']').trigger('change');
+
+$('#content input[name=\'postcode\']').live('change', function() {
+        $('#filter-load').hide();
+	loadPostCode('#login');
+        $('#filter-load').show();
+        
+});
 //--></script>
 <script type="text/javascript"><!--
 $('.colorbox').colorbox({

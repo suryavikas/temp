@@ -34,6 +34,7 @@ $_['text_welcome_shipping']          = 'Welcome %s, Shipping address please!';
 $_['text_welcome']                   = '<a href="%s">Sign up</a> | <a href="%s">Forgot password</a>.';
 $_['text_option']                    = 'Or';
 $_['text_modal_title']               = 'Error!';
+$_['text_button']                    = 'Pay Now!';
 
 // Column
 $_['column_name']                    = 'Product Name';

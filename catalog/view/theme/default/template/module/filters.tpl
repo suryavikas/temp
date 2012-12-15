@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="catalog/view/theme/default/stylesheet/filters.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/filters.css" />
 <div class="box">
     <div class="box-heading"><?php echo $heading_title; ?></div>
     <div class="filterBox box-content">
