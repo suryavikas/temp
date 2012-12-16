@@ -20,7 +20,7 @@
 <?php } ?>
 <div id="shipping-new" style="display: <?php echo ($addresses ? 'none' : 'block'); ?>;">
     <div id="loggedin-user">
-        <div id="guest-buy-error" style="display:none"></div>
+        <div id="loggedin-user-new-address-error" style="display:none; border: 1px solid;"></div>
         <fieldset title="<?php echo $entry_email; ?>" id="email" class="form-field-full">
             <label>
                 <span>
@@ -39,16 +39,10 @@
             </label>
             <input type="text" name="postcode" value="" class="form-field-input-half" />
         </fieldset>
-        <fieldset title="<?php echo $entry_city; ?>" id="" class="form-field-left">
-            <label>
-                <span>
-                </span> <?php echo $entry_city; ?>
-            </label>
-            <input type="text" name="city" disabled="true" value="" class="form-field-input-half" />
-        </fieldset>
+        
         <div id="city_info"></div>
         <input type="hidden" name="country_id" id="country_id"/>
-        <input type="hidden" name ="zone_id" id ="zone_id"/>
+<!--        <input type="hidden" name ="zone_id" id ="zone_id"/>-->
         <input type="hidden" name="shipping_address_guest" value="1" id="shipping" />
         <fieldset title="<?php echo $entry_firstname; ?>" id="first_name" class="form-field-left">
             <label>
@@ -67,6 +61,33 @@
             </label>
             <input type="text" name="lastname" value="" class="form-field-input-half" />
         </fieldset>
+        <fieldset title="<?php echo $entry_postcode; ?>" id="pincode" class="form-field-left">
+                <label>
+                        <span>
+                            <em>*</em>
+                        </span>
+                        <?php echo $entry_city; ?>
+                </label>
+                <input type="text" name="city"  value="" class="form-field-input-half" />
+            </fieldset>
+            <fieldset title="<?php echo $text_none; ?>" id="zone" class="form-field-left">
+                <label>
+                        <span>
+                            <em>*</em>
+                        </span>
+                        <?php echo $entry_zone; ?>
+                </label>
+                <select name="zone_id" class="form-field-input-half-selected">
+                    <option value="0" selected="selected"><?php echo $text_none; ?></option>
+                <?php
+                        foreach ($zones as $zone) {
+
+                            echo '<option value="'.$zone['zone_id'].'" >'. $zone['name'] .'</option>';
+                        }
+                ?>
+                </select>
+
+            </fieldset>
 
         <fieldset title="<?php echo $entry_telephone; ?>" id="email" class="form-field-full">
             <label>
