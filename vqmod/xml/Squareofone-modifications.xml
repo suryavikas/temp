@@ -362,9 +362,9 @@
 		$this->data['order'] = $this->url->link('account/order', '', 'SSL');
 		$this->data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
 		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
-                $this->data['guestorder'] = $this->url->link('account/guest', '', 'SSL');
-//		$this->data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
-
+		$this->data['guestorder'] = $this->url->link('account/guest', '', 'SSL');
+		$this->data['text_tellafriend'] = $this->language->get('text_tellafriend');		
+		$this->data['text_track_order'] = $this->language->get('track_order');
                 $this->load->model('catalog/product');
 
 		$this->load->model('tool/image');
@@ -379,7 +379,8 @@
                             'href'    	 => $this->url->link('product/product', 'product_id=' . $result['product_id']),
                     );
 		}
-
+		$this->data['tellafriend'] = $this->url->link('information/tellafriend', '', 'SSL');
+		$this->data['track_order'] = $this->url->link('account/guest', '', 'SSL');
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/footer.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/footer.tpl';
 		} else {
@@ -400,8 +401,9 @@
             <add><![CDATA[$_['best_seller']       = 'Best Seller';
             $_['subscribe']       = 'Subscribe';
             $_['newsletter_header']       = 'Newsletter';
-            $_['best_seller']       = 'Best Seller';
-            $_['best_seller']       = 'Best Seller';]]>
+            $_['best_seller']       = 'Best Seller';  
+			$_['text_tellafriend'] = 'Tell a Friend';			
+			$_['track_order']       = 'Track your Order';]]>
             </add>
         </operation>
     </file>

@@ -8,6 +8,7 @@
           <?php foreach ($informations as $information) { ?>
           <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
           <?php } ?>
+          <li><a href="<?php echo $tellafriend; ?>"><?php echo $text_tellafriend; ?></a></li>
         </ul>
         <div class="clear"></div>
       </div>
@@ -17,7 +18,7 @@
           <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
           <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li>
           <li><a href="<?php echo $sitemap; ?>"><?php echo $text_sitemap; ?></a></li>
-          <li><a href="index.php?route=account/guest">Guest Order</a></li>
+          <li><a href="<?php echo $track_order; ?>"><?php echo $text_track_order; ?></a></li>
         </ul>
       </div>
       <div class="column">
@@ -26,7 +27,7 @@
           <li><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a></li>
           <li><a href="<?php echo $order; ?>"><?php echo $text_order; ?></a></li>
           <li><a href="<?php echo $wishlist; ?>"><?php echo $text_wishlist; ?></a></li>
-          <li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>
+          <li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>          
         </ul>
       </div>
       <div class="column">
