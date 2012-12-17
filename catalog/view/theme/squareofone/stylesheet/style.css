@@ -6342,7 +6342,7 @@ p {
 
 
 
-.buy_detail_left span {
+.buy_detail_left .special {
 
 
 
@@ -6374,6 +6374,9 @@ p {
     color:red;
 
 
+}
+.WebRupee{
+    font-size: 1.7em !important;
 }
 
 .about_size .error{

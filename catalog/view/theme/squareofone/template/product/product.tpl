@@ -56,7 +56,7 @@
         <?php
           } else{
               ?>
-              <span><?php echo $price; ?></span> <label><?php echo $special; ?></label>
+              <span class ="special"><?php echo $price; ?></span> <br /><label><?php echo $special; ?></label>
         <?php
               }       ?>
                  <p>Delivered in 2 - 5 business days </p>
@@ -345,7 +345,8 @@
         <?php if ($product['rating']) { ?>
         <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>
         <?php } ?>
-        <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button"><?php echo $button_cart; ?></a></div>
+<!--        <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button"><?php echo $button_cart; ?></a>-->
+      </div>
       <?php } ?>
     </div>
   </div>

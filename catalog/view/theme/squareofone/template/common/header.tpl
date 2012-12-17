@@ -69,6 +69,7 @@
 <script type="text/javascript" src="catalog/view/javascript/superfish.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/sq-common.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/nivo-slider/jquery.nivo.slider.pack.js"></script>
+<script src="http://cdn.webrupee.com/js" type="text/javascript"></script>
 <!--<script type="text/javascript" src="min/?g=sq-js"></script>-->
 
 
