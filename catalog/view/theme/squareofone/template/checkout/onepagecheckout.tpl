@@ -37,7 +37,8 @@
                                     <h2><?php echo $text_returning_customer; ?></h2>
                                     <div id="login-buy-error" style="display:none;" ></div>
                                     <b><?php echo $entry_email; ?></b><br />
-                                    <input type="email" name="email" class="large-field" required="required" data-message="<?php echo $error_email; ?>"/>                                   
+                                    <input type="email" name="email" class="large-field" required="required" data-message="<?php echo $error_email; ?>"/>
+                                    
                                     <b><?php echo $entry_password; ?></b><br />
                                     <input type="password" name="password" class="large-field" required="required" data-message="<?php echo $error_password_empty; ?>"/>
                                     
@@ -64,14 +65,15 @@
 
                                     
                                     <div id="guest-buy-error" style="display:none"></div>
-                                     <fieldset title="<?php echo $entry_email; ?>" id="email" class="form-field-full">
+                                     <fieldset title="<?php echo $entry_email; ?>"  class="form-field-full">
                                          <label>
                                                 <span>
                                                     <em>*</em>
                                                 </span>
                                                  <?php echo $entry_email; ?>
                                         </label>
-                                        <input type="text" name="email" value="<?php echo $email; ?>" class="form-field-input-full" />
+                                        <input type="text" id="email" name="email" value="<?php echo $email; ?>" class="form-field-input-full" />
+                                        <div id="suggest"></div>
                                      </fieldset>
                                     
                                     <fieldset title="<?php echo $entry_postcode; ?>" id="pincode" class="form-field-left">

@@ -1,0 +1,127 @@
+<modification>
+	<id>Email Mailcheck on registration</id>
+	<version><![CDATA[1]]></version>
+	<vqmver><![CDATA[2]]></vqmver>
+	<author>Peter Stuart - embermonkey</author>
+	<file name="catalog/view/theme/*/template/account/register.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td><input type="text" name="email" value="<?php echo $email; ?>" class="inpt" />]]></search>
+			<add><![CDATA[
+          <td><input type="text" name="email" id="email" value="<?php echo $email; ?>" class="inpt"/>
+          <div id="suggest"></div>
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[<?php echo $footer; ?>]]></search>
+			<add><![CDATA[
+<style>
+
+	#suggest {
+		margin-top:5px;	
+		display:none;
+	}
+	
+	#emailSuggestion {
+		font-weight:bold;
+		cursor:pointer;
+	}
+	
+	#closeSuggestion {
+		font-weight:bold;
+		cursor:pointer;
+		color:#aaa;
+	}
+		
+	#emailSuggestion:hover, #closeSuggestion:hover {
+		text-decoration:underline;
+	}
+</style>
+<script>
+$('#email').on('blur', function() {
+  $(this).mailcheck({
+    suggested: function(element, suggestion) {
+          $("#suggest").html("Did you mean: <span id='emailSuggestion'>" + suggestion.full + "</span> <span style='color:#bbb;'>|</span> <span id='closeSuggestion'>No</span>");
+		  $("#suggest").fadeIn(500);
+    },
+    empty: function(element) {
+      $("#suggest").html("");
+    }
+  });
+});
+$("#emailSuggestion").live("click", function(){
+	var email = $(this).html();
+	$("#email").val(email);
+	$("#suggest").fadeOut(500);
+});
+$("#closeSuggestion").live("click", function(){
+	$("#suggest").fadeOut(500);
+});
+</script>
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[<?php echo $header; ?>]]></search>
+			<add><![CDATA[
+<script type="text/javascript" src="catalog/view/javascript/mailcheck.min.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/mailcheck.js"></script>
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/*/template/checkout/onepagecheckout.tpl">		
+		<operation>
+			<search position="before"><![CDATA[<?php echo $footer; ?>]]></search>
+			<add><![CDATA[
+<style>
+
+	#suggest {
+		margin-top:5px;	
+		display:none;
+	}
+	
+	#emailSuggestion {
+		font-weight:bold;
+		cursor:pointer;
+	}
+	
+	#closeSuggestion {
+		font-weight:bold;
+		cursor:pointer;
+		color:#aaa;
+	}
+		
+	#emailSuggestion:hover, #closeSuggestion:hover {
+		text-decoration:underline;
+	}
+</style>
+<script>
+$('#email').on('blur', function() {
+  $(this).mailcheck({
+    suggested: function(element, suggestion) {
+          $("#suggest").html("Did you mean: <span id='emailSuggestion'>" + suggestion.full + "</span> <span style='color:#bbb;'>|</span> <span id='closeSuggestion'>No</span>");
+		  $("#suggest").fadeIn(500);
+    },
+    empty: function(element) {
+      $("#suggest").html("");
+    }
+  });
+});
+$("#emailSuggestion").live("click", function(){
+	var email = $(this).html();
+	$("#email").val(email);
+	$("#suggest").fadeOut(500);
+});
+$("#closeSuggestion").live("click", function(){
+	$("#suggest").fadeOut(500);
+});
+</script>
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[<?php echo $header; ?>]]></search>
+			<add><![CDATA[
+<script type="text/javascript" src="catalog/view/javascript/mailcheck.min.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/mailcheck.js"></script>
+			]]></add>
+		</operation>
+	</file>
+</modification>
