@@ -139,9 +139,9 @@ echo $header; ?>
                             <?php
                              }
                             ?>
-                            <div class="clear"></div>
-                            <a href="<?php echo $productArr[$i]['href'] ?>" <?php if ($productArr[$i]['quantity'] <= 0) { echo 'style="display:none"'; } ?> class="buy_now_button"><span><?php echo $buy_now; ?></span></a>
-                            <div class="clear"></div>
+<!--                            <div class="clear"></div>
+                            <a href="<?php echo $productArr[$i]['href'] ?>" <?php if ($productArr[$i]['quantity'] <= 0) { echo 'style="display:none"'; } ?> class="buy_now_button"><span><?php echo $buy_now; ?></span></a>                            
+                            <div class="clear"></div>-->
                         </div>
                     </li>
                 
@@ -186,8 +186,10 @@ echo $header; ?>
             <?php if ($product['rating']) { ?>
             <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>
             <?php } ?>
-            <div class="cart">
+            <div class="cart">               
                 <input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />
+
+
             </div>
             <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');"><?php echo $button_wishlist; ?></a></div>
             <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');"><?php echo $button_compare; ?></a></div>
@@ -297,5 +299,6 @@ echo $header; ?>
     } else {
         display('list');
     }
+  
     //--></script>
 <?php echo $footer; ?>

@@ -25,7 +25,10 @@
         <?php if ($product['rating']) { ?>
 <!--        <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>-->
         <?php } ?>
-        <div class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>
+        <div class="cart">
+            <input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />
+<!--            <input type="button" value="<?php echo $button_buy_now; ?>" onclick="buyNow('<?php echo $product['product_id']; ?>');" class="button" />-->
+        </div>
       </div>
       <?php } ?>
     </div>

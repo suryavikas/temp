@@ -139,7 +139,7 @@ margin:0px 0px 0px 40px!important;
     z-index: 99999 !important;
 }
 #header {
-    margin: -27px 0 0;
+    margin: -12px 0 0;
     padding: 0;
 }
 </style>

@@ -316,6 +316,14 @@
             </add>
         </operation>
     </file>
+    <file name="catalog/language/english/english.php">
+        <operation>
+            <search position="after"><![CDATA[$_['button_quote']          = 'Get Quotes';]]>
+            </search>
+            <add><![CDATA[$_['button_buy_now']        = 'Buy Now';]]>
+            </add>
+        </operation>        
+    </file>
     <file name="catalog/controller/common/footer.php">
         <operation>
             <search position="replace" offset="54"><![CDATA[protected function index() {]]>
@@ -402,12 +410,23 @@
             $_['subscribe']       = 'Subscribe';
             $_['newsletter_header']       = 'Newsletter';
             $_['best_seller']       = 'Best Seller';  
-			$_['text_tellafriend'] = 'Tell a Friend';			
-			$_['track_order']       = 'Track your Order';]]>
+            $_['text_tellafriend'] = 'Tell a Friend';
+            $_['track_order']       = 'Track your Order';
+            
+            ]]>
             </add>
         </operation>
     </file>
-	
+
+    <file name="catalog/language/english/information/contact.php">
+        <operation>
+            <search position="after"><![CDATA[$_['email_subject']  = 'Enquiry %s';]]>
+            </search>
+            <add><![CDATA[$_['text_location']       = 'Address';
+            $_['text_telephone']       = 'Call Us';]]>
+            </add>
+        </operation>
+    </file>
     <file name="catalog/language/english/account/register.php">
         <operation>
             <search position="replace"><![CDATA[$_['entry_telephone']      = 'Telephone:';]]>
@@ -427,7 +446,7 @@
             </add>
         </operation>
     </file>
-
+     
     <file name="catalog/language/english/checkout/checkout.php">
         <operation>
             <search position="replace"><![CDATA[$_['entry_telephone']                = 'Telephone:';]]>
@@ -1079,6 +1098,33 @@
             ]]></add>
             </operation>
             </file>
+
+        <file name="catalog/controller/module/bestseller.php">
+            <operation>
+                <search position="after"><![CDATA[$this->data['button_cart'] = $this->language->get('button_cart');]]>
+                </search>
+                <add><![CDATA[$this->data['button_buy_now'] = $this->language->get('button_buy_now');]]>
+                </add>
+            </operation>
+        </file>
+
+<!--        <file name="catalog/controller/module/featured.php">
+            <operation>
+                <search position="after"><![CDATA[$this->data['button_cart'] = $this->language->get('button_cart');]]>
+                </search>
+                <add><![CDATA[$this->data['button_buy_now'] = $this->language->get('button_buy_now');]]>
+                </add>
+            </operation>
+        </file>
+        <file name="catalog/controller/module/viewed.php">
+            <operation>
+                <search position="after"><![CDATA[$this->data['button_cart'] = $this->language->get('button_cart');]]>
+                </search>
+                <add><![CDATA[$this->data['button_buy_now'] = $this->language->get('button_buy_now');]]>
+                </add>
+            </operation>
+        </file>-->
+
     <!-- Modules -->
     
 	

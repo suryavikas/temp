@@ -106,6 +106,7 @@ class ControllerProductTopCategory extends Controller {
             $this->data['no_discount'] = $this->language->get('no_discount');
             $this->data['discount'] = $this->language->get('discount');
             $this->data['buy_now'] = $this->language->get('buy_now');
+            $this->data['button_buy_now'] = $this->language->get('button_buy_now');
 
 
             if ($category_info['image']) {

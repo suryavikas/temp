@@ -106,7 +106,7 @@
             <div class="clear"></div>
             </div>
             <div class="clear"></div>
-            <a class="buy_now_button" onclick="addToCart('<?php echo $product['product_id']; ?>');"><span>more</span></a>
+<!--            <a class="buy_now_button" onclick="addToCart('<?php echo $product['product_id']; ?>');"><span>more</span></a>-->
             <div class="clear"></div>
     </div>
 
