@@ -439,12 +439,16 @@ font-size: 12px!important;
 	border-collapse: collapse;
 	display: inline-block;
 	margin-bottom: 5px;
+        float: right;
+}
+.mini-cart-total tr{
+    width: 50%;
 }
 .mini-cart-total td {
 	color: #000;
 	font-size: 12px;
 	padding: 4px;
-        width: 80%;
+        
 }
 #header #cart .checkout {
 	text-align: right;
@@ -1819,6 +1823,7 @@ a.button:hover, input.button:hover {
 }
 .cart-total table {
 	float: right;
+        width: 220px;
 }
 .cart-total td {
 	padding: 3px;

@@ -30,7 +30,7 @@ $_['text_shipping_method']           = 'Please select the preferred shipping met
 $_['text_payment_method']            = 'Please select the preferred payment method to use on this order.';
 $_['text_comments']                  = 'Add Comments About Your Order';
 $_['text_login_success']             = 'You are already logged in, please click <a href="%s" >here</a> to logout';
-$_['text_welcome_shipping']          = 'Welcome %s, Shipping address please!';
+$_['text_welcome_shipping']          = 'Welcome %s ';
 $_['text_welcome']                   = '<a href="%s">Sign up</a> | <a href="%s">Forgot password</a>.';
 $_['text_option']                    = 'Or';
 $_['text_modal_title']               = 'Error!';

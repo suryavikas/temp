@@ -60,9 +60,9 @@
                          
                        
                             <div class="right">
+                                <?php if (!$logged) { ?>
                                 <div id="guest-buy">
                                     <h2><?php echo $text_your_details; ?></h2>
-
                                     
                                     <div id="guest-buy-error" style="display:none"></div>
                                      <fieldset title="<?php echo $entry_email; ?>"  class="form-field-full">
@@ -209,6 +209,14 @@
                                     </div>
                                 </div>
                                 </div>
+                                <?php } else{ ?>
+                                <div id="guest-buy">
+                                    
+                                </div>
+                                <?php
+                                }
+                                ?>
+
                             </div>
                     </div>                    
                 </div>

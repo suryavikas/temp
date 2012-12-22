@@ -312,7 +312,6 @@ class ControllerCheckoutOnePageCheckout extends Controller {
     }
 
     private function set_default_shipping() {
-
         $this->load->model('setting/extension');
 
         $results = $this->model_setting_extension->getExtensions('shipping');
@@ -1168,7 +1167,7 @@ class ControllerCheckoutOnePageCheckout extends Controller {
         }
 
 
-        $this->data['button_continue'] = $this->language->get('button_continue');
+        $this->data['text_button'] = $this->language->get('text_button');
 
         //Populating states list
         $this->load->model('localisation/zone');
@@ -1224,13 +1223,13 @@ class ControllerCheckoutOnePageCheckout extends Controller {
         $this->language->load('checkout/onepagecheckout');
 
         $this->load->model('account/address');
-
+        $payment_address = '';
         if ($this->customer->isLogged() && isset($this->session->data['payment_address_id'])) {
             $payment_address = $this->model_account_address->getAddress($this->session->data['payment_address_id']);
         } elseif (isset($this->session->data['guest'])) {
             $payment_address = $this->session->data['guest']['payment'];
         }
-
+        
         if (!empty($payment_address)) {
             // Totals
             $total_data = array();
@@ -1290,7 +1289,7 @@ class ControllerCheckoutOnePageCheckout extends Controller {
         $this->data['text_payment_method'] = $this->language->get('text_payment_method');
         $this->data['text_comments'] = $this->language->get('text_comments');
 
-        $this->data['button_continue'] = $this->language->get('button_continue');
+        $this->data['text_button'] = $this->language->get('text_button');
 
         if (empty($this->session->data['payment_methods'])) {
             $this->data['error_warning'] = sprintf($this->language->get('error_no_payment'), $this->url->link('information/contact'));
@@ -1380,12 +1379,11 @@ class ControllerCheckoutOnePageCheckout extends Controller {
 
             if ($product['minimum'] > $product_total) {
                 $json['redirect'] = $this->url->link('checkout/cart');
-
                 break;
             }
         }
 
-        if (!$json) {
+        if (!$json) {            
             if ($this->request->post['shipping_address'] == 'existing') {
                 $this->load->model('account/address');
 
@@ -1395,14 +1393,14 @@ class ControllerCheckoutOnePageCheckout extends Controller {
                     $json['error']['warning'] = $this->language->get('error_address');
                 }
 
-                if (!$json) {
+                if (!$json) {                    
                     $this->session->data['shipping_address_id'] = $this->request->post['address_id'];
 
                     // Default Shipping Address
                     $this->load->model('account/address');
 
                     $address_info = $this->model_account_address->getAddress($this->request->post['address_id']);
-
+                    
                     if ($address_info) {
                         $this->session->data['shipping_country_id'] = $address_info['country_id'];
                         $this->session->data['shipping_zone_id'] = $address_info['zone_id'];
@@ -1412,12 +1410,11 @@ class ControllerCheckoutOnePageCheckout extends Controller {
                         unset($this->session->data['shipping_zone_id']);
                         unset($this->session->data['shipping_postcode']);                        
                     }
+                    
                     unset($this->session->data['shipping_method']);
                     unset($this->session->data['shipping_methods']);
                 }
-            }
-
-            if ($this->request->post['shipping_address'] == 'new') {
+            } else if ($this->request->post['shipping_address'] == 'new') {
 
                 if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
                     $json['error']['email'] = $this->language->get('error_email');
@@ -1471,16 +1468,6 @@ class ControllerCheckoutOnePageCheckout extends Controller {
                     $json['error']['address_1'] = $this->language->get('error_address_1');
                 }
 
-                
-                
-
-                
-
-//			$this->load->model('localisation/country');
-//
-//			$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
-
-                
                 if (!$json) {
                     // Default Shipping Address
                     $this->load->model('account/address');
@@ -1505,8 +1492,10 @@ class ControllerCheckoutOnePageCheckout extends Controller {
                     unset($this->session->data['shipping_method']);
                     unset($this->session->data['shipping_methods']);
                 }
-            }
-            if(isset($json['error']) && sizeof($json['error']) == 0) {
+            } else{
+                 $json['error']['warning'] = $this->language->get('error_address');
+            }            
+            if(sizeof($json) == 0) {             
                 $this->session->data['payment_address_id'] = $this->session->data['shipping_address_id'];
                 $this->set_default_shipping();
             }
