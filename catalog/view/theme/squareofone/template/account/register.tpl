@@ -98,7 +98,7 @@
       </table>
     </div>
     <h2><?php echo $text_your_address; ?></h2>
-    <div class="content">
+    <div class="content" id="register-user-address">
           <table class="form" style="border: 1px solid #CCCCCC; margin:-5px 0 15px;padding:10px; display:block;">
         <tr  style="display:none;">
           <td><?php echo $entry_company; ?></td>
@@ -311,9 +311,9 @@ $('select[name=\'country_id\']').bind('change', function() {
 $('select[name=\'country_id\']').trigger('change');
 
 $('#content input[name=\'postcode\']').live('change', function() {
-        $('#filter-load').hide();
-	loadPostCode('#login');
         $('#filter-load').show();
+	loadPostCode('#register-user-address');
+        $('#filter-load').hide();
         
 });
 //--></script>

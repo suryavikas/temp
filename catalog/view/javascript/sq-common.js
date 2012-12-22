@@ -336,7 +336,6 @@ function sendRequest(arrData, getParams, categoryId, appendToUrl){
     }
 
     function loadPostCode(divId){
-
         $.ajax({
 		url: 'index.php?route=checkout/onepagecheckout/pincode&pincode=' + $(divId+ ' input[name=\'postcode\']').val(),
 		dataType: 'json',

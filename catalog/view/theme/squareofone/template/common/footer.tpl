@@ -29,15 +29,7 @@
           <li><a href="<?php echo $wishlist; ?>"><?php echo $text_wishlist; ?></a></li>
           <li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>          
         </ul>
-      </div>
-      <div class="column">
-        <h3><?php echo $best_seller; ?></h3>
-        <ul>
-          <?php foreach ($best_sellers as $best_seller) { ?>
-          <li><a href="<?php echo $best_seller['href']; ?>"><?php echo $best_seller['name']; ?></a></li>
-          <?php } ?>
-        </ul>
-      </div>
+      </div>      
       <div class="column">Newsletter
       <div>&nbsp;</div>
         <div id="newsletter">
@@ -46,7 +38,20 @@
     $(document).ready(function(){
 	//$("#subscribe").validate();
 	$("#subscribenewsletter1").click(function(){
-	$("input#emailconfirm1").val($("input#email1").val());
+            errorStr = ''
+            if($("#email1").val() == ''){
+                errorStr = '<p>Pls enter an email address<p><br />';
+            } else {
+                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                if( !emailReg.test( $email ) ) {
+                    errorStr = 'Email address seems invalid'
+                }
+            }
+//            $('#newletter-subscribe input[name=\'listname[2]\']')
+            console.log($("#newletter-subscribe select[name='\'listname[2]\''] option:selected"));
+//            if($('#newletter-subscribe input[name=\'listname[2]\']').c)
+            
+//        $("input#emailconfirm1").val($("input#email1").val());
 	var str = $("form").serialize();
 	 $.ajax({
           type:'post',
@@ -127,39 +132,11 @@ function checkGroup(name,value) {
   return true;
 }
 </script>
-          <form method="post" name="subscribeform" id="subscribe">
-            <input type="hidden" name="formtoken" value="25b143b041e45e30cc3dddbb02fb96b9" />
-            <table>
-              <tr>
-                <td class="attributeinput"><input type="text"  name="email" id="email1" value="" placeholder="Email" size="35" />
-                </td>
-              </tr>
-              <tr>
-               <input type="hidden" id="emailconfirm1" name="emailconfirm" value="">
-              </tr>
-              <input type="hidden" name="htmlemail" value="1">
-            </table>
-            <p>Please select the newsletters you want to sign up to:</p>
-            <ul class="list">
-              <li class="list">
-              <input type="checkbox" name="list[2]" value=signup  />
-              <input type=hidden name="listname[2]" value="Men"/>
-              <b>Men</b>
-
-           &nbsp;&nbsp;&nbsp;
-              <input type="checkbox" name="list[3]" value=signup  />
-               <input type=hidden name="listname[3]" value="Women"/>
-              <b>Women</b>
-            </li>
-            </ul>
-            <div style="display:none">
-              <input type="text" name="VerificationCodeX" value="" size="20">
-            </div>
-            <p>
-              <input type="hidden"  name="subscribe" id="subscribenewsletter" value="Subscribe"/>
-              <input type="button" name="subscribe" id="subscribenewsletter1" value="Subscribe to the Selected Mailinglists"/>
-            </p>
-          </form>
+<div id="newletter-subscribe" style="overflow: hidden; min-height: 260px;  height: auto; width:300px">
+          <iframe  src="http://www.newsletter.squareofone.com/newsletter/?p=subscribe&id=1" style="border: 0px solid #ffffff; overflow: hidden; min-height: 260px;" scrolling="no">
+            <p>Your browser does not support iframes.</p>
+        </iframe>
+        </div>
         </div>
         <div id="message" style="color:#F52887;"></div>
       </div>
@@ -197,4 +174,11 @@ function checkGroup(name,value) {
   <div class="clear"></div>
 </div>
 </div>
+<script type="text/javascript">
+//	window.addEventListener('load', function(){
+//
+//		helium.init();
+//
+//	}, false);
+</script>
 </body></html>

@@ -32,9 +32,9 @@
 
             <div class="clear"></div>
             </div>
-            <div class="clear"></div>
+<!--            <div class="clear"></div>
              <a <?php if ($product['quantity'] <= 0) { echo 'style="display:none"'; } ?> class="buy_now_button" onclick="addToCart('<?php echo $product['product_id']; ?>');"><span>more</span></a>
-            <div class="clear"></div>
+            <div class="clear"></div>-->
     </div>
 
     </li>

@@ -322,6 +322,11 @@
             </search>
             <add><![CDATA[$_['button_buy_now']        = 'Buy Now';]]>
             </add>
+            <search position="after"><![CDATA[$_['button_continue']       = 'Continue Shopping';]]>
+            </search>
+            <add><![CDATA[$_['button_continue']       = 'Continue';]]>
+            </add>
+
         </operation>        
     </file>
     <file name="catalog/controller/common/footer.php">

@@ -444,6 +444,7 @@ font-size: 12px!important;
 	color: #000;
 	font-size: 12px;
 	padding: 4px;
+        width: 80%;
 }
 #header #cart .checkout {
 	text-align: right;
