@@ -113,7 +113,7 @@ echo $header; ?>
                                         
                                         if(isset($productArr[$i]['discount']['price'])) {
                                     ?>
-                                        <span><?php echo $productArr[$i]['price']; ?></span>
+                                        <span class="discount"><?php echo $productArr[$i]['price']; ?></span>
                                         <?php
                                         echo $productArr[$i]['discount']['price'];
 

@@ -39,39 +39,38 @@
 <html class="no-js ie9" lang="en" version="HTML+RDFa 1.1"> <![endif]-->
 
 <!-- CSS -->
-<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/alice-min.css" media="all"/>
 <!--<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/colorbox/colorbox.css" media="screen" />-->
-<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/stylesheet.css" />
-
-<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/skin.css" />
-<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/style.css" />
 <!--<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/sq_slideshow.css" />-->
-<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/superfish.css" /><!--
---><link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/superfish-navbar.css" />
-<!--<link rel="stylesheet" type="text/css" href="min/?g=sq-css" />-->
+
+
+<link type="text/css" rel="stylesheet" href="min/?g=sq-css"></link>
+<!--<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/alice-min.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/style.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/superfish.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/superfish-navbar.css" />-->
+<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+
 <?php foreach ($styles as $style) { ?>
 <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
 <?php } ?>
 
 <!-- Java script -->
-<!--<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>-->
-
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<script src="http://cdn.webrupee.com/js" type="text/javascript"></script>
+<script type="text/javascript" src="min/?g=sq-js"></script>
+<!--<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
-
-<!--<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css" />-->
-<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<!--<script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/external/jquery.cookie.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/hoverIntent.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/superfish.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/sq-common.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/jquery/nivo-slider/jquery.nivo.slider.pack.js"></script>
-<script src="http://cdn.webrupee.com/js" type="text/javascript"></script>
-<script type="text/javascript" src="catalog/view/javascript/helium.js"></script>
-<!--<script type="text/javascript" src="min/?g=sq-js"></script>-->
+<script type="text/javascript" src="catalog/view/javascript/jquery/nivo-slider/jquery.nivo.slider.pack.js"></script>-->
+
 
 
 <!--<script type="text/javascript" src="catalog/view/javascript/jquery.jcarousel.min.js"></script>-->

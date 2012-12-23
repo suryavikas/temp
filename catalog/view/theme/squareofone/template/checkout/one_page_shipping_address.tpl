@@ -41,7 +41,7 @@
         </fieldset>
         
         <div id="city_info"></div>
-        <input type="hidden" name="country_id" id="country_id"/>
+        <input type="hidden" name="country_id" id="country_id" value ="99"/>
 <!--        <input type="hidden" name ="zone_id" id ="zone_id"/>-->
         <input type="hidden" name="shipping_address_guest" value="1" id="shipping" />
         <fieldset title="<?php echo $entry_firstname; ?>" id="first_name" class="form-field-left">

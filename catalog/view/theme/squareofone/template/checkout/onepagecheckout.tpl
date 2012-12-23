@@ -87,7 +87,7 @@
                                         <span>
 
                                             <span id="city_info"></span>
-                                            <input type="hidden" name="country_id" id="country_id" />
+                                            <input type="hidden" name="country_id" id="country_id" value="99"/>
 <!--                                            <input type="hidden" name ="zone_id" id ="zone_id"/>-->
                                             <input type="hidden" name="shipping_address_guest" value="1" id="shipping" />
                                         </span>

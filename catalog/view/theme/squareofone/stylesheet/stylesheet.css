@@ -421,6 +421,7 @@ font-size: 12px!important;
 }
 .mini-cart-info td.total {
 	text-align: right;
+        width: 62px;
 }
 .mini-cart-info .remove {
 	text-align: right;
@@ -449,6 +450,14 @@ font-size: 12px!important;
 	font-size: 12px;
 	padding: 4px;
         
+}
+.mini-cart-total.sidecart-right {
+    width: 70px
+    
+}
+.mini-cart-total .sidecart-left {
+    width: 238px
+
 }
 #header #cart .checkout {
 	text-align: right;

@@ -9269,7 +9269,7 @@ h7 {
 
 
 
-.prc span {
+.prc .discount {
 
 
 
@@ -9399,12 +9399,10 @@ h7 {
 
 }
 
-.prc_right span{
+.prc_right .discount{
     color: #FF0000;
     text-decoration: line-through;
 }
-
-
 
 
 
