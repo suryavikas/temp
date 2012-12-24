@@ -42,14 +42,26 @@
 <!--<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/colorbox/colorbox.css" media="screen" />-->
 <!--<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/sq_slideshow.css" />-->
 
+<?php
+if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1"){ ?>
+    <link type="text/css" rel="stylesheet" href="min/?g=sq-css"></link>
+<?php
+} else { ?>
 
-<link type="text/css" rel="stylesheet" href="min/?g=sq-css"></link>
+    <link type="text/css" rel="stylesheet" href="/min/b=catalog/view/theme/squareofone/stylesheet&amp;f=alice-min.css,stylesheet.css,style.css,superfish.css,superfish-navbar.css" />
+<?php
+}
+?>
+<!--Set this while deploying to prod or dev-->
+
+<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+
 <!--<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/alice-min.css" media="all"/>
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/stylesheet.css" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/style.css" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/superfish.css" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/superfish-navbar.css" />-->
-<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+
 
 <?php foreach ($styles as $style) { ?>
 <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
@@ -59,11 +71,21 @@
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
 <script src="http://cdn.webrupee.com/js" type="text/javascript"></script>
-<script type="text/javascript" src="min/?g=sq-js"></script>
-<!--<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
-<!--<script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
+
+<!--Set this while deploying to prod or dev-->
+
+<?php
+if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1"){ ?>
+    <script type="text/javascript" src="min/?g=sq-js"></script>
+<?php
+} else { ?>
+    <script type="text/javascript" src="/min/b=catalog/view/javascript&amp;f=jquery/tabs.js,jquery/ui/external/jquery.cookie.js,hoverIntent.js,superfish.js,sq-common.js,jquery/nivo-slider/jquery.nivo.slider.pack.js"></script>
+<?php
+}
+?>
+
+<!--<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/external/jquery.cookie.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/hoverIntent.js"></script>

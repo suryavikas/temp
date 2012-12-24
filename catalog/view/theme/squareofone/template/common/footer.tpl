@@ -133,7 +133,7 @@ function checkGroup(name,value) {
 }
 </script>
 <div id="newletter-subscribe" style="overflow: hidden; min-height: 260px;  height: auto; width:300px">
-          <iframe  src="http://www.newsletter.squareofone.com/newsletter/?p=subscribe&id=1" style="border: 0px solid #ffffff; overflow: hidden; min-height: 260px;" scrolling="no">
+          <iframe  src="http://www.newsletter.squareofone.com/?p=subscribe&id=1" style="border: 0px solid #ffffff; overflow: hidden; min-height: 260px;" scrolling="no">
             <p>Your browser does not support iframes.</p>
         </iframe>
         </div>

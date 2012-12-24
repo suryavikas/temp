@@ -2730,8 +2730,8 @@ div.css-panes > div:first-child {
     font-size: 12px;
     font-weight: bold;
 }
-.form-field-full label{
-
+#guest-buy fieldset {
+    border: 0px none;
 }
 #guest-buy-error{
     border: 1px solid;

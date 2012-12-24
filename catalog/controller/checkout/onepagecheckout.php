@@ -421,7 +421,8 @@ class ControllerCheckoutOnePageCheckout extends Controller {
             $this->session->data['guest']['payment']['postcode'] = $this->request->post['postcode'];
             $this->session->data['guest']['payment']['city'] = $this->request->post['city'];
             //Added guard rail to get details from server side code only
-            $this->request->post['country_id'] = $this->request->post['country_id'] ? '' : $this->session->data['pincode_based_details']['country_id'];
+            $this->request->post['country_id'] = ($this->request->post['country_id'] !='') ? $this->request->post['country_id'] : $this->session->data['pincode_based_details']['country_id'];
+            
             $this->session->data['guest']['payment']['country_id'] = $this->request->post['country_id'];
             $this->session->data['guest']['payment']['zone_id'] = $this->request->post['zone_id'];
 
@@ -576,7 +577,7 @@ class ControllerCheckoutOnePageCheckout extends Controller {
                     $this->load->model('payment/' . $result['code']);
 
                     $method = $this->{'model_payment_' . $result['code']}->getMethod($payment_address, $total);
-
+                    
                     if ($method) {
                         $method_data[$result['code']] = $method;
                     }

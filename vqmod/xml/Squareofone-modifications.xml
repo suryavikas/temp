@@ -1104,15 +1104,27 @@
             </operation>
             </file>
 
-        <file name="catalog/controller/module/bestseller.php">
+    <file name="catalog/controller/module/bestseller.php">
+        <operation>
+            <search position="after"><![CDATA[$this->data['button_cart'] = $this->language->get('button_cart');]]>
+            </search>
+            <add><![CDATA[$this->data['button_buy_now'] = $this->language->get('button_buy_now');]]>
+            </add>
+        </operation>
+    </file>
+
+    <file name="catalog/model/payment/cod.php">
             <operation>
-                <search position="after"><![CDATA[$this->data['button_cart'] = $this->language->get('button_cart');]]>
+                <search position="before"><![CDATA[$method_data = array();]]>
                 </search>
-                <add><![CDATA[$this->data['button_buy_now'] = $this->language->get('button_buy_now');]]>
+                <add><![CDATA[                
+                $codQuery = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_city WHERE pin_code = '" . (int)$address['postcode'] . "' AND cod = 1 and is_enabled = 1");
+                if($codQuery->num_rows == 0){
+                        $status = false;
+                }]]>
                 </add>
             </operation>
         </file>
-
 <!--        <file name="catalog/controller/module/featured.php">
             <operation>
                 <search position="after"><![CDATA[$this->data['button_cart'] = $this->language->get('button_cart');]]>
