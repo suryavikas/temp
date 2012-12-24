@@ -6336,7 +6336,15 @@ p {
 
 }
 
-
+.buy_detail_left .delivery_date{
+    
+    color: #D14747;
+    font-family: Trebuchet MS,Helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 23px;
+}
 
 
 

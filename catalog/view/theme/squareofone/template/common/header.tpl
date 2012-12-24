@@ -47,7 +47,6 @@ if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1"){ 
     <link type="text/css" rel="stylesheet" href="min/?g=sq-css"></link>
 <?php
 } else { ?>
-
     <link type="text/css" rel="stylesheet" href="/min/b=catalog/view/theme/squareofone/stylesheet&amp;f=alice-min.css,stylesheet.css,style.css,superfish.css,superfish-navbar.css" />
 <?php
 }
@@ -60,7 +59,8 @@ if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1"){ 
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/stylesheet.css" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/style.css" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/superfish.css" />
-<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/superfish-navbar.css" />-->
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/superfish-navbar.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/skin.css" />-->
 
 
 <?php foreach ($styles as $style) { ?>
@@ -85,8 +85,9 @@ if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1"){ 
 ?>
 
 <!--<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script> -->
+
+<!--<script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/external/jquery.cookie.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/hoverIntent.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/superfish.js"></script>

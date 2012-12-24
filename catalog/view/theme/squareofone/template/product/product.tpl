@@ -59,7 +59,8 @@
               <span class ="special"><?php echo $price; ?></span> <br /><label><?php echo $special; ?></label>
         <?php
               }       ?>
-                 <p>Delivered in 2 - 5 business days </p>
+                 <p class ="delivery_date" >Delivered in 2 - 5 business days </p>
+                 
         </div>
         <div class="cart buy_detail_right" style="border-bottom:none; margin-bottom:0px; <?php if ($quantity <= 0) { echo ' display:none'; } ?>">
             <div style="margin-bottom:10px;"><?php echo $text_qty; ?>
@@ -70,7 +71,7 @@
             
             </div>
 <!--            <input type="button" value="<?php echo $button_cart; ?>" id="button-cart" class="button" />-->
-            <a id="button-cart" >&nbsp;</a>
+            <a id="button-cart" >&nbsp;</a>            
             <?php if ($minimum > 1) { ?>
             <div class="minimum"><?php echo $text_minimum; ?></div>
             <?php } ?>
@@ -225,7 +226,8 @@
             <div class ="size">
                 <label style="float:left;"><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a> <span> | </span></label>
                  
-                <label style="float:left;"><a href="#" >Not sure about your size?</a></label>
+                <label style="float:left;"><a href="#" >Not sure about your size?</a><span> | </span></label>
+                <label style="float:left;"><a onclick="addToCart('<?php echo $product_id; ?>');">Add to Cart</a> </label>
 <!--        <label><a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></label>-->
             </div>
         <div class="clear"></div>
@@ -384,12 +386,6 @@
    <div class="clear"></div>
   </div>
 
-<script type="text/javascript"><!--
-$('.colorbox').colorbox({
-	overlayClose: true,
-	opacity: 0.5
-});
-//--></script>
 <script type="text/javascript"><!--
 $('#button-cart').bind('click', function() {
 	$.ajax({
