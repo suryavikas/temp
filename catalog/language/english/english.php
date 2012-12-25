@@ -21,7 +21,7 @@ $_['text_separator']        = ' &raquo; ';
 // Buttons
 $_['button_add_address']    = 'Add Address';
 $_['button_back']           = 'Back';
-$_['button_continue']       = 'Continue Shopping';
+$_['button_continue']       = 'Continue';
 $_['button_cart']           = 'Add to Cart';
 $_['button_compare']        = 'Add to Compare';
 $_['button_wishlist']       = 'Add to Wish List';
@@ -40,7 +40,7 @@ $_['button_update']         = 'Update';
 $_['button_remove']         = 'Remove';
 $_['button_reorder']        = 'Reorder';
 $_['button_return']         = 'Return';
-$_['button_shopping']       = 'Continue Shopping';
+$_['button_shopping']       = 'Buy Now';
 $_['button_search']         = 'Search';
 $_['button_shipping']       = 'Apply Shipping';
 $_['button_guest']          = 'Guest Checkout';

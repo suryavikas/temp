@@ -152,18 +152,17 @@ function checkGroup(name,value) {
           <li class="sq_mst1">&nbsp;</li>
           <li class="sq_mst2">&nbsp;</li>
           <li class="sq_visa1">&nbsp;</li>
-          <li class="sq_visa2">&nbsp;</li>
-          <li style="margin:0 0 10px 20px;" class="sq_nrt">&nbsp;</li>
+          <li class="sq_visa2">&nbsp;</li>          
         </ul>
         <div class="clear"></div>
       </div>
       <div class="follow">
         <ul>
           <li style="padding:0px; margin-right:-10px;" class="sq_flw">&nbsp;</li>
-          <li><a href="#" class="tw_hv"><span>more</span></a></li>
-          <li><a href="#" class="rss_hv"><span>more</span></a></li>
-          <li><a href="#" class="fb_hv"><span>more</span></a></li>
-          <li><a href="#" class="v_hv"><span>more</span></a></li>
+<!--          <li><a href="#" class="tw_hv"><span>more</span></a></li>
+          <li><a href="#" class="rss_hv"><span>more</span></a></li>-->
+          <li><a href="https://www.facebook.com/pages/Squareofone/295855950519330?fref=ts" class="fb_hv"><span>more</span></a></li>
+<!--          <li><a href="#" class="v_hv"><span>more</span></a></li>-->
         </ul>
         <div class="clear"></div>
       </div>
