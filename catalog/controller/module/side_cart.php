@@ -1,6 +1,6 @@
 <?php
 class ControllerModuleSideCart extends Controller {
-	protected function index() {
+	public function index() {
             $this->language->load('module/side_cart');
 //
 //            $this->data['heading_title'] = $this->language->get('heading_title');

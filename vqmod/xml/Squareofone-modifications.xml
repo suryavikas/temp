@@ -464,7 +464,7 @@
         <operation>
             <search position="replace"><![CDATA[		$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');]]>
             </search>
-            <add><![CDATA[		$this->data['checkout'] = $this->url->link('checkout/onepagecheckout', '', 'SSL');]]>
+            <add><![CDATA[		$this->data['checkout'] = $this->url->link('checkout/cart', '', 'SSL');]]>
             </add>
         </operation>
     </file>

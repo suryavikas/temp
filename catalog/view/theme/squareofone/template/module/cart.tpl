@@ -15,6 +15,10 @@
       <table>
         <?php foreach ($products as $product) { ?>
         <tr>
+            <div>
+              <?php foreach ($product['option'] as $option) { ?>
+              - <small><?php echo $option['name']; ?> <?php echo $option['value']; ?></small><br />
+              <?php } ?>
           <td class="image"><?php if ($product['thumb']) { ?>
             <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
             <?php } ?></td>
@@ -26,7 +30,7 @@
             </div></td>
           <td class="quantity">x&nbsp;<?php echo $product['quantity']; ?></td>
           <td class="total"><?php echo $product['total']; ?></td>
-          <td class="remove"><img src="catalog/view/theme/default/image/remove-small.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" onclick="$('#cart').load('index.php?route=module/cart&remove=<?php echo $product['key']; ?> #cart > *');" /></td>
+          <td class="remove"><img src="catalog/view/theme/default/image/remove-small.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" onclick="$('#cart').load('index.php?route=module/cart&remove=<?php echo $product['key']; ?> #cart > *'); $('#side-cart-product-listing').load('index.php?route=module/side_cart #side-cart-product-listing > *') " /></td>
         </tr>
         <?php } ?>
         <?php foreach ($vouchers as $voucher) { ?>
