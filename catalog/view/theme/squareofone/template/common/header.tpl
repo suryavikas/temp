@@ -43,7 +43,7 @@
 <!--<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/sq_slideshow.css" />-->
 
 <?php
-if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1"){ ?>
+if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1" or $_SERVER["HTTP_HOST"] == "www.squareofone.com"){ ?>
     <link type="text/css" rel="stylesheet" href="min/?g=sq-css"></link>
 <?php
 } else { ?>
@@ -75,7 +75,7 @@ if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1"){ 
 <!--Set this while deploying to prod or dev-->
 
 <?php
-if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1"){ ?>
+if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1" or $_SERVER["HTTP_HOST"] == "www.squareofone.com"){ ?>
     <script type="text/javascript" src="min/?g=sq-js"></script>
 <?php
 } else { ?>
@@ -127,7 +127,7 @@ width:720px!important;
 <!--[if IE 8 ]>
 <style type="text/css">
 #header {
-    margin: -30px 0 0!important;;
+    margin: -12px 0 0!important;;
     padding: 0;
 }
 .shoping_bag .content {
@@ -150,7 +150,7 @@ margin:40px 0px 0px -280px!important;
 margin:0px 0px 0px 40px!important;
 }
 #header {
-    margin: -35px 0 0!important;;
+    margin: 0px 0 0!important;;
     padding: 0;
 }
 </style>
@@ -186,7 +186,7 @@ display:block!important;
     <div id="header">
     <div id="header_top1_outer">
     <div id="header_top1_inner">
-      <div class="header_top1_menu">24x7 Customer Support  - <a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a> | <a href="<?php echo $guestorder; ?>"><?php echo $text_guestorder; ?></a> |  <a href="<?php echo $home; ?>"><?php echo $text_home; ?></a> | <a href="<?php echo $wishlist; ?>"  id="wishlist-total"><?php echo $text_wishlist; ?></a> |
+      <div class="header_top1_menu"><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a> | <a href="<?php echo $guestorder; ?>"><?php echo $text_guestorder; ?></a> |  <a href="<?php echo $home; ?>"><?php echo $text_home; ?></a> | <a href="<?php echo $wishlist; ?>"  id="wishlist-total"><?php echo $text_wishlist; ?></a> |
 
     <?php if (!$logged) { ?>
         <?php echo $text_welcome; ?>

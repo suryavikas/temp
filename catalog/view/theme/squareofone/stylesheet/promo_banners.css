@@ -1,19 +1,19 @@
-.promo-banner {
-	position:fixed;
-	top:10px;
-	left:50%;
-	z-index:9999;
-	padding-bottom: 20px;
-}
-
-.promo-banner  .close_container {
-	text-align:right;
-}
-
-.promo-banner  .close_container .close {
-	font-size:12px;
-	background:#000000;
-	color:#ffffff;
-	padding:2px 5px;
-	font-weight:bold;
+.promo-banner {
+	position:fixed;
+	top:10px;
+	left:50%;
+	z-index:9999;
+	padding-bottom: 20px;
+}
+
+.promo-banner  .close_container {
+	text-align:right;
+}
+
+.promo-banner  .close_container .close {
+	font-size:12px;
+	background:#000000;
+	color:#ffffff;
+	padding:2px 5px;
+	font-weight:bold;
 }

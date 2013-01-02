@@ -10,11 +10,11 @@
    
     <div class="contact-info" >
      <h2><?php echo $text_location; ?></h2>
-      <div class="ct_lt"><div  style="line-height:18px;"><b><?php echo $text_address; ?></b><br />
+      <div class="ct_lt"><div  style="line-height:18px;">
         <?php echo $store; ?><br />
         <?php echo $address; ?><div class="clear"></div><br />
         <?php if ($telephone) { ?>
-        <b><?php echo $text_telephone; ?></b><br />
+        <b><?php echo $text_telephone; ?>:</b><br />
         <?php echo $telephone; ?><br />
        
         <?php } ?>
@@ -22,6 +22,8 @@
         <b><?php echo $text_fax; ?></b><br />
         <?php echo $fax; ?>
         <?php } ?>
+        <b><?php echo $entry_email; ?></b><br />
+        customercare@squareofone.com<br />
         </div>
       
     </div>

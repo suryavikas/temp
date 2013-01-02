@@ -14,6 +14,7 @@
    <div class="all_page_right">
   
   <div class="content"><?php echo $text_error; ?></div>
+  <div>Please check our <a href="www.squareofone.com/sitemap">sitemap</a>. </div>
   <div class="buttons">
     <div class="right"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a></div>
   </div>
