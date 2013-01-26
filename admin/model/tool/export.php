@@ -1534,11 +1534,11 @@ class ModelToolExport extends Model {
 			$imageNames = ($imageNames=="") ? array() : explode( ",", $imageNames );
 			foreach ($imageNames as $imageName) {
 				$maxImageId += 1;
-				$sql  = "INSERT INTO `".DB_PREFIX."product_image` (`product_image_id`, product_id, `image`) VALUES ";
-				$sql .= "($maxImageId,$productId,'$imageName')";
+				$sql  = "INSERT INTO `".DB_PREFIX."product_image` ( `product_id`, `image`) VALUES ";
+				$sql .= "($productId,'$imageName')";
 				$sql .= " ON DUPLICATE KEY UPDATE ";
 				$sql .= " product_id = $productId, image = '$imageName'";
-				
+//				die($sql);
 				$database->query( $sql );
 			}
 		}
@@ -2531,6 +2531,8 @@ class ModelToolExport extends Model {
 		$this->clearSpreadsheetCache();
 		exit;
 	}
+
+
 
 
 }
