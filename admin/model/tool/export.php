@@ -1516,7 +1516,7 @@ class ModelToolExport extends Model {
 		$sql = "START TRANSACTION;\n";
 		
 		// delete old additional product images from database
-		$sql = "DELETE FROM `".DB_PREFIX."product_image`";
+//		$sql = "DELETE FROM `".DB_PREFIX."product_image`";
 		$database->query( $sql );
 		
 		// insert new additional product images into database

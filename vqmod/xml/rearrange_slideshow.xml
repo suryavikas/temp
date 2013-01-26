@@ -1,0 +1,64 @@
+<!--
+  Copyright (C) 2012 Tri Le <trile7 at gmail dot com>
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>
+-->
+<modification>
+  <id>rearrange slideshow images</id>
+  <version>0.1</version>
+  <vqmver>2.1.7</vqmver>
+  <author>Tri Le</author>
+  <file name="admin/view/template/design/banner_form.tpl">
+    <operation>
+      <search position="bottom" offset="1"></search>
+      <add><![CDATA[
+        <script type="text/javascript"><!--
+        $(document).ready(function() {
+          $('.down_button').live('click', function () {
+            var rowToMove = $(this).parents('tbody.MoveableRow:first');
+            var next = rowToMove.next('tbody.MoveableRow')
+            if (next.length == 1) { next.after(rowToMove); }
+            });
+
+          $('.up_button').live('click', function () {
+            var rowToMove = $(this).parents('tbody.MoveableRow:first');
+            var prev = rowToMove.prev('tbody.MoveableRow')
+            if (prev.length == 1) { prev.before(rowToMove); }
+            });
+          });
+        //--></script>
+      ]]></add>
+    </operation>
+    <operation>
+      <search position="replace"><![CDATA[tbody id="image-row]]></search>
+      <add><![CDATA[tbody class="MoveableRow" id="image-row]]></add>
+    </operation>
+    <operation>
+      <search position="replace"><![CDATA[<?php echo $button_remove; ?></a>]]></search>
+      <add><![CDATA[<?php echo $button_remove; ?></a><a class="down_button button">down</a><a class="up_button button">up</a>]]></add>
+    </operation>
+  </file>
+  <file name="catalog/model/design/banner.php">
+    <operation>
+      <search position="replace"><![CDATA["'");]]></search>
+      <add><![CDATA["' ORDER BY bi.banner_image_id");]]></add>
+    </operation>
+  </file>
+  <file name="admin/model/design/banner.php">
+    <operation>
+      <search position="replace"><![CDATA[$banner_image_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "banner_image WHERE banner_id = '" . (int)$banner_id . "'");]]></search>
+      <add><![CDATA[$banner_image_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "banner_image WHERE banner_id = '" . (int)$banner_id . "' ORDER BY banner_image_id");]]></add>
+    </operation>
+  </file>
+</modification>
