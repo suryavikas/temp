@@ -12,7 +12,7 @@ $(document).ready(function() {
 		location = url;
 	});
 	
-        $('.pagination .links a').live('click', function() {
+        $('.category-listing .links a').live('click', function() {
             
             var arrData = getFilterParams();
             var getParams = getSortingParams();
@@ -320,7 +320,7 @@ function sendRequest(arrData, getParams, categoryId, appendToUrl){
             dataType: "html"
         }).done(function( msg ) {
             $('#filter-load').hide()
-            $('div').remove('.pagination');
+            $('div').remove('.category-listing');
             var productDiv;
             if($('.product-list').length){
                 productDiv = '.product-list';
@@ -328,7 +328,7 @@ function sendRequest(arrData, getParams, categoryId, appendToUrl){
                 productDiv = '.product-grid';
             }
             $('div').remove(productDiv);
-            $('div').remove('.pagination');
+            $('div').remove('.category-listing');
             $('div').remove('.buttons');
             $('div').remove('.product-list')
             $(msg).insertAfter('.sort');

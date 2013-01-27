@@ -1,20 +1,35 @@
 <?php echo $header; ?>
-<div id="content"><?php echo $content_top; ?>
-  <div class="breadcrumb">
+<div  id="content"><?php echo $content_top; ?>
+  <div class="shop_by"> We found <?php echo $product_total; ?> Products for <?php echo $heading_title; ?>
+<div class="clear"></div>
+</div>
+
+
+     <div class="all_page_left"><?php echo $column_left; ?><?php echo $column_right; ?> </div>
+
+<div class="all_page_right_manufacturer">
+
+<div>
+  <div class="prd_nm">
+
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
     <?php } ?>
   </div>
-  <h1><?php echo $heading_title; ?></h1>
+  <?php if ($manufacturer_info['image'] ) { ?>
+  <div class="category-info">
+    
+    <div class="image"><img src="<?php echo $manufacturer_info['image']; ?>" alt="<?php echo $heading_title; ?>" /></div>
   
-  <div class="all_page_left"><?php echo $column_left; ?><?php echo $column_right; ?>
-    </div>
-  
-   <div class="all_page_right">
+  </div>
+  <?php } ?>
+
   <?php if ($products) { ?>
-  <div class="product-filter">
+
+
+<!--  <div class="product-filter">
     <div class="display"><b><?php echo $text_display; ?></b> <?php echo $text_list; ?> <b>/</b> <a onclick="display('grid');"><?php echo $text_grid; ?></a></div>
-    <div class="limit"><?php echo $text_limit; ?>
+    <div class="limit"><b><?php echo $text_limit; ?></b>
       <select onchange="location = this.value;">
         <?php foreach ($limits as $limits) { ?>
         <?php if ($limits['value'] == $limit) { ?>
@@ -24,50 +39,60 @@
         <?php } ?>
         <?php } ?>
       </select>
-    </div>
-    <div class="sort"><?php echo $text_sort; ?>
-      <select onchange="location = this.value;">
+    </div>-->
+
+  </div>
+    <div class="sort prd_sort"><b><?php echo $text_sort; ?></b>
         <?php foreach ($sorts as $sorts) { ?>
         <?php if ($sorts['value'] == $sort . '-' . $order) { ?>
-        <option value="<?php echo $sorts['href']; ?>" selected="selected"><?php echo $sorts['text']; ?></option>
+        <a class="product-sorting" href="<?php echo $sorts['href']; ?>" ><?php echo $sorts['text']; ?></a>
         <?php } else { ?>
-        <option value="<?php echo $sorts['href']; ?>"><?php echo $sorts['text']; ?></option>
+        <a class="product-sorting" href="<?php echo $sorts['href']; ?>"><?php echo $sorts['text']; ?></a>
         <?php } ?>
         <?php } ?>
-      </select>
+
     </div>
-  </div>
-  <div class="product-compare"><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></div>
-  <div class="product-list">
-    <?php foreach ($products as $product) { ?>
-    <div>
+<!--  <div class="product-compare"><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></div>-->
+  <div class="found_prd_item product-list">
+      <ul>
+    <?php foreach ($products as $product) {  ?>
+    <li>
+      <?php if($product['special']){ ?>
+            <div class="discount_tag"><?php echo $product['discount_percentage']; ?>%<br>OFF</div>
+      <?php }
+      ?>
       <?php if ($product['thumb']) { ?>
-      <div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" /></a></div>
+            <a href="<?php echo $product['href']; ?>">
+                <img src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" />
+            </a>
       <?php } ?>
-      <div class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
-      <div class="description"><?php echo $product['description']; ?></div>
-      <?php if ($product['price']) { ?>
-      <div class="price">
-        <?php if (!$product['special']) { ?>
-        <?php echo $product['price']; ?>
-        <?php } else { ?>
-        <span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new"><?php echo $product['special']; ?></span>
-        <?php } ?>
-        <?php if ($product['tax']) { ?>
-        <br />
-        <span class="price-tax"><?php echo $text_tax; ?> <?php echo $product['tax']; ?></span>
-        <?php } ?>
-      </div>
-      <?php } ?>
-      <?php if ($product['rating']) { ?>
-      <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>
-      <?php } ?>
-      <div class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>
-      <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');"><?php echo $button_wishlist; ?></a></div>
-      <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');"><?php echo $button_compare; ?></a></div>
+      <div class="clear"></div>
+      <div class="buy_detail5">
+           <a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a><br>
+            <div class="prc">
+                <?php
+                if($product['special']){ ?>
+                    <div class="prc_left">Price : </div><div class="prc_right"><span><?php echo $product['price']; ?></span>   <?php echo $product['special']; ?></div>
+                <?php
+                } else {
+                ?>
+                    <div class="prc_left">Price : </div><div class="prc_right"><?php echo $product['price']; ?></div>
+                <?php
+                }
+                ?>
+
+            <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+<!--            <a class="buy_now_button" onclick="addToCart('<?php echo $product['product_id']; ?>');"><span>more</span></a>-->
+            <div class="clear"></div>
     </div>
+
+    </li>
     <?php } ?>
+        </ul>
   </div>
+    
   <div class="pagination"><?php echo $pagination; ?></div>
   <?php } else { ?>
   <div class="content"><?php echo $text_empty; ?></div>
@@ -166,9 +191,9 @@ function display(view) {
 view = $.cookie('display');
 
 if (view) {
-	display(view);
+//	display(view);
 } else {
-	display('list');
+//	display('list');
 }
 //--></script> 
 <?php echo $footer; ?>

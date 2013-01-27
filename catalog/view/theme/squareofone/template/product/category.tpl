@@ -114,7 +114,7 @@
     <?php } ?>
         </ul>
   </div>
-  <div class="pagination"><?php echo $pagination; ?></div>
+  <div class="pagination category-listing"><?php echo $pagination; ?></div>
   <?php } ?>
   <?php if (!$categories && !$products) { ?>
   <div class="content"><?php echo $text_empty; ?></div>

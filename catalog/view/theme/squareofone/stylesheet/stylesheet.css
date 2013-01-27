@@ -2493,6 +2493,11 @@ border:2px solid #6BBA70;
 	width:755px;
 	margin-left:10px;
 }
+.all_page_right_manufacturer {
+	float:left;
+	width:982px;
+	margin-left:10px;
+}
 .shoping_bag .content {
     background: none repeat scroll 0 0 #F5F4F4;
     border: medium none;
