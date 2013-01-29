@@ -268,8 +268,13 @@
             <add><![CDATA[ $products = $this->getProduct($result['product_id']);
                                     $products['discounts'] = $this->getProductDiscounts($result['product_id']);
                                     $temp = $products['price'];
-                                    $discountedPrice = $products['special'];  
-                                    $discount = floor(((($temp - $discountedPrice)/$temp)*100));
+                                    $discountedPrice = $products['special'];
+                                    if($temp > 0){
+                                        $discount = floor(((($temp - $discountedPrice)/$temp)*100));
+                                    } else {
+                                        $discount = "";
+                                    }
+                                    
 //                                    echo"<pre>$discount ------- ****";
                                     
                                     $products['discount_percentage'] = $discount;
