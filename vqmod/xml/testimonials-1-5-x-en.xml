@@ -1,0 +1,28 @@
+<modification>
+	<id>Customer Testimonial Package - OpenCart 1.5.x core file modifications</id>
+	<version>1.5.x</version>
+	<vqmver>1.0.5</vqmver>
+	<author>JNeuhoff and waterfall</author>
+	<file name="admin/controller/common/header.php">
+		<operation>
+			<search position="after"><![CDATA[$this->data['text_information'] = $this->language->get('text_information');]]></search>
+			<add><![CDATA[		$this->data['text_testimonial'] = $this->language->get('text_testimonial');]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$this->data['information'] = $this->url->link('catalog/information', 'token=' . $this->session->data['token'], 'SSL');]]></search>
+			<add><![CDATA[			$this->data['testimonial'] = $this->url->link('catalog/testimonial', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/english/common/header.php">
+		<operation>
+			<search position="after"><![CDATA[$_['text_information']                 = 'Information';]]></search>
+			<add><![CDATA[$_['text_testimonial']       = 'Testimonial';]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[<li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>]]></search>
+			<add><![CDATA[        <li><a href="<?php echo $testimonial; ?>"><?php echo $text_testimonial; ?></a></li>]]></add>
+		</operation>
+	</file>
+</modification>
