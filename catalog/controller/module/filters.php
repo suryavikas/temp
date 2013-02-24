@@ -285,7 +285,8 @@ class ControllerModuleFilters extends Controller {
 //                echo "ISSET";
                 $product_total = $this->model_filters_filters->getTotalProducts($data);                
             }
-            
+//            print_r($product_total);
+//            die;
 
 	  
 

@@ -2072,7 +2072,7 @@ a.button:hover, input.button:hover {
 .box-content {
 }
 .box-content ul {
-	border: 1px solid #CCCCCC;
+	/*border: 1px solid #CCCCCC;*/
 	margin:-5px 0 0;
 	padding: 5px 15px 20px;
 	width:193px;
@@ -2754,4 +2754,15 @@ div.css-panes > div:first-child {
     display: inline;
     color: #0A4194 !important;
     text-decoration: underline;
+}
+#button_quotes{
+    width: auto;
+    min-height: 240px;
+    height: 240px;
+}
+#button_quotes ul li{
+    border-style: none;
+}
+.testimonial{
+    min-height: 240px;
 }

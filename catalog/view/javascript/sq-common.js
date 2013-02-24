@@ -320,7 +320,7 @@ function sendRequest(arrData, getParams, categoryId, appendToUrl){
             dataType: "html"
         }).done(function( msg ) {
             $('#filter-load').hide()
-            $('div').remove('.category-listing');
+//            $('div').remove('.category-listing');
             var productDiv;
             if($('.product-list').length){
                 productDiv = '.product-list';
@@ -329,6 +329,7 @@ function sendRequest(arrData, getParams, categoryId, appendToUrl){
             }
             $('div').remove(productDiv);
             $('div').remove('.category-listing');
+            $('div').remove('.pagination');
             $('div').remove('.buttons');
             $('div').remove('.product-list')
             $(msg).insertAfter('.sort');

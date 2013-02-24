@@ -43,11 +43,11 @@
 <!--<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/sq_slideshow.css" />-->
 
 <?php
-if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1" or $_SERVER["HTTP_HOST"] == "www.squareofone.com"){ ?>
+if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1" or $_SERVER["HTTP_HOST"] == "www.squareofone.com" ){ ?>
     <link type="text/css" rel="stylesheet" href="min/?g=sq-css"></link>
 <?php
 } else { ?>
-    <link type="text/css" rel="stylesheet" href="/min/b=catalog/view/theme/squareofone/stylesheet&amp;f=alice-min.css,stylesheet.css,style.css,superfish.css,superfish-navbar.css" />
+    <link type="text/css" rel="stylesheet" href="/min/?b=catalog/view/theme/squareofone/stylesheet&amp;f=alice-min.css,stylesheet.css,style.css,superfish.css,superfish-navbar.css" />
 <?php
 }
 ?>
@@ -79,7 +79,7 @@ if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1" or
     <script type="text/javascript" src="min/?g=sq-js"></script>
 <?php
 } else { ?>
-    <script type="text/javascript" src="/min/b=catalog/view/javascript&amp;f=jquery/tabs.js,jquery/ui/external/jquery.cookie.js,hoverIntent.js,superfish.js,sq-common.js,jquery/nivo-slider/jquery.nivo.slider.pack.js"></script>
+    <script type="text/javascript" src="/min/?b=catalog/view/javascript&amp;f=jquery/tabs.js,jquery/ui/external/jquery.cookie.js,hoverIntent.js,superfish.js,sq-common.js,jquery/nivo-slider/jquery.nivo.slider.pack.js,jquery/rotator/jquery.rotator.js"></script>
 <?php
 }
 ?>
