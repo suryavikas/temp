@@ -7,3 +7,4 @@ admin/config.php
 vqmod/vqcache
 image/data/*
 /nbproject/private/
+deploy
