@@ -74,6 +74,7 @@
         <?php } ?>
 
     </div>
+    <div class="pagination category-listing"><?php echo $pagination; ?></div>
 <!--  <div class="product-compare"><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></div>-->
   <div class="found_prd_item product-list">
       <ul>

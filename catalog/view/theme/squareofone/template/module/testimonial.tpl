@@ -1,5 +1,15 @@
 <div class="box">
-    <div><h1 style="float:left; width:350px;"><?php if ($testimonial_title == "") echo "<br>"; else echo $testimonial_title; ?></h1></div>
+    
+    <div>
+        <h1 style="float:left; width:350px;"><?php if ($testimonial_title == "") echo "<br>"; else echo $testimonial_title; ?></h1>
+        
+    </div>
+    <div style="float:right; margin-top: 20px;" class="name">
+        <span style="vertical-align: middle;">
+        <a href="<?php echo $showall_url; ?>"><?php echo $show_all; ?></a> | <a href="<?php echo $isitesti; ?>"><?php echo $isi_testimonial; ?></a>
+        </span>
+    </div>
+
 
     <div class="box-content testimonial">
         <div class="box-product testimonial">
@@ -24,7 +34,7 @@
                 <?php $i = "none"; } ?>
             </ul>
         </div>
-        <span><a href="<?php echo $showall_url; ?>"><?php echo $show_all; ?></a> | <a href="<?php echo $isitesti; ?>"><?php echo $isi_testimonial; ?></a></span>
+        
     </div>
 </div>
 <script type="text/javascript">

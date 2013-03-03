@@ -602,7 +602,7 @@
             <add><![CDATA[<?php class ControllerCommonSeoUrl extends Controller {
                 /* SEO Custom URL */
                     private $url_list = array (
-                                    'common/home'       => 'home',                                    
+                                    'common/home'       => '',                                    
                                     'account/register'  => 'register',
                                     'account/wishlist'  => 'wishlist',
                                     'checkout/checkout' => 'checkout',
@@ -709,7 +709,7 @@
                                             if (isset($data['route'])) {
                                                     if (($data['route'] == 'product/product' && $key == 'product_id') || (($data['route'] == 'product/manufacturer/info' || $data['route'] == 'product/product') && $key == 'manufacturer_id') ) {
                                                             $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = '" . $this->db->escape($key . '=' . (int)$value) . "'");
-                                                            $url .= '/india/buy-now';
+                                                            //$url .= '/india/buy-now';
                                                             if ($query->num_rows) {
                                                                     $url .= '/' . $query->row['keyword'];
 
@@ -726,7 +726,7 @@
 
                                                     } elseif ($key == 'path') {
                                                             $categories = explode('_', $value);
-                                                            $url .= '/india/fashion';
+                                                            //$url .= '/india/fashion';
                                                             foreach ($categories as $category) {
                                                                     $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = 'category_id=" . (int)$category . "'");
 
@@ -738,7 +738,7 @@
                                                             unset($data[$key]);
                                                     } elseif ($key == 'tpath') {
                                                             $categories = explode('_', $value);
-                                                            $url .= '/india/fashion';
+                                                            //$url .= '/india/fashion';
                                                             foreach ($categories as $category) {
                                                                     $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = 'category_id=" . (int)$category . "'");
 

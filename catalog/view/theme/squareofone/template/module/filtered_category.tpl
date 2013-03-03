@@ -1,5 +1,6 @@
 
 <?php if ($products) { ?>
+<div class="pagination"><?php echo $pagination; ?></div>
     <!-- Product Filters -->    
   <div class="found_prd_item product-list">
       <ul>
