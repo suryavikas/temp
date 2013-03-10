@@ -8,3 +8,7 @@ vqmod/vqcache
 image/data/*
 /nbproject/private/
 deploy
+cache
+data
+data - Copy
+minify-2.1.5

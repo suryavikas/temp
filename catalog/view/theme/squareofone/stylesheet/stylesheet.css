@@ -2765,4 +2765,5 @@ div.css-panes > div:first-child {
 }
 .testimonial{
     min-height: 240px;
+    text-align:left;
 }
