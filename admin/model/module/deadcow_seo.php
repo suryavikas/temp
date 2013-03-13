@@ -22,7 +22,8 @@ class ModelModuleDeadcowSEO extends Model {
         foreach ($products as $product) {
             $tags = array('[product_name]' => $product['name'],
                           '[model_name]' => $product['model'],
-                          '[manufacturer_name]' => $product['manufacturer_name']
+                          '[manufacturer_name]' => $product['manufacturer_name'],
+                          '[categories]' => $product['categories']
             );
             $slug = $uniqueSlug = $this->makeSlugs(strtr($template, $tags), 0, true, $source_langcode);
             $index = 1;
@@ -140,7 +141,24 @@ class ModelModuleDeadcowSEO extends Model {
     }
 
     private function getProducts() {
-        $query = $this->db->query("SELECT p.product_id, pd.name, p.model, m.name as manufacturer_name FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "manufacturer m ON (p.manufacturer_id = m.manufacturer_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY pd.name ASC");
+        #http://www.squareofone.com/[category-Name]/[sub-Category]/buy-[Product-Name]
+        $query = $this->db->query("SELECT p.product_id, pd.name, p.model, m.name as manufacturer_name,
+                                    group_concat(DISTINCT cd.name order by c.category_id, c.sort_order ASC SEPARATOR '/' ) as categories
+                                    FROM " . DB_PREFIX . "product p
+                                    LEFT JOIN " . DB_PREFIX . "product_description pd
+                                    ON (p.product_id = pd.product_id)
+                                    LEFT JOIN " . DB_PREFIX . "manufacturer m ON (p.manufacturer_id = m.manufacturer_id)
+                                    -- new addition
+                                    JOIN " . DB_PREFIX . "product_to_category pc
+                                    on (pc.product_id = p.product_id)
+                                    JOIN " . DB_PREFIX . "category_description cd
+                                    on (cd.category_id = pc.category_id)
+                                    JOIN " . DB_PREFIX . "category c
+                                    on(c.category_id = cd.category_id)
+                                    WHERE pd.language_id =  '" . (int)$this->config->get('config_language_id') . "'
+                                    group by p.product_id
+                                    ORDER BY pd.name ASC");
+        //$query = $this->db->query("SELECT p.product_id, pd.name, p.model, m.name as manufacturer_name FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "manufacturer m ON (p.manufacturer_id = m.manufacturer_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY pd.name ASC");
         return $query->rows;
     }
 
@@ -375,8 +393,9 @@ class ModelModuleDeadcowSEO extends Model {
         } else {
             $stringTab = $this->my_str_split($string);
         }
-        $numbers = array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-");
+        $numbers = array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-", "/");
         foreach ($stringTab as $letter) {
+        
             if (in_array($letter, range("a", "z")) || in_array($letter, $numbers)) {
                 $newStringTab[] = $letter;
             } elseif ($letter == " ") {
@@ -387,6 +406,7 @@ class ModelModuleDeadcowSEO extends Model {
                 }
             }
         }
+        
         if (count($newStringTab)) {
             $newString = implode($newStringTab);
             if ($maxlen > 0) {

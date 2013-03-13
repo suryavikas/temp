@@ -1,6 +1,6 @@
 <div class="box">
     <?php echo ($titlelink) ? '<a href="'.$titlelink.'">' : ''; ?>
-  <div><h1 style="float:left; width:300px;"><?php echo $heading_title; ?></h1></div>
+  <div><h1 style="float:left; width:auto;"><?php echo $heading_title; ?></h1></div>
   <?php echo ($titlelink) ? '</a>' : ''; ?>
 	<?php if (isset($grid) and $grid>0) { ?>
 	    <ul class="product-grid">
@@ -40,11 +40,7 @@
     <div class="box-product">
       <?php
         foreach ($products as $product) { ?>
-      <div class ="img1">
-           <?php if($product['special']){ ?>
-            <div class="discount_tag"><?php echo $product['discount_percentage']; ?>%<br>OFF</div>
-            <?php }
-            ?>
+      <div class ="img1">           
         <?php if ($product['thumb']) { ?>
         <div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a></div>
         <?php } ?>
