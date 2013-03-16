@@ -3,6 +3,8 @@ class ModelModuleDeadcowSEO extends Model {
     public function generateCategories($template, $source_langcode) {
         $categories = $this->getCategories();
         $slugs = array();
+//        print_r($categories);
+//        die;
         foreach ($categories as $category) {
             $tags = array('[category_name]' => $category['name']);
             $slug = $uniqueSlug = $this->makeSlugs(strtr($template, $tags), 0, true, $source_langcode);
