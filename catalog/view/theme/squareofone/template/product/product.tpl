@@ -227,7 +227,7 @@
                 <label style="float:left;"><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a> <span> | </span></label>
                  
                 <label style="float:left;"><a href="#" >Not sure about your size?</a><span> | </span></label>
-                <label style="float:left;"><a onclick="addToCart('<?php echo $product_id; ?>');">Add to Cart</a> </label>
+                <label style="float:left;"><a id="addToCart">Add to Cart</a> </label>
 <!--        <label><a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></label>-->
             </div>
         <div class="clear"></div>
@@ -387,7 +387,7 @@
   </div>
 
 <script type="text/javascript"><!--
-$('#button-cart').bind('click', function() {
+$('#button-cart, #addToCart').bind('click', function() {
 	$.ajax({
 		url: 'index.php?route=checkout/cart/add',
 		type: 'post',

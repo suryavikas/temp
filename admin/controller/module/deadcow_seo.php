@@ -12,7 +12,8 @@ class ControllerModuleDeadcowSEO extends Controller {
                                                                       'deadcow_seo_tags_template' => '[product_name], [model_name], [manufacturer_name], [categories_names]',
                                                                       'deadcow_seo_yahoo_id' => '',
                                                                       'deadcow_seo_yahoo_checkbox' => 0,
-                                                                      'deadcow_seo_source_language_code' => ''
+                                                                      'deadcow_seo_source_language_code' => '',
+                                                                      'deadcow_seo_titles_template' => '[product_name], [categories_names]'
                                                                  ));
     }
 
@@ -43,6 +44,9 @@ class ControllerModuleDeadcowSEO extends Controller {
             if (isset($this->request->post['tags'])) {
                 $this->model_module_deadcow_seo->generateTags($this->request->post['tags_template'], $this->request->post['source_language_code']);
             }
+            if (isset($this->request->post['titles'])) {
+                $this->model_module_deadcow_seo->generateTitles($this->request->post['titles_template'], $this->request->post['source_language_code']);
+            }
             $this->model_setting_setting->editSetting('deadcow_seo', array('deadcow_seo_categories_template' => $this->request->post['categories_template'],
                                                                           'deadcow_seo_products_template' => $this->request->post['products_template'],
                                                                           'deadcow_seo_manufacturers_template' => $this->request->post['manufacturers_template'],
@@ -51,7 +55,8 @@ class ControllerModuleDeadcowSEO extends Controller {
                                                                           'deadcow_seo_yahoo_id' => $this->request->post['yahoo_id'],
                                                                           'deadcow_seo_yahoo_checkbox' => isset($this->request->post['yahoo_checkbox'])
                                                                                   ? 1 : 0,
-                                                                          'deadcow_seo_source_language_code' => $this->request->post['source_language_code']
+                                                                          'deadcow_seo_source_language_code' => $this->request->post['source_language_code'],
+                                                                          'deadcow_seo_titles_template' => $this->request->post['titles_template']
                                                                      ));
             if (isset($this->error['warning'])) {
                 $this->data['error_warning'] = $this->error['warning'];
@@ -81,6 +86,9 @@ class ControllerModuleDeadcowSEO extends Controller {
         $this->data['add_from_yahoo'] = $this->language->get('add_from_yahoo');
         $this->data['curl_not_enabled'] = $this->language->get('curl_not_enabled');
         $this->data['source_language'] = $this->language->get('source_language');
+        $this->data['titles'] = $this->language->get('titles');
+        $this->data['available_titles_tags'] = $this->language->get('available_titles_tags');
+        $this->data['warning_clear_titles'] = $this->language->get('warning_clear_titles');
 
         if (isset($this->request->post['categories_template'])) {
             $this->data['categories_template'] = $this->request->post['categories_template'];
@@ -117,6 +125,11 @@ class ControllerModuleDeadcowSEO extends Controller {
             $this->data['source_language_code'] = $this->request->post['source_language_code'];
         } else {
             $this->data['source_language_code'] = $this->config->get('deadcow_seo_source_language_code');
+        }
+        if (isset($this->request->post['titles_template'])) {
+            $this->data['titles_template'] = $this->request->post['titles_template'];
+        } else {
+            $this->data['titles_template'] = $this->config->get('deadcow_seo_titles_template');
         }
         $this->data['languages'] = $this->model_module_deadcow_seo->getLanguages();
         $this->data['breadcrumbs'] = array();

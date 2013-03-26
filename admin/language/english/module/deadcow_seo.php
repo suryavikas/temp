@@ -24,3 +24,6 @@ $_['enter_yahoo_id'] = 'Please enter your Yahoo! Application ID if you want to u
 $_['curl_not_enabled'] = 'Please enable the cURL extension if you want to use the Yahoo! Term extraction service.';
 $_['tags'] = 'Tags';
 $_['source_language'] = 'Source language';
+$_['titles'] = 'Titles:';
+$_['available_titles_tags'] = 'Available tags: [product_name],  [categories_names]';
+$_['warning_clear_titles'] = 'Warning: this will clear all previous titles!';

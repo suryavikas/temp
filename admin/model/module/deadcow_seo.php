@@ -145,7 +145,7 @@ class ModelModuleDeadcowSEO extends Model {
     private function getProducts() {
         #http://www.squareofone.com/[category-Name]/[sub-Category]/buy-[Product-Name]
         $query = $this->db->query("SELECT p.product_id, pd.name, p.model, m.name as manufacturer_name,
-                                    group_concat(DISTINCT cd.name order by c.category_id, c.sort_order ASC SEPARATOR '/' ) as categories
+                                    group_concat(DISTINCT cd.name order by c.category_id, c.sort_order ASC SEPARATOR '/' ) as categories, pd.language_id
                                     FROM " . DB_PREFIX . "product p
                                     LEFT JOIN " . DB_PREFIX . "product_description pd
                                     ON (p.product_id = pd.product_id)
@@ -395,7 +395,7 @@ class ModelModuleDeadcowSEO extends Model {
         } else {
             $stringTab = $this->my_str_split($string);
         }
-        $numbers = array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-", "/");
+        $numbers = array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-", "/", "|");
         foreach ($stringTab as $letter) {
         
             if (in_array($letter, range("a", "z")) || in_array($letter, $numbers)) {
@@ -433,4 +433,55 @@ class ModelModuleDeadcowSEO extends Model {
         } while ($pos !== false);
         return $sSubject;
     }
+
+    public function generateTitles($template, $source_langcode) {
+       $products = $this->getProducts();
+       
+       $slugs = array();
+        foreach ($products as $product) {
+            $finalCategories = array();
+            $categories = $this->getProductCategories($product['product_id'], $product['language_id']);
+           
+            foreach ($categories as $category) {
+                $finalCategories[] = $category['name'];
+            }
+            
+            $categoryDepth = sizeof($finalCategories);
+            $subCatName = "";
+            for($i = $categoryDepth; $i>=0; $i--){
+                if(isset($finalCategories[$i]) && !empty($finalCategories[$i])){
+                    $subCatName = $finalCategories[$i];
+                    break;
+                }
+                else{
+                    continue;
+                }
+            }
+            
+            $tags = array('[product_name]' => $product['name'],
+                          '[model_name]' => $product['model'],
+                          '[manufacturer_name]' => $product['manufacturer_name'],
+                          '[categories_names]' => $subCatName
+
+            );            
+            $finalKeywords = array();
+            $keywords = explode(',', strtr($template, $tags));
+            
+            foreach ($keywords as $keyword) {                 
+                $finalKeywords[] = $this->makeSlugs(trim($keyword), 0, false, $source_langcode);
+            }
+            
+            $finalKeywords = array_filter(array_unique($finalKeywords));
+            $finalKeyWorksArray = explode('|', $keyword);
+            $newFinalKeywords = array();
+            foreach ($finalKeyWorksArray as $keyword) {
+                $newFinalKeywords[] = ucfirst($keyword);
+            }
+            
+            $finalKeywords = implode(' | ', $newFinalKeywords);
+            #die("UPDATE " . DB_PREFIX . "product_description SET oct_product_title = '" . $this->db->escape($finalKeywords) . "' where product_id = " . (int)$product['product_id'] . " and language_id = " . (int)$product['language_id']);
+            $this->db->query("UPDATE " . DB_PREFIX . "product_description SET oct_product_title = '" . $this->db->escape($finalKeywords) . "' where product_id = " . (int)$product['product_id'] . " and language_id = " . (int)$product['language_id']);
+        }
+    }
+
 }

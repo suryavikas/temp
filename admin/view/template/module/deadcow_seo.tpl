@@ -112,6 +112,16 @@
                             <br/><?php echo $warning_clear_tags;?>
                         </td>
                     </tr>
+                    <tr>
+                        <td><?php echo $titles;?></td>
+                        <td>
+                            <label for="titles_template"><?php echo $template;?> </label><input type="text" id="titles_template" name="titles_template" value="<?php echo $titles_template;?>" size="80"><br/>
+
+                            <div class="template-info"><?php echo $available_titles_tags;?></div>
+                            <button type="submit" name="titles" value="titles"><?php echo $generate;?></button>
+                            <br/><?php echo $warning_clear_titles;?>
+                        </td>
+                    </tr>
                 </table>
             </form>
         </div>

@@ -140,10 +140,12 @@ function checkGroup(name,value) {
         </div>
         <div id="message" style="color:#F52887;"></div>
       </div>
+
       <div class="clear"></div>
     </div>
     <div class="clear"></div>
   </div>
+
   <div id="footer_bottom">
     <div id="footer_bottom_inner">
       <div class="paypal_left">
@@ -156,11 +158,18 @@ function checkGroup(name,value) {
         </ul>
         <div class="clear"></div>
       </div>
-        <div style="float:left;"><a title="Find Our Coupons on CouponDunia" target="_blank" href="http://coupondunia.in">
-
-            <img width="105" height="40" style="padding: 5px; cursor: hand; border:0" alt="Find Our Coupons on CouponDunia" src="http://www.coupondunia.in/media/coupondunia_badge.png">
-
-       </a></div>
+        <div id="partners">
+            <div style="float:left;">
+                <a title="Find Our Coupons on CouponDunia" target="_blank" href="http://www.coupondunia.in/squareofone">
+                    <img width="105" height="40" style="padding: 5px; cursor: hand; border:0" alt="Find Our Coupons on CouponDunia" src="http://www.coupondunia.in/media/coupondunia_badge.png">
+                </a>
+            </div>
+            <div style="float:left;">
+                <a href="http://www.couponrani.com/squareofone-coupons" target="_blank">
+                    <img src="http://www.couponrani.com/resources/images/couponrani_fdt.jpg" width="80" height="31" alt="Latest Coupons" />
+                </a>
+            </div>
+        </div>
       <div class="follow">
         <ul>
           <li style="padding:0px; margin-right:-10px;" class="sq_flw">&nbsp;</li>
