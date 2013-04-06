@@ -175,9 +175,9 @@ display:block!important;
 
 </style>
 <![endif]-->
-
+<link href="/index.php?route=feed/latest_products_rss&currency=<?php echo $this->currency->getCode(); ?>" rel="alternate" type="application/rss+xml" />
 <?php echo $google_analytics; ?>
-</head>
+</head>    
 <body style="width:100%; height:auto; position:inherit;">
         <!-- Pre loading images -->
         <p>
