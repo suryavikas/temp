@@ -74,7 +74,7 @@ $(document).ready(function() {
 	});
 	
 	/* Mega Menu */
-	$('#menu ul > li > a + div').each(function(index, element) {
+	/*$('#menu ul > li > a + div').each(function(index, element) {
 		// IE6 & IE7 Fixes
 		if ($.browser.msie && ($.browser.version == 7 || $.browser.version == 6)) {
 			var category = $(element).find('a');
@@ -92,7 +92,7 @@ $(document).ready(function() {
 		if (i > 0) {
 			$(this).css('margin-left', '-' + (i + 5) + 'px');
 		}
-	});
+	});*/
 
 	// IE6 & IE7 Fixes
 	if ($.browser.msie) {
