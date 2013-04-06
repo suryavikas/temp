@@ -77,9 +77,25 @@ padding:7px 15px 12px;
 }
 .sf-menu li li {
 	background:		none;
-        border-top: 1px #fff solid;
-	
+/*        border-top: 1px #fff solid;*/
 }
+.sf-menu li ul li{
+        border-top: 1px #fff solid;
+        padding:7px 0px 8px 8px;
+}
+/*.sf-menu li ul li a:hover{
+        
+}*/
+.sf-menu li ul li:hover{
+        background-color: #258AF7;
+        text-transform: uppercase;
+        color: #fff;
+        font-weight: bold;
+}
+/*.sf-menu li li a {
+	background:		none;
+        border-top: 1px #fff solid;
+}*/
 .sf-menu li li li {
 /*	background:		#9AAEDB;*/
 }
@@ -88,6 +104,7 @@ padding:7px 15px 12px;
 /*	background:		#CFDEFF;*/
         border-bottom: 1px;
 	outline:		0;
+        
 }
 
 /*** arrows **/
@@ -129,7 +146,7 @@ li.sfHover > a > .sf-sub-indicator {
 .sf-menu ul a:active > .sf-sub-indicator,
 .sf-menu ul li:hover > a > .sf-sub-indicator,
 .sf-menu ul li.sfHover > a > .sf-sub-indicator {
-	background-position: -10px 0; /* arrow hovers for modern browsers*/
+	background-position: -10px 0; /* arrow hovers for modern browsers*/        
 }
 
 /*** shadows for all but IE6 ***/

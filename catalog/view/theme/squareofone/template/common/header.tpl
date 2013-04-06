@@ -79,7 +79,7 @@ if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1" or
     <script type="text/javascript" src="min/?g=sq-js"></script>
 <?php
 } else { ?>
-    <script type="text/javascript" src="/min/?b=catalog/view/javascript&amp;f=jquery/tabs.js,jquery/ui/external/jquery.cookie.js,hoverIntent.js,superfish.js,sq-common.js,jquery/nivo-slider/jquery.nivo.slider.pack.js,jquery/rotator/jquery.rotator.js,jquery/superfish/supersubs.js"></script>
+    <script type="text/javascript" src="/min/?b=catalog/view/javascript&amp;f=jquery/tabs.js,jquery/ui/external/jquery.cookie.js,hoverIntent.js,superfish.js,sq-common.js,jquery/nivo-slider/jquery.nivo.slider.pack.js,jquery/rotator/jquery.rotator.js,jquery/superfish/js/supersubs.js"></script>
 <?php
 }
 ?>
@@ -348,15 +348,15 @@ display:block!important;
 <script type="text/javascript"><!--
     $(document).ready(function(){
         $("ul.sf-menu").supersubs({
-            //pathClass:  'current',
-            //hoverClass:    'sfHover',          // the class applied to hovered list items
+            pathClass:  'current',
+            hoverClass:    'sfHover',          // the class applied to hovered list items
 //            pathClass:     'overideThisToUse', // the class you have applied to list items that lead to the current page
             //pathLevels:    1,                  // the number of levels of submenus that remain open or are restored using pathClass
-            //delay:         800,                // the delay in milliseconds that the mouse can remain outside a submenu without it closing
-            //animation:     {opacity:'show'},   // an object equivalent to first parameter of jQueryâ€™s .animate() method
+            delay:         800,                // the delay in milliseconds that the mouse can remain outside a submenu without it closing
+            animation:     {opacity:'show'},   // an object equivalent to first parameter of jQueryâ€™s .animate() method
             //speed:         'normal',           // speed of the animation. Equivalent to second parameter of jQueryâ€™s .animate() method
-            //autoArrows:    true,               // if true, arrow mark-up generated automatically = cleaner source code at expense of initialisation performance
-            //dropShadows:   true,                // completely disable drop shadows by setting this to false
+            autoArrows:    true,               // if true, arrow mark-up generated automatically = cleaner source code at expense of initialisation performance
+            dropShadows:   true,                // completely disable drop shadows by setting this to false
             minWidth:    20,   // minimum width of submenus in em units
             maxWidth:    40,   // maximum width of submenus in em units
             extraWidth:  1     // extra width can ensure lines don't sometimes turn over
