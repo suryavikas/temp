@@ -1,0 +1,486 @@
+<modification>
+	<id>Opencart SEO Title Tag Editor Free</id>
+	<version>2</version>
+	<vqmver>2.1.7</vqmver>
+	<author>jrnielsen</author>
+
+	<!-- Database Table Exists Function
+	############################################ -->
+	<file name="system/library/db.php">
+		<operation>
+			<!-- Function to alter the table if necessary -->
+			<search position="before"><![CDATA[
+				public function query($sql) {
+			]]></search>
+			<add><![CDATA[
+				public function octCheckTable($table, $column) {
+					//check if column exists.  If not, then make it exist.
+					$sql = "DESC " . DB_PREFIX . "{$table} {$column}";
+					$query = $this->query($sql);
+					if (!$query->num_rows) {
+						$sql = "ALTER TABLE " . DB_PREFIX . "{$table} ADD {$column} VARCHAR(255) NOT NULL DEFAULT ''";
+						$this->query($sql);
+					}
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- Info Pop
+	############################################ -->
+	
+	<!-- Global Title Settings
+	############################################ -->
+	<file name="admin/view/template/setting/setting.tpl">
+		<operation>
+			<!-- add the title input to the settings page -->
+			<search position="before" offset="2"><![CDATA[
+				<td><?php echo $entry_meta_description; ?></td>
+			]]></search>
+			<add><![CDATA[
+				<tr>
+					<td>
+						<?php echo $entry_oct_title_prefix; ?> <sup><a href="javascript:titlerPop();">?</a></sup>
+						<br />
+						<span class="help"><?php echo $oct_upgrade_text; ?></span>
+					</td>
+					<td><input type="text" disabled="disalbed" name="config_oct_title_prefix" value="" /></td>
+				</tr>
+				<tr>
+					<td>
+						<?php echo $entry_oct_title_suffix; ?> <sup><a href="javascript:titlerPop();">?</a></sup>
+						<br />
+						<span class="help"><?php echo $oct_upgrade_text; ?></span>
+					</td>
+					<td><input type="text" disabled="disalbed" name="config_oct_title_suffix" value="" /></td>
+				</tr>
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/english/setting/setting.php">
+		<operation>
+			<!-- add the title language to the setting page langauge file -->
+			<search position="after"><![CDATA[
+				// Entry
+			]]></search>
+			<add><![CDATA[
+				$_['entry_oct_title_prefix']  = 'Title Tag Prefix:';
+				$_['entry_oct_title_suffix']  = 'Title Tag Suffix:';
+				$_['oct_upgrade_text'] = '<a target="_blank" href="http://www.opencart.com/index.php?route=extension/extension/info&extension_id=8837">Upgrade now</a> for this feature';
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/setting/setting.php">
+		<operation>
+			<!-- include the language -->
+			<search position="after"><![CDATA[
+				$this->load->language('setting/setting');
+			]]></search>
+			<add><![CDATA[
+				$this->data['entry_oct_title_prefix'] = $this->language->get('entry_oct_title_prefix');
+				$this->data['entry_oct_title_suffix'] = $this->language->get('entry_oct_title_suffix');
+				$this->data['oct_upgrade_text'] = $this->language->get('oct_upgrade_text');
+			]]></add>
+		</operation>
+	</file>
+	<!-- allow custom prefix and suffix for multi store -->
+	<file name="admin/view/template/setting/store_form.tpl">
+		<operation>
+			<!-- add the title input to the settings page -->
+			<search position="before" offset="2"><![CDATA[
+				<td><?php echo $entry_meta_description; ?></td>
+			]]></search>
+			<add><![CDATA[
+				<tr>
+					<td>
+						<?php echo $entry_oct_title_prefix; ?> <sup><a href="javascript:titlerPop();">?</a></sup>
+						<br />
+						<span class="help"><?php echo $oct_upgrade_text; ?></span>
+					</td>
+					<td><input type="text" disabled="disalbed" name="config_oct_title_prefix" value="" /></td>
+				</tr>
+				<tr>
+					<td>
+						<?php echo $entry_oct_title_suffix; ?> <sup><a href="javascript:titlerPop();">?</a></sup>
+						<br />
+						<span class="help"><?php echo $oct_upgrade_text; ?></span>
+					</td>
+					<td><input type="text" disabled="disalbed" name="config_oct_title_suffix" value="" /></td>
+				</tr>
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/english/setting/store.php">
+		<operation>
+			<!-- add the title language to the setting page langauge file -->
+			<search position="after"><![CDATA[
+				// Entry
+			]]></search>
+			<add><![CDATA[
+				$_['entry_oct_title_prefix']  = 'Title Tag Prefix:';
+				$_['entry_oct_title_suffix']  = 'Title Tag Suffix:';
+				$_['oct_upgrade_text'] = '<a target="_blank" href="http://www.opencart.com/index.php?route=extension/extension/info&extension_id=8837">Upgrade now</a> for this feature';
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/setting/store.php">
+		<operation>
+			<!-- include the language -->
+			<search position="after"><![CDATA[
+				$this->load->language('setting/store');
+			]]></search>
+			<add><![CDATA[
+				$this->data['entry_oct_title_prefix'] = $this->language->get('entry_oct_title_prefix');
+				$this->data['entry_oct_title_suffix'] = $this->language->get('entry_oct_title_suffix');
+				$this->data['oct_upgrade_text'] = $this->language->get('oct_upgrade_text');
+			]]></add>
+		</operation>
+	</file>
+	<!-- update the title globally to include the pre and post text if it is available -->
+	<file name="catalog/controller/common/header.php">
+		<operation>
+			<search position="after"><![CDATA[
+				$this->data['title'] = $this->document->getTitle();
+			]]></search>
+			<add><![CDATA[
+				if ($this->config->has('config_oct_title_suffix') && $this->config->get('config_oct_title_suffix') != '') {
+					$this->data['title'] .= " " . $this->config->get('config_oct_title_suffix');
+				}
+				if ($this->config->has('config_oct_title_prefix') && $this->config->get('config_oct_title_prefix') != '') {
+					$this->data['title'] = $this->config->get('config_oct_title_prefix') . " " . $this->data['title'];
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- Category Page Mod
+	############################################ -->
+	<file name="admin/view/template/catalog/category_form.tpl">
+		<operation>
+			<!-- add the oct_category_title input to the category page -->
+			<search position="before" offset="2"><![CDATA[
+				<td><?php echo $entry_meta_description; ?></td>
+			]]></search>
+			<add><![CDATA[
+				<tr>
+					<td><?php echo $entry_title_tag; ?> <sup><a href="javascript:titlerPop();">?</a></sup></td>
+					<td><input type="text" size="100" name="category_description[<?php echo $language['language_id']; ?>][oct_category_title]" value="<?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['oct_category_title'] : ''; ?>" /></td>
+				</tr>
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/english/catalog/category.php">
+		<operation>
+			<!-- add the oct_category_title language to the category page langauge file -->
+			<search position="before"><![CDATA[
+				$_['entry_meta_description']
+			]]></search>
+			<add><![CDATA[
+				$_['entry_title_tag']  = 'Title Tag:';
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/catalog/category.php">
+		<operation>
+			<!-- call the db check function -->
+			<search position="after"><![CDATA[
+				private function getForm() {
+			]]></search>
+			<add><![CDATA[
+				$this->db->octCheckTable('category_description', 'oct_category_title');
+			]]></add>
+		</operation>
+		<operation>
+			<!-- get the language data -->
+			<search position="before"><![CDATA[
+				$this->data['entry_meta_description'] = $this->language->get('entry_meta_description');
+			]]></search>
+			<add><![CDATA[
+				$this->data['entry_title_tag'] = $this->language->get('entry_title_tag');
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/model/catalog/category.php">
+		<operation>
+			<!-- add a query to include the title tag. this matches for both update and insert -->
+			<search position="after"><![CDATA[
+				"', meta_keyword = '" . $this->db->escape($value['meta_keyword'])
+			]]></search>
+			<add><![CDATA[
+				if(isset($value['oct_category_title'])) {
+					if (!isset($category_id)) {
+						$octitler_category_id = $this->db->getLastId();
+					} else {
+						$octitler_category_id = $category_id;
+					}
+					$this->db->query("UPDATE " . DB_PREFIX . "category_description SET oct_category_title = '" . $this->db->escape($value['oct_category_title']) . "' WHERE category_id = '" . (int)$octitler_category_id . "' AND language_id = '" . (int)$language_id . "'");
+					unset($octitler_category_id);
+				}
+			]]></add>
+		</operation>
+		<operation>
+			<!-- update the retrieval query to include oct_category_title-->
+			<search position="before"><![CDATA[
+				'meta_keyword'     => $result['meta_keyword'],
+			]]></search>
+			<add><![CDATA[
+				'oct_category_title' => $result['oct_category_title'],
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/product/category.php">
+		<operation>
+			<!-- Update title logic -->
+			<search position="after"><![CDATA[
+				$this->document->setTitle($category_info['name']);
+			]]></search>
+			<add><![CDATA[
+				if (isset($category_info["oct_category_title"]) && $category_info["oct_category_title"] != "") {
+					$this->document->setTitle($category_info['oct_category_title']);
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- Product Page Mod
+	############################################ -->
+	<file name="admin/view/template/catalog/product_form.tpl">
+		<operation>
+			<!-- add the oct_product_title input to the product page -->
+			<search position="before" offset="2"><![CDATA[
+				<td><?php echo $entry_meta_description; ?></td>
+			]]></search>
+			<add><![CDATA[
+				<tr>
+					<td><?php echo $entry_title_tag; ?> <sup><a href="javascript:titlerPop();">?</a></sup></td>
+					<td><input type="text" size="100" name="product_description[<?php echo $language['language_id']; ?>][oct_product_title]" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['oct_product_title'] : ''; ?>" /></td>
+				</tr>
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/english/catalog/product.php">
+		<operation>
+			<!-- add the oct_product_title language to the product page langauge file -->
+			<search position="before"><![CDATA[
+				$_['entry_meta_description']
+			]]></search>
+			<add><![CDATA[
+				$_['entry_title_tag']  = 'Title Tag:';
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/catalog/product.php">
+		<operation>
+			<!-- call the db check function -->
+			<search position="after"><![CDATA[
+				private function getForm() {
+			]]></search>
+			<add><![CDATA[
+				$this->db->octCheckTable('product_description', 'oct_product_title');
+			]]></add>
+		</operation>
+		<operation>
+			<!-- get the language data -->
+			<search position="before"><![CDATA[
+				$this->data['entry_meta_description'] = $this->language->get('entry_meta_description');
+			]]></search>
+			<add><![CDATA[
+				$this->data['entry_title_tag'] = $this->language->get('entry_title_tag');
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/model/catalog/product.php">
+		<operation>
+			<!-- add a query to include the title tag. this matches for both update and insert -->
+			<search position="after"><![CDATA[
+				"', meta_keyword = '" . $this->db->escape($value['meta_keyword'])
+			]]></search>
+			<add><![CDATA[
+				if(isset($value['oct_product_title'])) {
+					if (!isset($product_id)) {
+						$octitler_product_id = $this->db->getLastId();
+					} else {
+						$octitler_product_id = $product_id;
+					}
+					$this->db->query("UPDATE " . DB_PREFIX . "product_description SET oct_product_title = '" . $this->db->escape($value['oct_product_title']) . "' WHERE product_id = '" . (int)$octitler_product_id . "' AND language_id = '" . (int)$language_id . "'");
+					unset($octitler_product_id);
+				}
+			]]></add>
+		</operation>
+		<operation>
+			<!-- update the retrieval query to include oct_product_title -->
+			<search position="before"><![CDATA[
+				'meta_keyword'     => $result['meta_keyword'],
+			]]></search>
+			<add><![CDATA[
+				'oct_product_title' => $result['oct_product_title'],
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/product/product.php">
+		<operation>
+			<!-- Update title logic -->
+			<search position="after"><![CDATA[
+				$this->document->setTitle($product_info['name']);
+			]]></search>
+			<add><![CDATA[
+				if (isset($product_info["oct_product_title"]) && $product_info["oct_product_title"] != "") {
+					$this->document->setTitle($product_info['oct_product_title']);
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/model/catalog/product.php">
+		<!-- make sure the model is retrieving the title tag. this necessity was introduced in 1541, so skip if not found -->
+		<operation error="skip">
+			<search position="before"><![CDATA[
+				return array(
+			]]></search>
+			<add><![CDATA[
+				$oct_product_title = (isset($query->row['oct_product_title']) ? $query->row['oct_product_title'] : '');
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="after"><![CDATA[
+				return array(
+			]]></search>
+			<add><![CDATA[
+				'oct_product_title' => $oct_product_title,
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- Information Page Mod
+	################################################# -->
+	<file name="admin/view/template/catalog/information_form.tpl">
+		<operation>
+			<!-- add the oct_information_title input to the information page -->
+			<search position="before" offset="2"><![CDATA[
+				<td><span class="required">*</span> <?php echo $entry_description; ?></td>
+			]]></search>
+			<add><![CDATA[
+				<tr>
+					<td><?php echo $entry_title_tag; ?> <sup><a href="javascript:titlerPop();">?</a></sup></td>
+					<td><input type="text" size="100" name="information_description[<?php echo $language['language_id']; ?>][oct_information_title]" value="<?php echo isset($information_description[$language['language_id']]) ? $information_description[$language['language_id']]['oct_information_title'] : ''; ?>" /></td>
+				</tr>
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/english/catalog/information.php">
+		<operation>
+			<!-- add the oct_information_title language to the information page language file -->
+			<search position="before"><![CDATA[
+				$_['entry_description']
+			]]></search>
+			<add><![CDATA[
+				$_['entry_title_tag']  = 'Title Tag:';
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/catalog/information.php">
+		<operation>
+			<!-- call the db check function -->
+			<search position="after"><![CDATA[
+				private function getForm() {
+			]]></search>
+			<add><![CDATA[
+				$this->db->octCheckTable('information_description', 'oct_information_title');
+			]]></add>
+		</operation>
+		<operation>
+			<!-- get the language data -->
+			<search position="before"><![CDATA[
+				$this->data['entry_description'] = $this->language->get('entry_description');
+			]]></search>
+			<add><![CDATA[
+				$this->data['entry_title_tag'] = $this->language->get('entry_title_tag');
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/model/catalog/information.php">
+		<operation>
+			<!-- add a query to include the title tag. this matches for both update and insert -->
+			<search position="after" offset="1"><![CDATA[
+				foreach ($data['information_description'] as $language_id => $value) {
+			]]></search>
+			<add><![CDATA[
+				if(isset($value['oct_information_title'])) {
+					if (!isset($information_id)) {
+						$octitler_information_id = $this->db->getLastId();
+					} else {
+						$octitler_information_id = $information_id;
+					}
+					$this->db->query("UPDATE " . DB_PREFIX . "information_description SET oct_information_title = '" . $this->db->escape($value['oct_information_title']) . "' WHERE information_id = '" . (int)$octitler_information_id . "' AND language_id = '" . (int)$language_id . "'");
+					unset($octitler_information_id);
+				}
+			]]></add>
+		</operation>
+		<operation>
+			<!-- update the retrieval query to include oct_information_title -->
+			<search position="before"><![CDATA[
+				'description' => $result['description']
+			]]></search>
+			<add><![CDATA[
+				'oct_information_title' => $result['oct_information_title'],
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/information/information.php">
+		<operation>
+			<!-- Update title logic -->
+			<search position="after"><![CDATA[
+				$this->document->setTitle($information_info['title']);
+			]]></search>
+			<add><![CDATA[
+				if (isset($information_info["oct_information_title"]) && $information_info["oct_information_title"] != "") {
+					$this->document->setTitle($information_info['oct_information_title']);
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- Manufacturer Mod
+	################################################### -->
+	<file name="admin/view/template/catalog/manufacturer_form.tpl">
+		<operation>
+			<!-- add the oct_manufacturer_title input to the information page -->
+			<search position="before" offset="2"><![CDATA[
+				 <td><?php echo $entry_store; ?></td>
+			]]></search>
+			<add><![CDATA[
+				<tr>
+					<td>
+						<?php echo $entry_title_tag; ?> <sup><a href="javascript:titlerPop();">?</a></sup>
+						<br />
+						<span class="help"><?php echo $oct_upgrade_text; ?></span>
+					</td>
+					<td><input type="text" size="100" disabled="disabled" name="oct_manufacturer_title" value="" /></td>
+				</tr>
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/english/catalog/manufacturer.php">
+		<operation>
+			<!-- add the oct_manufacturer_title language to the manufacturer page langauge file -->
+			<search position="before"><![CDATA[
+				$_['entry_store']
+			]]></search>
+			<add><![CDATA[
+				$_['entry_title_tag']  = 'Title Tag:';
+				$_['oct_upgrade_text'] = 'Please upgrade to the <a target="_blank" href="http://www.opencart.com/index.php?route=extension/extension/info&extension_id=8837">complete SEO Title Tag Editor</a> to enable this feature';
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/catalog/manufacturer.php">
+		<operation>
+			<!-- get the language data -->
+			<search position="before"><![CDATA[
+				$this->data['entry_store'] = $this->language->get('entry_store');
+			]]></search>
+			<add><![CDATA[
+				$this->data['entry_title_tag'] = $this->language->get('entry_title_tag');
+				$this->data['oct_upgrade_text'] = $this->language->get('oct_upgrade_text');
+			]]></add>
+		</operation>
+	</file>
+</modification>
