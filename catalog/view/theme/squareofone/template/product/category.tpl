@@ -74,7 +74,14 @@
         <?php } ?>
 
     </div>
-    <div class="pagination category-listing"><?php echo $pagination; ?></div>
+    <div class="pagination category-listing"><?php echo $pagination;
+        if($page == 'show'){ ?>
+        <span class="links" style="padding-left: 2px">
+            <a  href="<?php echo $show_all; ?>"><?php echo $text_show_all ?></a>
+        </span>
+<?php } ?>
+    </div>
+    
 <!--  <div class="product-compare"><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></div>-->
   <div class="found_prd_item product-list">
       <ul>
@@ -115,7 +122,11 @@
     <?php } ?>
         </ul>
   </div>
-  <div class="pagination category-listing"><?php echo $pagination; ?></div>
+  <div class="pagination category-listing"><?php echo $pagination; ?>
+    <span class="links" style="padding-left: 2px">
+        <a  href="<?php echo $show_all; ?>"><?php echo $text_show_all ?></a>
+    </span>
+  </div>
   <?php } ?>
   <?php if (!$categories && !$products) { ?>
   <div class="content"><?php echo $text_empty; ?></div>

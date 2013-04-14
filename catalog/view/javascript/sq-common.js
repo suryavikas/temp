@@ -12,20 +12,20 @@ $(document).ready(function() {
 		location = url;
 	});
 	
-        $('.category-listing .links a').live('click', function() {
-            
-            var arrData = getFilterParams();
-            var getParams = getSortingParams();
-
-            var url = $(this).attr('href');
-            
-            categoryId = getURLVarFromString(url, "path");
-            page = getURLVarFromString(url, "page");
-            sendRequest(arrData, getParams, categoryId, "page="+page);
-            
-            
-            return false;
-        });
+//        $('.category-listing .links a').live('click', function() {
+//
+//            var arrData = getFilterParams();
+//            var getParams = getSortingParams();
+//
+//            var url = $(this).attr('href');
+//
+//            categoryId = getURLVarFromString(url, "path");
+//            page = getURLVarFromString(url, "page");
+//            sendRequest(arrData, getParams, categoryId, "page="+page);
+//
+//
+//            return false;
+//        });
 
 
 	$('#header input[name=\'filter_name\']').bind('keydown', function(e) {

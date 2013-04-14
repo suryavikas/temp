@@ -101,7 +101,9 @@ class ControllerModuleFilters extends Controller {
         if (isset($this->request->get['limit'])) {
             $limit = $this->request->get['limit'];
         } else {
-            $limit = $this->config->get('config_catalog_limit');
+//            Overidding this so that filters have no pagination
+//            $limit = $this->config->get('config_catalog_limit');
+            $limit = 99999999;
         }
 
         $this->data['breadcrumbs'] = array();
