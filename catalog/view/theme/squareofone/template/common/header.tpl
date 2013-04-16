@@ -10,7 +10,7 @@
 <?php if ($keywords) { ?>
 <meta name="keywords" content="<?php echo $keywords; ?>" />
 <?php } else {?>
-<meta name="keywords" content='Online shopping India, Gifts to India, Fashion, Style, Vogue, Stylish, Party wear, Latest fashion, Men, Women, Accessories, Earrings, Pendents, Skirts, Stoles, Long Skirts, Short Skirts, Printed tops, Speghetti tops, 15 days refund, Free home delivery, Free shipping, Cash on delivery, COD, Delhi NCR, Bangalore, Mumbai, Chennai, Hyderabad' />
+<meta name="keywords" content='Online Womens Clothes shopping, womens clothing, ladies dresses, casual dresses, formal dresses, evening gowns, cocktail dresses, bags, hand bags, clutches, costume jewellery, fashion jewellery, designer Jewellery, squareofone.com , 15 days refund, Free home delivery, Free shipping, Cash on delivery, COD' />
 <?php }?>
 <meta name="author" content="Square One Trade Com "/>
 <meta name="copyright" content="2012"/>
