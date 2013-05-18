@@ -887,7 +887,7 @@ class ModelToolExport extends Model {
 				$sql  = " INSERT INTO `".DB_PREFIX."option_description` (`option_id`,`language_id`,`name`)";
 				$sql .= " VALUES ($optionId,$langId,'".$database->escape($name)."')";
 				$sql .= " ON DUPLICATE KEY UPDATE ";
-				$sql .= " language_id= $langId, name='".$database->escape($name)."'";
+				$sql .= " `option_id` = `option_id`";
 				$database->query( $sql);
 				
 				$countOptions += 1;
@@ -968,7 +968,7 @@ class ModelToolExport extends Model {
 				$sql .= " VALUES($productOptionValueId,$productOptionId,$productId,$optionId,$optionValueId,";
 				$sql .= " $quantity,$subtract,$price,'$pricePrefix',$points,'$pointsPrefix',$weight,'$weightPrefix') ";
 				$sql .= " ON DUPLICATE KEY UPDATE ";
-				$sql .= " option_value_id=$optionValueId,quantity=$quantity,";
+				$sql .= " quantity=$quantity,";
 				$sql .= " subtract=$subtract, price=$price, price_prefix= '$pricePrefix', points=$points, points_prefix='$pointsPrefix',";
 				$sql .= " weight=$weight, weight_prefix='$weightPrefix'";
 

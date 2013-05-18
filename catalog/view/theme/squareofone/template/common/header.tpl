@@ -1,6 +1,6 @@
 <?php if (isset($_SERVER['HTTP_USER_AGENT']) && !strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6')) echo '<?xml version="1.0" encoding="UTF-8"?>'. "\n"; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>" xml:lang="<?php echo $lang; ?>">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>" xml:lang="<?php echo $lang; ?>">
 <head>
 <title><?php echo $title; ?></title>
 <base href="<?php echo $base; ?>" />
@@ -71,7 +71,7 @@ if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1" or
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
 <script src="http://cdn.webrupee.com/js" type="text/javascript"></script>
-
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5189f68500069580"></script>
 <!--Set this while deploying to prod or dev-->
 
 <?php
@@ -210,6 +210,16 @@ display:block!important;
                             <input type="text" name="filter_name" value="<?php echo $text_search; ?>" onclick="this.value = '';" onkeydown="this.style.color = '#000000';" />
                             <?php } ?>
                             <input type="image" src="catalog/view/theme/squareofone/image/srch-btn.jpg" class="srch_btn" />
+                    </div>
+                    <div class="follow_us_text "> </div>
+                    <div class="follow_us addthis_toolbox addthis_32x32_style addthis_default_style">
+                        <!-- AddThis Follow BEGIN -->
+                            <a class="addthis_button_facebook_follow" addthis:userid="Squareofone/295855950519330"></a>
+                            <a class="addthis_button_twitter_follow" addthis:userid="squareofone"></a>
+                            <a class="addthis_button_pinterest_follow" addthis:userid="squareofone"></a>
+                        
+<!--                        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5189f68500069580"></script>-->
+                        <!-- AddThis Follow END -->
                     </div>
                     <div class="free_shiping">
                         <div class="bn">

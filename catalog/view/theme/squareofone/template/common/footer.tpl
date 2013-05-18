@@ -29,7 +29,8 @@
           <li><a href="<?php echo $wishlist; ?>"><?php echo $text_wishlist; ?></a></li>
           <li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>          
         </ul>
-      </div>      
+      </div>
+      
       <div class="column">Newsletter
       <div>&nbsp;</div>
         <div id="newsletter">
@@ -140,7 +141,9 @@ function checkGroup(name,value) {
         </div>
         <div id="message" style="color:#F52887;"></div>
       </div>
-
+      
+        <div class="clear"></div>
+      </div>
       <div class="clear"></div>
     </div>
     <div class="clear"></div>
@@ -170,16 +173,7 @@ function checkGroup(name,value) {
                 </a>
             </div>
         </div>
-      <div class="follow">
-        <ul>
-          <li style="padding:0px; margin-right:-10px;" class="sq_flw">&nbsp;</li>
-<!--          <li><a href="#" class="tw_hv"><span>more</span></a></li>
-          <li><a href="#" class="rss_hv"><span>more</span></a></li>-->
-          <li><a href="https://www.facebook.com/pages/Squareofone/295855950519330?fref=ts" target="_blank" class="fb_hv"><span>more</span></a></li>
-<!--          <li><a href="#" class="v_hv"><span>more</span></a></li>-->
-        </ul>
-        <div class="clear"></div>
-      </div>
+      
       <div class="clear"></div>
     </div>
     <div class="clear"></div>
