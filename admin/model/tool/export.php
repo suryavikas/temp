@@ -881,7 +881,7 @@ class ModelToolExport extends Model {
 				$newOptionIds[$name][$type] = $optionId;
 				$sql  = "INSERT INTO `".DB_PREFIX."option` (`option_id`,`type`,`sort_order`) VALUES ($optionId,'$type',$countOptions)";
 				$sql .= " ON DUPLICATE KEY UPDATE ";
-				$sql .= " type= '$type', sort_order= $countOptions";
+				$sql .= " `sort_order` = `sort_order`";
 				$database->query( $sql );
 				
 				$sql  = " INSERT INTO `".DB_PREFIX."option_description` (`option_id`,`language_id`,`name`)";
@@ -920,7 +920,7 @@ class ModelToolExport extends Model {
 					$sql  = "INSERT INTO `".DB_PREFIX."option_value_description` (`option_value_id`,`language_id`,`option_id`,`name`) VALUES ";
 					$sql .= "($optionValueId,$langId,$optionId,'".$database->escape($value)."')";
 					$sql .= " ON DUPLICATE KEY UPDATE ";
-					$sql .= " language_id=$langId, option_id= $optionId, name='".$database->escape($value)."'";					
+					$sql .= " `option_value_id` = `option_value_id`";
 					
 					$database->query( $sql );
 				}
@@ -941,7 +941,7 @@ class ModelToolExport extends Model {
 				$sql  = "INSERT INTO `".DB_PREFIX."product_option` (`product_option_id`,`product_id`,`option_id`,`option_value`,`required`) VALUES ";
 				$sql .= "($productOptionId,$productId,$optionId,'".$database->escape($productOptionValue)."',$required)";
 				$sql .= " ON DUPLICATE KEY UPDATE ";
-				$sql .= " product_id= $productId, option_id= $optionId, option_value= '".$database->escape($productOptionValue)."', required= $required";
+				$sql .= " option_value= '".$database->escape($productOptionValue)."', required= $required";
 				
 				$database->query( $sql );
 			}
@@ -968,7 +968,7 @@ class ModelToolExport extends Model {
 				$sql .= " VALUES($productOptionValueId,$productOptionId,$productId,$optionId,$optionValueId,";
 				$sql .= " $quantity,$subtract,$price,'$pricePrefix',$points,'$pointsPrefix',$weight,'$weightPrefix') ";
 				$sql .= " ON DUPLICATE KEY UPDATE ";
-				$sql .= " product_option_id=$productOptionId,product_id=$productId,option_id=$optionId,option_value_id=$optionValueId,quantity=$quantity,";
+				$sql .= " option_value_id=$optionValueId,quantity=$quantity,";
 				$sql .= " subtract=$subtract, price=$price, price_prefix= '$pricePrefix', points=$points, points_prefix='$pointsPrefix',";
 				$sql .= " weight=$weight, weight_prefix='$weightPrefix'";
 

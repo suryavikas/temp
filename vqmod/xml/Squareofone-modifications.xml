@@ -1262,4 +1262,27 @@ class ControllerCommonSeoUrl extends Controller {
                 </add>
             </operation>
         </file>
+        <file name="catalog/model/account/customer.php">
+            <operation>
+                <search position="replace"><![CDATA[$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));]]></search>
+                <add><![CDATA[
+                    $welcome = sprintf($this->language->get('text_saluataion'), $data['firstname'])."\r\n";
+                    $subject = $welcome.''. sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
+                ]]>
+                </add>
+            </operation>
+            <operation>
+                <search position="replace"><![CDATA[$message = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";]]></search>
+                <add><![CDATA[
+                    $message = $welcome."\r\n".sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\r\n";
+                ]]>
+                </add>
+            </operation>
+            <operation>
+                <search position="replace"><![CDATA[$message .= $this->url->link('account/login', '', 'SSL') . "\n\n";]]></search>
+                <add><![CDATA[ ]]>
+                </add>
+            </operation>
+
+        </file>
 </modification>
