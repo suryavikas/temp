@@ -29,8 +29,7 @@
           <li><a href="<?php echo $wishlist; ?>"><?php echo $text_wishlist; ?></a></li>
           <li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>          
         </ul>
-      </div>
-      
+      </div>      
       <div class="column">Newsletter
       <div>&nbsp;</div>
         <div id="newsletter">
@@ -141,9 +140,7 @@ function checkGroup(name,value) {
         </div>
         <div id="message" style="color:#F52887;"></div>
       </div>
-      
-        <div class="clear"></div>
-      </div>
+
       <div class="clear"></div>
     </div>
     <div class="clear"></div>
@@ -173,7 +170,27 @@ function checkGroup(name,value) {
                 </a>
             </div>
         </div>
-      
+      <div class="follow">
+        <ul>
+          <li style="padding:0px; margin-right:-10px;" class="sq_flw">&nbsp;</li>
+<!--          <li><a href="#" class="tw_hv"><span>more</span></a></li>
+          <li><a href="#" class="rss_hv"><span>more</span></a></li>-->
+          <li>
+              <!-- AddThis Follow BEGIN -->
+<div class="addthis_toolbox addthis_32x32_style addthis_default_style">
+<a class="addthis_button_facebook_follow" addthis:userid="Squareofone/295855950519330"></a>
+<a class="addthis_button_twitter_follow" addthis:userid="squareofone"></a>
+<a class="addthis_button_pinterest_follow" addthis:userid="squareofone"></a>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5189f68500069580"></script>
+<!-- AddThis Follow END -->
+
+<!--              <a href="https://www.facebook.com/pages/Squareofone/295855950519330?fref=ts" target="_blank" class="fb_hv"><span>more</span></a>-->
+          </li>
+<!--          <li><a href="#" class="v_hv"><span>more</span></a></li>-->
+        </ul>
+        <div class="clear"></div>
+      </div>
       <div class="clear"></div>
     </div>
     <div class="clear"></div>
