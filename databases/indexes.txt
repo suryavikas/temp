@@ -1,0 +1,17 @@
+Export tool bug
+
+ALTER TABLE `option` 
+ADD UNIQUE INDEX `type_UNIQUE` (`type` ASC) ;
+
+ALTER TABLE `option_description` 
+ADD UNIQUE INDEX `name_UNIQUE` (`name` ASC, `language_id` ASC) ;
+
+ALTER TABLE `option_value_description` 
+ADD UNIQUE INDEX `name_UNIQUE` (`name` ASC, `option_id` ASC, `language_id` ASC) ;
+
+ALTER TABLE `product_option` 
+ADD UNIQUE INDEX `UK_prod_option` (`product_id` ASC, `option_id` ASC, `option_value`(255) ASC) ;
+
+ALTER TABLE `product_option_value` 
+ADD UNIQUE INDEX `UK_prd_opt` (`product_option_id` ASC, `product_id` ASC, `option_id` ASC, `option_value_id` ASC) ;
+

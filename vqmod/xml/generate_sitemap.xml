@@ -1,0 +1,65 @@
+<modification>
+	<id>Generate SiteMap</id>
+	<version>1.2.0</version>
+	<vqmver>2.1</vqmver>
+	<author>BitCom</author>
+	<file name="admin/controller/common/header.php">
+		<operation error="abort">
+			<search position="before"><![CDATA[$this->data['geo_zone']]]></search>
+			<add><![CDATA[		$this->data['text_generate_sitemap'] = $this->language->get('text_generate_sitemap');]]></add>
+		</operation>
+		<operation error="abort">
+			<search position="before"><![CDATA[$this->data['geo_zone']]]></search>
+			<add><![CDATA[		$this->data['generate_sitemap'] = $this->url->link('tool/generate_sitemap', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/*/common/header.php">
+		<operation error="abort">
+			<search position="before"><![CDATA[$_['text_geo_zone']]]></search>
+			<add><![CDATA[$_['text_generate_sitemap']               = 'Generate Sitemap';]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/common/header.tpl">
+		<operation error="abort">
+			<search position="after"><![CDATA[<li><a href="<?php echo $backup; ?>"><?php echo $text_backup; ?></a></li>]]></search>
+			<add><![CDATA[          <li><a href="<?php echo $generate_sitemap; ?>"><?php echo $text_generate_sitemap; ?></a></li>]]></add>
+		</operation>
+	</file>
+	<file name="admin/model/catalog/category.php">
+		<operation error="abort">
+			<search position="before"><![CDATA[public function getTotalCategoriesByImageId]]></search>
+			<add><![CDATA[public function getSiteMapCategories($parent_id = 0) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$parent_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)");
+		
+		return $query->rows;}]]></add>
+		</operation>
+	</file>
+	<file name="admin/model/catalog/product.php">
+		<operation error="abort">
+			<search position="before"><![CDATA[public function getTotalProductsByOptionId($option_id)]]></search>
+			<add><![CDATA[public function getAllProducts($data = array()) {
+		$sql = "SELECT p.* FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+		
+		if (isset($data['filter_name']) && !is_null($data['filter_name'])) {
+			$sql .= " AND LCASE(pd.name) LIKE '%" . $this->db->escape(strtolower($data['filter_name'])) . "%'";
+		}
+
+		if (isset($data['filter_model']) && !is_null($data['filter_model'])) {
+			$sql .= " AND LCASE(p.model) LIKE '%" . $this->db->escape(strtolower($data['filter_model'])) . "%'";
+		}
+		
+		if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
+			$sql .= " AND p.quantity = '" . $this->db->escape($data['filter_quantity']) . "'";
+		}
+		
+		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
+			$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
+		}
+
+		$query = $this->db->query($sql);
+		
+		return $query->rows;
+	}]]></add>
+		</operation>
+	</file>	
+</modification>

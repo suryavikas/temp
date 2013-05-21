@@ -392,7 +392,7 @@
   </div>
 
 <script type="text/javascript"><!--
-$('#button-cart, #addToCart').bind('click', function() {
+$('#button-cart, #addToCart').bind('click', function(event) {
 	$.ajax({
 		url: 'index.php?route=checkout/cart/add',
 		type: 'post',
@@ -418,13 +418,16 @@ $('#button-cart, #addToCart').bind('click', function() {
 				$('#cart-total').html(json['total']);
 
 				$('html, body').animate({ scrollTop: 0 }, 'slow');
-                                //Removed to not to do a page reload
-//                                window.location='index.php?route=checkout/cart';
+                                
+                                if(event.target.id == "button-cart"){
+                                    window.location='index.php?route=checkout/cart';
+                                }
 				
 			}
 		}
 	});
 });
+
 //--></script>
 <script type="text/javascript">
 $(document).ready(function() {

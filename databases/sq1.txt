@@ -1,0 +1,7 @@
+Payment gateway
+	Check if they can accept personalized Cheque.
+	Check if they need company account.
+	Amount.
+	Credit period.
+
+	

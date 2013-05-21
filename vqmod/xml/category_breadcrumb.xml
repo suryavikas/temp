@@ -1,0 +1,88 @@
+<modification>
+	<id>Always display categories in breadcrumb trail</id>
+	<author>Casey Faber</author>
+	<email>kc@caseyfaber.com</email>
+	
+	<file name="catalog/model/catalog/product.php">
+		<operation>
+			<search position="before" index="1"><![CDATA[public function getTotalProducts($data = array()) {]]></search>
+			<add><![CDATA[
+        public function getCategoriesByProductId($product_id) {
+          $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . (int)$product_id . "'");
+
+          return $query->rows;
+        }
+      ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/product/product.php">
+		<operation>
+			<search position="before"><![CDATA[public function upload() {]]></search>
+			<add><![CDATA[
+        protected function getPath($parent_id, $current_path = '') {
+					$category_info = $this->model_catalog_category->getCategory($parent_id);
+				
+					if ($category_info) {
+						if (!$current_path) {
+							$new_path = $category_info['category_id'];
+						} else {
+							$new_path = $category_info['category_id'] . '_' . $current_path;
+						}	
+					
+						$path = $this->getPath($category_info['parent_id'], $new_path);
+								
+						if ($path) {
+							return $path;
+						} else {
+							return $new_path;
+						}
+					}
+				}
+      ]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[if ($product_info) {]]></search>
+			<add><![CDATA[
+        if(!isset($category_info)) {
+          $categories = $this->model_catalog_product->getCategoriesByProductId($this->request->get['product_id']);
+          if($categories) {
+            foreach($categories as $category){
+              $path = $this->getPath($category['category_id']);
+              $category_info = $this->model_catalog_category->getCategory($category['category_id']);
+              if($path){
+                $cat_path = $path;
+              }else{
+                $cat_path = $category_info['category_id'];
+              }
+
+              if($category_info) {
+                $path = '';
+                foreach (explode('_', $cat_path) as $path_id) {
+                  if (!$path) {
+                    $path = $path_id;
+                  } else {
+                    $path .= '_' . $path_id;
+                  }
+
+                  $category_info = $this->model_catalog_category->getCategory($path_id);
+
+                  if ($category_info) {
+                    $this->data['breadcrumbs'][] = array(
+                      'text'      => $category_info['name'],
+                      'href'      => $this->url->link('product/category', '&path=' . $path),
+                      'separator' => $this->language->get('text_separator')
+                    );
+                  }
+                }
+                break;
+              }
+
+            }
+          }
+        }
+      ]]></add>
+		</operation>
+	</file>
+	
+</modification>

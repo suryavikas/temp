@@ -1,0 +1,22 @@
+ALTER TABLE `customer_group` ADD COLUMN `name` VARCHAR(32) NOT NULL  AFTER `sort_order` ;
+
+CREATE TABLE `product_tag` (
+  `product_tag_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `tag` varchar(32) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`product_tag_id`),
+  KEY `product_id` (`product_id`),
+  KEY `language_id` (`language_id`),
+  KEY `tag` (`tag`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+
+ALTER TABLE `sqproduct_image` 
+
+ADD UNIQUE INDEX `UK_product_img` (`product_id` ASC, `image` ASC) ;
+
+Release 3
+ALTER TABLE `product_description` ADD `oct_product_title` VARCHAR( 255 ) NOT NULL 
+ALTER TABLE squar5gt_information_description ADD oct_information_title VARCHAR(255) NOT NULL DEFAULT
+ALTER TABLE `squar5gt_information_description` ADD `oct_information_title` VARCHAR( 255 ) NOT NULL 
+

@@ -1,0 +1,32 @@
+SELECT CD.name AS category, P . * ,POV.value,POV . quantity , PI.image
+FROM squar5gt_category_description CD
+JOIN squar5gt_product_to_category PC ON CD.category_id = PC.category_id
+JOIN squar5gt_product P ON P.product_id = PC.product_id
+JOIN squar5gt_product_option PO ON PO.product_id = P.product_id
+JOIN squar5gt_product_option_value POV ON ( PO.product_id = P.product_id
+AND POV.product_option_id = PO.product_option_id )
+JOIN squar5gt_option_value_description OVD
+on OVD.option_value_id = POV.option_value_id
+JOIN squar5gt_product_image PI ON PI.product_id = P.product_id
+
+
+
+// Orignial
+SELECT distinct CD.name AS category, P . product_id, P.quantity, P.sku,P.image,group_concat(DISTINCT PI.image SEPARATOR "|")  as additional_image,P.price ,OD.name as product_option, OVD.name as product_option_value,POV . quantity as product_option_qty
+FROM squar5gt_category_description CD
+JOIN squar5gt_category C
+ON (C.category_id = CD.category_id and C.parent_id != 0
+and C.category_id not in (49,73,74,77,78,79,80,81,82))
+JOIN squar5gt_product_to_category PC ON CD.category_id = PC.category_id
+JOIN squar5gt_product P ON P.product_id = PC.product_id
+LEFT JOIN squar5gt_product_option PO ON PO.product_id = P.product_id
+LEFT JOIN squar5gt_product_option_value POV ON ( PO.product_id = P.product_id
+AND POV.product_option_id = PO.product_option_id 
+)
+LEFT JOIN squar5gt_option_value_description OVD
+on OVD.option_value_id = POV.option_value_id
+LEFT JOIN squar5gt_option_description OD
+on OD.option_id = POV.option_id
+LEFT JOIN squar5gt_product_image PI ON PI.product_id = P.product_id
+group by  P . product_id
+
