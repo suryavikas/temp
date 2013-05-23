@@ -1,6 +1,6 @@
 <?php
 // Text
-$_['text_subject']  = '%s - Thank you for registering';
+$_['text_subject']  = 'Thank you for registering on %s';
 $_['text_welcome']  = 'Congratulations!. '."\r\n".'Welcome to the SquareofOne.com family - One stop solution to your style statement.';
 $_['text_login']    = 'We are sure that your association with Squareofone.com will take your shopping experience to next level and you will soon be the author of the style statement you ever wished for yourself.'."\r\n".
                       'Please login to your account on www.squareofone.com/login, whenever you desire for fashion fiesta.'."\r\n";

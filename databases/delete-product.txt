@@ -75,8 +75,8 @@ TRUNCATE order_product;
 ALTER TABLE order AUTO_INCREMENT = 1000;
 
 Local
-TRUNCATE sqattribute_description;
 TRUNCATE sqattribute_group;
+TRUNCATE sqattribute_description;
 TRUNCATE sqattribute;
 TRUNCATE sqattribute_group_description;
 TRUNCATE sqcategory;

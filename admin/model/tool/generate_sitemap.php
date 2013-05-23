@@ -62,7 +62,7 @@ class ModelToolGenerateSitemap extends Model {
 				$new_path = $current_path . '_' . $result['category_id'];
 			}
 			
-			$output .= $this->generateLinkNode(HTTP_CATALOG . 'index.php?route=product/category&path=' . $new_path);
+			$output .= $this->generateLinkNode(HTTP_CATALOG . 'index.php?route=product/category&path=' . $new_path, "daily", "0.8");
 			
         	$output .= $this->getCategories($result['category_id'], $new_path);
 		}
@@ -78,7 +78,7 @@ class ModelToolGenerateSitemap extends Model {
 		$results = $this->model_catalog_product->getAllProducts();
 		
 		foreach ($results as $result) {	
-			$output .= $this->generateLinkNode(HTTP_CATALOG . 'index.php?route=product/product&product_id=' . $result['product_id'], "weekly", "0.5");
+			$output .= $this->generateLinkNode(HTTP_CATALOG . 'index.php?route=product/product&product_id=' . $result['product_id'], "daily", "0.8");
 		}
 		
 		return $output;
@@ -90,9 +90,10 @@ class ModelToolGenerateSitemap extends Model {
 		$this->load->model('catalog/information');
 		
 		foreach ($this->model_catalog_information->getInformations() as $result) {
-			$output .= $this->generateLinkNode(HTTP_CATALOG .  'index.php?route=information/information&information_id=' . $result['information_id']);
+			$output .= $this->generateLinkNode(HTTP_CATALOG .  'index.php?route=information/information&information_id=' . $result['information_id'], "monthly", "0.5");
 		}
 		$output .= $this->generateLinkNode(HTTP_CATALOG . 'index.php?route=information/contact', "weekly", "0.5");
+                $output .= $this->generateLinkNode(HTTP_CATALOG . '', "daily", "1");
 		
 		return $output;
 	}

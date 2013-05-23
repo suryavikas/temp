@@ -899,6 +899,13 @@ class ControllerCommonSeoUrl extends Controller {
             <add><![CDATA[$pagination->url = $this->url->link('product/category', 'path=' . $url_path . $url . '&page={page}');]]>
             </add>
         </operation>
+        <operation>
+            <search position="after"><![CDATA[if ($category_info) {]]>
+            </search>
+            <add><![CDATA[$path = $category_info['parent_id'].'_'.$path;]]>
+            </add>
+        </operation>
+
 
     </file>
      <file name="catalog/controller/checkout/success.php">
