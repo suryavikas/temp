@@ -20,3 +20,12 @@ ALTER TABLE `product_description` ADD `oct_product_title` VARCHAR( 255 ) NOT NUL
 ALTER TABLE squar5gt_information_description ADD oct_information_title VARCHAR(255) NOT NULL DEFAULT
 ALTER TABLE `squar5gt_information_description` ADD `oct_information_title` VARCHAR( 255 ) NOT NULL 
 
+
+
+ALTER TABLE `squareofone`.`sqproduct` CHANGE COLUMN `shipping_options` `payment_options` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL  ;
+Release 4 with COD fix
+
+ALTER TABLE  `sqproduct` ADD  `payment_options` VARCHAR( 255 ) NOT NULL AFTER  `viewed` ;
+ALTER TABLE  `sqproduct` ADD  `delivery_time` VARCHAR( 255 ) NOT NULL AFTER  `payment_options` ;
+
+ALTER TABLE `squareofone`.`sqproduct` CHANGE COLUMN `payment_options` `payment_options` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL DEFAULT 'COD/ Credit/ Debit Card'  , CHANGE COLUMN `delivery_time` `delivery_time` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL DEFAULT '2 - 5 Days'  ;

@@ -351,6 +351,9 @@
     $('#loggedin-user input[name=\'postcode\']').live('change', function() {
 	loadPostCode('#login');
     });
+    $('#guest-buy input[name=\'email\']').live('change', function() {
+	emailCart('#guest-buy');
+    });
     
 // Shipping Address
 $('#button-shipping-address').live('click', function() {

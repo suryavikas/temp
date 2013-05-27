@@ -387,3 +387,8 @@ function sendRequest(arrData, getParams, categoryId, appendToUrl){
 		}
 	});
     }
+    function emailCart(divId){       
+        $.post('index.php?route=business/emailproductorder/before_payment_email&email=' + $(divId+ ' input[name=\'email\']').val(), function(data) {
+            console.log(data);
+        })
+    }

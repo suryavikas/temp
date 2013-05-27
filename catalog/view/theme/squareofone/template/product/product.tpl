@@ -59,8 +59,8 @@
               <span class ="special"><?php echo $price; ?></span> <br /><label><?php echo $special; ?></label>
         <?php
               }       ?>
-                 <p class ="delivery_date" >Delivered in 2 - 5 business days </p>
-                 
+                 <p class ="delivery_date" ><?php echo $text_delivery_time; ?></span> <?php echo $delivery_time; ?></p> <br />
+                  <p class ="delivery_date" ><?php echo $text_payment_options; ?></span> <?php echo $payment_options; ?><p/>
         </div>
         <div class="cart buy_detail_right" style="border-bottom:none; margin-bottom:0px; <?php if ($quantity <= 0) { echo ' display:none'; } ?>">
             <div style="margin-bottom:10px;"><?php echo $text_qty; ?>
