@@ -1,0 +1,168 @@
+
+<modification>
+    <id>Custom Field - Size</id>
+    <version>1.0.2</version>
+    <vqmver>1.0.0</vqmver>
+    <author>JIM2Y</author>
+	
+    <file name="admin/language/english/catalog/product.php">
+        <operation  >
+            <search position="after"><![CDATA[
+$_['entry_model']            = 'Model:';
+            ]]>
+            </search>
+            <add><![CDATA[
+$_['entry_payment_options']             			= 'Payment Options: ';
+$_['entry_delivery_time']             	= 'Delivery Time: ';
+            ]]>
+            </add>
+        </operation>
+    </file>
+	
+    <file name="admin/controller/catalog/product.php">
+        <operation  >
+            <search position="after"><![CDATA[    	$this->data['entry_model'] = $this->language->get('entry_model');]]>
+            </search>
+            <add><![CDATA[
+    	$this->data['entry_payment_options'] = $this->language->get('entry_payment_options');
+		$this->data['entry_delivery_time'] = $this->language->get('entry_delivery_time');
+            ]]>
+            </add>
+        </operation>
+        <operation  >
+            <search position="before"><![CDATA[
+		if (isset($this->request->post['sku'])) {
+            ]]>
+            </search>
+            <add><![CDATA[
+		if (isset($this->request->post['payment_options'])) {
+      		$this->data['payment_options'] = $this->request->post['payment_options'];
+    	} elseif (isset($product_info)) {
+			$this->data['payment_options'] = $product_info['payment_options'];
+		} else {
+      		$this->data['payment_options'] = '';
+    	}
+		if (isset($this->request->post['delivery_time'])) {
+      		$this->data['delivery_time'] = $this->request->post['delivery_time'];
+    	} elseif (isset($product_info)) {
+			$this->data['delivery_time'] = $product_info['delivery_time'];
+		} else {
+      		$this->data['delivery_time'] = '';
+    	}
+            ]]>
+            </add>
+        </operation>
+    </file>
+
+    <file name="admin/model/catalog/product.php">
+        <operation  >
+            <search position="replace"><![CDATA[		$this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW()");]]>
+            </search>
+            <add><![CDATA[
+		$this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', payment_options = '" . $this->db->escape($data['payment_options']) . "', delivery_time = '" . $this->db->escape($data['delivery_time']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . (int)$data['tax_class_id'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW()");
+            ]]>
+            </add>
+        </operation>
+        <operation  >
+            <search position="replace"><![CDATA[		$this->db->query("UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");]]>
+            </search>
+            <add><![CDATA[$this->db->query("UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', payment_options = '" . $this->db->escape($data['payment_options']) . "', delivery_time = '" . $this->db->escape($data['delivery_time']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");]]>
+            </add>
+        </operation>
+
+    </file>
+	
+    <file name="admin/view/template/catalog/product_form.tpl">
+        <operation >
+            <search position="after" offset="2"><![CDATA[<span class="error"><?php echo $error_model; ?></span>]]>
+            </search>
+            <add><![CDATA[
+            <tr>
+              <td><?php echo $entry_payment_options; ?></td>
+              <td><input type="text" name="payment_options" value="<?php echo $payment_options; ?>" /></td>
+              </td>
+            </tr>
+			<tr>
+              <td><?php echo $entry_delivery_time; ?></td>
+              <td><input type="text" name="delivery_time" value="<?php echo $delivery_time; ?>" /></td>
+              </td>
+            </tr>
+            ]]>
+            </add>
+        </operation>
+    </file>
+	
+    <file name="catalog/controller/product/product.php">
+        <operation  >
+            <search position="after"><![CDATA[
+			$this->data['text_model'] = $this->language->get('text_model');
+            ]]>
+            </search>
+            <add><![CDATA[
+			$this->data['text_payment_options'] = $this->language->get('text_payment_options');
+			$this->data['text_delivery_time'] = $this->language->get('text_delivery_time');
+            ]]>
+            </add>
+        </operation>
+        <operation  >
+            <search position="after"><![CDATA[$this->data['points'] = $product_info['points'];]]>
+            </search>
+            <add><![CDATA[
+			$this->data['payment_options'] = $product_info['payment_options'];
+			$this->data['delivery_time'] = $product_info['delivery_time'];
+            ]]>
+            </add>
+        </operation>
+    </file>
+	
+    <file name="catalog/language/english/product/product.php">
+        <operation  >
+            <search position="after"><![CDATA[
+$_['text_model']        = 'Product Code:';
+            ]]>
+            </search>
+            <add><![CDATA[
+$_['text_payment_options']         = 'Payment Options: ';
+$_['text_delivery_time']         = 'Delivery Time: ';
+            ]]>
+            </add>
+        </operation>
+    </file>
+	
+    <file name="catalog/model/catalog/product.php">
+        <operation  >
+            <search position="after"><![CDATA[
+				'model'            => $query->row['model'],
+            ]]>
+            </search>
+            <add><![CDATA[
+				'payment_options'             => $query->row['payment_options'],
+				'delivery_time'             => $query->row['delivery_time'],
+            ]]>
+            </add>
+        </operation>
+    </file>
+
+    <file name="system/library/cart.php">
+        <operation  >
+            <search position="after"><![CDATA['length_class_id' => $product_query->row['length_class_id']]]>
+            </search>
+            <add><![CDATA[
+				,'payment_options'             => $product_query->row['payment_options'],
+				'delivery_time'             => $product_query->row['delivery_time']
+            ]]>
+            </add>
+        </operation>
+    </file>
+	<!-- <file name="catalog/view/theme/squareofone/template/product/product.tpl">
+        <operation  >
+            <search position="after"><![CDATA[
+       <p class ="delivery_date" >Delivered in 2 - 5 business days </p>
+            ]]></search>
+            <add><![CDATA[
+        <p class ="delivery_date" ><?php echo $text_payment_options; ?></span> <?php echo $payment_options; ?><p/>
+            ]]></add>
+        </operation>
+	</file> -->
+	
+</modification>
