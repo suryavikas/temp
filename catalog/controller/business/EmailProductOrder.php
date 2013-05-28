@@ -57,7 +57,7 @@ class ControllerBusinessEmailProductOrder extends Controller {
         if ($this->config->get('config_alert_mail')) {
              echo "HELLO";
             $this->language->load('business/emailproductorder');
-            $subject = sprintf($this->language->get('text_new_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
+            $subject = $this->request->post['email'].' '.sprintf($this->language->get('text_new_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
 
             // Text
             $text = $this->language->get('text_new_received') . "\n\n";

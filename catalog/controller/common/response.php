@@ -60,7 +60,8 @@ class ControllerCommonResponse extends Controller {
                 $this->load->model('account/guest');
 
                 $order_id = $response['MerchantRefNo'];
-                $email = $response['BillingEmail'];
+//                $email = $response['BillingEmail'];
+                $email= preg_replace('/\s/', '+', $response['BillingEmail']);
                 $order_info = $this->model_account_guest->getOrder($order_id, $email, '');
 
                 if ($order_info) {

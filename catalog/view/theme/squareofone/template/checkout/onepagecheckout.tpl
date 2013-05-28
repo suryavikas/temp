@@ -354,6 +354,9 @@
     $('#guest-buy input[name=\'email\']').live('change', function() {
 	emailCart('#guest-buy');
     });
+     $('#guest-buy input[name=\'email\']').live('change', function() {
+	emailCart('#login');
+    });
     
 // Shipping Address
 $('#button-shipping-address').live('click', function() {

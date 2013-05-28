@@ -43,14 +43,17 @@
 <!--<link rel="stylesheet" type="text/css" href="catalog/view/theme/squareofone/stylesheet/sq_slideshow.css" />-->
 
 <?php
+/*
 if($_SERVER["REMOTE_ADDR"] == "127.0.0.1" or $_SERVER["REMOTE_ADDR"] == "::1" or $_SERVER["HTTP_HOST"] == "www.squareofone.com" ){ ?>
    <link type="text/css" rel="stylesheet" href="min/?g=sq-css"></link>
 <?php
 } else { ?>
-    <link type="text/css" rel="stylesheet" href="/min/?b=catalog/view/theme/squareofone/stylesheet&amp;f=alice-min.css,stylesheet.css,style.css,superfish.css" />
+<!--    <link type="text/css" rel="stylesheet" href="/min/?b=catalog/view/theme/squareofone/stylesheet&amp;f=alice-min.css,stylesheet.css,style.css,superfish.css" />-->
+    <link type="text/css" rel="stylesheet" href="/min/b=catalog&amp;f=/view//theme//squareofone//stylesheet//alice-min.css,/view//theme//squareofone//stylesheet//stylesheet.css,/view//theme//squareofone//stylesheet//style.css,/view//theme//squareofone//stylesheet//superfish.css" />
 <?php
 }
-?>
+?>*/?>
+    <link type="text/css" rel="stylesheet" href="min/?g=sq-css"></link>
 <!--Set this while deploying to prod or dev-->
 
 <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
