@@ -931,8 +931,6 @@ class ModelToolExport extends Model {
 			$optionId = $newOptionIds[$name][$type];
                         $maxProductOptionId += 1;
 			if (!isset($productOptionIds[$productId][$optionId])) {
-				
-                                echo "Key = ".$maxProductOptionId."<br />";
 				$productOptionId = $maxProductOptionId;
 				$productOptionIds[$productId][$optionId] = $productOptionId;
 				if (($type!='select') && ($type!='checkbox') && ($type!='radio') && ($type!='image')) {
