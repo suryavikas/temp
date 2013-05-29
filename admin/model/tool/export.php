@@ -929,8 +929,10 @@ class ModelToolExport extends Model {
 				$productOptionIds[$productId] = array();
 			}
 			$optionId = $newOptionIds[$name][$type];
+                        $maxProductOptionId += 1;
 			if (!isset($productOptionIds[$productId][$optionId])) {
-				$maxProductOptionId += 1;
+				
+                                echo "Key = ".$maxProductOptionId."<br />";
 				$productOptionId = $maxProductOptionId;
 				$productOptionIds[$productId][$optionId] = $productOptionId;
 				if (($type!='select') && ($type!='checkbox') && ($type!='radio') && ($type!='image')) {
@@ -943,8 +945,10 @@ class ModelToolExport extends Model {
 				$sql .= " ON DUPLICATE KEY UPDATE ";
 				$sql .= " option_value= '".$database->escape($productOptionValue)."', required= $required";
 				
+
 				$database->query( $sql );
 			}
+                        $maxProductOptionValueId += 1;
 			if (($type=='select') || ($type=='checkbox') || ($type=='radio') || ($type=='image')) {
 				$quantity = $option['quantity'];
 				$subtract = $option['subtract'];
