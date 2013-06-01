@@ -410,7 +410,7 @@ $('#button-cart, #addToCart').bind('click', function(event) {
 
 			if (json['error']) {
 				if (json['error']['option']) {
-                                        $('#option-' + i).css('border-color', 'red');
+//                                        $('#option-' + i).css('border-color', 'red');
 					for (i in json['error']['option']) {
 						$('#option-' + i).append('<span class="error">' + json['error']['option'][i] + '</span>');
 					}

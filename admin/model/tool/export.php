@@ -800,19 +800,21 @@ class ModelToolExport extends Model {
 	}
 
 
-	function storeOptionsIntoDatabase( &$database, &$options ) 
+	function storeOptionsIntoDatabase( &$database, &$options )
 	{
 		// find the default language id
 		$languageId = $this->getDefaultLanguageId($database);
-		
-		// reuse old option_ids and option_value_ids where possible
-		$oldOptionIds = array();       // indexed by [name][type]
-		$oldOptionValueIds = array();  // indexed by [name][type][value]
+
+		// reuse old options and old option_values where possible
+		$optionIds = array();       // indexed by [name][type]
+		$optionValueIds = array();  // indexed by [name][type][value][image]
+		$maxOptionSortOrder = 0;
 		$maxOptionId = 0;
 		$maxOptionValueId = 0;
-		$sql  = "SELECT o.*, od.name, ovd.option_value_id, ovd.name AS value FROM `".DB_PREFIX."option` o ";
+		$sql  = "SELECT o.*, od.name, ovd.option_value_id, ovd.name AS value, ov.image FROM `".DB_PREFIX."option` o ";
 		$sql .= "INNER JOIN `".DB_PREFIX."option_description` od ON od.option_id=o.option_id AND od.language_id=$languageId ";
-		$sql .= "LEFT JOIN  `".DB_PREFIX."option_value_description` ovd ON ovd.option_id=o.option_id AND ovd.language_id=$languageId ";
+		$sql .= "LEFT JOIN `".DB_PREFIX."option_value` ov ON ov.option_id=o.option_id ";
+		$sql .= "LEFT JOIN  `".DB_PREFIX."option_value_description` ovd ON ovd.option_value_id=ov.option_value_id AND ovd.language_id=$languageId ";
 		$result = $database->query( $sql );
 		foreach ($result->rows as $row) {
 			$name = $row['name'];
@@ -820,133 +822,125 @@ class ModelToolExport extends Model {
 			$value = $row['value'];
 			$optionId = $row['option_id'];
 			$optionValueId = $row['option_value_id'];
+			$image = $row['image'];
+			$optionSortOrder = $row['sort_order'];
+
 			if ($maxOptionId < $optionId) {
 				$maxOptionId = $optionId;
 			}
 			if ($maxOptionValueId < $optionValueId) {
 				$maxOptionValueId = $optionValueId;
 			}
-			if (!isset($oldOptionIds[$name])) {
-				$oldOptionIds[$name] = array();
+			if ($maxOptionSortOrder < $optionSortOrder) {
+				$maxOptionSortOrder = $optionSortOrder;
 			}
-			if (!isset($oldOptionIds[$name][$type])) {
-				$oldOptionIds[$name][$type] = $optionId;
+			if (!isset($optionIds[$name])) {
+				$optionIds[$name] = array();
 			}
-			if (!isset($oldOptionValueIds[$name])) {
-				$oldOptionValueIds[$name] = array();
+			if (!isset($optionIds[$name][$type])) {
+				$optionIds[$name][$type] = $optionId;
 			}
-			if (!isset($oldOptionValueIds[$name][$type])) {
-				$oldOptionValueIds[$name][$type] = array();
+			if (!isset($optionValueIds[$name])) {
+				$optionValueIds[$name] = array();
 			}
-			if (!isset($oldOptionValueIds[$name][$type][$value])) {
-				$oldOptionValueIds[$name][$type][$value] = $optionValueId;
+			if (!isset($optionValueIds[$name][$type])) {
+				$optionValueIds[$name][$type] = array();
+			}
+			if (!isset($optionValueIds[$name][$type][$value])) {
+				$optionValueIds[$name][$type][$value] = array();
+			}
+			if (!isset($optionValueIds[$name][$type][$value][$image])) {
+				$optionValueIds[$name][$type][$value][$image] = $optionValueId;
 			}
 		}
-		
-		// start transaction, remove options
+
+		// start transaction, remove product options and product option values from database
 		$sql = "START TRANSACTION;\n";
-		// $sql .= "DELETE FROM `".DB_PREFIX."option`;\n";
-		// $sql .= "DELETE FROM `".DB_PREFIX."option_description` WHERE language_id=$languageId;\n";
-		// $sql .= "DELETE FROM `".DB_PREFIX."option_value`;\n";
-		// $sql .= "DELETE FROM `".DB_PREFIX."option_value_description` WHERE language_id=$languageId;\n";
-		// $sql .= "DELETE FROM `".DB_PREFIX."product_option`;\n";
-		// $sql .= "DELETE FROM `".DB_PREFIX."product_option_value`;\n";
+		//$sql .= "DELETE FROM `".DB_PREFIX."product_option`;\n";
+		//$sql .= "DELETE FROM `".DB_PREFIX."product_option_value`;\n";
 		$this->import( $database, $sql );
-		
-		$newOptionIds = array();       // indexed by [name][type]
-		$newOptionValueIds = array();  // indexed by [name[[type][value]
-		$productOptionIds = array();   // indexed by [product_id][option_id]
+
+		// add product options and product option values to the database
+		$productOptionIds = array(); // indexed by [product_id][option_id]
 		$maxProductOptionId = 0;
 		$maxProductOptionValueId = 0;
-		$countOptions = 0;
-		
 		foreach ($options as $option) {
 			$productId = $option['product_id'];
 			$langId = $option['language_id'];
 			$name = $option['option'];
 			$type = $option['type'];
 			$value = $option['value'];
+			$image = $option['image'];
 			$required = $option['required'];
 			$required = ((strtoupper($required)=="TRUE") || (strtoupper($required)=="YES") || (strtoupper($required)=="ENABLED")) ? 1 : 0;
-			if (!isset($newOptionIds[$name])) {
-				$newOptionIds[$name] = array();
+			if (!isset($optionIds[$name])) {
+				$optionIds[$name] = array();
 			}
-			if (!isset($newOptionIds[$name][$type])) {
-				if (isset($oldOptionIds[$name][$type])) {
-					$optionId = $oldOptionIds[$name][$type];
-				} else {
-					$maxOptionId += 1;
-					$optionId = $maxOptionId;
-				}
-				$newOptionIds[$name][$type] = $optionId;
-				$sql  = "INSERT INTO `".DB_PREFIX."option` (`option_id`,`type`,`sort_order`) VALUES ($optionId,'$type',$countOptions)";
-				$sql .= " ON DUPLICATE KEY UPDATE ";
-				$sql .= " `sort_order` = `sort_order`";
+			if (!isset($optionIds[$name][$type])) {
+				$maxOptionId += 1;
+				$optionId = $maxOptionId;
+				$optionIds[$name][$type] = $optionId;
+				$maxOptionSortOrder += 1;
+				$sql = "INSERT INTO `".DB_PREFIX."option` (`option_id`,`type`,`sort_order`) VALUES ($optionId,'$type',$maxOptionSortOrder);";
 				$database->query( $sql );
-				
-				$sql  = " INSERT INTO `".DB_PREFIX."option_description` (`option_id`,`language_id`,`name`)";
-				$sql .= " VALUES ($optionId,$langId,'".$database->escape($name)."')";
-				$sql .= " ON DUPLICATE KEY UPDATE ";
-				$sql .= " `option_id` = `option_id`";
+				$sql = "INSERT INTO `".DB_PREFIX."option_description` (`option_id`,`language_id`,`name`) VALUES ($optionId,$langId,'".$database->escape($name)."');";
 				$database->query( $sql);
-				
-				$countOptions += 1;
 			}
 			if (($type=='select') || ($type=='checkbox') || ($type=='radio') || ($type=='image')) {
-				if (!isset($newOptionValueIds[$name])) {
-					$newOptionValueIds[$name] = array();
+				if (!isset($optionValueIds[$name])) {
+					$optionValueIds[$name] = array();
 				}
-				if (!isset($newOptionValueIds[$name][$type])) {
-					$newOptionValueIds[$name][$type] = array();
+				if (!isset($optionValueIds[$name][$type])) {
+					$optionValueIds[$name][$type] = array();
 				}
-				if (!isset($newOptionValueIds[$name][$type][$value])) {
-					if (isset($oldOptionValueIds[$name][$type][$value])) {
-						$optionValueId = $oldOptionValueIds[$name][$type][$value];
-					} else {
-						$maxOptionValueId += 1;
-						$optionValueId = $maxOptionValueId;
-					}
-					$newOptionValueIds[$name][$type][$value] = $optionValueId;
+				if (!isset($optionValueIds[$name][$type][$value])) {
+					$optionValueIds[$name][$type][$value] = array();
+				}
+				if (!isset($optionValueIds[$name][$type][$value][$image])) {
+					$maxOptionValueId += 1;
+					$optionValueId = $maxOptionValueId;
+					$optionValueIds[$name][$type][$value][$image] = $optionValueId;
 					$sortOrder = ($option['sort_order'] == '') ? 0 : $option['sort_order'];
-					$image = ($option['image'] == '') ? '' : $this->db->escape($option['image']);
-					$optionId = $newOptionIds[$name][$type];
-					
+					$optionId = $optionIds[$name][$type];
 					$sql  = "INSERT INTO `".DB_PREFIX."option_value` (`option_value_id`,`option_id`,`image`,`sort_order`) VALUES ";
-					$sql .= "($optionValueId,$optionId,'$image',$sortOrder)";
-					$sql .= " ON DUPLICATE KEY UPDATE ";
-					$sql .= " option_id= $optionId, image='$image', sort_order= $sortOrder";
+					$sql .= "($optionValueId,$optionId,'".$database->escape($image)."',$sortOrder);";
 					$database->query( $sql );
-					
 					$sql  = "INSERT INTO `".DB_PREFIX."option_value_description` (`option_value_id`,`language_id`,`option_id`,`name`) VALUES ";
-					$sql .= "($optionValueId,$langId,$optionId,'".$database->escape($value)."')";
-					$sql .= " ON DUPLICATE KEY UPDATE ";
-					$sql .= " `option_value_id` = `option_value_id`";
-					
+					$sql .= "($optionValueId,$langId,$optionId,'".$database->escape($value)."');";
+					$database->query( $sql );
+				} else {
+					$optionValueId = $optionValueIds[$name][$type][$value][$image];
+					$sortOrder = ($option['sort_order'] == '') ? 0 : $option['sort_order'];
+					$optionId = $optionIds[$name][$type];
+					$sql  = "UPDATE `".DB_PREFIX."option_value` SET `image`='".$database->escape($image)."', `sort_order`=$sortOrder ";
+					$sql .= "WHERE `option_value_id`=$optionValueId AND `option_id`=$optionId";
 					$database->query( $sql );
 				}
 			}
 			if (!isset($productOptionIds[$productId])) {
 				$productOptionIds[$productId] = array();
 			}
-			$optionId = $newOptionIds[$name][$type];
-                        $maxProductOptionId += 1;
+			$optionId = $optionIds[$name][$type];
 			if (!isset($productOptionIds[$productId][$optionId])) {
-				$productOptionId = $maxProductOptionId;
+//				$maxProductOptionId += 1;
+				$maxProductOptionId = $this->getLastInsertIdProductOptionValue($database) + 1;
+                                $productOptionId = $maxProductOptionId;
 				$productOptionIds[$productId][$optionId] = $productOptionId;
 				if (($type!='select') && ($type!='checkbox') && ($type!='radio') && ($type!='image')) {
 					$productOptionValue = $value;
 				} else {
 					$productOptionValue = '';
 				}
-				$sql  = "INSERT INTO `".DB_PREFIX."product_option` (`product_option_id`,`product_id`,`option_id`,`option_value`,`required`) VALUES ";
+//				$sql  = "INSERT INTO `".DB_PREFIX."product_option` (`product_option_id`,`product_id`,`option_id`,`option_value`,`required`) VALUES ";
+//				$sql .= "($productOptionId,$productId,$optionId,'".$database->escape($productOptionValue)."',$required);";
+//
+
+                                $sql  = "INSERT INTO `".DB_PREFIX."product_option` (`product_option_id`,`product_id`,`option_id`,`option_value`,`required`) VALUES ";
 				$sql .= "($productOptionId,$productId,$optionId,'".$database->escape($productOptionValue)."',$required)";
 				$sql .= " ON DUPLICATE KEY UPDATE ";
 				$sql .= " option_value= '".$database->escape($productOptionValue)."', required= $required";
-				
-
 				$database->query( $sql );
 			}
-                        $maxProductOptionValueId += 1;
 			if (($type=='select') || ($type=='checkbox') || ($type=='radio') || ($type=='image')) {
 				$quantity = $option['quantity'];
 				$subtract = $option['subtract'];
@@ -960,27 +954,212 @@ class ModelToolExport extends Model {
 				$sortOrder= $option['sort_order'];
 				$maxProductOptionValueId += 1;
 				$productOptionValueId = $maxProductOptionValueId;
-				$optionId = $newOptionIds[$name][$type];
-				$optionValueId = $newOptionValueIds[$name][$type][$value];
+				$optionId = $optionIds[$name][$type];
+				$optionValueId = $optionValueIds[$name][$type][$value][$image];
 				$productOptionId = $productOptionIds[$productId][$optionId];
-				
-				$sql  = "INSERT INTO `".DB_PREFIX."product_option_value` ";
-				$sql .= " (`product_option_value_id`,`product_option_id`,`product_id`,`option_id`,`option_value_id`,`quantity`,";
+//				$sql  = "INSERT INTO `".DB_PREFIX."product_option_value` (,`product_option_id`,`product_id`,`option_id`,`option_value_id`,`quantity`,`subtract`,`price`,`price_prefix`,`points`,`points_prefix`,`weight`,`weight_prefix`) VALUES ";
+//				$sql .= "($productOptionValueId,$productOptionId,$productId,$optionId,$optionValueId,$quantity,$subtract,$price,'$pricePrefix',$points,'$pointsPrefix',$weight,'$weightPrefix');";
+                                $sql  = "INSERT INTO `".DB_PREFIX."product_option_value` ";
+				$sql .= " (`product_option_id`,`product_id`,`option_id`,`option_value_id`,`quantity`,";
 				$sql .= " `subtract`,`price`,`price_prefix`,`points`,`points_prefix`,`weight`,`weight_prefix`) ";
-				$sql .= " VALUES($productOptionValueId,$productOptionId,$productId,$optionId,$optionValueId,";
+				$sql .= " VALUES($productOptionId,$productId,$optionId,$optionValueId,";
 				$sql .= " $quantity,$subtract,$price,'$pricePrefix',$points,'$pointsPrefix',$weight,'$weightPrefix') ";
 				$sql .= " ON DUPLICATE KEY UPDATE ";
 				$sql .= " quantity=$quantity,";
 				$sql .= " subtract=$subtract, price=$price, price_prefix= '$pricePrefix', points=$points, points_prefix='$pointsPrefix',";
 				$sql .= " weight=$weight, weight_prefix='$weightPrefix'";
-
+//                                die($sql);
 				$database->query( $sql );
 			}
 		}
-		
+
 		$database->query("COMMIT;");
 		return TRUE;
 	}
+
+
+
+//        	function storeOptionsIntoDatabase( &$database, &$options )
+//	{
+//		// find the default language id
+//		$languageId = $this->getDefaultLanguageId($database);
+//
+//		// reuse old option_ids and option_value_ids where possible
+//		$oldOptionIds = array();       // indexed by [name][type]
+//		$oldOptionValueIds = array();  // indexed by [name][type][value]
+//		$maxOptionId = 0;
+//		$maxOptionValueId = 0;
+//		$sql  = "SELECT o.*, od.name, ovd.option_value_id, ovd.name AS value FROM `".DB_PREFIX."option` o ";
+//		$sql .= "INNER JOIN `".DB_PREFIX."option_description` od ON od.option_id=o.option_id AND od.language_id=$languageId ";
+//		$sql .= "LEFT JOIN  `".DB_PREFIX."option_value_description` ovd ON ovd.option_id=o.option_id AND ovd.language_id=$languageId ";
+//		$result = $database->query( $sql );
+//		foreach ($result->rows as $row) {
+//			$name = $row['name'];
+//			$type = $row['type'];
+//			$value = $row['value'];
+//			$optionId = $row['option_id'];
+//			$optionValueId = $row['option_value_id'];
+//			if ($maxOptionId < $optionId) {
+//				$maxOptionId = $optionId;
+//			}
+//			if ($maxOptionValueId < $optionValueId) {
+//				$maxOptionValueId = $optionValueId;
+//			}
+//			if (!isset($oldOptionIds[$name])) {
+//				$oldOptionIds[$name] = array();
+//			}
+//			if (!isset($oldOptionIds[$name][$type])) {
+//				$oldOptionIds[$name][$type] = $optionId;
+//			}
+//			if (!isset($oldOptionValueIds[$name])) {
+//				$oldOptionValueIds[$name] = array();
+//			}
+//			if (!isset($oldOptionValueIds[$name][$type])) {
+//				$oldOptionValueIds[$name][$type] = array();
+//			}
+//			if (!isset($oldOptionValueIds[$name][$type][$value])) {
+//				$oldOptionValueIds[$name][$type][$value] = $optionValueId;
+//			}
+//		}
+//
+//		// start transaction, remove options
+//		$sql = "START TRANSACTION;\n";
+//		// $sql .= "DELETE FROM `".DB_PREFIX."option`;\n";
+//		// $sql .= "DELETE FROM `".DB_PREFIX."option_description` WHERE language_id=$languageId;\n";
+//		// $sql .= "DELETE FROM `".DB_PREFIX."option_value`;\n";
+//		// $sql .= "DELETE FROM `".DB_PREFIX."option_value_description` WHERE language_id=$languageId;\n";
+//		// $sql .= "DELETE FROM `".DB_PREFIX."product_option`;\n";
+//		// $sql .= "DELETE FROM `".DB_PREFIX."product_option_value`;\n";
+//		$this->import( $database, $sql );
+//
+//		$newOptionIds = array();       // indexed by [name][type]
+//		$newOptionValueIds = array();  // indexed by [name[[type][value]
+//		$productOptionIds = array();   // indexed by [product_id][option_id]
+//		$maxProductOptionId = 0;
+//		$maxProductOptionValueId = 0;
+//		$countOptions = 0;
+//
+//		foreach ($options as $option) {
+//			$productId = $option['product_id'];
+//			$langId = $option['language_id'];
+//			$name = $option['option'];
+//			$type = $option['type'];
+//			$value = $option['value'];
+//			$required = $option['required'];
+//			$required = ((strtoupper($required)=="TRUE") || (strtoupper($required)=="YES") || (strtoupper($required)=="ENABLED")) ? 1 : 0;
+//			if (!isset($newOptionIds[$name])) {
+//				$newOptionIds[$name] = array();
+//			}
+//			if (!isset($newOptionIds[$name][$type])) {
+//				if (isset($oldOptionIds[$name][$type])) {
+//					$optionId = $oldOptionIds[$name][$type];
+//				} else {
+//					$maxOptionId += 1;
+//					$optionId = $maxOptionId;
+//				}
+//				$newOptionIds[$name][$type] = $optionId;
+//				$sql  = "INSERT INTO `".DB_PREFIX."option` (`option_id`,`type`,`sort_order`) VALUES ($optionId,'$type',$countOptions)";
+//				$sql .= " ON DUPLICATE KEY UPDATE ";
+//				$sql .= " `sort_order` = `sort_order`";
+//				$database->query( $sql );
+//
+//				$sql  = " INSERT INTO `".DB_PREFIX."option_description` (`option_id`,`language_id`,`name`)";
+//				$sql .= " VALUES ($optionId,$langId,'".$database->escape($name)."')";
+//				$sql .= " ON DUPLICATE KEY UPDATE ";
+//				$sql .= " `option_id` = `option_id`";
+//				$database->query( $sql);
+//
+//				$countOptions += 1;
+//			}
+//			if (($type=='select') || ($type=='checkbox') || ($type=='radio') || ($type=='image')) {
+//				if (!isset($newOptionValueIds[$name])) {
+//					$newOptionValueIds[$name] = array();
+//				}
+//				if (!isset($newOptionValueIds[$name][$type])) {
+//					$newOptionValueIds[$name][$type] = array();
+//				}
+//				if (!isset($newOptionValueIds[$name][$type][$value])) {
+//					if (isset($oldOptionValueIds[$name][$type][$value])) {
+//						$optionValueId = $oldOptionValueIds[$name][$type][$value];
+//					} else {
+//						$maxOptionValueId += 1;
+//						$optionValueId = $maxOptionValueId;
+//					}
+//					$newOptionValueIds[$name][$type][$value] = $optionValueId;
+//					$sortOrder = ($option['sort_order'] == '') ? 0 : $option['sort_order'];
+//					$image = ($option['image'] == '') ? '' : $this->db->escape($option['image']);
+//					$optionId = $newOptionIds[$name][$type];
+//
+//					$sql  = "INSERT INTO `".DB_PREFIX."option_value` (`option_value_id`,`option_id`,`image`,`sort_order`) VALUES ";
+//					$sql .= "($optionValueId,$optionId,'$image',$sortOrder)";
+//					$sql .= " ON DUPLICATE KEY UPDATE ";
+//					$sql .= " option_id= $optionId, image='$image', sort_order= $sortOrder";
+//					$database->query( $sql );
+//
+//					$sql  = "INSERT INTO `".DB_PREFIX."option_value_description` (`option_value_id`,`language_id`,`option_id`,`name`) VALUES ";
+//					$sql .= "($optionValueId,$langId,$optionId,'".$database->escape($value)."')";
+//					$sql .= " ON DUPLICATE KEY UPDATE ";
+//					$sql .= " `option_value_id` = `option_value_id`";
+//
+//					$database->query( $sql );
+//				}
+//			}
+//			if (!isset($productOptionIds[$productId])) {
+//				$productOptionIds[$productId] = array();
+//			}
+//			$optionId = $newOptionIds[$name][$type];
+//                        $maxProductOptionId += 1;
+//			if (!isset($productOptionIds[$productId][$optionId])) {
+//				$productOptionId = $maxProductOptionId;
+//				$productOptionIds[$productId][$optionId] = $productOptionId;
+//				if (($type!='select') && ($type!='checkbox') && ($type!='radio') && ($type!='image')) {
+//					$productOptionValue = $value;
+//				} else {
+//					$productOptionValue = '';
+//				}
+//				$sql  = "INSERT INTO `".DB_PREFIX."product_option` (`product_option_id`,`product_id`,`option_id`,`option_value`,`required`) VALUES ";
+//				$sql .= "($productOptionId,$productId,$optionId,'".$database->escape($productOptionValue)."',$required)";
+//				$sql .= " ON DUPLICATE KEY UPDATE ";
+//				$sql .= " option_value= '".$database->escape($productOptionValue)."', required= $required";
+//
+//
+//				$database->query( $sql );
+//			}
+//                        $maxProductOptionValueId += 1;
+//			if (($type=='select') || ($type=='checkbox') || ($type=='radio') || ($type=='image')) {
+//				$quantity = $option['quantity'];
+//				$subtract = $option['subtract'];
+//				$subtract = ((strtoupper($subtract)=="TRUE") || (strtoupper($subtract)=="YES") || (strtoupper($subtract)=="ENABLED")) ? 1 : 0;
+//				$price = $option['price'];
+//				$pricePrefix = $option['price_prefix'];
+//				$points = $option['points'];
+//				$pointsPrefix = $option['points_prefix'];
+//				$weight = $option['weight'];
+//				$weightPrefix = $option['weight_prefix'];
+//				$sortOrder= $option['sort_order'];
+//				$maxProductOptionValueId += 1;
+//				$productOptionValueId = $maxProductOptionValueId;
+//				$optionId = $newOptionIds[$name][$type];
+//				$optionValueId = $newOptionValueIds[$name][$type][$value];
+//				$productOptionId = $productOptionIds[$productId][$optionId];
+//
+//				$sql  = "INSERT INTO `".DB_PREFIX."product_option_value` ";
+//				$sql .= " (`product_option_value_id`,`product_option_id`,`product_id`,`option_id`,`option_value_id`,`quantity`,";
+//				$sql .= " `subtract`,`price`,`price_prefix`,`points`,`points_prefix`,`weight`,`weight_prefix`) ";
+//				$sql .= " VALUES($productOptionValueId,$productOptionId,$productId,$optionId,$optionValueId,";
+//				$sql .= " $quantity,$subtract,$price,'$pricePrefix',$points,'$pointsPrefix',$weight,'$weightPrefix') ";
+//				$sql .= " ON DUPLICATE KEY UPDATE ";
+//				$sql .= " quantity=$quantity,";
+//				$sql .= " subtract=$subtract, price=$price, price_prefix= '$pricePrefix', points=$points, points_prefix='$pointsPrefix',";
+//				$sql .= " weight=$weight, weight_prefix='$weightPrefix'";
+//
+//				$database->query( $sql );
+//			}
+//		}
+//
+//		$database->query("COMMIT;");
+//		return TRUE;
+//	}
 
 
 
@@ -2532,6 +2711,13 @@ class ModelToolExport extends Model {
 		// Clear the spreadsheet caches
 		$this->clearSpreadsheetCache();
 		exit;
+	}
+
+        function getLastInsertIdProductOptionValue( &$database ) {
+		$sql =  "SELECT last_insert_id(product_option_id) as product_option_id FROM `".DB_PREFIX."product_option` order by 1 desc limit 1";
+		$storeIds = array();
+		$result = $database->query( $sql );
+		return $result->rows[0]['product_option_id'];
 	}
 
 
